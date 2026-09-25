@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinebruh</title>
+<style>
+  :root{
+    --bg:#f0e5ea;--ink:#1a0f14;--paper:#fdf7fa;--muted:#8a6b78;
+    --border:#ae4c78;--sc:#623248;
+    --primary:#623248;--secondary:#c98da8;--accent:#ae4c78;
+    --animes:#ff68b4;--filmes:#E63946;--series:#1D6FE0;--tokusatsu:#FF7A00;--animacoes:#0FA958;--vods:#7B2FF7;
+    --display:"Bahnschrift","Franklin Gothic Heavy","Arial Black",system-ui,sans-serif;
+    --body:"Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+  [data-theme="dark"]{
+    --bg:#190e13;--ink:#efe4e9;--paper:#241520;--muted:#c0a4b2;
+    --border:#b2507c;--sc:#723651;
+    --primary:#cc9cb2;--secondary:#723651;--accent:#b2507c;
+  }
+  :root{--shadow:6px 6px 0 var(--sc);--shadow-sm:3px 3px 0 var(--sc)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;
+    -webkit-font-smoothing:antialiased;padding-bottom:64px;overflow-x:hidden;
+    transition:background .25s ease,color .25s ease;}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- Top bar ---------- */
+  header.topbar{position:sticky;top:0;z-index:50;background:var(--bg)}
+  .topbar-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px}
+  .logo{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.5px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .logo .dot{background:var(--animes,#ff68b4);color:#fff;padding:2px 10px;border:3px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm);transform:rotate(-3deg)}
+  .spacer{flex:1}
+  .search{display:flex;align-items:center;gap:8px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:7px 15px;box-shadow:var(--shadow-sm);width:min(280px,52vw)}
+  .search input{border:none;outline:none;background:transparent;font-family:var(--body);font-size:15px;width:100%;color:var(--ink)}
+  .btn-live{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;
+    font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;
+    border:3px solid var(--border);border-radius:999px;padding:8px 15px;box-shadow:var(--shadow-sm);transition:transform .12s}
+  .btn-live:hover{transform:translate(-2px,-2px)}
+  .btn-live svg{flex:none;display:block}
+  .tw{background:#9146FF;color:#fff}
+  .ki{background:#53FC18;color:#0c0f07}
+  .theme{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;
+    background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:12px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
+  .theme:hover{transform:translate(-2px,-2px)}
+  .theme .moon{display:none}
+  [data-theme="dark"] .theme .sun{display:none}
+  [data-theme="dark"] .theme .moon{display:block}
+
+  /* ---------- Hero ---------- */
+  .hero{max-width:1240px;margin:0 auto;padding:38px 20px 20px}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,7vw,72px);line-height:.95;letter-spacing:-1px;text-transform:uppercase}
+  .hero h1 .hl{color:#ff68b4}
+  .hero p{margin-top:14px;max-width:640px;font-size:clamp(15px,2vw,18px);color:var(--muted)}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .stat{background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:10px 16px;box-shadow:var(--shadow-sm)}
+  .stat b{font-family:var(--display);font-size:26px;display:block;line-height:1}
+  .stat span{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .cta{font-family:var(--display);font-size:15px;letter-spacing:.5px;text-transform:uppercase;background:var(--ink);color:var(--bg);border:3px solid var(--border);border-radius:12px;padding:11px 18px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .12s}
+  .cta.alt{background:var(--paper);color:var(--ink)}
+  .cta:hover{transform:translate(-2px,-2px)}
+  [data-theme="dark"] .cta{background:var(--primary);color:#190e13}
+  [data-theme="dark"] .cta.alt{background:var(--secondary);color:#efe4e9}
+
+  /* ---------- Filters ---------- */
+  .filters{background:var(--bg)}
+  .filter-cats{position:sticky;top:61px;z-index:45;background:var(--bg);border-bottom:3px solid var(--border);padding:12px 0}
+  .filter-extra{position:relative;z-index:30;background:var(--bg);padding:12px 0;border-bottom:3px solid var(--border)}
+  .filters-inner{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;gap:12px 14px;flex-wrap:wrap;align-items:center}
+  .pills{display:flex;gap:9px;flex-wrap:wrap}
+  .lang-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .lang-group .lg-label{font-family:var(--display);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+  .lpill{font-family:var(--display);font-size:13px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:6px 13px;cursor:pointer;color:var(--ink);transition:transform .12s,box-shadow .12s;display:flex;align-items:center;gap:6px}
+  .lpill:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-sm)}
+  .lpill.active{background:var(--ink);color:var(--bg)}
+  .filters.compact #statuspills, .filters.compact #langpills{display:none}
+  .section{scroll-margin-top:120px}
+  .pill{font-family:var(--display);font-size:14px;letter-spacing:.5px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:7px 15px;cursor:pointer;transition:transform .12s,box-shadow .12s;display:flex;align-items:center;gap:7px;color:var(--ink)}
+  .pill:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-sm)}
+  .pill .ic{width:13px;height:13px;border-radius:50%;border:2px solid var(--border)}
+  .pill[data-cat="todos"] .ic{background:var(--ink)}
+  .pill[data-cat="animes"] .ic{background:var(--animes)}
+  .pill[data-cat="filmes"] .ic{background:var(--filmes)}
+  .pill[data-cat="series"] .ic{background:var(--series)}
+  .pill[data-cat="tokusatsu"] .ic{background:var(--tokusatsu)}
+  .pill[data-cat="animacoes"] .ic{background:var(--animacoes)}
+  .pill[data-cat="vods"] .ic{background:var(--vods)}
+  .pill.active{color:#fff}
+  .pill[data-cat="todos"].active{background:var(--ink)}
+  .pill[data-cat="animes"].active{background:var(--animes)}
+  .pill[data-cat="filmes"].active{background:var(--filmes)}
+  .pill[data-cat="series"].active{background:var(--series)}
+  .pill[data-cat="tokusatsu"].active{background:var(--tokusatsu)}
+  .pill[data-cat="animacoes"].active{background:var(--animacoes)}
+  .pill[data-cat="vods"].active{background:var(--vods)}
+  .pill.active .ic{background:#fff!important}
+
+  /* ---------- Shelves / capsules ---------- */
+  main{max-width:1240px;margin:0 auto;padding:4px 20px 40px}
+  .section{padding-top:34px}
+  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .section-head .tag{font-family:var(--display);font-size:clamp(20px,3.2vw,32px);text-transform:uppercase;letter-spacing:.5px;padding:4px 15px;border:3px solid var(--border);border-radius:12px;color:#fff;box-shadow:var(--shadow-sm)}
+  .section[data-cat="animes"] .tag{background:var(--animes)}
+  .section[data-cat="filmes"] .tag{background:var(--filmes)}
+  .section[data-cat="series"] .tag{background:var(--series)}
+  .section[data-cat="tokusatsu"] .tag{background:var(--tokusatsu)}
+  .section[data-cat="animacoes"] .tag{background:var(--animacoes)}
+  .section[data-cat="vods"] .tag{background:var(--vods)}
+  .section-head .count{font-size:13px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+
+  .shelf{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,158px),1fr))}
+  .cap{display:block;position:relative;border:3px solid var(--border);border-radius:14px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-sm);transition:transform .14s,box-shadow .14s;animation:pop .4s both}
+  .cap:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
+  @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .cap-art{position:relative;aspect-ratio:2/3;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .cap-art .em{font-size:58px;opacity:.95;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.28));transition:transform .3s}
+  .cap:hover .cap-art .em{transform:scale(1.14) rotate(-5deg)}
+  .cap-cat{position:absolute;top:8px;left:8px;font-family:var(--display);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:3px 8px;border-radius:6px}
+  .cap-done{position:absolute;top:8px;right:8px;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#0FA958;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
+  .cap-scrim{position:absolute;left:0;right:0;bottom:0;padding:28px 10px 10px;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,0))}
+  .cap-title{font-family:var(--display);color:#fff;font-size:15px;line-height:1.1;text-shadow:0 1px 5px rgba(0,0,0,.7)}
+  .cap-hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;background:rgba(0,0,0,.32)}
+  .cap:hover .cap-hover{opacity:1}
+  .cap-hover span{font-family:var(--display);font-size:13px;letter-spacing:.5px;color:#111;background:#fff;border:2px solid #111;border-radius:8px;padding:7px 12px}
+  .cap-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .cap.inc .cap-art{filter:grayscale(1) contrast(.95)}
+  .cap.inc:hover .cap-art{filter:grayscale(.5)}
+  .cap-inc{position:absolute;top:8px;right:8px;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#5a5550;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
+  .cap-lang{position:absolute;bottom:8px;right:8px;z-index:2;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:rgba(255,255,255,.93);color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px}
+  .cap-badge{position:absolute;top:8px;right:8px;z-index:2;font-family:var(--display);font-size:10px;letter-spacing:.5px;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
+  .st-completo{background:#0FA958}
+  .st-assistindo{background:#ff68b4}
+  .st-fila{background:#5a5550}
+  .st-embreve{background:#FF7A00}
+  .cap-open{position:absolute;top:34px;left:8px;z-index:2;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#F5A623;color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px}
+  .cap.locked{cursor:default}
+  .cap.locked .cap-art{filter:saturate(.8)}
+  .cap.locked.inc .cap-art{filter:grayscale(1) contrast(.95)}
+  .empty{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--display);font-size:20px}
+
+  /* ---------- Content bands ---------- */
+  .band{max-width:1240px;margin:0 auto;padding:52px 20px 4px;scroll-margin-top:128px}
+  .band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .band-head h2{font-family:var(--display);font-size:clamp(26px,4.4vw,42px);text-transform:uppercase;letter-spacing:.5px;line-height:1}
+  .band-head .kicker{font-family:var(--display);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#ff68b4;padding:3px 11px;border:3px solid var(--border);border-radius:999px;box-shadow:var(--shadow-sm);transform:rotate(-2deg)}
+  .band-sub{color:var(--muted);font-size:15px;max-width:660px;margin:12px 0 24px}
+  .price-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+  .price{background:var(--paper);border:3px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:6px}
+  .price .tier{font-family:var(--display);font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#fff;align-self:flex-start;padding:3px 10px;border-radius:8px;border:2px solid var(--border)}
+  .price.f .tier{background:#E63946}.price.s .tier{background:#1D6FE0}.price.a .tier{background:#ff68b4}
+  .price .amount{font-family:var(--display);font-size:32px;line-height:1;margin-top:6px}
+  .price .bits{font-size:13px;color:var(--muted);font-weight:700}
+  .price .desc{font-size:14px;margin-top:6px}
+  .price-note{grid-column:1/-1;margin-top:4px;background:#FFEEBF;color:#1A1512;border:3px solid var(--border);border-radius:12px;padding:13px 16px;font-size:14px;box-shadow:var(--shadow-sm)}
+  .link-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+  .link-tile{display:flex;align-items:center;gap:13px;background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-sm);transition:transform .12s,box-shadow .12s;color:var(--ink)}
+  .link-tile:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
+  .link-tile .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;border:2px solid var(--border);font-size:22px;background:var(--bg)}
+  .link-tile .txt{min-width:0}
+  .link-tile .txt b{display:block;font-family:var(--display);font-size:16px;line-height:1.1}
+  .link-tile .txt span{font-size:12px;color:var(--muted);word-break:break-word}
+  .social-row{display:flex;flex-wrap:wrap;gap:10px}
+  .soc{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;border:3px solid var(--border);border-radius:999px;padding:9px 15px;color:#fff;box-shadow:var(--shadow-sm);transition:transform .12s}
+  .soc:hover{transform:translate(-2px,-2px)}
+  .soc svg{flex:none;display:block}
+  .soc.tw{background:#9146FF}.soc.ki{background:#53FC18;color:#0c0f07}.soc.ig{background:#E1306C}
+  .soc.tt{background:#111;color:#fff}.soc.yt{background:#FF0000}.soc.x{background:#111;color:#fff}.soc.dc{background:#5865F2}
+
+  footer{max-width:1240px;margin:20px auto 0;padding:26px 20px 10px;border-top:3px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+  footer .logo{font-size:20px}
+
+  .totop{position:fixed;right:20px;bottom:20px;z-index:60;width:50px;height:50px;
+    display:flex;align-items:center;justify-content:center;
+    background:#ff68b4;color:#fff;border:3px solid var(--border);border-radius:14px;
+    box-shadow:var(--shadow-sm);cursor:pointer;opacity:0;pointer-events:none;
+    transform:translateY(12px);transition:opacity .2s ease,transform .2s ease}
+  .totop.show{opacity:1;pointer-events:auto;transform:none}
+  .totop.show:hover{transform:translate(-2px,-2px)}
+  .totop svg{display:block}
+
+  @media (max-width:600px){
+    .shelf{grid-template-columns:repeat(auto-fill,minmax(min(100%,120px),1fr));gap:11px}
+    .cap-art .em{font-size:42px}
+    .cap-title{font-size:13px}
+    .search{width:100%;order:5}
+  }
+  @media print{
+    .topbar,.filters,.cta-row,.theme{display:none}
+    .cap,.price,.link-tile{box-shadow:none}
+    body{padding-bottom:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">Cine <span class="dot">Bruh</span></div>
+    <div class="spacer"></div>
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="search" type="text" placeholder="Buscar obra…" autocomplete="off">
+    </label>
+    <a class="btn-live tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      Twitch
+    </a>
+    <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>
+      Kick
+    </a>
+    <button class="theme" id="theme" aria-label="Alternar tema">
+      <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+      <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Reações da <span class="hl">Bruna</span><br>num lugar só</h1>
+  <p>A biblioteca completa dos reacts da Bruna Rodrigues — lives ao vivo na Twitch e na Kick. Escolha a categoria, clique na capa e abra a pasta com todos os episódios e temporadas no Drive.</p>
+  <div class="stats">
+    <div class="stat"><b id="s-titles">0</b><span>obras</span></div>
+    <div class="stat"><b id="s-done">0</b><span>concluídas</span></div>
+    <div class="stat"><b>6</b><span>categorias</span></div>
+  </div>
+  <div class="cta-row">
+    <button class="cta" onclick="document.getElementById('precos').scrollIntoView()">Peça um react</button>
+    <button class="cta alt" onclick="document.getElementById('apoiar').scrollIntoView()">Apoiar a Bruna</button>
+    <button class="cta alt" onclick="document.getElementById('redes').scrollIntoView()">Redes &amp; mais</button>
+  </div>
+</section>
+
+<div class="filter-cats">
+  <div class="filters-inner">
+    <div class="pills" id="pills">
+      <button class="pill active" data-cat="todos"><span class="ic"></span>Todos</button>
+      <button class="pill" data-cat="animes"><span class="ic"></span>Animes</button>
+      <button class="pill" data-cat="filmes"><span class="ic"></span>Filmes</button>
+      <button class="pill" data-cat="series"><span class="ic"></span>Séries</button>
+      <button class="pill" data-cat="tokusatsu"><span class="ic"></span>Tokusatsu</button>
+      <button class="pill" data-cat="animacoes"><span class="ic"></span>Animações</button>
+      <button class="pill" data-cat="vods"><span class="ic"></span>VODs</button>
+    </div>
+  </div>
+</div>
+<div class="filter-extra">
+  <div class="filters-inner">
+    <div class="lang-group" id="statuspills">
+      <span class="lg-label">Status</span>
+      <button class="lpill active" data-status="all">Todos</button>
+      <button class="lpill" data-status="completo">Completo</button>
+      <button class="lpill" data-status="assistindo">Assistindo</button>
+      <button class="lpill" data-status="fila">Na fila</button>
+      <button class="lpill" data-status="embreve">Em breve</button>
+      <button class="lpill" data-status="aberto">Em aberto</button>
+    </div>
+    <div class="lang-group" id="langpills">
+      <span class="lg-label">Áudio</span>
+      <button class="lpill active" data-lang="all">Todos</button>
+      <button class="lpill" data-lang="dub">🎙️ Dublado</button>
+      <button class="lpill" data-lang="leg">💬 Legendado</button>
+    </div>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<!-- ============ PREÇOS ============ -->
+<section class="band" id="precos">
+  <div class="band-head"><h2>Peça um react</h2><span class="kicker">Cinebruh</span></div>
+  <p class="band-sub">Manda o valor (em reais ou bits) pelo Incentive.gg ou por uma das formas de apoio logo abaixo, e escolha o que a Bruna vai reagir nas próximas lives — tudo conforme o cronograma.</p>
+  <div class="price-grid">
+    <div class="price f"><span class="tier">Filme</span><span class="amount">R$40</span><span class="bits">ou 500 bits</span><span class="desc">Você escolhe UM filme.</span></div>
+    <div class="price s"><span class="tier">Série até 1h</span><span class="amount">R$20</span><span class="bits">ou 250 bits</span><span class="desc">UM episódio de série, à sua escolha, de até 1h.</span></div>
+    <div class="price s"><span class="tier">Série 1h+</span><span class="amount">R$30</span><span class="bits">ou 400 bits</span><span class="desc">UM episódio de série, à sua escolha, de 1h ou mais.</span></div>
+    <div class="price a"><span class="tier">Anime</span><span class="amount">R$12</span><span class="bits">ou 150 bits</span><span class="desc">UM episódio de anime à sua escolha.</span></div>
+    <div class="price a"><span class="tier">Anime · 5 eps</span><span class="amount">R$50</span><span class="bits">ou 700 bits</span><span class="desc">CINCO episódios do anime à sua escolha.</span></div>
+    <div class="price-note">💡 <b>Pacote:</b> fechando pacotes com 5 ou mais episódios, cada episódio sai a <b>R$10,00</b>.</div>
+  </div>
+  <div class="cta-row"><a class="cta" href="https://incentive.gg/brunarodrigues" target="_blank" rel="noopener">🎯 Ver metas no Incentive.gg</a></div>
+</section>
+
+<!-- ============ APOIAR ============ -->
+<section class="band" id="apoiar">
+  <div class="band-head"><h2>Apoiar a Bruna</h2><span class="kicker">Doações</span></div>
+  <p class="band-sub">Escolha o canal que preferir para mandar sua contribuição e ajudar a bater as metas dos reacts.</p>
+  <div class="link-grid">
+    <a class="link-tile" href="https://livepix.gg/faribruh" target="_blank" rel="noopener"><span class="ic">💸</span><span class="txt"><b>LivePix</b><span>livepix.gg/faribruh</span></span></a>
+    <a class="link-tile" href="https://pixgg.com/faribruh" target="_blank" rel="noopener"><span class="ic">⚡</span><span class="txt"><b>PixGG</b><span>pixgg.com/faribruh</span></span></a>
+    <a class="link-tile" href="https://streamlabs.com/brunarodrigues/tip" target="_blank" rel="noopener"><span class="ic">🎛️</span><span class="txt"><b>Streamlabs</b><span>streamlabs.com/brunarodrigues/tip</span></span></a>
+    <a class="link-tile" href="https://wise.com/pay/me/brunaf1547" target="_blank" rel="noopener"><span class="ic">🌍</span><span class="txt"><b>Wise</b><span>Wisetag @brunaf1547</span></span></a>
+    <button class="link-tile" style="cursor:pointer;text-align:left;font:inherit" onclick="copyPix(this)" data-pix="contato.faribruh@gmail.com"><span class="ic">🔑</span><span class="txt"><b>Chave Pix (e-mail)</b><span>contato.faribruh@gmail.com · clique p/ copiar</span></span></button>
+    <a class="link-tile" href="https://incentive.gg/brunarodrigues" target="_blank" rel="noopener"><span class="ic">🎯</span><span class="txt"><b>Incentive.gg</b><span>Metas e recompensas dos reacts</span></span></a>
+  </div>
+</section>
+
+<!-- ============ REDES ============ -->
+<section class="band" id="redes">
+  <div class="band-head"><h2>Redes &amp; mais</h2><span class="kicker">Segue a Bruna</span></div>
+  <p class="band-sub">As lives acontecem ao vivo na Twitch e na Kick. Fora isso, é só seguir por aí:</p>
+  <div class="social-row">
+    <a class="soc tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>Twitch</a>
+    <a class="soc ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>Kick</a>
+    <a class="soc ig" href="https://instagram.com/faribruh_" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram</a>
+    <a class="soc tt" href="https://tiktok.com/@faribruh_" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 01-1-2.8h-3.2v12.9a2.6 2.6 0 11-1.8-2.5V9.9a5.8 5.8 0 00-.8-.05 5.86 5.86 0 105.86 5.86V8.9a7.5 7.5 0 004.34 1.4V7.1a4.3 4.3 0 01-3.4-1.3z"/></svg>TikTok</a>
+    <a class="soc yt" href="https://youtube.com/faribruh" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>YouTube</a>
+    <a class="soc x" href="https://x.com/Faribruh_" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.48l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>X</a>
+    <a class="soc dc" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0015.4 2.85a.07.07 0 00-.08.04c-.2.38-.44.87-.6 1.25a18.3 18.3 0 00-5.42 0c-.17-.4-.4-.87-.62-1.25a.08.08 0 00-.08-.04A19.7 19.7 0 003.7 4.4a.07.07 0 00-.03.02C.53 9.05-.32 13.6.1 18.1a.08.08 0 00.03.05 19.9 19.9 0 006 3.03.08.08 0 00.08-.03c.46-.63.87-1.3 1.23-2a.08.08 0 00-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 01-.01-.13l.37-.29a.07.07 0 01.08-.01 14.2 14.2 0 0012.06 0 .07.07 0 01.08.01l.37.29a.08.08 0 01-.01.13c-.6.35-1.22.64-1.87.89a.08.08 0 00-.04.11c.36.7.78 1.36 1.23 2a.08.08 0 00.08.03 19.8 19.8 0 006-3.03.08.08 0 00.04-.05c.5-5.18-.84-9.69-3.56-13.7a.06.06 0 00-.03-.02zM8.02 15.4c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.96 2.42-2.16 2.42zm7.97 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42z"/></svg>Discord</a>
+  </div>
+  <div class="link-grid" style="margin-top:22px">
+    <a class="link-tile" href="https://trello.com/b/b3LlCpc8/reacts-cinebruh" target="_blank" rel="noopener"><span class="ic">📋</span><span class="txt"><b>Trello Cinebruh</b><span>Cronograma, regras e histórico dos reacts</span></span></a>
+    <a class="link-tile" href="https://yourmovieprofile.com/pt-BR/u/Faribruh_" target="_blank" rel="noopener"><span class="ic">🎬</span><span class="txt"><b>Perfil cinematográfico</b><span>Filmes assistidos e reviews da Bruna</span></span></a>
+    <a class="link-tile" href="https://drive.google.com/drive/folders/1iAgJHwf9WwZyZX6nGfWq0-KcjvjsZBiX" target="_blank" rel="noopener"><span class="ic">🗂️</span><span class="txt"><b>Drive completo</b><span>Todas as reações, direto da fonte</span></span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Cine <span class="dot">Bruh</span></div>
+  <a class="soc tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener" style="box-shadow:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>twitch.tv/Brunarodrigues</a>
+  <div>Biblioteca de reações da Bruna Rodrigues · arquivo no Google Drive</div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+const F = id => `https://drive.google.com/drive/folders/${id}`;      /* pasta (todos os eps) */
+const V = id => `https://drive.google.com/file/d/${id}/view`;         /* arquivo único */
+
+const CAT_LABEL = {animes:"Animes",filmes:"Filmes",series:"Séries",tokusatsu:"Tokusatsu",animacoes:"Animações",vods:"VODs"};
+const ORDER = ["animes","filmes","series","tokusatsu","animacoes","vods"];
+const CAT_GRADS = {
+  animes:[["#ff68b4","#7A1846"],["#FF6FB0","#8A2A5A"],["#B15CFF","#521C86"],["#FF477E","#7A1638"],["#F55D3E","#7A2416"]],
+  filmes:[["#E63946","#7B1E27"],["#FF6B35","#7A2E12"],["#C1121F","#5A0A10"],["#FF4D6D","#7A1830"]],
+  series:[["#1D6FE0","#0A2E63"],["#3A86FF","#173F8A"],["#00A8E8","#004E6B"],["#4361EE","#1A2A7A"]],
+  tokusatsu:[["#FF7A00","#7A3A00"],["#FB5607","#7A2A00"],["#FF9E00","#7A4B00"]],
+  animacoes:[["#0FA958","#08542C"],["#12B886","#075E45"],["#06A77D","#054D3A"],["#38B000","#1A5200"]],
+  vods:[["#7B2FF7","#3A1370"],["#B84DFF","#4A1C7A"]],
+};
+
+/* done:true = reação concluída (marcada com ✅ no Drive) */
+const DATA = [
+  /* ===== ANIMES ===== */
+  {t:"One Piece", cat:"animes", em:"🏴‍☠️", url:F("1mnVczAdzi6nMM6hzT0IXuxTxBK4QoyLq"), img:"one-piece.webp"},
+  {t:"Fullmetal Alchemist: Brotherhood", cat:"animes", em:"⚗️", url:F("1dYy7iEi9KLsv-dK5yF6Zyi-et4Ok9Eks"), img:"fullmetal-alchemist-brotherhood.webp"},
+  {t:"Frieren e a Jornada para o Além", cat:"animes", em:"✨", url:F("119ZODMNDZnXXo8wddX4YDtfqCrZPBkNJ"), done:true, img:"frieren.webp"},
+  {t:"DAN DA DAN", cat:"animes", em:"👽", url:F("1SAhq4da3GsgXNtlK2dEGmURomMZaQRZw"), img:"dandadan.webp"},
+  {t:"Link Click", cat:"animes", em:"⏳", url:F("1guUnZ08VS-N3Vbn-KatqmQNl6VstiEWT"), img:"link-click.webp"},
+  {t:"Your Lie in April", cat:"animes", em:"🎻", url:F("1udNUsrxwYO9i7kG86cUL1yS7FJFTL1ix"), done:true, img:"your-lie-in-april.webp"},
+  {t:"Orange", cat:"animes", em:"🍊", url:F("1DEQgMXZXk2nCRDcpj9JlPx-ULlhkUYaY"), done:true, img:"orange.webp"},
+  {t:"Mob Psycho 100", cat:"animes", em:"💥", url:F("1HXjBowGGy3g8Y_FVuYz4j9ixOnFow7Q_"), img:"mob-psycho-100.webp"},
+  {t:"Kaiju no. 8", cat:"animes", em:"👹", url:F("1YCxk36xG9runaB6zPj39XigRfIGqsezh"), img:"kaiju-no-8.webp"},
+  {t:"SAKAMOTO DAYS", cat:"animes", em:"🔫", url:F("1U0QzpsUE19DZuEe1HODbvfr41taoM4qT"), img:"sakamoto-days.webp"},
+  {t:"Spy x Family", cat:"animes", em:"🕵️", url:F("1Q6QaSc4QvyfZoZRq_gEJ28yfGiTBlaHk"), img:"spy-x-family.webp"},
+  {t:"Haikyu!!", cat:"animes", em:"🏐", url:F("1XsinXYgTO_kF9mpciEZWB7iawoNh6tdL"), img:"haikyu.webp"},
+  {t:"Blue Box", cat:"animes", em:"🏸", url:F("1RDSci5Z046FAQNrzlFM1D4GkEn5nUSB5"), img:"blue-box.webp"},
+  {t:"Clevatess", cat:"animes", em:"🐉", url:F("19bODRWJhfNyGFY3_HeTJMjM_e1kU82D1"), img:"clevatess.webp"},
+  {t:"Konosuba", cat:"animes", em:"💫", url:F("1ZGE3nhX_fJ_pBG-H1HgJeZuLoL5lsMzy"), img:"konosuba.webp"},
+  {t:"Noragami", cat:"animes", em:"⛩️", url:F("1nUB22RhtMKJTEYzzNqsXY0arXvjqoE5s"), img:"noragami.webp"},
+  {t:"Fate Zero", cat:"animes", em:"⚔️", url:F("1RGodbA1g-lxi6-VINtRo1P0svZirHCqj"), img:"fate-zero.webp"},
+  {t:"To Your Eternity", cat:"animes", em:"🌱", url:F("1ra35mDm6MNrv9VD7BPNupW_kgq0dQSu5"), done:true, img:"to-your-eternity.webp"},
+  {t:"Ranking of Kings", cat:"animes", em:"👑", url:F("1bH6BvMPtuMdtfWZxyVx5ehjRtdE8dcqH"), img:"ranking-of-kings.webp"},
+  {t:"Gachiakuta", cat:"animes", em:"🗑️", url:F("1hi9Ga5qbyzqYbtTuFDIvb8RP0_-gnVDW"), img:"gachiakuta.webp"},
+  {t:"Mobile Suit Gundam: The Origin", cat:"animes", em:"🤖", url:F("1AS1DCWf8Twiuc4AZqFcA5zHkKbGpXeR0"), img:"gundam-the-origin.webp"},
+  {t:"3-Gatsu no Lion", cat:"animes", em:"🦁", url:F("1DqrsXkvmC09G0bpLjYB2GUrlawYnwO64"), img:"3-gatsu-no-lion.webp"},
+  {t:"Welcome to Demon School! Iruma-kun", cat:"animes", em:"😈", url:F("12SZ6nE16GgYlUR70U2E8wq7TGxi-Wyrk"), img:"iruma-kun.webp"},
+  {t:"Witch Hat Atelier", cat:"animes", em:"🎩", url:F("1fKKITwbCZMqsIBbRyrlvjWd-5vHE13Fr"), done:true, img:"witch-hat-atelier.webp"},
+  {t:"Kaoru Hana wa Rin to Saku", cat:"animes", em:"🌺", url:F("1samkcTLXX9Uqdsx8FQfRniM-gu45N1Yg"), img:"kaoru-hana.webp"},
+  {t:"Smoking Behind the Supermarket with You", cat:"animes", em:"🚬", url:F("1NuJeLAcRnepCFkXLX1w1mgIxBEg0hZOJ"), img:"smoking-behind-the-supermarket.webp"},
+  {t:"Cautious Hero", cat:"animes", em:"🛡️", url:F("1eUYOd54pWQX4-XWJ60ZcQ0Bo23wxCaT6"), done:true, img:"cautious-hero.webp"},
+  {t:"NIPPON SANGOKU", cat:"animes", em:"🀄", url:F("1mb0zivWJOliimw1gg-6XzaWfzV0fLq2B"), img:"nippon-sangoku.webp"},
+  {t:"I'm Standing on a Million Lives", cat:"animes", em:"🎮", url:F("1iYPtv8n3nj9drAy62RztstmVrih9cwOY"), img:"million-lives.webp"},
+  {t:"Wistoria: Wand and Sword", cat:"animes", em:"🪄", url:F("1GK_A-MR6b_GLQQHGlvHr9vLSbUDk8Q-R"), img:"wistoria.webp"},
+  {t:"Life Lessons with Uramichi Oniisan", cat:"animes", em:"😩", url:F("1aYEOkK0Hm2PqcUZbPLpqso3A2P0_qA50"), img:"uramichi-oniisan.webp"},
+  {t:"Rooster Fighter", cat:"animes", em:"🐓", url:F("1qgamHULu1ENlhzqi2RCjOi3PNrbO9oRy"), img:"rooster-fighter.webp"},
+
+  /* ===== FILMES ===== */
+  {t:"Interestelar", cat:"filmes", em:"🚀", url:F("1MZIgJTDndFygBUKt9d0TkjMIpf1pmE8A"), img:"interestelar.webp"},
+  {t:"O Grande Truque", cat:"filmes", em:"🎩", url:F("1d9ZKt1csBoELbsUHetvtJQ8NgcYsmxsi"), img:"o-grande-truque.webp"},
+  {t:"Predador: Badlands", cat:"filmes", em:"👽", url:F("1tYpuRPpLJBKX3TSHM703yeE5SqfIh9xx"), img:"predador-badlands.webp"},
+  {t:"Deu a Louca na Chapeuzinho", cat:"filmes", em:"🔴", url:F("1Vmy4w1T9BmM9kzZhpRRfw_uQb7OvefLe"), img:"deu-a-louca-na-chapeuzinho.webp"},
+  {t:"Obsessão", cat:"filmes", em:"🎭", url:F("1KBOUW_HE6iwiwPZEU1gQpv3DiFR4aNgu"), incomplete:true, img:"obsessao.webp"},
+  {t:"Your Name (Kimi no na wa)", cat:"filmes", em:"🌠", url:F("1AZABlV4qWQama8cA_jmPGi1GsG-cg-bg"), img:"your-name.webp"},
+  {t:"A Voz do Silêncio (Koe no Katachi)", cat:"filmes", em:"🌸", url:F("10M3Ibqijd2UJW5A0RrzU5gT9-419DapT"), img:"koe-no-katachi.webp"},
+  {t:"A Viagem de Chihiro", cat:"filmes", em:"🐷", url:F("1Sk8iP3Yo1ipwc-mVtuV3ivbnFQAgG9vw"), img:"a-viagem-de-chihiro.webp"},
+  {t:"O Castelo Animado", cat:"filmes", em:"🏰", url:F("1b9pozBbqmnc_3G0-YiHGaTrItUsuZbX7"), img:"o-castelo-animado.webp"},
+  {t:"As Memórias de Marnie", cat:"filmes", em:"💙", url:F("1xaYtMpoyeff9tqYpTB-3jnOltWubAMhH"), img:"as-memorias-de-marnie.webp"},
+  {t:"DuckTales: O Tesouro da Lâmpada Perdida", cat:"filmes", em:"🦆", url:F("1jdHDmQTr7GOheEmyhEcT-z-Ql5Ras_Ld"), img:"ducktales.webp"},
+  {t:"Metrópolis", cat:"filmes", em:"🤖", url:F("1gCIEYefsX1EF6Psgyl5EVb4OXYHcQEK7"), img:"metropolis.webp"},
+  {t:"Os Escolhidos (Dark Skies)", cat:"filmes", em:"🛸", url:F("1Qb2YGxaQRz54xWbuymqhyTLPA11XELOv"), img:"os-escolhidos.webp"},
+  {t:"Esposa de Mentirinha", cat:"filmes", em:"💍", url:F("1jTeADnZuImquVUx_xk9ep60BkHsrBJlp"), img:"esposa-de-mentirinha.webp"},
+  {t:"Sete Vidas", cat:"filmes", em:"💔", url:F("1Is_HA3io0L0S9B7BVU1TBY1v-QpN7c0w"), img:"sete-vidas.webp"},
+  {t:"No Cair da Noite", cat:"filmes", em:"🌙", url:F("1a6kdERvFZgJSeegeuaziAY0bi6BdMdc9"), img:"no-cair-da-noite.webp"},
+
+  /* ===== SÉRIES ===== */
+  {t:"Invencível", cat:"series", em:"🦸", url:F("17N-2247ZLZT2EVKqh7d-lSLtJeCfqD9n"), img:"invencivel.webp"},
+  {t:"La Casa de Papel", cat:"series", em:"🎭", url:F("1X9tXuGvFGxxMbfqVkJZosJMn3qcS4dM0"), img:"la-casa-de-papel.webp"},
+  {t:"Nível Secreto", cat:"series", em:"🎮", url:F("1-MnyZiL4XFh0Uo_YhEd4xCxz_QaDEixE"), done:true, img:"nivel-secreto.webp"},
+
+  /* ===== TOKUSATSU ===== */
+  {t:"Kamen Rider Zeztz", cat:"tokusatsu", em:"🦗", url:F("1cxiXh8wY5agETG6FHWDSaYC5cIsakD4O"), done:true, img:"kamen-rider-zeztz.webp"},
+  {t:"Kamen Rider Zeztz — Série da Irmã (Agente Minami)", cat:"tokusatsu", em:"🕶️", url:F("1P9j_BmVcIv_BSpvgRgM9AAEoyI9cszWc"), incomplete:true, img:"kamen-rider-zeztz-agente-minami.webp"},
+
+  /* ===== ANIMAÇÕES ===== */
+  {t:"Over the Garden Wall", cat:"animacoes", em:"🍂", url:F("1K0Aac7VufqKxDhAqsVMVLFuU1Mz_Jgi6"), done:true, img:"over-the-garden-wall.webp"},
+  {t:"The Amazing Digital Circus", cat:"animacoes", em:"🎪", url:F("1t3u_mfpzshcw3kGQtTbZmZlXUXLsIL6a"), img:"amazing-digital-circus.webp"},
+  {t:"Gameoverse", cat:"animacoes", em:"🕹️", url:F("1YkAKOr4dvnluqjXD28ff4NPks0gJeT8V"), img:"gameoverse.webp"},
+  {t:"Yamishibai: Histórias de Terror Japonesas", cat:"animacoes", em:"👺", url:F("1txR0FKs4w0hu5tgVBacKLgH6noi51A6L"), done:true, img:"yamishibai.webp"},
+
+  /* ===== NA FILA / EM BREVE (novos, sem link no Drive ainda) ===== */
+  /* Filmes gravados, faltando subir ao Drive */
+  {t:"O Serviço de Entregas da Kiki", cat:"filmes", em:"🧹", lang:"dub", status:"embreve"},
+  {t:"Suzume", cat:"filmes", em:"🚪", lang:"dub", status:"embreve"},
+  {t:"Gintama: Yoshiwara em Chamas", cat:"filmes", em:"⚔️", lang:"dub", status:"embreve"},
+  {t:"Como Se Fosse a Primeira Vez", cat:"filmes", em:"💑", lang:"dub", status:"embreve"},
+  /* Animes na fila pra começar */
+  {t:"You and I Are Polar Opposites", cat:"animes", em:"❤️", lang:"dub", status:"fila"},
+  {t:"Parede de Gelo", cat:"animes", em:"🧊", lang:"leg", status:"fila"},
+  {t:"Beck: Mongolian Chop Squad", cat:"animes", em:"🎸", lang:"leg", status:"fila"},
+  {t:"Hunter x Hunter", cat:"animes", em:"🎯", lang:"dub", status:"fila"},
+  {t:"The Ancient Magus' Bride", cat:"animes", em:"💍", lang:"dub", status:"fila"},
+  {t:"86: Eighty Six", cat:"animes", em:"🎖️", lang:"dub", status:"fila"},
+  {t:"Buddy Daddies", cat:"animes", em:"👨‍👧", lang:"leg", status:"fila"},
+  {t:"Romantic Killer", cat:"animes", em:"💘", lang:"dub", status:"fila"},
+  {t:"Takt op.Destiny", cat:"animes", em:"🎼", lang:"dub", status:"fila"},
+  {t:"The Rising of the Shield Hero", cat:"animes", em:"🛡️", lang:"dub", status:"fila"},
+  {t:"Jujutsu Kaisen", cat:"animes", em:"👊", lang:"dub", status:"fila"},
+  {t:"Agents of the Four Seasons: Dance of Spring", cat:"animes", em:"🌸", lang:"dub", status:"fila"},
+  {t:"Naruto Clássico", cat:"animes", em:"🍥", lang:"dub", status:"fila"},
+  {t:"Naruto Shippuden", cat:"animes", em:"🍥", lang:"dub", status:"fila"},
+  {t:"Mobile Suit Gundam Thunderbolt", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Mobile Suit Gundam: The 08th MS Team", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Mobile Suit Gundam 0080: War in the Pocket", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Re:Zero", cat:"animes", em:"⏰", lang:"dub", status:"fila"},
+  /* Série / Animação na fila */
+  {t:"Final Space", cat:"animacoes", em:"🚀", lang:"dub", status:"fila"},
+  {t:"Guerreiras do Kpop", cat:"animacoes", em:"🎤", lang:"leg", status:"fila"},
+  /* Filmes na fila pra começar */
+  {t:"Akira", cat:"filmes", em:"🏍️", lang:"dub", status:"fila"},
+  {t:"Sussurros do Coração", cat:"filmes", em:"🎻", lang:"dub", status:"fila"},
+  {t:"Batman (1989)", cat:"filmes", em:"🦇", lang:"leg", status:"fila"},
+  {t:"Matrix (1999)", cat:"filmes", em:"💊", lang:"dub", status:"fila"},
+  {t:"O Senhor dos Anéis: A Sociedade do Anel", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
+  {t:"O Senhor dos Anéis: As Duas Torres", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
+  {t:"O Senhor dos Anéis: O Retorno do Rei", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
+  {t:"Mobile Suit Gundam I", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Mobile Suit Gundam II: Soldiers of Sorrow", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Mobile Suit Gundam III: Encounters in Space", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Mobile Suit Gundam: Char Contra-Ataca", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
+  {t:"Jujutsu Kaisen 0", cat:"filmes", em:"👊", lang:"dub", status:"fila"},
+
+  /* ===== VODS ===== */
+  {t:"Live de Aniversário de 26 Anos", cat:"vods", em:"🎂", url:V("1Y7iox9XQ6ILeOZ9GvcS9YDwUOSQQak-2")},
+  {t:"IRL no Matsuri Festival", cat:"vods", em:"🏮", url:V("110YtZ24SZmOXJBqQyaQgw09zj8fNIAHE")},
+];
+
+const LANG_MAP = {
+  "One Piece":"dub","Fullmetal Alchemist: Brotherhood":"dub","Frieren e a Jornada para o Além":"dub",
+  "DAN DA DAN":"dub","Link Click":"dub","Your Lie in April":"leg","Orange":"dub","Mob Psycho 100":"dub",
+  "Kaiju no. 8":"dub","SAKAMOTO DAYS":"dub","Spy x Family":"dub","Haikyu!!":"dub","Blue Box":"dub",
+  "Clevatess":"dub","Konosuba":"dub","Noragami":"leg","Fate Zero":"leg","To Your Eternity":"leg",
+  "Ranking of Kings":"dub","Gachiakuta":"dub","Mobile Suit Gundam: The Origin":"leg","3-Gatsu no Lion":"leg",
+  "Welcome to Demon School! Iruma-kun":"leg","Witch Hat Atelier":"dub","Kaoru Hana wa Rin to Saku":"leg",
+  "Smoking Behind the Supermarket with You":"leg","Cautious Hero":"leg","NIPPON SANGOKU":"dub",
+  "I'm Standing on a Million Lives":"leg","Wistoria: Wand and Sword":"leg","Life Lessons with Uramichi Oniisan":"dub",
+  "Rooster Fighter":"dub",
+  "Interestelar":"dub","O Grande Truque":"dub","Predador: Badlands":"leg","Deu a Louca na Chapeuzinho":"dub",
+  "Obsessão":"dub","Your Name (Kimi no na wa)":"dub","A Voz do Silêncio (Koe no Katachi)":"leg",
+  "A Viagem de Chihiro":"dub","O Castelo Animado":"dub","As Memórias de Marnie":"dub",
+  "DuckTales: O Tesouro da Lâmpada Perdida":"dub","Metrópolis":"leg","Os Escolhidos (Dark Skies)":"leg",
+  "Esposa de Mentirinha":"dub","Sete Vidas":"dub","No Cair da Noite":"dub",
+  "Invencível":"dub","La Casa de Papel":"dub","Nível Secreto":"dub",
+  "Kamen Rider Zeztz":"dub","Kamen Rider Zeztz — Série da Irmã (Agente Minami)":"leg",
+  "Over the Garden Wall":"dub","The Amazing Digital Circus":"dub","Gameoverse":"dub",
+  "Yamishibai: Histórias de Terror Japonesas":"leg",
+};
+
+const ABERTO = new Set([
+  "Smoking Behind the Supermarket with You","Haikyu!!","NIPPON SANGOKU","One Piece","Gachiakuta",
+  "Noragami","Welcome to Demon School! Iruma-kun","Blue Box","Fate Zero","Konosuba",
+  "Life Lessons with Uramichi Oniisan","Rooster Fighter","You and I Are Polar Opposites",
+  "Parede de Gelo","Wistoria: Wand and Sword","La Casa de Papel","Invencível",
+  "The Amazing Digital Circus","Gameoverse",
+]);
+
+/* Fonte única das capas: título -> arquivo em images/ (prefixo do tipo de obra) */
+const IMG_MAP = {
+  /* ===== ANIMES ===== */
+  "One Piece":"anime-one-piece.webp",
+  "Fullmetal Alchemist: Brotherhood":"anime-fullmetal-alchemist-brotherhood.webp",
+  "Frieren e a Jornada para o Além":"anime-frieren.webp",
+  "DAN DA DAN":"anime-dandadan.webp",
+  "Link Click":"anime-link-click.webp",
+  "Your Lie in April":"anime-your-lie-in-april.webp",
+  "Orange":"anime-orange.webp",
+  "Mob Psycho 100":"anime-mob-psycho-100.webp",
+  "Kaiju no. 8":"anime-kaiju-no-8.webp",
+  "SAKAMOTO DAYS":"anime-sakamoto-days.webp",
+  "Spy x Family":"anime-spy-x-family.webp",
+  "Haikyu!!":"anime-haikyu.webp",
+  "Blue Box":"anime-blue-box.webp",
+  "Clevatess":"anime-clevatess.webp",
+  "Konosuba":"anime-konosuba.webp",
+  "Noragami":"anime-noragami.webp",
+  "Fate Zero":"anime-fate-zero.webp",
+  "To Your Eternity":"anime-to-your-eternity.webp",
+  "Ranking of Kings":"anime-ranking-of-kings.webp",
+  "Gachiakuta":"anime-gachiakuta.webp",
+  "Mobile Suit Gundam: The Origin":"anime-gundam-the-origin.webp",
+  "3-Gatsu no Lion":"anime-3-gatsu-no-lion.webp",
+  "Welcome to Demon School! Iruma-kun":"anime-iruma-kun.webp",
+  "Witch Hat Atelier":"anime-witch-hat-atelier.webp",
+  "Kaoru Hana wa Rin to Saku":"anime-kaoru-hana-wa-rin-to-saku.webp",
+  "Smoking Behind the Supermarket with You":"anime-smoking-behind-the-supermarket.webp",
+  "Cautious Hero":"anime-cautious-hero.webp",
+  "NIPPON SANGOKU":"anime-nippon-sangoku.webp",
+  "I'm Standing on a Million Lives":"anime-standing-on-a-million-lives.webp",
+  "Wistoria: Wand and Sword":"anime-wistoria-wand-and-sword.webp",
+  "Life Lessons with Uramichi Oniisan":"anime-uramichi-oniisan.webp",
+  "Rooster Fighter":"anime-rooster-fighter.webp",
+  "You and I Are Polar Opposites":"anime-you-and-i-are-polar-opposites.webp",
+  "Parede de Gelo":"anime-parede-de-gelo.webp",
+  "Beck: Mongolian Chop Squad":"anime-beck-mongolian-chop-squad.webp",
+  "Hunter x Hunter":"anime-hunter-x-hunter.webp",
+  "The Ancient Magus' Bride":"anime-ancient-magus-bride.webp",
+  "86: Eighty Six":"anime-86-eighty-six.webp",
+  "Buddy Daddies":"anime-buddy-daddies.webp",
+  "Romantic Killer":"anime-romantic-killer.webp",
+  "Takt op.Destiny":"anime-takt-op-destiny.webp",
+  "The Rising of the Shield Hero":"anime-rising-of-the-shield-hero.webp",
+  "Jujutsu Kaisen":"anime-jujutsu-kaisen.webp",
+  "Agents of the Four Seasons: Dance of Spring":"anime-agents-of-the-four-seasons.webp",
+  "Naruto Clássico":"anime-naruto-classico.webp",
+  "Naruto Shippuden":"anime-naruto-shippuden.webp",
+  "Mobile Suit Gundam Thunderbolt":"anime-gundam-thunderbolt.webp",
+  "Mobile Suit Gundam: The 08th MS Team":"anime-gundam-08th-ms-team.webp",
+  "Mobile Suit Gundam 0080: War in the Pocket":"anime-gundam-0080-war-in-the-pocket.webp",
+  "Re:Zero":"anime-re-zero.webp",
+
+  /* ===== FILMES ===== */
+  "Interestelar":"filme-interestelar.webp",
+  "O Grande Truque":"filme-o-grande-truque.webp",
+  "Predador: Badlands":"filme-predador-badlands.webp",
+  "Deu a Louca na Chapeuzinho":"filme-deu-a-louca-na-chapeuzinho.webp",
+  "Obsessão":"filme-obsessao.webp",
+  "Your Name (Kimi no na wa)":"filme-your-name.webp",
+  "A Voz do Silêncio (Koe no Katachi)":"filme-a-voz-do-silencio.webp",
+  "A Viagem de Chihiro":"filme-a-viagem-de-chihiro.webp",
+  "O Castelo Animado":"filme-o-castelo-animado.webp",
+  "As Memórias de Marnie":"filme-as-memorias-de-marnie.webp",
+  "DuckTales: O Tesouro da Lâmpada Perdida":"filme-ducktales-tesouro-da-lampada-perdida.webp",
+  "Metrópolis":"filme-metropolis.webp",
+  "Os Escolhidos (Dark Skies)":"filme-os-escolhidos-dark-skies.webp",
+  "Esposa de Mentirinha":"filme-esposa-de-mentirinha.webp",
+  "Sete Vidas":"filme-sete-vidas.webp",
+  "No Cair da Noite":"filme-no-cair-da-noite.webp",
+  "O Serviço de Entregas da Kiki":"filme-servico-de-entregas-da-kiki.webp",
+  "Suzume":"filme-suzume.webp",
+  "Gintama: Yoshiwara em Chamas":"filme-gintama-yoshiwara-em-chamas.webp",
+  "Como Se Fosse a Primeira Vez":"filme-como-se-fosse-a-primeira-vez.webp",
+  "Akira":"filme-akira.webp",
+  "Sussurros do Coração":"filme-sussurros-do-coracao.webp",
+  "Batman (1989)":"filme-batman-1989.webp",
+  "Matrix (1999)":"filme-matrix-1999.webp",
+  "O Senhor dos Anéis: A Sociedade do Anel":"filme-senhor-dos-aneis-1-a-sociedade-do-anel.webp",
+  "O Senhor dos Anéis: As Duas Torres":"filme-senhor-dos-aneis-2-as-duas-torres.webp",
+  "O Senhor dos Anéis: O Retorno do Rei":"filme-senhor-dos-aneis-3-o-retorno-do-rei.webp",
+  "Mobile Suit Gundam I":"filme-gundam-1-mobile-suit-gundam-i.webp",
+  "Mobile Suit Gundam II: Soldiers of Sorrow":"filme-gundam-2-soldiers-of-sorrow.webp",
+  "Mobile Suit Gundam III: Encounters in Space":"filme-gundam-3-encounters-in-space.webp",
+  "Mobile Suit Gundam: Char Contra-Ataca":"filme-gundam-char-contra-ataca.webp",
+  "Jujutsu Kaisen 0":"filme-jujutsu-kaisen-0.webp",
+
+  /* ===== SÉRIES ===== */
+  "Invencível":"serie-invencivel.webp",
+  "La Casa de Papel":"serie-la-casa-de-papel.webp",
+  "Nível Secreto":"serie-nivel-secreto.webp",
+
+  /* ===== TOKUSATSU ===== */
+  "Kamen Rider Zeztz":"toku-kamen-rider-zeztz.webp",
+  "Kamen Rider Zeztz — Série da Irmã (Agente Minami)":"toku-kamen-rider-zeztz-agente-minami.webp",
+
+  /* ===== ANIMAÇÕES ===== */
+  "Over the Garden Wall":"animacao-over-the-garden-wall.webp",
+  "The Amazing Digital Circus":"animacao-amazing-digital-circus.webp",
+  "Gameoverse":"animacao-gameoverse.webp",
+  "Yamishibai: Histórias de Terror Japonesas":"animacao-yamishibai.webp",
+  "Final Space":"animacao-final-space.webp",
+  "Guerreiras do Kpop":"animacao-guerreiras-do-kpop.webp",
+};
+
+const main = document.getElementById('main');
+const searchEl = document.getElementById('search');
+let activeCat = 'todos', activeLang = 'all', activeStatus = 'all', query = '';
+
+document.getElementById('s-titles').textContent = DATA.length;
+document.getElementById('s-done').textContent = DATA.filter(d=>statusOf(d)==='completo').length;
+
+function statusOf(it){
+  if(it.status) return it.status;
+  if(it.incomplete) return 'fila';
+  if(it.cat==='filmes' || it.cat==='vods') return 'completo';
+  if(it.done) return 'completo';
+  return 'assistindo';
+}
+function matches(it){
+  if(activeCat!=='todos' && it.cat!==activeCat) return false;
+  if(activeStatus!=='all'){
+    if(activeStatus==='aberto'){ if(!ABERTO.has(it.t)) return false; }
+    else if(statusOf(it)!==activeStatus) return false;
+  }
+  if(activeLang!=='all'){
+    const lg = it.lang || LANG_MAP[it.t];
+    if(!lg) return false;
+    if(lg!=='both' && lg!==activeLang) return false;
+  }
+  if(!query) return true;
+  return it.t.toLowerCase().includes(query.toLowerCase());
+}
+
+function capHTML(it, i){
+  const g = CAT_GRADS[it.cat][i % CAT_GRADS[it.cat].length];
+  const st = statusOf(it);
+  const ST = {completo:["✓ Completo","st-completo"], assistindo:["Assistindo","st-assistindo"], fila:["Na fila","st-fila"], embreve:["Em breve","st-embreve"]};
+  const badge = `<span class="cap-badge ${ST[st][1]}">${ST[st][0]}</span>`;
+  const open = ABERTO.has(it.t) ? `<span class="cap-open">Em aberto</span>` : '';
+  const LANG = {dub:"🎙️ Dub", leg:"💬 Leg", both:"Dub + Leg"};
+  const lgv = it.lang || LANG_MAP[it.t];
+  const lang = lgv ? `<span class="cap-lang">${LANG[lgv]}</span>` : '';
+  const imgFile = IMG_MAP[it.t] || it.img;
+  const art = `<span class="em">${it.em}</span>` + (imgFile ? `<img src="images/${imgFile}" alt="${it.t}" loading="lazy" onerror="this.remove()">` : '');
+  const hover = it.url ? (it.cat==='vods'?'▶ Assistir':'▶ Ver reações') : (st==='embreve'?'Em breve':'Na fila');
+  const inner = `
+      <div class="cap-art" style="--c1:${g[0]};--c2:${g[1]}">
+        ${art}
+        <span class="cap-cat">${CAT_LABEL[it.cat]}</span>
+        ${badge}${open}${lang}
+        <div class="cap-scrim"><div class="cap-title">${it.t}</div></div>
+        <div class="cap-hover"><span>${hover}</span></div>
+      </div>`;
+  const cls = `cap${it.incomplete?' inc':''}${it.url?'':' locked'}`;
+  const style = `style="animation-delay:${Math.min(i*30,360)}ms"`;
+  return it.url
+    ? `<a class="${cls}" href="${it.url}" target="_blank" rel="noopener" ${style}>${inner}</a>`
+    : `<div class="${cls}" ${style}>${inner}</div>`;
+}
+
+function render(){
+  const cats = activeCat==='todos' ? ORDER : [activeCat];
+  let html = '', any = false;
+  cats.forEach(cat=>{
+    const items = DATA.filter(it=>it.cat===cat && matches(it));
+    if(!items.length) return;
+    any = true;
+    html += `
+      <section class="section" data-cat="${cat}">
+        <div class="section-head">
+          <span class="tag">${CAT_LABEL[cat]}</span>
+          <span class="count">${items.length} obra(s)</span>
+        </div>
+        <div class="shelf">${items.map((it,i)=>capHTML(it,i)).join('')}</div>
+      </section>`;
+  });
+  main.innerHTML = any ? html : `<div class="empty">Nada encontrado 😢<br>Tenta outra busca ou categoria.</div>`;
+}
+
+document.getElementById('pills').addEventListener('click', e=>{
+  const btn = e.target.closest('.pill'); if(!btn) return;
+  document.querySelectorAll('#pills .pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active'); activeCat = btn.dataset.cat; render(); toResults();
+});
+document.getElementById('statuspills').addEventListener('click', e=>{
+  const btn = e.target.closest('.lpill'); if(!btn) return;
+  document.querySelectorAll('#statuspills .lpill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active'); activeStatus = btn.dataset.status; render(); toResults();
+});
+document.getElementById('langpills').addEventListener('click', e=>{
+  const btn = e.target.closest('.lpill'); if(!btn) return;
+  document.querySelectorAll('#langpills .lpill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active'); activeLang = btn.dataset.lang; render(); toResults();
+});
+searchEl.addEventListener('input', e=>{ query = e.target.value.trim(); render(); });
+
+/* barra de filtros: encaixa embaixo do topo e recolhe status/áudio ao rolar */
+const topbarEl = document.querySelector('.topbar');
+const catsEl = document.querySelector('.filter-cats');
+function syncSticky(){ catsEl.style.top = topbarEl.offsetHeight + 'px'; }
+syncSticky();
+window.addEventListener('resize', syncSticky);
+function toResults(){
+  const sec = main.querySelector('.section') || main;
+  requestAnimationFrame(()=>sec.scrollIntoView({behavior:'smooth', block:'start'}));
+}
+
+/* tema claro/escuro */
+const root = document.documentElement;
+try{ const saved = localStorage.getItem('bru-theme'); if(saved) root.setAttribute('data-theme', saved); }catch(e){}
+document.getElementById('theme').addEventListener('click', ()=>{
+  const next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try{ localStorage.setItem('bru-theme', next); }catch(e){}
+});
+
+/* copiar chave Pix */
+function copyPix(btn){
+  const key = btn.dataset.pix, label = btn.querySelector('.txt span'), original = label.textContent;
+  const done = ()=>{ label.textContent='Copiado! ✅'; setTimeout(()=>label.textContent=original,1800); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(key).then(done).catch(done); }
+  else{ const t=document.createElement('textarea');t.value=key;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);done(); }
+}
+window.copyPix = copyPix;
+
+/* voltar ao topo */
+const toTop = document.getElementById('totop');
+window.addEventListener('scroll', ()=>{ toTop.classList.toggle('show', window.scrollY > 400); });
+toTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+render();
+</script>
+</body>
+</html>
