@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cinebruh</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <style>
   :root{
     --bg:#f0e5ea;--ink:#1a0f14;--paper:#fdf7fa;--muted:#8a6b78;
@@ -22,9 +24,14 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;
-    -webkit-font-smoothing:antialiased;padding-bottom:64px;overflow-x:hidden;
-    transition:background .25s ease,color .25s ease;}
+    -webkit-font-smoothing:antialiased;padding-bottom:64px;overflow-x:hidden;}
   a{color:inherit;text-decoration:none}
+
+  /* troca de tema suave: varre de cima pra baixo como uma camada só */
+  @keyframes themeWipe{ from{clip-path:inset(0 0 100% 0)} to{clip-path:inset(0 0 0 0)} }
+  ::view-transition-old(root){ animation:none }
+  ::view-transition-new(root){ animation:themeWipe .45s ease }
+  @media (prefers-reduced-motion:reduce){ ::view-transition-new(root){ animation:none } }
 
   /* ---------- Top bar ---------- */
   header.topbar{position:sticky;top:0;z-index:50;background:var(--bg)}
@@ -468,6 +475,7 @@ const DATA = [
   /* ===== VODS ===== */
   {t:"Live de Aniversário de 26 Anos", cat:"vods", em:"🎂", url:V("1Y7iox9XQ6ILeOZ9GvcS9YDwUOSQQak-2")},
   {t:"IRL no Matsuri Festival", cat:"vods", em:"🏮", url:V("110YtZ24SZmOXJBqQyaQgw09zj8fNIAHE")},
+  {t:"IRL no Karaokê", cat:"vods", em:"🎙️", status:"embreve"},
 ];
 
 const LANG_MAP = {
@@ -715,8 +723,12 @@ const root = document.documentElement;
 try{ const saved = localStorage.getItem('bru-theme'); if(saved) root.setAttribute('data-theme', saved); }catch(e){}
 document.getElementById('theme').addEventListener('click', ()=>{
   const next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-  root.setAttribute('data-theme', next);
-  try{ localStorage.setItem('bru-theme', next); }catch(e){}
+  const apply = ()=>{
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('bru-theme', next); }catch(e){}
+  };
+  if(document.startViewTransition){ document.startViewTransition(apply); }
+  else{ apply(); }
 });
 
 /* copiar chave Pix */
