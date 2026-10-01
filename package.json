@@ -1,0 +1,11 @@
+{
+  "name": "cinebruh-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Robô que lê o Google Drive da Bruna e gera o data.json do site Cinebruh.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "sync": "node scripts/sync-drive.mjs"
+  }
+}

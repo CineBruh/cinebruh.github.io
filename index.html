@@ -2,7 +2,7 @@
 <html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cinebruh</title>
 <link rel="icon" type="image/png" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="favicon.png?v=2">
@@ -51,9 +51,9 @@
   .theme{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;
     background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:12px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
   .theme:hover{transform:translate(-2px,-2px)}
-  .theme .moon{display:none}
-  [data-theme="dark"] .theme .sun{display:none}
-  [data-theme="dark"] .theme .moon{display:block}
+  .theme .moon,.themefab .moon{display:none}
+  [data-theme="dark"] .theme .sun,[data-theme="dark"] .themefab .sun{display:none}
+  [data-theme="dark"] .theme .moon,[data-theme="dark"] .themefab .moon{display:block}
 
   /* ---------- Hero ---------- */
   .hero{max-width:1240px;margin:0 auto;padding:38px 20px 20px}
@@ -180,6 +180,7 @@
   .price .bits{font-size:13px;color:var(--muted);font-weight:700}
   .price .desc{font-size:14px;margin-top:6px}
   .price-note{grid-column:1/-1;margin-top:4px;background:#FFEEBF;color:#1A1512;border:3px solid var(--border);border-radius:12px;padding:13px 16px;font-size:14px;box-shadow:var(--shadow-sm)}
+  [data-theme="dark"] .price-note{background:#37301c;color:#f0e2bd}
   .link-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
   .link-tile{display:flex;align-items:center;gap:13px;background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-sm);transition:transform .12s,box-shadow .12s;color:var(--ink)}
   .link-tile:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
@@ -197,7 +198,7 @@
   footer{max-width:1240px;margin:20px auto 0;padding:26px 20px 10px;border-top:3px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
   footer .logo{font-size:20px}
 
-  .totop{position:fixed;right:20px;bottom:20px;z-index:60;width:50px;height:50px;
+  .totop{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;width:50px;height:50px;
     display:flex;align-items:center;justify-content:center;
     background:#ff68b4;color:#fff;border:3px solid var(--border);border-radius:14px;
     box-shadow:var(--shadow-sm);cursor:pointer;opacity:0;pointer-events:none;
@@ -205,7 +206,7 @@
   .totop.show{opacity:1;pointer-events:auto;transform:none}
   .totop.show:hover{transform:translate(-2px,-2px)}
   .totop svg{display:block}
-  .themefab{position:fixed;right:20px;bottom:80px;z-index:60;width:50px;height:50px;
+  .themefab{position:fixed;right:20px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:60;width:50px;height:50px;
     display:none;align-items:center;justify-content:center;
     background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:14px;
     box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
@@ -218,6 +219,7 @@
     .cap-title{font-size:12px}
     .cap-meta{gap:3px;margin-top:4px}
     .seg,.cap-eps,.cap-lang,.cap-nota{font-size:9px;padding:3px 6px;border-width:1.5px}
+    .cap-badge,.cap-open{font-size:9px;padding:2px 5px;letter-spacing:.3px}
     .cap-nota b{font-size:12px}
     .hero{padding:16px 20px 14px}
     .topbar-inner .spacer{display:none}
@@ -227,6 +229,12 @@
     .btn-live.tw{margin-left:auto}
     .search{width:100%;order:5}
     .filter-cats,.filter-extra{padding:9px 0}
+    /* filtros viram faixa de rolagem horizontal (padrão de app nativo) */
+    .filters-inner{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .filters-inner::-webkit-scrollbar{display:none}
+    .pills,.lang-group{flex-wrap:nowrap}
+    .lang-group{flex:0 0 auto}
+    .pill,.lpill,.lang-group .lg-label{flex:0 0 auto;white-space:nowrap}
     .pills{gap:7px}
     .pill{font-size:12px;padding:5px 11px;gap:6px}
     .pill .ic{width:10px;height:10px}
@@ -245,6 +253,20 @@
     /* botão de tema flutuante quando compacto */
     .scrolled .themefab{display:flex}
   }
+  @media (max-width:430px){
+    .shelf{grid-template-columns:repeat(2,1fr);gap:12px}
+    .cap-art .em{font-size:48px}
+    .cap-title{font-size:13px}
+  }
+  /* evita efeitos de :hover "presos" após toque em telas sem mouse */
+  @media (hover:none){
+    .cap:hover,.pill:hover,.lpill:hover,.btn-live:hover,.soc:hover,.link-tile:hover,.cta:hover,.theme:hover,.themefab:hover,.totop.show:hover,.seg.clik:hover{transform:none}
+    .cap:hover{box-shadow:var(--shadow-sm)}
+    .cap:hover .cap-art .em{transform:none}
+    .cap:hover .cap-hover{opacity:0}
+    .pill:hover,.lpill:hover{box-shadow:none}
+    .link-tile:hover{box-shadow:var(--shadow-sm)}
+  }
   @media print{
     .topbar,.filters,.cta-row,.theme{display:none}
     .cap,.price,.link-tile{box-shadow:none}
@@ -260,13 +282,13 @@
     <div class="spacer"></div>
     <label class="search">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="search" type="text" placeholder="Buscar obra…" autocomplete="off">
+      <input id="search" type="text" placeholder="Buscar obra…" autocomplete="off" aria-label="Buscar obra na biblioteca">
     </label>
-    <a class="btn-live tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener">
+    <a class="btn-live tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Twitch">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
       <span class="lbl">Twitch</span>
     </a>
-    <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener">
+    <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Kick">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>
       <span class="lbl">Kick</span>
     </a>
@@ -344,7 +366,7 @@
 
 <!-- ============ APOIAR ============ -->
 <section class="band" id="apoiar">
-  <div class="band-head"><h2>Apoiar a Bruna</h2><span class="kicker">Doações</span></div>
+  <div class="band-head"><h2>Apoie a Bruna</h2><span class="kicker">Doações</span></div>
   <p class="band-sub">Escolha o canal que preferir para mandar sua contribuição e ajudar nas metas ou garantir seu react.</p>
   <div class="link-grid">
     <a class="link-tile" href="https://livepix.gg/faribruh" target="_blank" rel="noopener"><span class="ic">💸</span><span class="txt"><b>LivePix</b><span>livepix.gg/faribruh</span></span></a>
@@ -383,7 +405,8 @@
 </footer>
 
 <button class="themefab" id="themefab" aria-label="Alternar tema claro/escuro" title="Modo claro/escuro">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+  <svg class="sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+  <svg class="moon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
 </button>
 
 <button class="totop" id="totop" aria-label="Voltar ao topo" title="Voltar ao topo">
@@ -405,261 +428,20 @@ const CAT_GRADS = {
   vods:[["#7B2FF7","#3A1370"],["#B84DFF","#4A1C7A"]],
 };
 
-/* done:true = reação concluída (marcada com ✅ no Drive) */
-const DATA = [
-  /* ===== ANIMES ===== */
-  {t:"One Piece", cat:"animes", em:"🏴‍☠️", url:F("1mnVczAdzi6nMM6hzT0IXuxTxBK4QoyLq"), lang:"dub", status:"assistindo", aberto:true, seasons:[{l:"East Blue",s:"y",id:"1UYyP0i29mpI9a9BYpUOLMq_GOD7_01N-"}]},
-  {t:"Fullmetal Alchemist: Brotherhood", cat:"animes", em:"⚗️", url:F("1dYy7iEi9KLsv-dK5yF6Zyi-et4Ok9Eks"), lang:"dub", status:"assistindo", eps:13},
-  {t:"Yu Yu Hakusho", cat:"animes", em:"👊", url:F("1JIxosDgwhvhMeLCzVlWMBETfYfQgPWHA"), lang:"dub", status:"assistindo", eps:3},
-  {t:"Frieren e a Jornada para o Além", cat:"animes", em:"✨", url:F("119ZODMNDZnXXo8wddX4YDtfqCrZPBkNJ"), lang:"dub", status:"completo", nota:10, seasons:[{n:1,s:"g",id:"1OXUW2DnReionf9f6C9cY8jiydZ3-_DV0"},{n:2,s:"g",id:"1vkgKhEVG3uFVu37VzzyzfwZVrJY2edSQ"}]},
-  {t:"DAN DA DAN", cat:"animes", em:"👽", url:F("1SAhq4da3GsgXNtlK2dEGmURomMZaQRZw"), lang:"dub", status:"assistindo", seasons:[{n:1,s:"y",id:"1gjsZmN_EfPOQrxvceMnueOogBJieuHm2"}]},
-  {t:"Link Click", cat:"animes", em:"⏳", url:F("1guUnZ08VS-N3Vbn-KatqmQNl6VstiEWT"), lang:"dub", status:"assistindo", nota:10, seasons:[{n:1,s:"g",id:"1USjdQT8t8-aphfNsLGWn7xoq8e2nUaUW"},{n:2,s:"y",id:"1rsHgwDzInONFJ5iFqkoGYGMGTkWXjud9"}]},
-  {t:"Your Lie in April", cat:"animes", em:"🎻", url:F("1udNUsrxwYO9i7kG86cUL1yS7FJFTL1ix"), lang:"leg", status:"completo", eps:22},
-  {t:"Orange", cat:"animes", em:"🍊", url:F("1DEQgMXZXk2nCRDcpj9JlPx-ULlhkUYaY"), lang:"dub", status:"completo", nota:10, eps:13},
-  {t:"Mob Psycho 100", cat:"animes", em:"💥", url:F("1HXjBowGGy3g8Y_FVuYz4j9ixOnFow7Q_"), lang:"dub", status:"assistindo", seasons:[{n:1,s:"g",id:"1bVGPLViBOH-IC7ybtogvXzQ0HEgXglIw"},{n:2,s:"y",id:"1bvvL_pfxGVLOCvgm1ymliWRkFiHzsITv"}]},
-  {t:"Kaiju no. 8", cat:"animes", em:"👹", url:F("1YCxk36xG9runaB6zPj39XigRfIGqsezh"), lang:"dub", status:"assistindo", seasons:[{n:1,s:"g",id:"1lM7Z1KJWT_LBlh-JQ9DHR8VJhEEBAwRe"},{n:2,s:"y",id:"1fXba9JXH7uLZcIcfa7hafIMQqPHBLOX8"}]},
-  {t:"SAKAMOTO DAYS", cat:"animes", em:"🔫", url:F("1U0QzpsUE19DZuEe1HODbvfr41taoM4qT"), lang:"dub", status:"assistindo", eps:7},
-  {t:"Spy x Family", cat:"animes", em:"🕵️", url:F("1Q6QaSc4QvyfZoZRq_gEJ28yfGiTBlaHk"), lang:"dub", status:"assistindo", seasons:[{n:1,s:"y",id:"1PDtRz3qNhM2YJbC3eEVTGpg2f4Z2hGKw"}]},
-  {t:"Haikyu!!", cat:"animes", em:"🏐", url:F("1XsinXYgTO_kF9mpciEZWB7iawoNh6tdL"), lang:"dub", status:"assistindo", aberto:true, seasons:[{n:1,s:"y",id:"1uxLlwS1pQI4DqA3p1bMbktg9ECiBgmzt"}]},
-  {t:"Blue Box", cat:"animes", em:"🏸", url:F("1RDSci5Z046FAQNrzlFM1D4GkEn5nUSB5"), lang:"dub", status:"assistindo", aberto:true, eps:2},
-  {t:"Clevatess", cat:"animes", em:"🐉", url:F("19bODRWJhfNyGFY3_HeTJMjM_e1kU82D1"), lang:"dub", status:"assistindo", aberto:true, seasons:[{n:1,s:"g",id:"1_ZzIgj5qeypyjJ8nnwkTJk035j2T6i1E"}]},
-  {t:"Konosuba", cat:"animes", em:"💫", url:F("1ZGE3nhX_fJ_pBG-H1HgJeZuLoL5lsMzy"), lang:"dub", status:"assistindo", aberto:true, eps:1},
-  {t:"Noragami", cat:"animes", em:"⛩️", url:F("1nUB22RhtMKJTEYzzNqsXY0arXvjqoE5s"), lang:"leg", status:"assistindo", aberto:true, eps:2},
-  {t:"Fate Zero", cat:"animes", em:"⚔️", url:F("1RGodbA1g-lxi6-VINtRo1P0svZirHCqj"), lang:"leg", status:"assistindo", aberto:true, eps:9},
-  {t:"To Your Eternity", cat:"animes", em:"🌱", url:F("1ra35mDm6MNrv9VD7BPNupW_kgq0dQSu5"), lang:"leg", status:"assistindo", aberto:true, nota:8, seasons:[{n:1,s:"g",id:"1hA0REIHr1_bott4htgklNhFXj_5qwm8b"},{n:2,s:"r",id:"1zln_Rb6_UwI82Kwj-aoOmAzYPuSmRE3E"}]},
-  {t:"Ranking of Kings", cat:"animes", em:"👑", url:F("1bH6BvMPtuMdtfWZxyVx5ehjRtdE8dcqH"), lang:"dub", status:"assistindo", eps:5},
-  {t:"Gachiakuta", cat:"animes", em:"🗑️", url:F("1hi9Ga5qbyzqYbtTuFDIvb8RP0_-gnVDW"), lang:"dub", status:"assistindo", aberto:true, eps:3},
-  {t:"Mobile Suit Gundam: The Origin", cat:"animes", em:"🤖", url:F("1AS1DCWf8Twiuc4AZqFcA5zHkKbGpXeR0"), lang:"leg", status:"assistindo", eps:11},
-  {t:"3-Gatsu no Lion", cat:"animes", em:"🦁", url:F("1DqrsXkvmC09G0bpLjYB2GUrlawYnwO64"), lang:"leg", status:"assistindo", eps:12},
-  {t:"Welcome to Demon School! Iruma-kun", cat:"animes", em:"😈", url:F("12SZ6nE16GgYlUR70U2E8wq7TGxi-Wyrk"), lang:"leg", status:"assistindo", aberto:true, eps:2},
-  {t:"Witch Hat Atelier", cat:"animes", em:"🎩", url:F("1fKKITwbCZMqsIBbRyrlvjWd-5vHE13Fr"), lang:"dub", status:"completo", seasons:[{n:1,s:"g",id:"1QQslqr-y7LwkblBdgwjBx7gO2vrVkV6J"}]},
-  {t:"Kaoru Hana wa Rin to Saku", cat:"animes", em:"🌺", url:F("1samkcTLXX9Uqdsx8FQfRniM-gu45N1Yg"), lang:"leg", status:"assistindo", eps:4},
-  {t:"Smoking Behind the Supermarket with You", cat:"animes", em:"🚬", url:F("1NuJeLAcRnepCFkXLX1w1mgIxBEg0hZOJ"), lang:"leg", status:"assistindo", aberto:true, seasons:[{n:1,s:"y",id:"1ThUnnzeFT0DqTBipAHcDHExyxrAzyWLB"}]},
-  {t:"Cautious Hero", cat:"animes", em:"🛡️", url:F("1eUYOd54pWQX4-XWJ60ZcQ0Bo23wxCaT6"), lang:"leg", status:"completo", nota:7, eps:12},
-  {t:"NIPPON SANGOKU", cat:"animes", em:"🀄", url:F("1mb0zivWJOliimw1gg-6XzaWfzV0fLq2B"), lang:"dub", status:"assistindo", aberto:true, eps:2},
-  {t:"I'm Standing on a Million Lives", cat:"animes", em:"🎮", url:F("1iYPtv8n3nj9drAy62RztstmVrih9cwOY"), lang:"leg", status:"assistindo", eps:1},
-  {t:"Wistoria: Wand and Sword", cat:"animes", em:"🪄", url:F("1GK_A-MR6b_GLQQHGlvHr9vLSbUDk8Q-R"), lang:"leg", status:"assistindo", aberto:true, eps:1},
-  {t:"Life Lessons with Uramichi Oniisan", cat:"animes", em:"😩", url:F("1aYEOkK0Hm2PqcUZbPLpqso3A2P0_qA50"), lang:"dub", status:"assistindo", aberto:true, eps:1},
-  {t:"Rooster Fighter", cat:"animes", em:"🐓", url:F("1qgamHULu1ENlhzqi2RCjOi3PNrbO9oRy"), lang:"dub", status:"assistindo", aberto:true, eps:4},
-  /* animes na fila (pastas ainda vazias no Drive) */
-  {t:"You and I Are Polar Opposites", cat:"animes", em:"❤️", lang:"dub", status:"fila"},
-  {t:"Parede de Gelo", cat:"animes", em:"🧊", lang:"leg", status:"fila"},
-  {t:"Hunter x Hunter", cat:"animes", em:"🎯", lang:"dub", status:"fila"},
-  {t:"The Ancient Magus' Bride", cat:"animes", em:"💍", lang:"dub", status:"fila"},
-  {t:"86: Eighty Six", cat:"animes", em:"🎖️", lang:"dub", status:"fila"},
-  {t:"Buddy Daddies", cat:"animes", em:"👨‍👧", lang:"leg", status:"fila"},
-  {t:"Romantic Killer", cat:"animes", em:"💘", lang:"dub", status:"fila"},
-  {t:"Takt op.Destiny", cat:"animes", em:"🎼", lang:"dub", status:"fila"},
-  {t:"The Rising of the Shield Hero", cat:"animes", em:"🛡️", lang:"dub", status:"fila"},
-  {t:"Jujutsu Kaisen", cat:"animes", em:"👊", lang:"dub", status:"fila"},
-  {t:"Agents of the Four Seasons: Dance of Spring", cat:"animes", em:"🌸", lang:"dub", status:"fila"},
-  {t:"Re:Zero", cat:"animes", em:"⏰", lang:"dub", status:"fila"},
-  {t:"Beck: Mongolian Chop Squad", cat:"animes", em:"🎸", lang:"leg", status:"fila"},
-  {t:"Naruto Clássico", cat:"animes", em:"🍥", lang:"dub", status:"fila"},
-  {t:"Naruto Shippuden", cat:"animes", em:"🍥", lang:"dub", status:"fila"},
-  {t:"Mobile Suit Gundam Thunderbolt", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Mobile Suit Gundam: The 08th MS Team", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Mobile Suit Gundam 0080: War in the Pocket", cat:"animes", em:"🤖", lang:"leg", status:"fila"},
+/* Catálogo agora vem de data.json — fonte única de dados do site.
+   Editável à mão ou por automação futura (sync do Drive). */
+let DATA = [], LANG_MAP = {}, IMG_MAP = {};
 
-  /* ===== FILMES ===== */
-  {t:"Interestelar", cat:"filmes", em:"🚀", url:F("1MZIgJTDndFygBUKt9d0TkjMIpf1pmE8A"), lang:"dub", nota:10},
-  {t:"O Grande Truque", cat:"filmes", em:"🎩", url:F("1d9ZKt1csBoELbsUHetvtJQ8NgcYsmxsi"), lang:"dub", nota:10},
-  {t:"Predador: Badlands", cat:"filmes", em:"👽", url:F("1tYpuRPpLJBKX3TSHM703yeE5SqfIh9xx"), lang:"leg", nota:8},
-  {t:"Deu a Louca na Chapeuzinho", cat:"filmes", em:"🔴", url:F("1Vmy4w1T9BmM9kzZhpRRfw_uQb7OvefLe"), lang:"dub"},
-  {t:"Obsessão", cat:"filmes", em:"🎭", url:F("1KBOUW_HE6iwiwPZEU1gQpv3DiFR4aNgu"), lang:"dub", status:"assistindo", incomplete:true},
-  {t:"Your Name (Kimi no na wa)", cat:"filmes", em:"🌠", url:F("1AZABlV4qWQama8cA_jmPGi1GsG-cg-bg"), lang:"dub", nota:10},
-  {t:"A Voz do Silêncio (Koe no Katachi)", cat:"filmes", em:"🌸", url:F("10M3Ibqijd2UJW5A0RrzU5gT9-419DapT"), lang:"leg", nota:10},
-  {t:"A Viagem de Chihiro", cat:"filmes", em:"🐷", url:F("1Sk8iP3Yo1ipwc-mVtuV3ivbnFQAgG9vw"), lang:"dub", nota:10},
-  {t:"O Castelo Animado", cat:"filmes", em:"🏰", url:F("1b9pozBbqmnc_3G0-YiHGaTrItUsuZbX7"), lang:"dub", nota:10},
-  {t:"As Memórias de Marnie", cat:"filmes", em:"💙", url:F("1xaYtMpoyeff9tqYpTB-3jnOltWubAMhH"), lang:"dub", nota:10},
-  {t:"DuckTales: O Tesouro da Lâmpada Perdida", cat:"filmes", em:"🦆", url:F("1jdHDmQTr7GOheEmyhEcT-z-Ql5Ras_Ld"), lang:"dub", nota:8},
-  {t:"Metrópolis", cat:"filmes", em:"🤖", url:F("1gCIEYefsX1EF6Psgyl5EVb4OXYHcQEK7"), lang:"leg", nota:9},
-  {t:"Os Escolhidos (Dark Skies)", cat:"filmes", em:"🛸", url:F("1Qb2YGxaQRz54xWbuymqhyTLPA11XELOv"), lang:"leg", nota:7},
-  {t:"Esposa de Mentirinha", cat:"filmes", em:"💍", url:F("1jTeADnZuImquVUx_xk9ep60BkHsrBJlp"), lang:"dub", nota:8},
-  {t:"Sete Vidas", cat:"filmes", em:"💔", url:F("1Is_HA3io0L0S9B7BVU1TBY1v-QpN7c0w"), lang:"dub", nota:9},
-  {t:"No Cair da Noite", cat:"filmes", em:"🌙", url:F("1a6kdERvFZgJSeegeuaziAY0bi6BdMdc9"), lang:"dub", nota:5},
-  {t:"Como Se Fosse a Primeira Vez", cat:"filmes", em:"💑", url:F("1ocUq1u1gW8cjiQK2J87w_JpwKEfpIjq5"), lang:"dub", nota:10},
-  /* filmes gravados, aguardando subir ao Drive */
-  {t:"O Serviço de Entregas da Kiki", cat:"filmes", em:"🧹", lang:"dub", status:"embreve", nota:10},
-  {t:"Suzume", cat:"filmes", em:"🚪", lang:"dub", status:"embreve", nota:10},
-  {t:"Gintama: Yoshiwara em Chamas", cat:"filmes", em:"⚔️", lang:"dub", status:"embreve", nota:9},
-  /* filmes na fila (pastas ainda vazias no Drive) */
-  {t:"Akira", cat:"filmes", em:"🏍️", lang:"dub", status:"fila"},
-  {t:"Sussurros do Coração", cat:"filmes", em:"🎻", lang:"dub", status:"fila"},
-  {t:"Batman (1989)", cat:"filmes", em:"🦇", lang:"leg", status:"fila"},
-  {t:"Matrix (1999)", cat:"filmes", em:"💊", lang:"dub", status:"fila"},
-  {t:"O Senhor dos Anéis: A Sociedade do Anel", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
-  {t:"O Senhor dos Anéis: As Duas Torres", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
-  {t:"O Senhor dos Anéis: O Retorno do Rei", cat:"filmes", em:"💍", lang:"dub", status:"fila"},
-  {t:"Mobile Suit Gundam I", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Mobile Suit Gundam II: Soldiers of Sorrow", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Mobile Suit Gundam III: Encounters in Space", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Mobile Suit Gundam: Char Contra-Ataca", cat:"filmes", em:"🤖", lang:"leg", status:"fila"},
-  {t:"Jujutsu Kaisen 0", cat:"filmes", em:"👊", lang:"dub", status:"fila"},
-
-  /* ===== SÉRIES ===== */
-  {t:"Invencível", cat:"series", em:"🦸", url:F("17N-2247ZLZT2EVKqh7d-lSLtJeCfqD9n"), lang:"dub", status:"assistindo", aberto:true, eps:5},
-  {t:"La Casa de Papel", cat:"series", em:"🎭", url:F("1X9tXuGvFGxxMbfqVkJZosJMn3qcS4dM0"), lang:"dub", status:"assistindo", aberto:true, eps:5},
-  {t:"Nível Secreto", cat:"series", em:"🎮", url:F("1-MnyZiL4XFh0Uo_YhEd4xCxz_QaDEixE"), lang:"dub", status:"completo", eps:13},
-
-  /* ===== TOKUSATSU ===== */
-  {t:"Kamen Rider Zeztz", cat:"tokusatsu", em:"🦗", url:F("1cxiXh8wY5agETG6FHWDSaYC5cIsakD4O"), lang:"dub", status:"completo", nota:10, eps:50},
-  {t:"Kamen Rider Zeztz — Série da Irmã (Agente Minami)", cat:"tokusatsu", em:"🕶️", url:F("1P9j_BmVcIv_BSpvgRgM9AAEoyI9cszWc"), lang:"leg", status:"assistindo", incomplete:true, eps:50},
-  {t:"Kaizoku Sentai Gokaiger", cat:"tokusatsu", em:"🏴‍☠️", lang:"leg", status:"fila"},
-
-  /* ===== ANIMAÇÕES ===== */
-  {t:"Over the Garden Wall", cat:"animacoes", em:"🍂", url:F("1K0Aac7VufqKxDhAqsVMVLFuU1Mz_Jgi6"), lang:"dub", status:"completo", eps:10},
-  {t:"The Amazing Digital Circus", cat:"animacoes", em:"🎪", url:F("1t3u_mfpzshcw3kGQtTbZmZlXUXLsIL6a"), lang:"dub", status:"assistindo", aberto:true, eps:3},
-  {t:"Gameoverse", cat:"animacoes", em:"🕹️", url:F("1YkAKOr4dvnluqjXD28ff4NPks0gJeT8V"), lang:"dub", status:"assistindo", aberto:true, eps:1},
-  {t:"Yamishibai: Histórias de Terror Japonesas", cat:"animacoes", em:"👺", url:F("1txR0FKs4w0hu5tgVBacKLgH6noi51A6L"), lang:"leg", status:"assistindo", aberto:true, seasons:[{n:1,s:"g",id:"1XgMDzM4bYdeJTIU14n5S17f2RkEvJCeG"}]},
-  {t:"Final Space", cat:"animacoes", em:"🚀", lang:"dub", status:"fila"},
-  {t:"Guerreiras do Kpop", cat:"animacoes", em:"🎤", lang:"leg", status:"fila"},
-
-  /* ===== VODS ===== */
-  {t:"Live de Aniversário de 26 Anos", cat:"vods", em:"🎂", url:V("1Y7iox9XQ6ILeOZ9GvcS9YDwUOSQQak-2")},
-  {t:"IRL no Matsuri Festival", cat:"vods", em:"🏮", url:V("110YtZ24SZmOXJBqQyaQgw09zj8fNIAHE")},
-  {t:"IRL no Karaokê", cat:"vods", em:"🎙️", url:V("1NQKCGd5gB7lrbvDgQcxc5Cp6qQZ5ELGV")},
-];
-
-const LANG_MAP = {
-  "One Piece":"dub","Fullmetal Alchemist: Brotherhood":"dub","Frieren e a Jornada para o Além":"dub",
-  "DAN DA DAN":"dub","Link Click":"dub","Your Lie in April":"leg","Orange":"dub","Mob Psycho 100":"dub",
-  "Kaiju no. 8":"dub","SAKAMOTO DAYS":"dub","Spy x Family":"dub","Haikyu!!":"dub","Blue Box":"dub",
-  "Clevatess":"dub","Konosuba":"dub","Noragami":"leg","Fate Zero":"leg","To Your Eternity":"leg",
-  "Ranking of Kings":"dub","Gachiakuta":"dub","Mobile Suit Gundam: The Origin":"leg","3-Gatsu no Lion":"leg",
-  "Welcome to Demon School! Iruma-kun":"leg","Witch Hat Atelier":"dub","Kaoru Hana wa Rin to Saku":"leg",
-  "Smoking Behind the Supermarket with You":"leg","Cautious Hero":"leg","NIPPON SANGOKU":"dub",
-  "I'm Standing on a Million Lives":"leg","Wistoria: Wand and Sword":"leg","Life Lessons with Uramichi Oniisan":"dub",
-  "Rooster Fighter":"dub",
-  "Interestelar":"dub","O Grande Truque":"dub","Predador: Badlands":"leg","Deu a Louca na Chapeuzinho":"dub",
-  "Obsessão":"dub","Your Name (Kimi no na wa)":"dub","A Voz do Silêncio (Koe no Katachi)":"leg",
-  "A Viagem de Chihiro":"dub","O Castelo Animado":"dub","As Memórias de Marnie":"dub",
-  "DuckTales: O Tesouro da Lâmpada Perdida":"dub","Metrópolis":"leg","Os Escolhidos (Dark Skies)":"leg",
-  "Esposa de Mentirinha":"dub","Sete Vidas":"dub","No Cair da Noite":"dub",
-  "Invencível":"dub","La Casa de Papel":"dub","Nível Secreto":"dub",
-  "Kamen Rider Zeztz":"dub","Kamen Rider Zeztz — Série da Irmã (Agente Minami)":"leg",
-  "Over the Garden Wall":"dub","The Amazing Digital Circus":"dub","Gameoverse":"dub",
-  "Yamishibai: Histórias de Terror Japonesas":"leg",
-};
-
-const ABERTO = { has: t => DATA.some(d => d.t === t && d.aberto) };
+/* LANG_MAP (fallback de idioma) agora vem de data.json */
 
 
-/* Fonte única das capas: título -> arquivo em images/ (prefixo do tipo de obra) */
-const IMG_MAP = {
-  /* ===== ANIMES ===== */
-  "One Piece":"anime-one-piece.webp",
-  "Yu Yu Hakusho":"anime-yu-yu-hakusho.webp",
-  "Fullmetal Alchemist: Brotherhood":"anime-fullmetal-alchemist-brotherhood.webp",
-  "Frieren e a Jornada para o Além":"anime-frieren.webp",
-  "DAN DA DAN":"anime-dandadan.webp",
-  "Link Click":"anime-link-click.webp",
-  "Your Lie in April":"anime-your-lie-in-april.webp",
-  "Orange":"anime-orange.webp",
-  "Mob Psycho 100":"anime-mob-psycho-100.webp",
-  "Kaiju no. 8":"anime-kaiju-no-8.webp",
-  "SAKAMOTO DAYS":"anime-sakamoto-days.webp",
-  "Spy x Family":"anime-spy-x-family.webp",
-  "Haikyu!!":"anime-haikyu.webp",
-  "Blue Box":"anime-blue-box.webp",
-  "Clevatess":"anime-clevatess.webp",
-  "Konosuba":"anime-konosuba.webp",
-  "Noragami":"anime-noragami.webp",
-  "Fate Zero":"anime-fate-zero.webp",
-  "To Your Eternity":"anime-to-your-eternity.webp",
-  "Ranking of Kings":"anime-ranking-of-kings.webp",
-  "Gachiakuta":"anime-gachiakuta.webp",
-  "Mobile Suit Gundam: The Origin":"anime-gundam-the-origin.webp",
-  "3-Gatsu no Lion":"anime-3-gatsu-no-lion.webp",
-  "Welcome to Demon School! Iruma-kun":"anime-iruma-kun.webp",
-  "Witch Hat Atelier":"anime-witch-hat-atelier.webp",
-  "Kaoru Hana wa Rin to Saku":"anime-kaoru-hana-wa-rin-to-saku.webp",
-  "Smoking Behind the Supermarket with You":"anime-smoking-behind-the-supermarket.webp",
-  "Cautious Hero":"anime-cautious-hero.webp",
-  "NIPPON SANGOKU":"anime-nippon-sangoku.webp",
-  "I'm Standing on a Million Lives":"anime-standing-on-a-million-lives.webp",
-  "Wistoria: Wand and Sword":"anime-wistoria-wand-and-sword.webp",
-  "Life Lessons with Uramichi Oniisan":"anime-uramichi-oniisan.webp",
-  "Rooster Fighter":"anime-rooster-fighter.webp",
-  "Kaizoku Sentai Gokaiger":"toku-kaizoku-sentai-gokaiger.webp",
-  "You and I Are Polar Opposites":"anime-you-and-i-are-polar-opposites.webp",
-  "Parede de Gelo":"anime-parede-de-gelo.webp",
-  "Beck: Mongolian Chop Squad":"anime-beck-mongolian-chop-squad.webp",
-  "Hunter x Hunter":"anime-hunter-x-hunter.webp",
-  "The Ancient Magus' Bride":"anime-ancient-magus-bride.webp",
-  "86: Eighty Six":"anime-86-eighty-six.webp",
-  "Buddy Daddies":"anime-buddy-daddies.webp",
-  "Romantic Killer":"anime-romantic-killer.webp",
-  "Takt op.Destiny":"anime-takt-op-destiny.webp",
-  "The Rising of the Shield Hero":"anime-rising-of-the-shield-hero.webp",
-  "Jujutsu Kaisen":"anime-jujutsu-kaisen.webp",
-  "Agents of the Four Seasons: Dance of Spring":"anime-agents-of-the-four-seasons.webp",
-  "Naruto Clássico":"anime-naruto-classico.webp",
-  "Naruto Shippuden":"anime-naruto-shippuden.webp",
-  "Mobile Suit Gundam Thunderbolt":"anime-gundam-thunderbolt.webp",
-  "Mobile Suit Gundam: The 08th MS Team":"anime-gundam-08th-ms-team.webp",
-  "Mobile Suit Gundam 0080: War in the Pocket":"anime-gundam-0080-war-in-the-pocket.webp",
-  "Re:Zero":"anime-re-zero.webp",
-
-  /* ===== FILMES ===== */
-  "Interestelar":"filme-interestelar.webp",
-  "O Grande Truque":"filme-o-grande-truque.webp",
-  "Predador: Badlands":"filme-predador-badlands.webp",
-  "Deu a Louca na Chapeuzinho":"filme-deu-a-louca-na-chapeuzinho.webp",
-  "Obsessão":"filme-obsessao.webp",
-  "Your Name (Kimi no na wa)":"filme-your-name.webp",
-  "A Voz do Silêncio (Koe no Katachi)":"filme-a-voz-do-silencio.webp",
-  "A Viagem de Chihiro":"filme-a-viagem-de-chihiro.webp",
-  "O Castelo Animado":"filme-o-castelo-animado.webp",
-  "As Memórias de Marnie":"filme-as-memorias-de-marnie.webp",
-  "DuckTales: O Tesouro da Lâmpada Perdida":"filme-ducktales-tesouro-da-lampada-perdida.webp",
-  "Metrópolis":"filme-metropolis.webp",
-  "Os Escolhidos (Dark Skies)":"filme-os-escolhidos-dark-skies.webp",
-  "Esposa de Mentirinha":"filme-esposa-de-mentirinha.webp",
-  "Sete Vidas":"filme-sete-vidas.webp",
-  "No Cair da Noite":"filme-no-cair-da-noite.webp",
-  "O Serviço de Entregas da Kiki":"filme-servico-de-entregas-da-kiki.webp",
-  "Suzume":"filme-suzume.webp",
-  "Gintama: Yoshiwara em Chamas":"filme-gintama-yoshiwara-em-chamas.webp",
-  "Como Se Fosse a Primeira Vez":"filme-como-se-fosse-a-primeira-vez.webp",
-  "Akira":"filme-akira.webp",
-  "Sussurros do Coração":"filme-sussurros-do-coracao.webp",
-  "Batman (1989)":"filme-batman-1989.webp",
-  "Matrix (1999)":"filme-matrix-1999.webp",
-  "O Senhor dos Anéis: A Sociedade do Anel":"filme-senhor-dos-aneis-1-a-sociedade-do-anel.webp",
-  "O Senhor dos Anéis: As Duas Torres":"filme-senhor-dos-aneis-2-as-duas-torres.webp",
-  "O Senhor dos Anéis: O Retorno do Rei":"filme-senhor-dos-aneis-3-o-retorno-do-rei.webp",
-  "Mobile Suit Gundam I":"filme-gundam-1-mobile-suit-gundam-i.webp",
-  "Mobile Suit Gundam II: Soldiers of Sorrow":"filme-gundam-2-soldiers-of-sorrow.webp",
-  "Mobile Suit Gundam III: Encounters in Space":"filme-gundam-3-encounters-in-space.webp",
-  "Mobile Suit Gundam: Char Contra-Ataca":"filme-gundam-char-contra-ataca.webp",
-  "Jujutsu Kaisen 0":"filme-jujutsu-kaisen-0.webp",
-
-  /* ===== SÉRIES ===== */
-  "Invencível":"serie-invencivel.webp",
-  "La Casa de Papel":"serie-la-casa-de-papel.webp",
-  "Nível Secreto":"serie-nivel-secreto.webp",
-
-  /* ===== TOKUSATSU ===== */
-  "Kamen Rider Zeztz":"toku-kamen-rider-zeztz.webp",
-  "Kamen Rider Zeztz — Série da Irmã (Agente Minami)":"toku-kamen-rider-zeztz-agente-minami.webp",
-
-  /* ===== ANIMAÇÕES ===== */
-  "Over the Garden Wall":"animacao-over-the-garden-wall.webp",
-  "The Amazing Digital Circus":"animacao-amazing-digital-circus.webp",
-  "Gameoverse":"animacao-gameoverse.webp",
-  "Yamishibai: Histórias de Terror Japonesas":"animacao-yamishibai.webp",
-  "Final Space":"animacao-final-space.webp",
-  "Guerreiras do Kpop":"animacao-guerreiras-do-kpop.webp",
-};
+/* IMG_MAP (capas: título -> arquivo em images/) agora vem de data.json */
 
 const main = document.getElementById('main');
 const searchEl = document.getElementById('search');
 let activeCat = 'todos', activeLang = 'all', activeStatus = 'all', query = '';
 
-document.getElementById('s-titles').textContent = DATA.length;
-document.getElementById('s-done').textContent = DATA.filter(d=>statusOf(d)==='completo').length;
-document.getElementById('s-prog').textContent = DATA.filter(d=>statusOf(d)==='assistindo').length;
+/* estatísticas e primeiro render são disparados após carregar o data.json (ver fim do script) */
 
 function statusOf(it){
   if(it.status) return it.status;
@@ -693,14 +475,15 @@ function capHTML(it, i){
   const lgv = it.lang || LANG_MAP[it.t];
   const lang = lgv ? `<span class="cap-lang">${LANG[lgv]}</span>` : '';
   const imgFile = IMG_MAP[it.t] || it.img;
-  const art = `<span class="em">${it.em}</span>` + (imgFile ? `<img src="images/${imgFile}" alt="${it.t}" loading="lazy" onerror="this.remove()">` : '');
+  const imgSrc = imgFile ? (/^https?:\/\//.test(imgFile) ? imgFile : `images/${imgFile}`) : '';
+  const art = `<span class="em">${it.em}</span>` + (imgFile ? `<img src="${imgSrc}" alt="${it.t}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
   let info = '';
   if(it.seasons && it.seasons.length){
     const desc = {g:'completa',y:'em andamento',r:'vazia / faltando'};
-    const segs = it.seasons.map(s=>{
+    const segs = it.seasons.map((s,si)=>{
       const label = s.l || ('T'+s.n);
       return (s.id && s.s!=='r')
-        ? `<span class="seg ${s.s} clik" data-url="${F(s.id)}" title="Abrir ${label} no Drive">${label}</span>`
+        ? `<span class="seg ${s.s} clik" data-si="${si}" data-url="${F(s.id)}" title="Abrir ${label} no Drive">${label}</span>`
         : `<span class="seg ${s.s}" title="${label} — ${desc[s.s]||''}">${label}</span>`;
     }).join('');
     info = `<div class="cap-meta">${segs}</div>`;
@@ -721,8 +504,8 @@ function capHTML(it, i){
   const cls = `cap${it.incomplete?' inc':''}${it.url?'':' locked'}`;
   const style = `style="animation-delay:${Math.min(i*30,360)}ms"`;
   return it.url
-    ? `<a class="${cls}" href="${it.url}" target="_blank" rel="noopener" ${style}>${inner}</a>`
-    : `<div class="${cls}" ${style}>${inner}</div>`;
+    ? `<a class="${cls}" href="${it.url}" target="_blank" rel="noopener" data-i="${it._i}" ${style}>${inner}</a>`
+    : `<div class="${cls}" data-i="${it._i}" ${style}>${inner}</div>`;
 }
 
 function render(){
@@ -760,11 +543,227 @@ document.getElementById('langpills').addEventListener('click', e=>{
   btn.classList.add('active'); activeLang = btn.dataset.lang; render(); toResults();
 });
 searchEl.addEventListener('input', e=>{ query = e.target.value.trim(); render(); });
-/* clique nos quadradinhos de temporada abre a pasta da temporada, sem seguir o link do card */
+/* ---------- player embutido: assistir sem sair do site ---------- */
+const playerCSS = document.createElement('style');
+playerCSS.textContent = `
+body.noscroll{overflow:hidden}
+.player{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(10,6,10,.72)}
+.player.open{display:flex}
+.player-box{width:min(960px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow-x:hidden;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.player-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.player-title{font-weight:700;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1a0f14}
+.player-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.player-drive{font-size:13px;font-weight:600;text-decoration:none;color:#fff;background:var(--accent);padding:7px 12px;border-radius:8px;white-space:nowrap}
+.player-drive:hover{filter:brightness(1.05)}
+.player-close{border:0;background:rgba(0,0,0,.06);color:#1a0f14;width:34px;height:34px;border-radius:8px;font-size:15px;cursor:pointer;line-height:1}
+.player-close:hover{background:rgba(0,0,0,.12)}
+.player-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-note{font-size:12px;color:#6b5560;background:#faf3ee;padding:8px 12px;text-align:center}
+[data-theme="dark"] .player-box{background:#241820}
+[data-theme="dark"] .player-head{border-bottom-color:rgba(255,255,255,.1)}
+[data-theme="dark"] .player-title{color:#f4e9ef}
+[data-theme="dark"] .player-close{background:rgba(255,255,255,.1);color:#f4e9ef}
+[data-theme="dark"] .player-close:hover{background:rgba(255,255,255,.18)}
+[data-theme="dark"] .player-note{color:#c9b3bf;background:#2f2029}
+.player-fail{font-size:12px;line-height:1.4;color:#7a1e1e;background:#fdeaea;border-top:1px solid #f3caca;padding:9px 14px;text-align:center}
+.player-fail[hidden]{display:none}
+[data-theme="dark"] .player-fail{color:#ffb3b3;background:#3a1f24;border-top-color:#5a2b30}
+@media (max-width:600px){
+  .player{padding:0}
+  .player-box{width:100%;max-height:100vh;height:100%;border-radius:0}
+  .player-frame{flex:0 0 auto;aspect-ratio:16/9}
+}
+.player-eps{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:#fff;border-top:1px solid rgba(0,0,0,.06);scrollbar-width:thin;cursor:grab;user-select:none;-webkit-user-select:none}
+.player-eps.grabbing,.player-eps.grabbing .pep{cursor:grabbing}
+.player-eps[hidden]{display:none}
+.pep{flex:0 0 auto;min-width:40px;height:34px;padding:0 10px;border:1px solid rgba(0,0,0,.12);background:#fbf5f0;color:#1a0f14;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
+.pep:hover{border-color:var(--accent)}
+.pep.active{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-theme="dark"] .player-eps{background:#241820;border-top-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .pep{background:#2f2029;color:#f4e9ef;border-color:rgba(255,255,255,.14)}
+.player-seasons{display:flex;gap:6px;overflow-x:auto;padding:10px 12px 0;background:#fff;scrollbar-width:thin}
+.player-seasons[hidden]{display:none}
+.psn{flex:0 0 auto;padding:6px 13px;border:1px solid rgba(0,0,0,.12);background:#fbf5f0;color:#1a0f14;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.psn:hover{border-color:var(--accent)}
+.psn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-theme="dark"] .player-seasons{background:#241820}
+[data-theme="dark"] .psn{background:#2f2029;color:#f4e9ef;border-color:rgba(255,255,255,.14)}`;
+document.head.appendChild(playerCSS);
+
+const player = document.createElement('div');
+player.className = 'player'; player.id = 'player';
+player.innerHTML = `
+  <div class="player-box" role="dialog" aria-modal="true" aria-label="Player de vídeo">
+    <div class="player-head">
+      <span class="player-title"></span>
+      <div class="player-actions">
+        <a class="player-drive" target="_blank" rel="noopener">Abrir no Drive ↗</a>
+        <button class="player-close" type="button" aria-label="Fechar">✕</button>
+      </div>
+    </div>
+    <div class="player-frame"><iframe allow="autoplay; fullscreen; encrypted-media" allowfullscreen referrerpolicy="no-referrer"></iframe></div>
+    <div class="player-seasons" hidden></div>
+    <div class="player-eps" hidden></div>
+    <div class="player-note"></div>
+    <div class="player-fail" hidden>Não carregou ou está em branco? Seu navegador pode estar bloqueando cookies de terceiros — permita-os para este site ou use “Abrir no Drive” acima.</div>
+  </div>`;
+document.body.appendChild(player);
+const playerTitle = player.querySelector('.player-title');
+const playerFrame = player.querySelector('iframe');
+const playerDrive = player.querySelector('.player-drive');
+const playerNote  = player.querySelector('.player-note');
+const playerFail  = player.querySelector('.player-fail');
+const playerEps   = player.querySelector('.player-eps');
+const playerSeasons = player.querySelector('.player-seasons');
+let failTimer = null;
+let epState = null;
+let epDragged = false;
+/* se o iframe carregar (mesmo página de erro do Drive), some com o aviso de falha */
+playerFrame.addEventListener('load', ()=>{ clearTimeout(failTimer); playerFail.hidden = true; });
+
+/* helper: carrega uma URL no iframe e arma o aviso de falha */
+function setFrame(src){
+  playerFail.hidden = true;
+  clearTimeout(failTimer);
+  playerFrame.src = src;
+  failTimer = setTimeout(()=>{ playerFail.hidden = false; }, 7000);
+}
+function showModal(){ player.classList.add('open'); document.body.classList.add('noscroll'); }
+
+/* ----- modo lista de episódios ----- */
+function renderEps(){
+  if(!epState){ playerEps.hidden = true; playerEps.innerHTML = ''; return; }
+  playerEps.hidden = false;
+  playerEps.innerHTML = epState.list.map((e,idx)=>{
+    const cls = 'pep' + (idx===epState.i?' active':'');
+    const tip = e.sr ? `Episódio ${e.n} — sem reação (disponível)` : `Episódio ${e.n}`;
+    return `<button class="${cls}" data-i="${idx}" title="${tip}">${e.n}</button>`;
+  }).join('');
+  const act = playerEps.querySelector('.pep.active');
+  if(act) act.scrollIntoView({inline:'center', block:'nearest'});
+}
+/* abas de temporada (só aparecem quando há mais de uma temporada catalogada) */
+function renderSeasons(){
+  if(!epState || !epState.seasons || epState.seasons.length < 2){ playerSeasons.hidden = true; playerSeasons.innerHTML = ''; return; }
+  playerSeasons.hidden = false;
+  playerSeasons.innerHTML = epState.seasons.map((s,si)=>`<button class="psn${si===epState.si?' active':''}" data-si="${si}" type="button">${s.label}</button>`).join('');
+}
+function selectSeason(si){
+  if(!epState || !epState.seasons || !epState.seasons[si]) return;
+  epState.si = si;
+  epState.list = epState.seasons[si].list;
+  renderSeasons();
+  playEp(0);
+}
+function playEp(idx){
+  if(!epState) return;
+  const e = epState.list[idx];
+  if(!e) return;
+  epState.i = idx;
+  const sLabel = (epState.seasons && epState.seasons.length) ? epState.seasons[epState.si].label : '';
+  playerTitle.textContent = `${epState.title}${sLabel?` — ${sLabel}`:''} — Ep ${e.n}`;
+  playerDrive.href = `https://drive.google.com/file/d/${e.id}/view`;
+  playerNote.textContent = ''; playerNote.style.display = 'none';
+  setFrame(`https://drive.google.com/file/d/${e.id}/preview`);
+  renderEps();
+}
+function openEpisodes(title, episodes, folderUrl){
+  const list = (episodes||[]).filter(e=>e && e.id);
+  if(!list.length){ if(folderUrl) openPlayer(folderUrl, title); return; }
+  epState = { title: title||'', list, i: 0 };
+  showModal();
+  renderSeasons();
+  playEp(0);
+}
+/* abre uma obra com temporadas no player, com abas pra trocar de temporada sem sair do site */
+function openSeasonsPlayer(it, startSi){
+  const seasons = (it.seasons||[])
+    .map(s=>({ raw:s, label: s.l || ('T'+s.n), list: (s.ep||[]).filter(e=>e && e.id) }))
+    .filter(s=>s.list.length);
+  if(!seasons.length){ openPlayer(it.url, it.t); return; }   // nenhuma temporada catalogada ainda → grade da pasta
+  let si = 0;
+  if(startSi!=null && it.seasons[startSi]){
+    const idx = seasons.findIndex(s=>s.raw===it.seasons[startSi]);
+    if(idx>=0) si = idx;
+  }
+  epState = { title: it.t, seasons, si, list: seasons[si].list, i: 0 };
+  showModal();
+  renderSeasons();
+  playEp(0);
+}
+
+/* ----- modo arquivo único / pasta ----- */
+function openPlayer(url, title){
+  if(!url) return;
+  epState = null; renderEps(); renderSeasons();
+  const file = url.match(/\/file\/d\/([^/]+)/);
+  const folder = url.match(/\/folders\/([^/?#]+)/);
+  let src = '', note = '';
+  if(file){
+    src = `https://drive.google.com/file/d/${file[1]}/preview`;
+  } else if(folder){
+    src = `https://drive.google.com/embeddedfolderview?id=${folder[1]}#grid`;
+    note = 'Vários episódios nesta pasta — clique em um arquivo para assistir.';
+  } else {
+    window.open(url, '_blank', 'noopener'); return;
+  }
+  playerTitle.textContent = title || '';
+  playerDrive.href = url;
+  playerNote.textContent = note;
+  playerNote.style.display = note ? '' : 'none';
+  setFrame(src);
+  showModal();
+}
+function closePlayer(){
+  clearTimeout(failTimer);
+  playerFail.hidden = true;
+  epState = null; renderEps(); renderSeasons();
+  player.classList.remove('open');
+  document.body.classList.remove('noscroll');
+  playerFrame.src = 'about:blank';
+}
+player.addEventListener('click', e=>{ if(e.target===player || e.target.closest('.player-close')) closePlayer(); });
+playerEps.addEventListener('click', e=>{ if(epDragged){ epDragged=false; return; } const b = e.target.closest('.pep'); if(b) playEp(Number(b.dataset.i)); });
+playerSeasons.addEventListener('click', e=>{ const b = e.target.closest('.psn'); if(b) selectSeason(Number(b.dataset.si)); });
+/* arrastar a faixa de episódios com o mouse (esquerda/direita) */
+let epDown=false, epStartX=0, epStartLeft=0;
+playerEps.addEventListener('pointerdown', e=>{ if(e.pointerType && e.pointerType!=='mouse') return; epDown=true; epDragged=false; epStartX=e.clientX; epStartLeft=playerEps.scrollLeft; playerEps.classList.add('grabbing'); });
+playerEps.addEventListener('pointermove', e=>{ if(!epDown) return; const dx=e.clientX-epStartX; if(Math.abs(dx)>4) epDragged=true; playerEps.scrollLeft=epStartLeft-dx; });
+const epEnd=()=>{ epDown=false; playerEps.classList.remove('grabbing'); };
+playerEps.addEventListener('pointerup', epEnd);
+playerEps.addEventListener('pointerleave', epEnd);
+playerEps.addEventListener('pointercancel', epEnd);
+document.addEventListener('keydown', e=>{
+  if(!player.classList.contains('open')) return;
+  if(e.key==='Escape'){ closePlayer(); return; }
+  if(epState && (e.key==='ArrowRight' || e.key==='ArrowLeft')){
+    const j = epState.i + (e.key==='ArrowRight' ? 1 : -1);
+    if(epState.list[j]) playEp(j);
+  }
+});
+
+/* cliques nos cards e temporadas abrem o player embutido, sem redirecionar */
 main.addEventListener('click', e=>{
-  const seg = e.target.closest('.seg.clik'); if(!seg) return;
-  e.preventDefault(); e.stopPropagation();
-  window.open(seg.dataset.url, '_blank', 'noopener');
+  const capEl = e.target.closest('.cap');
+  const it = capEl ? DATA[+capEl.dataset.i] : null;
+  const seg = e.target.closest('.seg.clik');
+  if(seg){
+    e.preventDefault(); e.stopPropagation();
+    const season = it && it.seasons ? it.seasons[+seg.dataset.si] : null;
+    const label = season ? (season.l || ('T'+season.n)) : seg.textContent.trim();
+    const title = it ? it.t : '';
+    if(it && it.seasons) openSeasonsPlayer(it, +seg.dataset.si);
+    else openPlayer(seg.dataset.url, title ? `${title} — ${label}` : label);
+    return;
+  }
+  const card = e.target.closest('a.cap');
+  if(card){
+    e.preventDefault();
+    if(it && it.seasons && it.seasons.length) openSeasonsPlayer(it, 0);
+    else if(it && it.episodes && it.episodes.length) openEpisodes(it.t, it.episodes, it.url);
+    else openPlayer(card.getAttribute('href'), it ? it.t : '');
+  }
 });
 
 /* barra de filtros: encaixa embaixo do topo e recolhe status/áudio ao rolar */
@@ -824,7 +823,18 @@ window.addEventListener('scroll', ()=>{
 }, {passive:true});
 toTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
 
-render();
+/* ---- carrega o catálogo de data.json e só então inicializa a página ---- */
+function boot(){
+  DATA.forEach((d,i)=>{ d._i = i; });   // índice global estável, usado pelos cliques do player
+  document.getElementById('s-titles').textContent = DATA.length;
+  document.getElementById('s-done').textContent = DATA.filter(d=>statusOf(d)==='completo').length;
+  document.getElementById('s-prog').textContent = DATA.filter(d=>statusOf(d)==='assistindo').length;
+  render();
+}
+fetch('data.json', {cache:'no-cache'})
+  .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(j=>{ DATA = j.data || []; LANG_MAP = j.lang || {}; IMG_MAP = j.img || {}; boot(); })
+  .catch(err=>{ console.error('Falha ao carregar data.json:', err); main.innerHTML = '<div class="empty">Não consegui carregar o catálogo agora 😢<br>Tente recarregar a página em instantes.</div>'; });
 </script>
 </body>
 </html>
