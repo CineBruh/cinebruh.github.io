@@ -56,7 +56,7 @@
     { "t": "Obsessão", "cat": "filmes", "em": "🎭", "url": "https://drive.google.com/drive/folders/1KBOUW_HE6iwiwPZEU1gQpv3DiFR4aNgu", "lang": "dub", "status": "assistindo", "incomplete": true, "eps": 1, "episodes": [{ "n": 1, "id": "11D6jRLSezwuWj1iQ5jMt_fUNzcmrBNqB", "sr": 1 }] },
     { "t": "Your Name (Kimi no na wa)", "cat": "filmes", "em": "🌠", "url": "https://drive.google.com/drive/folders/1AZABlV4qWQama8cA_jmPGi1GsG-cg-bg", "lang": "dub", "nota": 10, "eps": 1, "episodes": [{ "n": 1, "id": "1t1mUAY_fYFs158HFF0TzEWwDhoAredl5" }] },
     { "t": "Como Se Fosse a Primeira Vez", "cat": "filmes", "em": "💑", "url": "https://drive.google.com/drive/folders/1ocUq1u1gW8cjiQK2J87w_JpwKEfpIjq5", "lang": "dub", "nota": 10, "eps": 1, "episodes": [{ "n": 1, "id": "1kALOTrqFpbD0HCXlX5lUOG_WjpgxxXWW" }] },
-    { "t": "O Serviço de Entregas da Kiki", "cat": "filmes", "em": "🧹", "url": "https://drive.google.com/drive/folders/1jNaTOUYmdxPA0ZKSGW9dAfnWkIkQIjm4", "lang": "dub", "status": "embreve", "nota": 10 },
+    { "t": "O Serviço de Entregas da Kiki", "cat": "filmes", "em": "🧹", "url": "https://drive.google.com/drive/folders/1jNaTOUYmdxPA0ZKSGW9dAfnWkIkQIjm4", "lang": "dub", "nota": 10, "eps": 1, "episodes": [{ "n": 1, "id": "1UlP2k0ysliNc7PX2e_3inSYJPEH0jx8f" }] },
     { "t": "Suzume", "cat": "filmes", "em": "🚪", "url": "https://drive.google.com/drive/folders/15DcN5Cu_31gaJlgtdCgIXxmr-6UZnhWO", "lang": "dub", "status": "embreve", "nota": 10 },
     { "t": "Akira", "cat": "filmes", "em": "🏍️", "lang": "dub", "status": "fila" },
     { "t": "Sussurros do Coração", "cat": "filmes", "em": "🎻", "lang": "dub", "status": "fila" },
