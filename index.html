@@ -138,6 +138,7 @@
   .seg.y{background:#E8A400;border-color:#E8A400}
   .seg.r{background:#E63946;border-color:#E63946}
   .seg.nota{background:#F5C518;border-color:#F5C518;color:#1a0f14}
+  .seg.ghost{visibility:hidden}
   .cap-eps{font-family:var(--display);font-size:11px;line-height:1;color:#fff;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.45);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
   .st-inc{background:#8a6b78}
   .legend{max-width:1240px;margin:8px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--body);font-size:11px;color:var(--muted)}
@@ -154,13 +155,14 @@
   .cap-lang{font-family:var(--display);font-size:11px;line-height:1;letter-spacing:.5px;background:rgba(255,255,255,.93);color:#111;border:2px solid #111;border-radius:6px;padding:4px 8px}
   .cap-nota{display:inline-flex;align-items:center;gap:3px;font-family:var(--display);font-size:11px;line-height:1;letter-spacing:.5px;background:#F5C518;color:#1a0f14;border:2px solid transparent;border-radius:6px;padding:4px 8px}
   .cap-nota b{font-size:15px;font-weight:800}
-  .cap-badge{position:absolute;top:8px;right:8px;z-index:2;font-family:var(--display);font-size:10px;letter-spacing:.5px;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
-  .cap-badge.solo{left:8px;right:auto}
+  .cap-tl{position:absolute;top:8px;left:8px;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+  .cap-tr{position:absolute;top:8px;right:8px;z-index:2}
+  .cap-badge{font-family:var(--display);font-size:10px;letter-spacing:.5px;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
   .st-completo{background:#0FA958}
   .st-assistindo{background:#ff68b4}
   .st-fila{background:#5a5550}
   .st-embreve{background:#FF7A00}
-  .cap-open{position:absolute;top:8px;left:8px;z-index:2;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#F5A623;color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px}
+  .cap-open{font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#F5A623;color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px}
   .cap.locked{cursor:default}
   .cap.locked .cap-art{filter:saturate(.8)}
   .cap.locked.inc .cap-art{filter:grayscale(1) contrast(.95)}
@@ -469,7 +471,7 @@ function capHTML(it, i){
   const ST = {completo:["✓ Completo","st-completo"], assistindo:["Assistindo","st-assistindo"], fila:["Na fila","st-fila"], embreve:["Em breve","st-embreve"], incompleto:["Incompleto","st-inc"]};
   const stKey = it.incomplete ? 'incompleto' : st;
   const meta = ST[stKey] || ST.assistindo;
-  const badge = `<span class="cap-badge ${meta[1]}${it.aberto?'':' solo'}">${meta[0]}</span>`;
+  const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
   const open = it.aberto ? `<span class="cap-open">Em aberto</span>` : '';
   const LANG = {dub:"🎙️ Dub", leg:"💬 Leg", both:"Dub + Leg"};
   const lgv = it.lang || LANG_MAP[it.t];
@@ -487,23 +489,29 @@ function capHTML(it, i){
         : `<span class="seg ${s.s}" title="${label} — ${desc[s.s]||''}">${label}</span>`;
     }).join('');
     info = `<div class="cap-meta">${segs}</div>`;
-  } else if(it.eps){
+  } else if(it.eps && it.cat!=='filmes'){
     info = `<div class="cap-meta"><span class="cap-eps" title="Episódios disponíveis no Drive">▦ ${it.eps} ep${it.eps>1?'s':''}</span></div>`;
+  } else {
+    // sem temporada/episódio: reserva a mesma altura pra o título não ficar atrás da nota/idioma
+    info = `<div class="cap-meta" aria-hidden="true"><span class="seg ghost">&nbsp;</span></div>`;
   }
   const nota = it.nota ? `<span class="cap-nota" title="Nota da Bruna">★<b>${it.nota}</b></span>` : '';
-  const br = (nota || lang) ? `<div class="cap-br">${nota}${lang}</div>` : '';
-  const hover = it.url ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Em breve':'Na fila');
+  const tr = nota ? `<div class="cap-tr">${nota}</div>` : '';
+  const br = lang ? `<div class="cap-br">${lang}</div>` : '';
+  const playable = it.url && st!=='embreve';   // "em breve" ainda não tem reação pra assistir
+  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Em breve':'Na fila');
   const inner = `
       <div class="cap-art" style="--c1:${g[0]};--c2:${g[1]}">
         ${art}
-        ${badge}${open}
+        <div class="cap-tl">${badge}${open}</div>
+        ${tr}
         ${br}
         <div class="cap-scrim"><div class="cap-title">${it.t}</div>${info}</div>
         <div class="cap-hover"><span>${hover}</span></div>
       </div>`;
-  const cls = `cap${it.incomplete?' inc':''}${it.url?'':' locked'}`;
+  const cls = `cap${it.incomplete?' inc':''}${playable?'':' locked'}`;
   const style = `style="animation-delay:${Math.min(i*30,360)}ms"`;
-  return it.url
+  return playable
     ? `<a class="${cls}" href="${it.url}" target="_blank" rel="noopener" data-i="${it._i}" ${style}>${inner}</a>`
     : `<div class="${cls}" data-i="${it._i}" ${style}>${inner}</div>`;
 }
