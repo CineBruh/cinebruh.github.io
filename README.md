@@ -7,7 +7,7 @@ O site se atualiza sozinho. Um robô lê a pasta do Google Drive, entende os nom
 ## Como funciona
 
 1. Basta organizar as pastas no Google Drive seguindo as regras abaixo.
-2. A cada **6 horas**, o robô lê o Drive e atualiza o `data.json`.
+2. A cada **hora**, o robô lê o Drive e atualiza o `data.json`.
 3. O site é atualizado logo depois, com capas puxadas automaticamente do TMDB.
 
 **Também pode atualizar manualmente** dando **Run workflow** no **Actions** de **Sincronizar catálogo (Drive → data.json)**.
@@ -44,7 +44,7 @@ O símbolo precisa ser o **primeiro caractere** do nome da pasta.
 | --- | --- |
 | `✅` | Completo |
 | `$` | Em aberto (aceita pedidos/patrocínio) |
-| `⌧` | Em breve no Drive |
+| `⌧` | Off Live (conteúdo que será gravado offline, fora da live) |
 | `⚠` | Incompleto (aparece como "assistindo", com aviso de incompleto) |
 | *(nenhum)* + pasta com vídeos | Assistindo. Em **Filmes** e **VODs**, conta como completo |
 | *(nenhum)* + pasta vazia | Na fila |
@@ -110,7 +110,7 @@ A ordem das obras no site é preservada. Obras novas entram no fim da categoria.
 **Arquivos**
 - `index.html`: o site
 - `scripts/sync-drive.mjs`: o robô (Node 20+, sem dependências)
-- `.github/workflows/sync-catalog.yml`: roda o robô a cada 6h e faz commit quando algo muda
+- `.github/workflows/sync-catalog.yml`: roda o robô a cada hora e faz commit quando algo muda
 
 **Secrets do repositório** (Settings → Secrets and variables → Actions)
 - `GDRIVE_API_KEY` (obrigatória): chave da API do Google Drive. A pasta do Drive precisa estar **pública** (leitura).
