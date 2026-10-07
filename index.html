@@ -157,6 +157,8 @@
   .cap-nota b{font-size:15px;font-weight:800}
   .cap-tl{position:absolute;top:8px;left:8px;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
   .cap-tr{position:absolute;top:8px;right:8px;z-index:2}
+  .cap-tr .cap-lang{display:inline-flex;align-items:center;gap:3px;height:23px;box-sizing:border-box;padding:0 8px}
+  .cap-tl .cap-badge,.cap-tl .cap-open{display:inline-flex;align-items:center;height:23px;box-sizing:border-box}
   .cap-badge{font-family:var(--display);font-size:10px;letter-spacing:.5px;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
   .st-completo{background:#0FA958}
   .st-assistindo{background:#ff68b4}
@@ -222,6 +224,8 @@
     .cap-meta{gap:3px;margin-top:4px}
     .seg,.cap-eps,.cap-lang,.cap-nota{font-size:9px;padding:3px 6px;border-width:1.5px}
     .cap-badge,.cap-open{font-size:9px;padding:2px 5px;letter-spacing:.3px}
+    .cap-tr .cap-lang{height:20px;padding:0 6px;border-width:2px}
+    .cap-tl .cap-badge,.cap-tl .cap-open{height:20px}
     .cap-nota b{font-size:12px}
     .hero{padding:16px 20px 14px}
     .topbar-inner .spacer{display:none}
@@ -337,7 +341,7 @@
       <button class="lpill" data-status="completo">Completo</button>
       <button class="lpill" data-status="assistindo">Assistindo</button>
       <button class="lpill" data-status="fila">Na fila</button>
-      <button class="lpill" data-status="embreve">Em breve</button>
+      <button class="lpill" data-status="embreve">Off Live</button>
       <button class="lpill" data-status="aberto">Em aberto</button>
     </div>
     <div class="lang-group" id="langpills">
@@ -446,9 +450,13 @@ let activeCat = 'todos', activeLang = 'all', activeStatus = 'all', query = '';
 /* estatísticas e primeiro render são disparados após carregar o data.json (ver fim do script) */
 
 function statusOf(it){
-  if(it.status) return it.status;
-  if(it.cat==='filmes' || it.cat==='vods') return 'completo';
-  return 'assistindo';
+  const base = it.status || ((it.cat==='filmes' || it.cat==='vods') ? 'completo' : 'assistindo');
+  // obra com temporadas vira "concluída" quando TODAS as temporadas estão completas (verdes)
+  // e a obra não está "em aberto". Se alguma estiver em andamento (amarela) ou na fila (vazia), não.
+  if(base==='assistindo' && !it.aberto && it.seasons && it.seasons.length && it.seasons.every(s=>s.s==='g')){
+    return 'completo';
+  }
+  return base;
 }
 function matches(it){
   if(activeCat!=='todos' && it.cat!==activeCat) return false;
@@ -468,7 +476,7 @@ function matches(it){
 function capHTML(it, i){
   const g = CAT_GRADS[it.cat][i % CAT_GRADS[it.cat].length];
   const st = statusOf(it);
-  const ST = {completo:["✓ Completo","st-completo"], assistindo:["Assistindo","st-assistindo"], fila:["Na fila","st-fila"], embreve:["Em breve","st-embreve"], incompleto:["Incompleto","st-inc"]};
+  const ST = {completo:["✓ Completo","st-completo"], assistindo:["Assistindo","st-assistindo"], fila:["Na fila","st-fila"], embreve:["Off Live","st-embreve"], incompleto:["Incompleto","st-inc"]};
   const stKey = it.incomplete ? 'incompleto' : st;
   const meta = ST[stKey] || ST.assistindo;
   const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
@@ -496,10 +504,10 @@ function capHTML(it, i){
     info = `<div class="cap-meta" aria-hidden="true"><span class="seg ghost">&nbsp;</span></div>`;
   }
   const nota = it.nota ? `<span class="cap-nota" title="Nota da Bruna">★<b>${it.nota}</b></span>` : '';
-  const tr = nota ? `<div class="cap-tr">${nota}</div>` : '';
-  const br = lang ? `<div class="cap-br">${lang}</div>` : '';
+  const tr = lang ? `<div class="cap-tr">${lang}</div>` : '';
+  const br = nota ? `<div class="cap-br">${nota}</div>` : '';
   const playable = it.url && st!=='embreve';   // "em breve" ainda não tem reação pra assistir
-  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Em breve':'Na fila');
+  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live':'Na fila');
   const inner = `
       <div class="cap-art" style="--c1:${g[0]};--c2:${g[1]}">
         ${art}
@@ -834,9 +842,10 @@ toTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}))
 /* ---- carrega o catálogo de data.json e só então inicializa a página ---- */
 function boot(){
   DATA.forEach((d,i)=>{ d._i = i; });   // índice global estável, usado pelos cliques do player
-  document.getElementById('s-titles').textContent = DATA.length;
-  document.getElementById('s-done').textContent = DATA.filter(d=>statusOf(d)==='completo').length;
-  document.getElementById('s-prog').textContent = DATA.filter(d=>statusOf(d)==='assistindo').length;
+  const counted = DATA.filter(d=>d.cat!=='vods');   // VODs não entram nos contadores do topo
+  document.getElementById('s-titles').textContent = counted.length;
+  document.getElementById('s-done').textContent = counted.filter(d=>statusOf(d)==='completo').length;
+  document.getElementById('s-prog').textContent = counted.filter(d=>statusOf(d)==='assistindo').length;
   render();
 }
 fetch('data.json', {cache:'no-cache'})
