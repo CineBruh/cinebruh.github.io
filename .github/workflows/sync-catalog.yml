@@ -2,7 +2,7 @@ name: Sincronizar catálogo (Drive → data.json)
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # a cada 6 horas (horário UTC)
+    - cron: '17 * * * *'    # a cada hora, aos :17 (minuto "quebrado" para rodar menos atrasado)
   workflow_dispatch: {}       # botão "Run workflow" para rodar na hora
 
 permissions:
