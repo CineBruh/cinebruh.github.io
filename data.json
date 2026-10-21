@@ -85,6 +85,7 @@
     { "t": "Gintama Yoshiwara em Chamas (2026)", "cat": "filmes", "em": "🎞️", "url": "https://drive.google.com/drive/folders/1HbeGkiQOidzO4KSeW-CprZWuCn9NBGcV", "lang": "dub", "nota": 9, "eps": 1, "episodes": [{ "n": 1, "id": "1_FP1hCLpVDfjPUgm-GGG9fWaeggQxu9S" }] },
     { "t": "O Serviço de Entregas da Kiki (1989)", "cat": "filmes", "em": "🎞️", "url": "https://drive.google.com/drive/folders/1jNaTOUYmdxPA0ZKSGW9dAfnWkIkQIjm4", "lang": "dub", "nota": 10, "eps": 1, "episodes": [{ "n": 1, "id": "1UlP2k0ysliNc7PX2e_3inSYJPEH0jx8f" }] },
     { "t": "Suzume (2022)", "cat": "filmes", "em": "🎞️", "url": "https://drive.google.com/drive/folders/15DcN5Cu_31gaJlgtdCgIXxmr-6UZnhWO", "lang": "dub", "nota": 10, "eps": 1, "episodes": [{ "n": 1, "id": "1ZWBYz41My94kPQzyzXz6qJOfDwNFaeV4" }] },
+    { "t": "Quero comer seu Pancreas", "cat": "filmes", "em": "🎞️", "lang": "leg", "status": "fila" },
 
     { "t": "Invencível", "cat": "series", "em": "🦸", "url": "https://drive.google.com/drive/folders/17N-2247ZLZT2EVKqh7d-lSLtJeCfqD9n", "lang": "dub", "status": "assistindo", "aberto": true, "eps": 5, "episodes": [{ "n": 1, "id": "1QZWB6OxSD-J0d0ZOdbaCRC78qav2fzQS" }, { "n": 2, "id": "1wkqsDPgfB1ozD61CeFRF48uXQpT8lR9G" }, { "n": 3, "id": "1uFPSawNGPkTMTMMQ8MHJQfk3AKf3hQyh" }, { "n": 4, "id": "1cNp8UR3it1oThBvSj055MdvLVdvFnccn" }, { "n": 5, "id": "10GgSGOydtE9hmfle8QymSXOGgL0BsQYo" }] },
     { "t": "La Casa de Papel", "cat": "series", "em": "🎭", "url": "https://drive.google.com/drive/folders/1X9tXuGvFGxxMbfqVkJZosJMn3qcS4dM0", "lang": "dub", "status": "assistindo", "aberto": true, "eps": 5, "episodes": [{ "n": 1, "id": "1cVtvxTVqWa2_BFPmQV-wfCEXqxouctcv" }, { "n": 2, "id": "1-k4gn1L_xxRLQbQSpgwV24HztN3Vg-IM" }, { "n": 3, "id": "1J-HxYEKzhwDWQYYkSQdCimiXfwSj4jls" }, { "n": 4, "id": "1dgWh1sNCU8evNAls7K7Py_nzMomZnkAa" }, { "n": 5, "id": "1SwaYRKAiXqHYtjtC6LnVYE3c1N5qR6t1" }] },
@@ -192,6 +193,7 @@
     "Gintama Yoshiwara em Chamas (2026)": "dub",
     "O Serviço de Entregas da Kiki (1989)": "dub",
     "Suzume (2022)": "dub",
+    "Quero comer seu Pancreas": "leg",
     "Invencível": "dub",
     "La Casa de Papel": "dub",
     "Nível Secreto": "dub",
@@ -291,6 +293,7 @@
     "Gintama Yoshiwara em Chamas (2026)": "https://image.tmdb.org/t/p/w500/sb41qo6yHw5GS2Tujd7H4NDP4ZH.jpg",
     "O Serviço de Entregas da Kiki (1989)": "https://image.tmdb.org/t/p/w500/eM4mDoXpOTwqMldmCy76cftok9m.jpg",
     "Suzume (2022)": "https://image.tmdb.org/t/p/w500/QcS3MhdUiOEUOjY451FOFInZXF.jpg",
+    "Quero comer seu Pancreas": "https://image.tmdb.org/t/p/w500/8xAwcL3ALTHzHMKkVIApiKwVEzt.jpg",
     "Invencível": "https://image.tmdb.org/t/p/w500/qhb7RWU9ad9a5m3HbeRRXzjaMXf.jpg",
     "La Casa de Papel": "https://image.tmdb.org/t/p/w500/k8ytNZ32uf4JtrtpfIw54MD0oZX.jpg",
     "Nível Secreto": "https://image.tmdb.org/t/p/w500/kqFWimBW9CGNx0XuTx8NkYHSmGG.jpg",
