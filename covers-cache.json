@@ -1,97 +1,1626 @@
 {
-  "One Piece": { "url": "https://image.tmdb.org/t/p/w500/9ltisibeD4gzqjM1AzmQwCdyirQ.jpg", "tmdb": "tv/37854" },
-  "Yu Yu Hakusho": { "url": "https://image.tmdb.org/t/p/w500/j6dzDPkrAsfJ6GUyyMPz38ZkpbF.jpg", "tmdb": "tv/30669" },
-  "Frieren e a Jornada para o Além": { "url": "https://image.tmdb.org/t/p/w500/qykTIEJQF8cunKD0CKOqab15wns.jpg", "tmdb": "tv/209867" },
-  "Dan Da Dan": { "url": "https://image.tmdb.org/t/p/w500/vtQug1eOyeU2VXIpNoDF1lTlcH4.jpg", "tmdb": "tv/240411" },
-  "Link Click": { "url": "https://image.tmdb.org/t/p/w500/8uBae3fsFRhYNrNBxuWJCXlBFKE.jpg", "tmdb": "tv/123542" },
-  "Orange": { "url": "https://image.tmdb.org/t/p/w500/oxnWNFG4cSLBXJTDLOJU8ucMpmD.jpg", "tmdb": "tv/66958" },
-  "Mob Psycho 100": { "url": "https://image.tmdb.org/t/p/w500/aFcv9zeJtSbJHSYUlQCOQYV3Gio.jpg", "tmdb": "tv/67075" },
-  "SAKAMOTO DAYS": { "url": "https://image.tmdb.org/t/p/w500/qTNIxDIzKjLLuS17fxdXjcKAlW7.jpg", "tmdb": "tv/207332" },
-  "Blue Box": { "url": "https://image.tmdb.org/t/p/w500/shXf4cTKUbMpx5AVBKi4V0dMwY3.jpg", "tmdb": "tv/207347" },
-  "Clevatess": { "url": "https://image.tmdb.org/t/p/w500/avajalKjBP5QjwIEb5Xs8QXg1K.jpg", "tmdb": "tv/258348" },
-  "KONOSUBA - God's blessing on this wonderful world!": { "url": "https://image.tmdb.org/t/p/w500/kvXF7ugmNHo2HyNLy7lhQQVbBBa.jpg", "tmdb": "tv/65844" },
-  "Noragami": { "url": "https://image.tmdb.org/t/p/w500/8yGBg40I36c98OeKMMjkJkCThkf.jpg", "tmdb": "tv/64710" },
-  "Fate/Zero": { "url": "https://image.tmdb.org/t/p/w500/hfTEDISVpFMqmp6uOGylsSakyXZ.jpg", "tmdb": "tv/45845" },
-  "To Your Eternity": { "url": "https://image.tmdb.org/t/p/w500/bohMYRVSIG68md0zQobyWbV4S8e.jpg", "tmdb": "tv/97525" },
-  "Ranking of Kings": { "url": "https://image.tmdb.org/t/p/w500/gaK5RosxmhRAtE2sX757dyICLJM.jpg", "tmdb": "tv/112613" },
-  "Gachiakuta": { "url": "https://image.tmdb.org/t/p/w500/RxuL7KuFoOzHC0htjtLGxJEGGx.jpg", "tmdb": "tv/256721" },
-  "March Comes In Like a Lion": { "url": "https://image.tmdb.org/t/p/w500/4LTg5dLXnHwbNcFyOTnXvMpSs4q.jpg", "tmdb": "tv/65336" },
-  "Welcome to Demon School! Iruma Kun": { "url": "https://image.tmdb.org/t/p/w500/5o1PjfSTASqjUH6giJXiskDbXpj.jpg", "tmdb": "tv/91801" },
-  "Witch Hat Atelier": { "url": "https://image.tmdb.org/t/p/w500/1qGSBnrANHLX8C7KqGuPDCylns2.jpg", "tmdb": "tv/196950" },
-  "Smoking Behind the Supermarket with you": { "url": "https://image.tmdb.org/t/p/w500/aRTMLZWEtBUy4fG01aqVicRD2wx.jpg", "tmdb": "tv/296286" },
-  "Cautious Hero: The Hero Is Overpowered but Overly Cautious": { "url": "https://image.tmdb.org/t/p/w500/leobb4kmAFpO1XUH739fkg6PEqH.jpg", "tmdb": "tv/93256" },
-  "I'm Standing on a Million Lives": { "url": "https://image.tmdb.org/t/p/w500/fbBY1UEW7Vx2alMrjg6xNNM3Pv9.jpg", "tmdb": "tv/99995" },
-  "Life Lessons with Uramichi Oniisan": { "url": "https://image.tmdb.org/t/p/w500/eiBMrPIG8jokkcAwhKpwcAZG7gh.jpg", "tmdb": "tv/96442" },
-  "You and I Are Polar Opposites": { "url": "https://image.tmdb.org/t/p/w500/lLjcMT7fwuO5fgswb2drlbFwoTJ.jpg", "tmdb": "tv/278043" },
-  "Parede de Gelo": { "url": "https://image.tmdb.org/t/p/w500/d03KBIFklbUjz3aHP77dqo9iagN.jpg", "tmdb": "tv/283428" },
-  "Hunter X Hunter": { "url": "https://image.tmdb.org/t/p/w500/eobAuhCJA8oRp814V67WhezVXtQ.jpg", "tmdb": "tv/45952" },
-  "The Ancient Magus' Bride": { "url": "https://image.tmdb.org/t/p/w500/sExUEM7eI1MQdsxgdRunrCeDNMT.jpg", "tmdb": "tv/73833" },
-  "Buddy Daddies": { "url": "https://image.tmdb.org/t/p/w500/qjRWZ1Ak9Ag6EvcA5LNhphqX8oV.jpg", "tmdb": "tv/212963" },
-  "Romantic Killer": { "url": "https://image.tmdb.org/t/p/w500/b6nww3xaBSi9pQWfePBbKb5PTnj.jpg", "tmdb": "tv/208730" },
-  "takt op.Destiny": { "url": "https://image.tmdb.org/t/p/w500/m1sJZonLyL0EG25qNc99Ml5DLlu.jpg", "tmdb": "tv/121787" },
-  "The Rising of the Shield Hero": { "url": "https://image.tmdb.org/t/p/w500/yX0d6aTjHrE5Sjp6gZ1dkPWCmIF.jpg", "tmdb": "tv/83095" },
-  "Jujutsu Kaisen": { "url": "https://image.tmdb.org/t/p/w500/8R1mMSC1gX1cg5ed7ns49JOEqw3.jpg", "tmdb": "tv/95479" },
-  "Re:ZERO -Starting Life in Another World-": { "url": "https://image.tmdb.org/t/p/w500/ccG0ZfXOQ0834bIus4SwZrXtkyM.jpg", "tmdb": "tv/65942" },
-  "Naruto": { "url": "https://image.tmdb.org/t/p/w500/9ptbVZpKNy5NY9D4zq4KGiYWRQY.jpg", "tmdb": "tv/46260" },
-  "Naruto Shippuden": { "url": "https://image.tmdb.org/t/p/w500/nRJmByfK9XdtOY73VArcN8KpKVs.jpg", "tmdb": "tv/31910" },
-  "Mobile Suit Gundam Thunderbolt": { "url": "https://image.tmdb.org/t/p/w500/tpIjhiHFxSTrblBwl5U8YAu2jTL.jpg", "tmdb": "tv/64809" },
-  "86 EIGHTY-SIX": { "url": "https://image.tmdb.org/t/p/w500/aEG1ZtdyjDFDtlGqovvAHsAfsR6.jpg", "tmdb": "tv/100565" },
-  "Agents of the Four Seasons Dance of Spring": { "url": "https://image.tmdb.org/t/p/w500/s8kMT6SmeAt7HovSJWbgIEvjmdm.jpg", "tmdb": "tv/288659" },
-  "Beck": { "url": "https://image.tmdb.org/t/p/w500/tZ3oKqwaeX2v9j6hSNhX4vPjP4c.jpg", "tmdb": "tv/43288" },
-  "Fullmetal Alchemist: Brotherhood": { "url": "https://image.tmdb.org/t/p/w500/vIkH7fUQf8Olo8Apq56FQLGDXOo.jpg", "tmdb": "tv/31911" },
-  "HAIKYU!!": { "url": "https://image.tmdb.org/t/p/w500/qNKaeunuUdL0smnowVVgShCkWZ4.jpg", "tmdb": "tv/60863" },
-  "Kaiju No. 8": { "url": "https://image.tmdb.org/t/p/w500/A6JOsCdFFTxtbDnKAfE0iY6jOiE.jpg", "tmdb": "tv/207468" },
-  "The Fragrant Flower Blooms With Dignity": { "url": "https://image.tmdb.org/t/p/w500/iR3kusHHeoAbjAjWrg53nSAVDx7.jpg", "tmdb": "tv/271607" },
-  "Mobile Suit Gundam 0080: War in the Pocket": { "url": "https://image.tmdb.org/t/p/w500/3eHNjpxvKa9cjvdhf14pG4s8V4n.jpg", "tmdb": "tv/46512" },
-  "Mobile Suit Gundam: The 08th MS Team": { "url": "https://image.tmdb.org/t/p/w500/5AzsnD4spu3oVN8Va8VK6ZOAQUt.jpg", "tmdb": "tv/43887" },
-  "Mobile Suit Gundam: The Origin": { "url": "https://image.tmdb.org/t/p/w500/iLzfsgJXntGJsU9lcY8emoTpM5v.jpg", "tmdb": "tv/88865" },
-  "NIPPON SANGOKU: The Three Nations of the Crimson Sun": { "url": "https://image.tmdb.org/t/p/w500/hjihUw4UPndUxklecJxz1qCbcjT.jpg", "tmdb": "tv/312474" },
-  "Rooster Fighter": { "url": "https://image.tmdb.org/t/p/w500/iCtbr0sIdaKZjhQH3Wr7hW6A1IU.jpg", "tmdb": "tv/259819" },
-  "Spy X Family": { "url": "https://image.tmdb.org/t/p/w500/vaIREdPGZOnW9Jrs86mheVVlIQQ.jpg", "tmdb": "tv/120089" },
-  "The Promised Neverland": { "url": "https://image.tmdb.org/t/p/w500/8RWcKSmCbwsN8porFyTOB5e2cDG.jpg", "tmdb": "tv/83097" },
-  "Wistoria: Wand and Sword": { "url": "https://image.tmdb.org/t/p/w500/65KsCghUgyI1hOsypfrwzAI9e4e.jpg", "tmdb": "tv/245842" },
-  "Your Lie in April": { "url": "https://image.tmdb.org/t/p/w500/xswPti7YWJfvqFf52P5VAN1QMuJ.jpg", "tmdb": "tv/61663" },
-
-  "Obsessão": { "url": "https://image.tmdb.org/t/p/w500/wUc6IDf5ChjM1UyQye21qFBeJY0.jpg", "tmdb": "movie/1339713" },
-  "Your Name.": { "url": "https://image.tmdb.org/t/p/w500/bMOKAjTU1TNUjRSF7icldbii06u.jpg", "tmdb": "movie/372058" },
-  "Como Se Fosse a Primeira Vez": { "url": "https://image.tmdb.org/t/p/w500/h0st50VJ755VG1kzSc2FgwtDHdk.jpg", "tmdb": "movie/1824" },
-  "O Serviço de Entregas da Kiki": { "url": "https://image.tmdb.org/t/p/w500/eM4mDoXpOTwqMldmCy76cftok9m.jpg", "tmdb": "movie/16859" },
-  "Suzume": { "url": "https://image.tmdb.org/t/p/w500/QcS3MhdUiOEUOjY451FOFInZXF.jpg", "tmdb": "movie/916224" },
-  "Akira (1988)": { "url": "https://image.tmdb.org/t/p/w500/tbwwTQ3EqSdotbQ3ZcIl6vKBv7q.jpg", "tmdb": "movie/149" },
-  "Sussurros do Coração": { "url": "https://image.tmdb.org/t/p/w500/5q752lJ1XoRwj6yKVx999avJ8eO.jpg", "tmdb": "movie/37797" },
-  "The Matrix": { "url": "https://image.tmdb.org/t/p/w500/lDqMDI3xpbB9UQRyeXfei0MXhqb.jpg", "tmdb": "movie/603" },
-  "Mobile Suit Gundam I": { "url": "https://image.tmdb.org/t/p/w500/uig60VsA6fL4NgSdD8KLZS6jDJV.jpg", "tmdb": "movie/39228" },
-  "Mobile Suit Gundam II Soldiers of Sorrow": { "url": "https://image.tmdb.org/t/p/w500/e0PWph73SqOgZmK9bKYZ1PXOYsX.jpg", "tmdb": "movie/39229" },
-  "Mobile Suit Gundam III Encounters in Space": { "url": "https://image.tmdb.org/t/p/w500/i5bRWeJ7qYJdVOev9C1JBsnTN2j.jpg", "tmdb": "movie/39230" },
-  "Mobile Suit Gundam: Char Contra-ataca!": { "url": "https://image.tmdb.org/t/p/w500/u6nYvAViUzqWsfyi948pqiG2c2l.jpg", "tmdb": "movie/16157" },
-  "Jujutsu Kaisen 0": { "url": "https://image.tmdb.org/t/p/w500/2ndvx03fmREMxEgaZ1vWt756TOQ.jpg", "tmdb": "movie/810693" },
-  "A Viagem de Chihiro": { "url": "https://image.tmdb.org/t/p/w500/hhoKhsyJ3hFaxEm5pMdZRiTu2lJ.jpg", "tmdb": "movie/129" },
-  "A Voz do Silêncio": { "url": "https://image.tmdb.org/t/p/w500/haMUCn5bNgeKb2EkILvhYGoHXZX.jpg", "tmdb": "movie/378064" },
-  "As Memórias de Marnie": { "url": "https://image.tmdb.org/t/p/w500/q8dKK0OdBR91gEJWRdo9osvxvM6.jpg", "tmdb": "movie/242828" },
-  "O Castelo Animado": { "url": "https://image.tmdb.org/t/p/w500/1hTfaEWktMJPxCk5nZNtK7F86C9.jpg", "tmdb": "movie/4935" },
-  "Deu a Louca na Chapeuzinho": { "url": "https://image.tmdb.org/t/p/w500/9fgIhvFgpgzawR0IflGXIQmyn8s.jpg", "tmdb": "movie/10982" },
-  "DuckTales: O Filme - O Tesouro da Lâmpada Perdida": { "url": "https://image.tmdb.org/t/p/w500/wsLP8ULSWhauYHynFn3n8zU03Io.jpg", "tmdb": "movie/10837" },
-  "Esposa de Mentirinha": { "url": "https://image.tmdb.org/t/p/w500/glC4pDnSieQ9NGU501rfVIqUCTB.jpg", "tmdb": "movie/50546" },
-  "Gintama: Yoshiwara em Chamas": { "url": "https://image.tmdb.org/t/p/w500/sb41qo6yHw5GS2Tujd7H4NDP4ZH.jpg", "tmdb": "movie/1530941" },
-  "Interestelar": { "url": "https://image.tmdb.org/t/p/w500/tR1XVa5bxgdh2bRw2u0DzrgkO2l.jpg", "tmdb": "movie/157336" },
-  "No Cair da Noite": { "url": "https://image.tmdb.org/t/p/w500/tXsbo4Wz6gy9LsBHT1McXkUirUh.jpg", "tmdb": "movie/10727" },
-  "O Grande Truque": { "url": "https://image.tmdb.org/t/p/w500/4AUW2bGbQjWACUREckGJWXmyF0d.jpg", "tmdb": "movie/1124" },
-  "O Senhor dos Anéis: A Sociedade do Anel": { "url": "https://image.tmdb.org/t/p/w500/tlvsNCwWEIgwAM23aNzTmMIcPEZ.jpg", "tmdb": "movie/120" },
-  "O Senhor dos Anéis: As Duas Torres": { "url": "https://image.tmdb.org/t/p/w500/mCs8vxvScCqVM3YFMQIdbrdFEhu.jpg", "tmdb": "movie/121" },
-  "O Senhor dos Anéis: O Retorno do Rei": { "url": "https://image.tmdb.org/t/p/w500/rU4oIKv5I4C59DpcXKmT7kNwGI0.jpg", "tmdb": "movie/122" },
-  "Dark Skies": { "url": "https://image.tmdb.org/t/p/w500/w6reBLxU6m8aIgga1JyceE15gVY.jpg", "tmdb": "movie/145135" },
-  "Predador: Terras Selvagens": { "url": "https://image.tmdb.org/t/p/w500/f3yLlUrJDdDL8d4nxywyotN45SL.jpg", "tmdb": "movie/1242898" },
-  "Sete Vidas": { "url": "https://image.tmdb.org/t/p/w500/pxJOJUV9UVYMlHmQVUh4zcXCOSf.jpg", "tmdb": "movie/11321" },
-  "Eu Quero Comer seu Pâncreas": { "url": "https://image.tmdb.org/t/p/w500/8xAwcL3ALTHzHMKkVIApiKwVEzt.jpg", "tmdb": "movie/504253" },
-  "Guerreiras do K-Pop": { "url": "https://image.tmdb.org/t/p/w500/gbdMa7woiuF7IiEB5Spwv5od4oo.jpg", "tmdb": "movie/803796" },
-
-  "Invencível": { "url": "https://image.tmdb.org/t/p/w500/qhb7RWU9ad9a5m3HbeRRXzjaMXf.jpg", "tmdb": "tv/95557" },
-  "La Casa de Papel": { "url": "https://image.tmdb.org/t/p/w500/k8ytNZ32uf4JtrtpfIw54MD0oZX.jpg", "tmdb": "tv/71446" },
-  "Nível Secreto": { "url": "https://image.tmdb.org/t/p/w500/kqFWimBW9CGNx0XuTx8NkYHSmGG.jpg", "tmdb": "tv/261579" },
-  "Kaizoku Sentai Gokaiger": { "url": "https://image.tmdb.org/t/p/w500/Sh7CX7XZ4AB4HVVrT0eksxd6xG.jpg", "tmdb": "tv/95707" },
-  "Kamen Rider Zeztz": { "url": "https://image.tmdb.org/t/p/w500/vqZ2Tum9B9xu1jl29LeCykHsVLL.jpg", "tmdb": "tv/295434" },
-  "The Amazing Digital Circus": { "url": "https://image.tmdb.org/t/p/w500/m6IDVi9F5G5ugrGNhKFFBYXZi6B.jpg", "tmdb": "tv/261145" },
-  "Final Space": { "url": "https://image.tmdb.org/t/p/w500/cf4chvwB40cEpsagSrRaEIqBFoG.jpg", "tmdb": "tv/74387" },
-  "O Segredo Além do Jardim": { "url": "https://image.tmdb.org/t/p/w500/3R6R5eMtOEOkvkc1oNZ9ZXvRtGi.jpg", "tmdb": "tv/61617" },
-  "Yamishibai: Japanese Ghost Stories": { "url": "https://image.tmdb.org/t/p/w500/buWbX4aFn2IxF928beUUJEAdsO5.jpg", "tmdb": "tv/56559" }
+  "One Piece": {
+    "url": "https://image.tmdb.org/t/p/w500/9ltisibeD4gzqjM1AzmQwCdyirQ.jpg",
+    "tmdb": "tv/37854",
+    "ano": 1999,
+    "aka": [
+      "ワンピース",
+      "One Piece",
+      "One Piece",
+      "One Piece",
+      "海贼王",
+      "Wan Pisu",
+      "ONE PIECE FAN LETTER",
+      "ONE PIECE",
+      "SPECIAL EDITED VERSION『ONE PIECE』魚人島編",
+      "ワンピース ドレスローザ編",
+      "One Piece Log: Fish-Man Island Saga"
+    ],
+    "akav": 2
+  },
+  "Yu Yu Hakusho": {
+    "url": "https://image.tmdb.org/t/p/w500/j6dzDPkrAsfJ6GUyyMPz38ZkpbF.jpg",
+    "tmdb": "tv/30669",
+    "ano": 1992,
+    "aka": [
+      "幽☆遊☆白書",
+      "Yu Yu Hakusho",
+      "Yu Yu Hakusho",
+      "Yu Yu Hakusho",
+      "幽游白书",
+      "幽遊白书",
+      "幽遊白書",
+      "Yuyu Hakusho",
+      "Yuu☆Yuu☆Hakusho: Two Shots/Noru ka Soru ka",
+      "幽☆遊☆白書 完全新作アニメーション",
+      "Ghost Files"
+    ],
+    "akav": 2
+  },
+  "Frieren e a Jornada para o Além": {
+    "url": "https://image.tmdb.org/t/p/w500/qykTIEJQF8cunKD0CKOqab15wns.jpg",
+    "tmdb": "tv/209867",
+    "ano": 2023,
+    "aka": [
+      "葬送のフリーレン",
+      "Frieren: Beyond Journey's End",
+      "Frieren e a Jornada para o Além",
+      "葬送的芙莉莲",
+      "そうそうのフリーレン",
+      "Sōsō no Furīren",
+      "Sousou no Frieren",
+      "Frieren of the Funeral",
+      "Frieren: Beyond Journey's End",
+      "Frieren Beyond Journeys End"
+    ],
+    "akav": 2
+  },
+  "Dan Da Dan": {
+    "url": "https://image.tmdb.org/t/p/w500/vtQug1eOyeU2VXIpNoDF1lTlcH4.jpg",
+    "tmdb": "tv/240411",
+    "ano": 2024,
+    "aka": [
+      "ダンダダン",
+      "Dan Da Dan",
+      "DAN DA DAN",
+      "丹达丹",
+      "超自然武装当哒当",
+      "Dan da dan"
+    ],
+    "akav": 2
+  },
+  "Link Click": {
+    "url": "https://image.tmdb.org/t/p/w500/44cNZ5PmLOwTIOkYwlAewgzn8Bl.jpg",
+    "tmdb": "tv/123542",
+    "ano": 2021,
+    "aka": [
+      "时光代理人",
+      "LINK CLICK",
+      "Link Click",
+      "Shi Guang Dai Li Ren",
+      "Shiguang Dailiren",
+      "时光代理人 第二季",
+      "时光代理人 英都篇",
+      "时光代理人 第三季",
+      "时光代理人 第一季",
+      "時光代理人 - LINK CLICK- Ⅱ",
+      "时光代理人"
+    ],
+    "akav": 2
+  },
+  "Orange": {
+    "url": "https://image.tmdb.org/t/p/w500/oxnWNFG4cSLBXJTDLOJU8ucMpmD.jpg",
+    "tmdb": "tv/66958",
+    "ano": 2016,
+    "aka": [
+      "orange",
+      "Orange",
+      "Orange",
+      "オレンジ",
+      "おれんじ",
+      "오렌지",
+      "오렌지 (2016)",
+      "Orange (2016)"
+    ],
+    "akav": 2
+  },
+  "Mob Psycho 100": {
+    "url": "https://image.tmdb.org/t/p/w500/aFcv9zeJtSbJHSYUlQCOQYV3Gio.jpg",
+    "tmdb": "tv/67075",
+    "ano": 2016,
+    "aka": [
+      "モブサイコ100",
+      "Mob Psycho 100",
+      "Mob Psycho 100",
+      "灵能百分百",
+      "Mob Psycho 100",
+      "モブサイコ100",
+      "모브 사이코 100",
+      "Mob Psycho 100"
+    ],
+    "akav": 2
+  },
+  "SAKAMOTO DAYS": {
+    "url": "https://image.tmdb.org/t/p/w500/qTNIxDIzKjLLuS17fxdXjcKAlW7.jpg",
+    "tmdb": "tv/207332",
+    "ano": 2025,
+    "aka": [
+      "SAKAMOTO DAYS",
+      "SAKAMOTO DAYS",
+      "SAKAMOTO DAYS",
+      "坂本DAYS",
+      "サカモト デイズ",
+      "サカモトデイズ"
+    ],
+    "akav": 2
+  },
+  "Blue Box": {
+    "url": "https://image.tmdb.org/t/p/w500/shXf4cTKUbMpx5AVBKi4V0dMwY3.jpg",
+    "tmdb": "tv/207347",
+    "ano": 2024,
+    "aka": [
+      "アオのハコ",
+      "Blue Box",
+      "Blue Box",
+      "蓝箱",
+      "青春之箱",
+      "青色之箱",
+      "Ao no Hako",
+      "アオのハコ Season2",
+      "푸른상자"
+    ],
+    "akav": 2
+  },
+  "Clevatess": {
+    "url": "https://image.tmdb.org/t/p/w500/avajalKjBP5QjwIEb5Xs8QXg1K.jpg",
+    "tmdb": "tv/258348",
+    "ano": 2025,
+    "aka": [
+      "クレバテス-魔獣の王と赤子と屍の勇者",
+      "Clevatess",
+      "Clevatess",
+      "Clevatess -魔兽之王与婴儿与尸之勇者-",
+      "克雷瓦提斯-魔兽之王与婴儿与尸之勇者-",
+      "魔獸之王與嬰兒與屍之勇者",
+      "－魔獸之王與嬰兒與屍之勇者－",
+      "Clevatess II -魔兽之王与虚假的勇者传承-",
+      "克雷瓦提斯",
+      "Clevatess: Majuu no Ou to Akago to Shikabane no Yuusha",
+      "Clevatess Majuu no Ou to Akago to Kabane no Yuusha"
+    ],
+    "akav": 2
+  },
+  "KONOSUBA - God's blessing on this wonderful world!": {
+    "url": "https://image.tmdb.org/t/p/w500/kvXF7ugmNHo2HyNLy7lhQQVbBBa.jpg",
+    "tmdb": "tv/65844",
+    "ano": 2016,
+    "aka": [
+      "この素晴らしい世界に祝福を！",
+      "KONOSUBA - God's blessing on this wonderful world!",
+      "KONOSUBA: As Bênçãos de Deus Neste Mundo Maravilhoso!",
+      "KonoSuba: As Bênçãos de Deus Neste Mundo Maravilhoso!",
+      "KonoSuba: Abençoado Mundo Maravilhoso!",
+      "素晴",
+      "素晴3",
+      "このすば",
+      "Kono Subarashii Sekai ni Syukufuku Wo!",
+      "Kono Subarashii Sekai ni Shukufuku wo! 3",
+      "Kono Subarashii Sekai ni Shukufuku wo!"
+    ],
+    "akav": 2
+  },
+  "Noragami": {
+    "url": "https://image.tmdb.org/t/p/w500/8yGBg40I36c98OeKMMjkJkCThkf.jpg",
+    "tmdb": "tv/64710",
+    "ano": 2014,
+    "aka": [
+      "ノラガミ",
+      "Noragami",
+      "Noragami",
+      "ノラガミ ARAGOTO",
+      "Noragami Aragoto",
+      "Noragami",
+      "Noragami Aragoto OVA",
+      "Noragami: Stray God"
+    ],
+    "akav": 2
+  },
+  "Fate/Zero": {
+    "url": "https://image.tmdb.org/t/p/w500/hfTEDISVpFMqmp6uOGylsSakyXZ.jpg",
+    "tmdb": "tv/45845",
+    "ano": 2011,
+    "aka": [
+      "Fate/Zero",
+      "Fate/Zero",
+      "Fate/Zero",
+      "命运守护之夜前传",
+      "Feito/Zero",
+      "Fate Zero",
+      "フェイト/ゼロ",
+      "페이트 제로",
+      "Fate/Zero‌",
+      "Fate Zero"
+    ],
+    "akav": 2
+  },
+  "To Your Eternity": {
+    "url": "https://image.tmdb.org/t/p/w500/bohMYRVSIG68md0zQobyWbV4S8e.jpg",
+    "tmdb": "tv/97525",
+    "ano": 2021,
+    "aka": [
+      "不滅のあなたへ",
+      "To Your Eternity",
+      "To Your Eternity",
+      "Fumetsu no Anata e",
+      "Uma Vida Imortal",
+      "Para a Sua Eternidade",
+      "致不灭的你",
+      "Fumetsu no Anata e",
+      "不滅のあなたへ 第2シリーズ",
+      "Fumetsu no Anata e Season 2",
+      "To You, the Immortal"
+    ],
+    "akav": 2
+  },
+  "Ranking of Kings": {
+    "url": "https://image.tmdb.org/t/p/w500/gaK5RosxmhRAtE2sX757dyICLJM.jpg",
+    "tmdb": "tv/112613",
+    "ano": 2021,
+    "aka": [
+      "王様ランキング",
+      "Ranking of Kings",
+      "Ranking of Kings",
+      "Ōsama Ranking",
+      "Ousama Ranking",
+      "Ranking of Kings"
+    ],
+    "akav": 2
+  },
+  "Gachiakuta": {
+    "url": "https://image.tmdb.org/t/p/w500/RxuL7KuFoOzHC0htjtLGxJEGGx.jpg",
+    "tmdb": "tv/256721",
+    "ano": 2025,
+    "aka": [
+      "ガチアクタ",
+      "Gachiakuta",
+      "Gachiakuta",
+      "废渊战鬼",
+      "Gachi Akuta"
+    ],
+    "akav": 2
+  },
+  "March Comes In Like a Lion": {
+    "url": "https://image.tmdb.org/t/p/w500/4LTg5dLXnHwbNcFyOTnXvMpSs4q.jpg",
+    "tmdb": "tv/65336",
+    "ano": 2016,
+    "aka": [
+      "３月のライオン",
+      "March Comes In Like a Lion",
+      "March comes in like a lion",
+      "三月的狮子",
+      "Sangatsu no Lion",
+      "3-gatsu no Lion",
+      "3月のライオン",
+      "3月のライオン 第2シリーズ",
+      "3월의 라이온",
+      "March comes in like a lion",
+      "March Comes In Like A Lion 2nd Season"
+    ],
+    "akav": 2
+  },
+  "Welcome to Demon School! Iruma Kun": {
+    "url": "https://image.tmdb.org/t/p/w500/5o1PjfSTASqjUH6giJXiskDbXpj.jpg",
+    "tmdb": "tv/91801",
+    "ano": 2019,
+    "aka": [
+      "魔入りました！入間くん",
+      "Welcome to Demon School! Iruma-kun",
+      "Welcome to Demon School! Iruma-kun",
+      "Mairimashita! Iruma-kun",
+      "Mairimashita! Iruma-kun 2",
+      "Mairimashita, Iruma-kun",
+      "Mairimashita, Iruma-kun 2",
+      "Mairimashita! Iruma-kun 3",
+      "魔入りました！入間くん４",
+      "魔入りました！入間くん",
+      "魔入りました!入間くん4"
+    ],
+    "akav": 2
+  },
+  "Witch Hat Atelier": {
+    "url": "https://image.tmdb.org/t/p/w500/1qGSBnrANHLX8C7KqGuPDCylns2.jpg",
+    "tmdb": "tv/196950",
+    "ano": 2026,
+    "aka": [
+      "とんがり帽子のアトリエ",
+      "Witch Hat Atelier",
+      "Witch Hat Atelier",
+      "尖帽子的魔法工房",
+      "尖帽子的魔法工坊",
+      "Tongari Boushi no Atelier",
+      "Tongari Bōshi no Atorie",
+      "Tongari Bōshi no Atelier",
+      "고깔모자의 아틀리에",
+      "Atelier of Witch Hat",
+      "Witch Hat Atelier"
+    ],
+    "akav": 2
+  },
+  "Smoking Behind the Supermarket with you": {
+    "url": "https://image.tmdb.org/t/p/w500/aRTMLZWEtBUy4fG01aqVicRD2wx.jpg",
+    "tmdb": "tv/296286",
+    "ano": 2026,
+    "aka": [
+      "スーパーの裏でヤニ吸うふたり",
+      "Smoking Behind the Supermarket with You",
+      "Smoking Behind the Supermarket with You",
+      "Fumando nos Fundos do Supermercado com Você",
+      "在超市后门吸烟的二人",
+      "躲在超市后门抽烟的两人",
+      "Super no Ura de Yani Suu Futari",
+      "Super no Ura de Yani Sū Futari",
+      "Behind the supermarket, smoking with you.",
+      "ヤニすう",
+      "Yanisuu"
+    ],
+    "akav": 2
+  },
+  "Cautious Hero: The Hero Is Overpowered but Overly Cautious": {
+    "url": "https://image.tmdb.org/t/p/w500/leobb4kmAFpO1XUH739fkg6PEqH.jpg",
+    "tmdb": "tv/93256",
+    "ano": 2019,
+    "aka": [
+      "慎重勇者～この勇者が俺TUEEEくせに慎重すぎる～",
+      "Cautious Hero: The Hero Is Overpowered but Overly Cautious",
+      "Cautious Hero: The Hero is Overpowered but Overly Cautious",
+      "Shinchou Yuusha",
+      "Cautious Hero",
+      "这个勇者明明超强却过度谨慎",
+      "这个勇者明明超强却过分慎重 慎重勇者～",
+      "这个勇者明明超强却过分慎重",
+      "慎重勇者 ～この勇者が俺TUEEEくせに慎重すぎる～",
+      "Kono Yūsha ga Ore TUEEE Kuse ni Shinchō Sugiru",
+      "Kono Yuusha ga Ore Tueee Kuse ni Shinchou Sugiru"
+    ],
+    "akav": 2
+  },
+  "I'm Standing on a Million Lives": {
+    "url": "https://image.tmdb.org/t/p/w500/fbBY1UEW7Vx2alMrjg6xNNM3Pv9.jpg",
+    "tmdb": "tv/99995",
+    "ano": 2020,
+    "aka": [
+      "100万の命の上に俺は立っている",
+      "I'm Standing on a Million Lives",
+      "I'm Standing on a Million Lives",
+      "100-man no Inochi no Ue ni Ore wa Tatteiru",
+      "100-man no Inochi no Ue ni Ore wa Tatte Iru",
+      "俺100",
+      "100만의 목숨 위에 나는 서 있다 2기",
+      "나는 100만의 목숨 위에 서 있다 2기",
+      "I’m Standing on 1,000,000 Lives",
+      "1000000 Lives",
+      "1,000,000 Lives"
+    ],
+    "akav": 2
+  },
+  "Life Lessons with Uramichi Oniisan": {
+    "url": "https://image.tmdb.org/t/p/w500/eiBMrPIG8jokkcAwhKpwcAZG7gh.jpg",
+    "tmdb": "tv/96442",
+    "ano": 2021,
+    "aka": [
+      "うらみちお兄さん",
+      "Life Lessons with Uramichi Oniisan",
+      "Uramichi Oniisan",
+      "Uramichi Oniisan",
+      "Uramichi Onii-san",
+      "우라미치 오빠",
+      "Life Lessons with Uramichi-Oniisan"
+    ],
+    "akav": 2
+  },
+  "You and I Are Polar Opposites": {
+    "url": "https://image.tmdb.org/t/p/w500/lLjcMT7fwuO5fgswb2drlbFwoTJ.jpg",
+    "tmdb": "tv/278043",
+    "ano": 2026,
+    "aka": [
+      "正反対な君と僕",
+      "You and I Are Polar Opposites",
+      "You and I Are Polar Opposites",
+      "相反的你和我",
+      "Seihantai na Kimi to Boku",
+      "正反対な君と僕(第2期)"
+    ],
+    "akav": 2
+  },
+  "Parede de Gelo": {
+    "url": "https://image.tmdb.org/t/p/w500/d03KBIFklbUjz3aHP77dqo9iagN.jpg",
+    "tmdb": "tv/283428",
+    "ano": 2026,
+    "aka": [
+      "氷の城壁",
+      "The Ramparts of Ice",
+      "Parede de Gelo",
+      "こおりのじょうへき",
+      "Kōri no Jyōheki",
+      "Koori no Jyōheki",
+      "Koori no Jouheki",
+      "Koori no Jyouheki",
+      "氷の城壁(第2期)",
+      "Ice Castle Wall"
+    ],
+    "akav": 2
+  },
+  "Hunter X Hunter": {
+    "url": "https://image.tmdb.org/t/p/w500/eobAuhCJA8oRp814V67WhezVXtQ.jpg",
+    "tmdb": "tv/45952",
+    "ano": 1999,
+    "aka": [
+      "HUNTER×HUNTER",
+      "Hunter x Hunter",
+      "Hunter x Hunter",
+      "ハンター×ハンター",
+      "Hunter x Hunter: Greed Island",
+      "Hunter x Hunter: Yorkshin City Kanketsu-hen",
+      "헌터x헌터",
+      "헌터 x 헌터"
+    ],
+    "akav": 2
+  },
+  "The Ancient Magus' Bride": {
+    "url": "https://image.tmdb.org/t/p/w500/sJCw9H0PmnJnTYTCx7uiHImOxSg.jpg",
+    "tmdb": "tv/73833",
+    "ano": 2017,
+    "aka": [
+      "魔法使いの嫁",
+      "The Ancient Magus' Bride",
+      "The Ancient Magus' Bride",
+      "魔法师的爱徒",
+      "Mahoutsukai no Yome",
+      "魔法使いの嫁 SEASON2",
+      "Mahou Tsukai no Yome",
+      "Mahoyome"
+    ],
+    "akav": 2
+  },
+  "Buddy Daddies": {
+    "url": "https://image.tmdb.org/t/p/w500/qjRWZ1Ak9Ag6EvcA5LNhphqX8oV.jpg",
+    "tmdb": "tv/212963",
+    "ano": 2023,
+    "aka": [
+      "Buddy Daddies",
+      "Buddy Daddies",
+      "Buddy Daddies",
+      "BUDDY DADDIES",
+      "バディ·ダディズ",
+      "Family Story of Two Killers and a Girl"
+    ],
+    "akav": 2
+  },
+  "Romantic Killer": {
+    "url": "https://image.tmdb.org/t/p/w500/b6nww3xaBSi9pQWfePBbKb5PTnj.jpg",
+    "tmdb": "tv/208730",
+    "ano": 2022,
+    "aka": [
+      "ロマンティック・キラー",
+      "Romantic Killer",
+      "Romantic Killer",
+      "Romantikku Kirā"
+    ],
+    "akav": 2
+  },
+  "takt op.Destiny": {
+    "url": "https://image.tmdb.org/t/p/w500/m1sJZonLyL0EG25qNc99Ml5DLlu.jpg",
+    "tmdb": "tv/121787",
+    "ano": 2021,
+    "aka": [
+      "takt op.Destiny",
+      "takt op.Destiny",
+      "takt op.Destiny",
+      "タクトオーパス",
+      "タクトオーパス デスティニー",
+      "takt op. Destiny",
+      "택트 오퍼스 데스티니"
+    ],
+    "akav": 2
+  },
+  "The Rising of the Shield Hero": {
+    "url": "https://image.tmdb.org/t/p/w500/yX0d6aTjHrE5Sjp6gZ1dkPWCmIF.jpg",
+    "tmdb": "tv/83095",
+    "ano": 2019,
+    "aka": [
+      "盾の勇者の成り上がり",
+      "The Rising of the Shield Hero",
+      "The Rising of the Shield Hero",
+      "Tate no Yuusha no Nariagari",
+      "盾の勇者の成り上がり Season2",
+      "盾の勇者の成り上がり Season3",
+      "盾の勇者の成り上がり Season4",
+      "방패용사성공담",
+      "방패용사 성공담",
+      "방패 용사 성공담",
+      "Shield Hero"
+    ],
+    "akav": 2
+  },
+  "Jujutsu Kaisen": {
+    "url": "https://image.tmdb.org/t/p/w500/8R1mMSC1gX1cg5ed7ns49JOEqw3.jpg",
+    "tmdb": "tv/95479",
+    "ano": 2020,
+    "aka": [
+      "呪術廻戦",
+      "JUJUTSU KAISEN",
+      "Jujutsu Kaisen",
+      "Jujutsu Kaisen",
+      "咒术回战",
+      "咒术回战 第一季",
+      "咒术回战 第二季",
+      "咒术回战 第三季",
+      "咒術迴戰",
+      "Jujutsu Kaisen",
+      "Jujutsu Kaisen"
+    ],
+    "akav": 2
+  },
+  "Re:ZERO -Starting Life in Another World-": {
+    "url": "https://image.tmdb.org/t/p/w500/2FvWqbgJDG2IWGgUxhROYQxE98p.jpg",
+    "tmdb": "tv/65942",
+    "ano": 2016,
+    "aka": [
+      "Re:ゼロから始める異世界生活",
+      "Re:ZERO -Starting Life in Another World-",
+      "Re:Zero - Começando uma Vida em Outro Mundo",
+      "Re:ZERO -Começando uma Vida em Outro Mundo",
+      "从零开始的异世界生活",
+      "Each One's Promise",
+      "Re Zero Starting Life in Another World",
+      "Re:Zero kara Hajimeru Isekai Seikatsu",
+      "ReZero kara Hajimeru Isekai Seikatsu",
+      "Re:ゼロから始める異世界生活 2nd season",
+      "Re:ゼロから始める異世界生活 新編集版"
+    ],
+    "akav": 2
+  },
+  "Naruto": {
+    "url": "https://image.tmdb.org/t/p/w500/9ptbVZpKNy5NY9D4zq4KGiYWRQY.jpg",
+    "tmdb": "tv/46260",
+    "ano": 2002,
+    "aka": [
+      "ナルト",
+      "Naruto",
+      "Naruto",
+      "Naruto Clássico",
+      "火影忍者",
+      "NARUTO -ナルト-",
+      "나루토"
+    ],
+    "akav": 2
+  },
+  "Naruto Shippuden": {
+    "url": "https://image.tmdb.org/t/p/w500/nRJmByfK9XdtOY73VArcN8KpKVs.jpg",
+    "tmdb": "tv/31910",
+    "ano": 2007,
+    "aka": [
+      "ナルト 疾風伝",
+      "Naruto Shippūden",
+      "Naruto Shippuden",
+      "Naruto Shippuden",
+      "火影忍者：疾风传",
+      "火影忍者：疾风传 2007",
+      "疾风传",
+      "火影忍者疾风传",
+      "HuoYingRenZhe：JiFengZhuan",
+      "Naruto Shippûden",
+      "Naruto Shippuden"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam Thunderbolt": {
+    "url": "https://image.tmdb.org/t/p/w500/tpIjhiHFxSTrblBwl5U8YAu2jTL.jpg",
+    "tmdb": "tv/64809",
+    "ano": 2015,
+    "aka": [
+      "機動戦士ガンダム サンダーボルト",
+      "Mobile Suit Gundam Thunderbolt",
+      "Mobile Suit Gundam Thunderbolt",
+      "기동전사 건담 썬더볼트",
+      "Kidō Senshi Gundam Thunderbolt"
+    ],
+    "akav": 2
+  },
+  "86 EIGHTY-SIX": {
+    "url": "https://image.tmdb.org/t/p/w500/aEG1ZtdyjDFDtlGqovvAHsAfsR6.jpg",
+    "tmdb": "tv/100565",
+    "ano": 2021,
+    "aka": [
+      "８６―エイティシックス―",
+      "86 EIGHTY-SIX",
+      "86 EIGHTY-SIX",
+      "86-不存在的地域-",
+      "86-不存在的战区-",
+      "86－不存在的战区",
+      "86 – EIGHTY-SIX",
+      "86-エイティシックス-",
+      "Eighty Six",
+      "86",
+      "86 EIGHTY-SIX"
+    ],
+    "akav": 2
+  },
+  "Agents of the Four Seasons Dance of Spring": {
+    "url": "https://image.tmdb.org/t/p/w500/s8kMT6SmeAt7HovSJWbgIEvjmdm.jpg",
+    "tmdb": "tv/288659",
+    "ano": 2026,
+    "aka": [
+      "春夏秋冬代行者 春の舞",
+      "Agents of the Four Seasons Dance of Spring",
+      "Agents of the Four Seasons: Dance of Spring",
+      "Shunkashūtō Daikōsha",
+      "Shunkashūtō Daikōsha: Haru no Mai",
+      "Shunkashuutou Daikousha",
+      "Shunkashuutou Daikousha: Haru no Mai",
+      "Agents of the Four Seasons"
+    ],
+    "akav": 2
+  },
+  "Beck": {
+    "url": "https://image.tmdb.org/t/p/w500/tZ3oKqwaeX2v9j6hSNhX4vPjP4c.jpg",
+    "tmdb": "tv/43288",
+    "ano": 2004,
+    "aka": [
+      "BECK",
+      "Beck: Mongolian Chop Squad",
+      "Beck",
+      "ベック",
+      "Beck - Mongolian Chop Squad"
+    ],
+    "akav": 2
+  },
+  "Fullmetal Alchemist: Brotherhood": {
+    "url": "https://image.tmdb.org/t/p/w500/vIkH7fUQf8Olo8Apq56FQLGDXOo.jpg",
+    "tmdb": "tv/31911",
+    "ano": 2009,
+    "aka": [
+      "鋼の錬金術師 FULLMETAL ALCHEMIST",
+      "Fullmetal Alchemist: Brotherhood",
+      "Fullmetal Alchemist: Brotherhood",
+      "Fullmetal Alchemist: Brotherhood",
+      "FA FULLMETAL ALCHEMIST",
+      "钢之炼金术师 FULLMETAL ALCHEMIST",
+      "鋼之煉金術師 FULLMETAL ALCHEMIST",
+      "Hagane no Renkinjutsushi FULLMETAL ALCHEMIST",
+      "강철의 연금술사 BROTHERHOOD",
+      "FMAB",
+      "Full Metal Alchemist: Brotherhood"
+    ],
+    "akav": 2
+  },
+  "HAIKYU!!": {
+    "url": "https://image.tmdb.org/t/p/w500/qNKaeunuUdL0smnowVVgShCkWZ4.jpg",
+    "tmdb": "tv/60863",
+    "ano": 2014,
+    "aka": [
+      "ハイキュー!!",
+      "Haikyu!!",
+      "HAIKYU!!",
+      "ハイキュー!! セカンドシーズン",
+      "Haikyuu!!",
+      "High Kyuu!!",
+      "Haikyuu!! Karasuno Koukou VS Shiratorizawa Gakuen Koukou",
+      "ハイキュー!! 烏野高校 VS 白鳥沢学園高校",
+      "ハイキュー!! バケモノたちの行くところ",
+      "Haikyuu!! Riku vs. Kuu",
+      "하이큐!! 땅 VS 하늘"
+    ],
+    "akav": 2
+  },
+  "Kaiju No. 8": {
+    "url": "https://image.tmdb.org/t/p/w500/A6JOsCdFFTxtbDnKAfE0iY6jOiE.jpg",
+    "tmdb": "tv/207468",
+    "ano": 2024,
+    "aka": [
+      "怪獣８号",
+      "Kaiju No. 8",
+      "Kaiju No. 8",
+      "怪兽八号",
+      "怪兽8号",
+      "怪獸8號",
+      "aiju.No.8",
+      "Kaijuu 8-gou",
+      "Kaiju No.Eight",
+      "Kaijū 8-gō",
+      "Kaijuu 8 gou"
+    ],
+    "akav": 2
+  },
+  "The Fragrant Flower Blooms With Dignity": {
+    "url": "https://image.tmdb.org/t/p/w500/iR3kusHHeoAbjAjWrg53nSAVDx7.jpg",
+    "tmdb": "tv/271607",
+    "ano": 2025,
+    "aka": [
+      "薫る花は凛と咲く",
+      "The Fragrant Flower Blooms with Dignity",
+      "The Fragrant Flower Blooms With Dignity",
+      "花开凛凛满薰香",
+      "花熏凛然",
+      "Kaoru Hana wa Rin to Saku",
+      "KaoruHana",
+      "Kaoru Hana",
+      "Fragrant Flower Blooms"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam 0080: War in the Pocket": {
+    "url": "https://image.tmdb.org/t/p/w500/3eHNjpxvKa9cjvdhf14pG4s8V4n.jpg",
+    "tmdb": "tv/46512",
+    "ano": 1989,
+    "aka": [
+      "機動戦士ガンダム0080 ポケットの中の戦争",
+      "Mobile Suit Gundam 0080: War in the Pocket",
+      "Mobile Suit Gundam 0080: War in the Pocket",
+      "Kidō Senshi Gandamu 0080 Poketto no Naka no Sensō",
+      "기동전사 건담 0080  주머니속의 전쟁",
+      "기동전사 건담 0080 - 포켓 속의 전쟁",
+      "기동전사 건담 0080: 주머니 속의 전쟁",
+      "Mobile Suit Gundam 0080: War in the Pocket"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam: The 08th MS Team": {
+    "url": "https://image.tmdb.org/t/p/w500/5AzsnD4spu3oVN8Va8VK6ZOAQUt.jpg",
+    "tmdb": "tv/43887",
+    "ano": 1996,
+    "aka": [
+      "機動戦士ガンダム 第08MS小隊",
+      "Mobile Suit Gundam: The 08th MS Team",
+      "Mobile Suit Gundam: The 08th MS Team",
+      "Gundam 08TH",
+      "機動戰士08小隊",
+      "Kidō Senshi Gandamu Dai Zerohachi Emu Esu Shōtai",
+      "Kidô senshi Gundam: Dai 08 MS shôtai",
+      "기동전사 건담 제08MS소대",
+      "기동전사 건담 제08MS 소대",
+      "Mobile Suit Gundam The 08th MS Team",
+      "Gundam: 08ᵗʰ MS Team"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam: The Origin": {
+    "url": "https://image.tmdb.org/t/p/w500/iLzfsgJXntGJsU9lcY8emoTpM5v.jpg",
+    "tmdb": "tv/88865",
+    "ano": 2019,
+    "aka": [
+      "機動戦士ガンダム THE ORIGIN 前夜 赤い彗星",
+      "Mobile Suit Gundam: The Origin - Advent of the Red Comet",
+      "Mobile Suit Gundam: The Origin",
+      "机动战士高达 THE ORIGIN 前夜 赤色彗星",
+      "機動戦士ガンダム THE ORIGIN",
+      "機動戦士ガンダム THE ORIGIN：2019",
+      "기동전사 건담 THE ORIGIN",
+      "기동전사 건담 디 오리진"
+    ],
+    "akav": 2
+  },
+  "NIPPON SANGOKU: The Three Nations of the Crimson Sun": {
+    "url": "https://image.tmdb.org/t/p/w500/hjihUw4UPndUxklecJxz1qCbcjT.jpg",
+    "tmdb": "tv/312474",
+    "ano": 2026,
+    "aka": [
+      "日本三國",
+      "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "NIPPON SANGOKU: A Guerra das Três Nações",
+      "Nippon Sangoku"
+    ],
+    "akav": 2
+  },
+  "Rooster Fighter": {
+    "url": "https://image.tmdb.org/t/p/w500/iCtbr0sIdaKZjhQH3Wr7hW6A1IU.jpg",
+    "tmdb": "tv/259819",
+    "ano": 2026,
+    "aka": [
+      "Rooster Fighter",
+      "Rooster Fighter",
+      "Rooster Fighter",
+      "Rooster Fighter: O Galo Lutador",
+      "公鸡斗士",
+      "社会我鸡哥，人狠话不多",
+      "Niwatori Fighter",
+      "Niwatori・Faitā",
+      "ROOSTER FIGHTER ニワトリ・ファイター",
+      "ROOSTER FIGHTER",
+      "Niwatori Faitâ"
+    ],
+    "akav": 2
+  },
+  "Spy X Family": {
+    "url": "https://image.tmdb.org/t/p/w500/vaIREdPGZOnW9Jrs86mheVVlIQQ.jpg",
+    "tmdb": "tv/120089",
+    "ano": 2022,
+    "aka": [
+      "SPY×FAMILY",
+      "SPY x FAMILY",
+      "SPY x FAMILY",
+      "间谍过家家",
+      "间谍家家酒",
+      "Spy X Family",
+      "スパイファミリー",
+      "Spy Family",
+      "Spy x Family 2nd",
+      "SPY×FAMILY：2022",
+      "스파이×패밀리"
+    ],
+    "akav": 2
+  },
+  "The Promised Neverland": {
+    "url": "https://image.tmdb.org/t/p/w500/8RWcKSmCbwsN8porFyTOB5e2cDG.jpg",
+    "tmdb": "tv/83097",
+    "ano": 2019,
+    "aka": [
+      "約束のネバーランド",
+      "The Promised Neverland",
+      "The Promised Neverland",
+      "約定的夢幻島",
+      "约定的梦幻岛",
+      "Yakusoku no Neverland",
+      "約束のネバーランド2"
+    ],
+    "akav": 2
+  },
+  "Wistoria: Wand and Sword": {
+    "url": "https://image.tmdb.org/t/p/w500/65KsCghUgyI1hOsypfrwzAI9e4e.jpg",
+    "tmdb": "tv/245842",
+    "ano": 2024,
+    "aka": [
+      "杖と剣のウィストリア",
+      "Wistoria: Wand and Sword",
+      "Wistoria: Wand and Sword",
+      "Wistoria: Varinha e Espada",
+      "Wistoria: Varinhas e Espadas",
+      "Wistoria: Varinhas e Espada",
+      "杖与剑的魔剑谭",
+      "Tsue to Tsurugi no Wistoria",
+      "杖と剣のウィストリア Season2",
+      "Wistoria's Wand and Sword",
+      "The Wistoria of Staves and Swords"
+    ],
+    "akav": 2
+  },
+  "Your Lie in April": {
+    "url": "https://image.tmdb.org/t/p/w500/xswPti7YWJfvqFf52P5VAN1QMuJ.jpg",
+    "tmdb": "tv/61663",
+    "ano": 2014,
+    "aka": [
+      "四月は君の嘘",
+      "Your Lie in April",
+      "Your lie in April",
+      "四月是你的谎言",
+      "Shigatsu wa Kimi no Uso",
+      "KimiUso",
+      "Your Lie in April"
+    ],
+    "akav": 2
+  },
+  "Obsessão": {
+    "url": "https://image.tmdb.org/t/p/w500/wUc6IDf5ChjM1UyQye21qFBeJY0.jpg",
+    "tmdb": "movie/1339713",
+    "ano": 2026,
+    "aka": [
+      "Obsession",
+      "Obsession",
+      "Obsessão",
+      "옵세션",
+      "Obsessão - Sem Censura",
+      "痴迷",
+      "Obsession - A Felicidade é Relativa"
+    ],
+    "akav": 2
+  },
+  "Your Name.": {
+    "url": "https://image.tmdb.org/t/p/w500/bMOKAjTU1TNUjRSF7icldbii06u.jpg",
+    "tmdb": "movie/372058",
+    "ano": 2016,
+    "aka": [
+      "君の名は。",
+      "Your Name.",
+      "Your Name.",
+      "Seu Nome",
+      "너의 이름은.",
+      "你的名字",
+      "君之名",
+      "君の名は.",
+      "君の名は",
+      "Your Name",
+      "Kimi no Na wa."
+    ],
+    "akav": 2
+  },
+  "Como Se Fosse a Primeira Vez": {
+    "url": "https://image.tmdb.org/t/p/w500/h0st50VJ755VG1kzSc2FgwtDHdk.jpg",
+    "tmdb": "movie/1824",
+    "ano": 2004,
+    "aka": [
+      "50 First Dates",
+      "50 First Dates",
+      "Como Se Fosse a Primeira Vez",
+      "Cheotkisuman 50baenjjae",
+      "50回目のファースト・キス",
+      "첫키스만 50번째"
+    ],
+    "akav": 2
+  },
+  "O Serviço de Entregas da Kiki": {
+    "url": "https://image.tmdb.org/t/p/w500/eM4mDoXpOTwqMldmCy76cftok9m.jpg",
+    "tmdb": "movie/16859",
+    "ano": 1989,
+    "aka": [
+      "魔女の宅急便",
+      "Kiki's Delivery Service",
+      "O Serviço de Entregas da Kiki",
+      "Majo no Takkyûbin",
+      "Majo no Takkyuubin",
+      "O Serviço de Entregas da Kiki",
+      "Kiki: A Aprendiz de Feiticeira",
+      "마녀 배달부 키키"
+    ],
+    "akav": 2
+  },
+  "Suzume": {
+    "url": "https://image.tmdb.org/t/p/w500/QcS3MhdUiOEUOjY451FOFInZXF.jpg",
+    "tmdb": "movie/916224",
+    "ano": 2022,
+    "aka": [
+      "すずめの戸締まり",
+      "Suzume",
+      "Suzume",
+      "Suzume no Tojimari",
+      "Suzume's Door-Locking",
+      "鈴芽的門鎖",
+      "关门雀",
+      "Suzume Locking Up the Doors",
+      "铃芽小姐来锁门",
+      "铃芽户缔",
+      "스즈메의 문단속"
+    ],
+    "akav": 2
+  },
+  "Akira (1988)": {
+    "url": "https://image.tmdb.org/t/p/w500/tbwwTQ3EqSdotbQ3ZcIl6vKBv7q.jpg",
+    "tmdb": "movie/149",
+    "ano": 1988,
+    "aka": [
+      "AKIRA",
+      "Akira",
+      "Akira",
+      "아키라",
+      "光明战士阿基拉",
+      "亚基拉",
+      "アキラ",
+      "폭풍 소년",
+      "Akira: 25th Anniversary Edition"
+    ],
+    "akav": 2
+  },
+  "Sussurros do Coração": {
+    "url": "https://image.tmdb.org/t/p/w500/5q752lJ1XoRwj6yKVx999avJ8eO.jpg",
+    "tmdb": "movie/37797",
+    "ano": 1995,
+    "aka": [
+      "耳をすませば",
+      "Whisper of the Heart",
+      "Sussurros do Coração",
+      "Mimi o Sumaseba",
+      "梦幻街少女",
+      "Mimi wo Sumaseba",
+      "Sussurros do Coração",
+      "Se Ouvires Atentamente",
+      "If You Listen Closely"
+    ],
+    "akav": 2
+  },
+  "The Matrix": {
+    "url": "https://image.tmdb.org/t/p/w500/lDqMDI3xpbB9UQRyeXfei0MXhqb.jpg",
+    "tmdb": "movie/603",
+    "ano": 1999,
+    "aka": [
+      "The Matrix",
+      "The Matrix",
+      "Matrix",
+      "매트릭스",
+      "廿二世紀殺人網絡",
+      "The Matrix 1"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam I": {
+    "url": "https://image.tmdb.org/t/p/w500/uig60VsA6fL4NgSdD8KLZS6jDJV.jpg",
+    "tmdb": "movie/39228",
+    "ano": 1981,
+    "aka": [
+      "機動戦士ガンダム",
+      "Mobile Suit Gundam I",
+      "Mobile Suit Gundam I",
+      "Mobile Suit Gundam: The Movie",
+      "기동전사 건담",
+      "기동전사 건담 I",
+      "기동전사 건담 1",
+      "Mobile Suit Gundam: The Movie I",
+      "Kidou Senshi Gundam",
+      "Mobile Suit Gundam 0079: I",
+      "初代ガンダム"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam II Soldiers of Sorrow": {
+    "url": "https://image.tmdb.org/t/p/w500/e0PWph73SqOgZmK9bKYZ1PXOYsX.jpg",
+    "tmdb": "movie/39229",
+    "ano": 1981,
+    "aka": [
+      "機動戦士ガンダムII 哀・戦士編",
+      "Mobile Suit Gundam II: Soldiers of Sorrow",
+      "Mobile Suit Gundam II: Soldados da Desolação",
+      "Mobile Suit Gundam The Movie II - Soldiers of Sorrow",
+      "Kidou Senshi Gundam II: Ai Senshi Hen",
+      "Mobile Suit Gundam 2",
+      "机动战士高达 剧场版Ⅱ 哀·战士",
+      "기동전사 건담 2: 애전사",
+      "기동전사 건담 Ⅱ - 슬픈 전사",
+      "기동전사 건담 2",
+      "기동전사 건담 Ⅱ: 슬픈 전사"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam III Encounters in Space": {
+    "url": "https://image.tmdb.org/t/p/w500/i5bRWeJ7qYJdVOev9C1JBsnTN2j.jpg",
+    "tmdb": "movie/39230",
+    "ano": 1982,
+    "aka": [
+      "機動戦士ガンダム III めぐりあい宇宙編",
+      "Mobile Suit Gundam III: Encounters in Space",
+      "Mobile Suit Gundam III: Confrontos no Espaço",
+      "Mobile Suit Gundam: The Movie III - Encounters in Space",
+      "Kidou Senshi Gundam III Meguriai Sora Hen",
+      "기동전사 건담 3: 만남의 우주",
+      "기동전사 건담 Ⅲ - 해후의 우주",
+      "기동전사 건담 3",
+      "기동전사 건담 Ⅲ: 해후의 우주",
+      "기동전사 건담 III: 해후의 우주편",
+      "기동전사 건담 3: 해후의 우주"
+    ],
+    "akav": 2
+  },
+  "Mobile Suit Gundam: Char Contra-ataca!": {
+    "url": "https://image.tmdb.org/t/p/w500/u6nYvAViUzqWsfyi948pqiG2c2l.jpg",
+    "tmdb": "movie/16157",
+    "ano": 1988,
+    "aka": [
+      "機動戦士ガンダム 逆襲のシャア",
+      "Mobile Suit Gundam: Char's Counterattack",
+      "Mobile Suit Gundam: Char Contra-ataca!",
+      "機動戦士ガンダム 逆襲のシャア",
+      "Kidō Senshi Gandamu: Gyakushū no Shā",
+      "기동전사 건담: 샤아의 역습",
+      "Mobile Suit Gundam : Char's CounterAttack",
+      "機動戦士ガンダム 逆襲のシャア：1988",
+      "기동전사 건담 : 역습의 샤아",
+      "기동전사 건담; 역습의 샤아",
+      "Mobile Suit Gundam 0093: Char's Counterattack"
+    ],
+    "akav": 2
+  },
+  "Jujutsu Kaisen 0": {
+    "url": "https://image.tmdb.org/t/p/w500/2ndvx03fmREMxEgaZ1vWt756TOQ.jpg",
+    "tmdb": "movie/810693",
+    "ano": 2021,
+    "aka": [
+      "劇場版 呪術廻戦 0",
+      "Jujutsu Kaisen 0",
+      "Jujutsu Kaisen 0: O Filme",
+      "Gekijō-ban Jujutsu Kaisen 0",
+      "Gekijou-ban Jujutsu Kaisen 0",
+      "呪術廻戦 0",
+      "JUJUTSU KAISEN 0: THE MOVIE",
+      "Jujutsu Kaisen Zero",
+      "JJK0",
+      "咒术回战剧场版1：零",
+      "劇場版呪術廻戦0"
+    ],
+    "akav": 2
+  },
+  "A Viagem de Chihiro": {
+    "url": "https://image.tmdb.org/t/p/w500/hhoKhsyJ3hFaxEm5pMdZRiTu2lJ.jpg",
+    "tmdb": "movie/129",
+    "ano": 2001,
+    "aka": [
+      "千と千尋の神隠し",
+      "Spirited Away",
+      "A Viagem de Chihiro",
+      "Sen to Chihiro no Kamikakushi",
+      "Unesenniye prizrakami",
+      "Shahr Ashbah",
+      "Sen gwa Chihiro ui Haengbang Bulmyeong",
+      "The Spiriting Away of Sen and Chihiro",
+      "神隐少女",
+      "센과 치히로의 행방불명",
+      "Miyazaki's Spirited Away"
+    ],
+    "akav": 2
+  },
+  "A Voz do Silêncio": {
+    "url": "https://image.tmdb.org/t/p/w500/haMUCn5bNgeKb2EkILvhYGoHXZX.jpg",
+    "tmdb": "movie/378064",
+    "ano": 2016,
+    "aka": [
+      "映画 聲の形",
+      "A Silent Voice: The Movie",
+      "A Voz do Silêncio",
+      "The Shape of Voice",
+      "Eiga Koe no Katachi",
+      "声之形",
+      "Uma Voz Silenciosa",
+      "A Silent Voice",
+      "聲の形",
+      "A Voz do Silêncio: Koe no Katachi",
+      "Koe no Katachi"
+    ],
+    "akav": 2
+  },
+  "As Memórias de Marnie": {
+    "url": "https://image.tmdb.org/t/p/w500/q8dKK0OdBR91gEJWRdo9osvxvM6.jpg",
+    "tmdb": "movie/242828",
+    "ano": 2014,
+    "aka": [
+      "思い出のマーニー",
+      "When Marnie Was There",
+      "As Memórias de Marnie",
+      "Omoide no Mânî",
+      "Omoide no Mani",
+      "Omoide no Marnie",
+      "回忆中的玛妮",
+      "As Memórias de Marnie",
+      "When Marnie Was There",
+      "Omoide no Mānī"
+    ],
+    "akav": 2
+  },
+  "O Castelo Animado": {
+    "url": "https://image.tmdb.org/t/p/w500/1hTfaEWktMJPxCk5nZNtK7F86C9.jpg",
+    "tmdb": "movie/4935",
+    "ano": 2004,
+    "aka": [
+      "ハウルの動く城",
+      "Howl's Moving Castle",
+      "O Castelo Animado",
+      "Haulov pokretni zamak",
+      "Hauru no Ugoku Shiro",
+      "Howl no Ugoku Shiro",
+      "Ghaleye Motahareke Howl",
+      "Ghaleh Motahareke Howl",
+      "하울의 움직이는 성",
+      "哈尔的移动城堡",
+      "ハウルの動く城"
+    ],
+    "akav": 2
+  },
+  "Deu a Louca na Chapeuzinho": {
+    "url": "https://image.tmdb.org/t/p/w500/9fgIhvFgpgzawR0IflGXIQmyn8s.jpg",
+    "tmdb": "movie/10982",
+    "ano": 2005,
+    "aka": [
+      "Hoodwinked!",
+      "Hoodwinked!",
+      "Deu a Louca na Chapeuzinho",
+      "Hoodwinked! The True Story of Red Riding Hood",
+      "Hoodwinked",
+      "빨간 모자의 진실",
+      "Capuchinho Vermelho - A Verdadeira História",
+      "リトル・レッド レシピ泥棒は誰だ！？",
+      "Deu a Louca na Chapeuzinho",
+      "Hoodwinked! 01 Hoodwinked!",
+      "小红帽"
+    ],
+    "akav": 2
+  },
+  "DuckTales: O Filme - O Tesouro da Lâmpada Perdida": {
+    "url": "https://image.tmdb.org/t/p/w500/wsLP8ULSWhauYHynFn3n8zU03Io.jpg",
+    "tmdb": "movie/10837",
+    "ano": 1990,
+    "aka": [
+      "DuckTales: The Movie - Treasure of the Lost Lamp",
+      "DuckTales: The Movie - Treasure of the Lost Lamp",
+      "DuckTales: O Filme - O Tesouro da Lâmpada Perdida",
+      "DuckTales O Filme",
+      "Duck Tales The Movie - Treasure of the Lost Lamp",
+      "욕심쟁이 오리아저씨: 잃어버린 램프의 보물",
+      "욕심쟁이 오리아저씨: 잃어버린 보물 램프",
+      "도널드 덕 가족의 모험: 잃어버린 보물 램프",
+      "도널드덕 가족의 모험: 잃어버린 보물 램프"
+    ],
+    "akav": 2
+  },
+  "Esposa de Mentirinha": {
+    "url": "https://image.tmdb.org/t/p/w500/glC4pDnSieQ9NGU501rfVIqUCTB.jpg",
+    "tmdb": "movie/50546",
+    "ano": 2011,
+    "aka": [
+      "Just Go with It",
+      "Just Go with It",
+      "Esposa de Mentirinha",
+      "船到桥头自然直",
+      "跟着感觉走",
+      "冒牌老公"
+    ],
+    "akav": 2
+  },
+  "Gintama: Yoshiwara em Chamas": {
+    "url": "https://image.tmdb.org/t/p/w500/sb41qo6yHw5GS2Tujd7H4NDP4ZH.jpg",
+    "tmdb": "movie/1530941",
+    "ano": 2026,
+    "aka": [
+      "新劇場版 銀魂 -吉原大炎上-",
+      "Gintama the Movie 2026: Yoshiwara in Flames",
+      "Gintama: Yoshiwara em Chamas",
+      "Shin-Gekijōban Gintama: Yoshiwara Daienjō",
+      "Shin Gekijouban Gintama: Yoshiwara Dai Enjou",
+      "Shin Gekijouban Gintama:  Yoshiwara Daienjou",
+      "Gintama the Movie: Yoshiwara in Flames"
+    ],
+    "akav": 2
+  },
+  "Interestelar": {
+    "url": "https://image.tmdb.org/t/p/w500/tR1XVa5bxgdh2bRw2u0DzrgkO2l.jpg",
+    "tmdb": "movie/157336",
+    "ano": 2014,
+    "aka": [
+      "Interstellar",
+      "Interstellar",
+      "Interestelar",
+      "星际穿越",
+      "Interestelar",
+      "インターステラー",
+      "인터스텔라"
+    ],
+    "akav": 2
+  },
+  "No Cair da Noite": {
+    "url": "https://image.tmdb.org/t/p/w500/tXsbo4Wz6gy9LsBHT1McXkUirUh.jpg",
+    "tmdb": "movie/10727",
+    "ano": 2003,
+    "aka": [
+      "Darkness Falls",
+      "Darkness Falls",
+      "No Cair da Noite"
+    ],
+    "akav": 2
+  },
+  "O Grande Truque": {
+    "url": "https://image.tmdb.org/t/p/w500/4AUW2bGbQjWACUREckGJWXmyF0d.jpg",
+    "tmdb": "movie/1124",
+    "ano": 2006,
+    "aka": [
+      "The Prestige",
+      "The Prestige",
+      "O Grande Truque",
+      "致命魔术",
+      "프레스티지",
+      "プレステージ",
+      "O Grande Truque",
+      "O Terceiro Passo",
+      "The Prestige"
+    ],
+    "akav": 2
+  },
+  "O Senhor dos Anéis: A Sociedade do Anel": {
+    "url": "https://image.tmdb.org/t/p/w500/tlvsNCwWEIgwAM23aNzTmMIcPEZ.jpg",
+    "tmdb": "movie/120",
+    "ano": 2001,
+    "aka": [
+      "The Lord of the Rings: The Fellowship of the Ring",
+      "The Lord of the Rings: The Fellowship of the Ring",
+      "O Senhor dos Anéis: A Sociedade do Anel",
+      "指环王1：护戒使者",
+      "ロード・オブ・ザ・リング",
+      "LOTR1- The Fellowship of the Ring",
+      "指环王1：魔戒再现",
+      "The Lord of the Rings I: The Fellowship of the Ring",
+      "LOTR1",
+      "The Lord of the Rings I"
+    ],
+    "akav": 2
+  },
+  "O Senhor dos Anéis: As Duas Torres": {
+    "url": "https://image.tmdb.org/t/p/w500/mCs8vxvScCqVM3YFMQIdbrdFEhu.jpg",
+    "tmdb": "movie/121",
+    "ano": 2002,
+    "aka": [
+      "The Lord of the Rings: The Two Towers",
+      "The Lord of the Rings: The Two Towers",
+      "O Senhor dos Anéis: As Duas Torres",
+      "The Lord of the Rings 2: The Two Towers",
+      "The Lord of the Rings II: The Two Towers",
+      "ロード・オブ・ザ・リング／二つの塔：2002",
+      "ロード・オブ・ザ・リング／二つの塔",
+      "The Lord of the Rings The Two Towers",
+      "LOTR2 - The Two Towers"
+    ],
+    "akav": 2
+  },
+  "O Senhor dos Anéis: O Retorno do Rei": {
+    "url": "https://image.tmdb.org/t/p/w500/rU4oIKv5I4C59DpcXKmT7kNwGI0.jpg",
+    "tmdb": "movie/122",
+    "ano": 2003,
+    "aka": [
+      "The Lord of the Rings: The Return of the King",
+      "The Lord of the Rings: The Return of the King",
+      "O Senhor dos Anéis: O Retorno do Rei",
+      "The Return of the King",
+      "The Lord of the Rings 3: The Return of the King",
+      "魔戒3：王者归来",
+      "The Lord of the Rings III: The Return of the King",
+      "ロード・オブ・ザ・リング／王の帰還：2003",
+      "The Lord of the Rings The Return of the King",
+      "指环王3：王者无敌",
+      "LOTR3 - The Return of the King"
+    ],
+    "akav": 2
+  },
+  "Dark Skies": {
+    "url": "https://image.tmdb.org/t/p/w500/w6reBLxU6m8aIgga1JyceE15gVY.jpg",
+    "tmdb": "movie/145135",
+    "ano": 2013,
+    "aka": [
+      "Dark Skies",
+      "Dark Skies",
+      "Os Escolhidos",
+      "夜凶",
+      "Os Escolhidos"
+    ],
+    "akav": 2
+  },
+  "Predador: Terras Selvagens": {
+    "url": "https://image.tmdb.org/t/p/w500/f3yLlUrJDdDL8d4nxywyotN45SL.jpg",
+    "tmdb": "movie/1242898",
+    "ano": 2025,
+    "aka": [
+      "Predator: Badlands",
+      "Predator: Badlands",
+      "Predador: Terras Selvagens",
+      "Predador: Terras Selvagens",
+      "铁血战士：杀戮之地",
+      "Predator - Badlands"
+    ],
+    "akav": 2
+  },
+  "Sete Vidas": {
+    "url": "https://image.tmdb.org/t/p/w500/pxJOJUV9UVYMlHmQVUh4zcXCOSf.jpg",
+    "tmdb": "movie/11321",
+    "ano": 2008,
+    "aka": [
+      "Seven Pounds",
+      "Seven Pounds",
+      "Sete Vidas",
+      "Sete Vidas",
+      "七生有幸",
+      "救人七命",
+      "7 Pounds",
+      "7つの贈り物"
+    ],
+    "akav": 2
+  },
+  "Eu Quero Comer seu Pâncreas": {
+    "url": "https://image.tmdb.org/t/p/w500/8xAwcL3ALTHzHMKkVIApiKwVEzt.jpg",
+    "tmdb": "movie/504253",
+    "ano": 2018,
+    "aka": [
+      "君の膵臓をたべたい",
+      "I Want to Eat Your Pancreas",
+      "Eu Quero Comer seu Pâncreas",
+      "Kimi no Suizou wo Tabetai",
+      "Kimi no Suizô wo Tabetai",
+      "KimiSui",
+      "Kimi no Suizô o Tabetai",
+      "Kimi no Suizou o Tabetai",
+      "劇場アニメ「君の膵臓をたべたい」",
+      "Kimi no Suizou wo Tabetai",
+      "너의 췌장을 먹고 싶어"
+    ],
+    "akav": 2
+  },
+  "Guerreiras do K-Pop": {
+    "url": "https://image.tmdb.org/t/p/w500/gbdMa7woiuF7IiEB5Spwv5od4oo.jpg",
+    "tmdb": "movie/803796",
+    "ano": 2025,
+    "aka": [
+      "KPop Demon Hunters",
+      "KPop Demon Hunters",
+      "Guerreiras do K-Pop",
+      "K-POP：猎魔女团",
+      "K-Pop: Demon Hunters",
+      "KPop Demon Hunters A Sing-Along Event",
+      "KPop Demon Hunters Sing Along",
+      "Guerreiras do K-Pop: Para Cantar Junto"
+    ],
+    "akav": 2
+  },
+  "Invencível": {
+    "url": "https://image.tmdb.org/t/p/w500/qhb7RWU9ad9a5m3HbeRRXzjaMXf.jpg",
+    "tmdb": "tv/95557",
+    "ano": 2021,
+    "aka": [
+      "INVINCIBLE",
+      "INVINCIBLE",
+      "INVENCÍVEL",
+      "无敌小子",
+      "无敌少侠",
+      "インビンシブル",
+      "O Invencivel",
+      "Invincible: Atom Eve",
+      "Invincible"
+    ],
+    "akav": 2
+  },
+  "La Casa de Papel": {
+    "url": "https://image.tmdb.org/t/p/w500/k8ytNZ32uf4JtrtpfIw54MD0oZX.jpg",
+    "tmdb": "tv/71446",
+    "ano": 2017,
+    "aka": [
+      "La casa de papel",
+      "Money Heist",
+      "La casa de papel",
+      "La casa de papel",
+      "纸钞屋",
+      "纸钞屋（西班牙版）",
+      "La Casa de Papel",
+      "Money Heist"
+    ],
+    "akav": 2
+  },
+  "Nível Secreto": {
+    "url": "https://image.tmdb.org/t/p/w500/kqFWimBW9CGNx0XuTx8NkYHSmGG.jpg",
+    "tmdb": "tv/261579",
+    "ano": 2024,
+    "aka": [
+      "Secret Level",
+      "Secret Level",
+      "Nível Secreto"
+    ],
+    "akav": 2
+  },
+  "Kaizoku Sentai Gokaiger": {
+    "url": "https://image.tmdb.org/t/p/w500/Sh7CX7XZ4AB4HVVrT0eksxd6xG.jpg",
+    "tmdb": "tv/95707",
+    "ano": 2011,
+    "aka": [
+      "海賊戦隊ゴーカイジャー",
+      "Kaizoku Sentai Gokaiger",
+      "Armada Pirata Gokaiger",
+      "海贼战队豪快者",
+      "Pirate Squadron Gokaiger",
+      "Pirate Sentai Gokaiger"
+    ],
+    "akav": 2
+  },
+  "Kamen Rider Zeztz": {
+    "url": "https://image.tmdb.org/t/p/w500/vqZ2Tum9B9xu1jl29LeCykHsVLL.jpg",
+    "tmdb": "tv/295434",
+    "ano": 2025,
+    "aka": [
+      "仮面ライダーゼッツ",
+      "Kamen Rider ZEZTZ",
+      "Kamen Rider ZEZTZ",
+      "假面骑士 ZEZTZ",
+      "Masked Rider Zeztz",
+      "Kamen Rider ZEZTZ"
+    ],
+    "akav": 2
+  },
+  "The Amazing Digital Circus": {
+    "url": "https://image.tmdb.org/t/p/w500/m6IDVi9F5G5ugrGNhKFFBYXZi6B.jpg",
+    "tmdb": "tv/261145",
+    "ano": 2023,
+    "aka": [
+      "The Amazing Digital Circus",
+      "The Amazing Digital Circus",
+      "O Incrível Circo Digital"
+    ],
+    "akav": 2
+  },
+  "Final Space": {
+    "url": "https://image.tmdb.org/t/p/w500/cf4chvwB40cEpsagSrRaEIqBFoG.jpg",
+    "tmdb": "tv/74387",
+    "ano": 2018,
+    "aka": [
+      "Final Space",
+      "Final Space",
+      "Final Space",
+      "Espaço Final",
+      "ファイナル・スペース",
+      "Espaço Final"
+    ],
+    "akav": 2
+  },
+  "O Segredo Além do Jardim": {
+    "url": "https://image.tmdb.org/t/p/w500/3R6R5eMtOEOkvkc1oNZ9ZXvRtGi.jpg",
+    "tmdb": "tv/61617",
+    "ano": 2014,
+    "aka": [
+      "Over the Garden Wall",
+      "Over the Garden Wall",
+      "O Segredo Além do Jardim",
+      "O Segredo Além do Jardim",
+      "篱笆墙外",
+      "飞越院墙",
+      "迷样森林",
+      "园墙之上",
+      "谜样森林",
+      "オーバー・ザ・ガーデンウォール",
+      "담장 너머"
+    ],
+    "akav": 2
+  },
+  "Yamishibai: Japanese Ghost Stories": {
+    "url": "https://image.tmdb.org/t/p/w500/buWbX4aFn2IxF928beUUJEAdsO5.jpg",
+    "tmdb": "tv/56559",
+    "ano": 2013,
+    "aka": [
+      "闇芝居",
+      "Theatre of Darkness: Yamishibai",
+      "Yamishibai: Japanese Ghost Stories",
+      "Yami Shibai",
+      "闇芝居 第9期",
+      "闇芝居 第10期",
+      "闇芝居 第11期",
+      "闇芝居 第12期",
+      "闇芝居 十三期",
+      "闇芝居 第13期",
+      "闇芝居 十六期"
+    ],
+    "akav": 2
+  },
+  "Batman (1989)": {
+    "url": "https://image.tmdb.org/t/p/w500/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+    "tmdb": "movie/268",
+    "ano": 1989,
+    "aka": [
+      "Batman",
+      "Batman",
+      "Batman",
+      "Tim Burton’s Batman",
+      "Batman ‘89",
+      "蝙蝠侠1"
+    ],
+    "akav": 2
+  },
+  "A Janela Secreta": {
+    "url": "https://image.tmdb.org/t/p/w500/dJ2XE9EQVixJVLfMUSF85E4TiaA.jpg",
+    "tmdb": "movie/1586",
+    "ano": 2004,
+    "aka": [
+      "Secret Window",
+      "Secret Window",
+      "A Janela Secreta",
+      "Secret Window, Secret Garden"
+    ],
+    "akav": 2
+  },
+  "O Ritual (2011)": {
+    "url": "https://image.tmdb.org/t/p/w500/zyo7KKEQltTN1lLvV8TR98oDt6X.jpg",
+    "tmdb": "movie/48171",
+    "ano": 2011,
+    "aka": [
+      "The Rite",
+      "The Rite",
+      "O Ritual",
+      "O Ritual",
+      "ザ・ライト -エクソシストの真実",
+      "ザ・ライト -エクソシストの真実-：2011",
+      "仪式",
+      "现代驱魔师",
+      "驱魔殿堂",
+      "恶魔仪式"
+    ],
+    "akav": 2
+  },
+  "Metrópolis": {
+    "url": "https://image.tmdb.org/t/p/w500/4XbTJgz5zADYp4fX6DbdhZga39q.jpg",
+    "tmdb": "movie/9606",
+    "ano": 2001,
+    "aka": [
+      "メトロポリス",
+      "Metropolis",
+      "Metrópolis",
+      "Metrópolis",
+      "メトロポリス"
+    ],
+    "akav": 2
+  },
+  "Gameoverse": {
+    "url": "https://image.tmdb.org/t/p/w500/meeTJLZKywUbQyCT3epykCTM4wi.jpg",
+    "tmdb": "tv/338837",
+    "ano": 2026,
+    "aka": [
+      "Gameoverse",
+      "Gameoverse",
+      "Gameoverse"
+    ],
+    "akav": 2
+  }
 }
