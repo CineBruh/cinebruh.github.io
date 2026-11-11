@@ -43,7 +43,7 @@ O símbolo precisa ser o **primeiro caractere** do nome da pasta.
 | Símbolo | Significado |
 | --- | --- |
 | `✅` | Completo |
-| `$` | Em aberto (aceita pedidos/patrocínio) |
+| `$` | Aceita patrocínio (no site aparece "💰 Patrocine") |
 | `⌧` | Off Live (conteúdo que será gravado offline, fora da live) |
 | `⚠` | Incompleto (aparece como "assistindo", com aviso de incompleto) |
 | *(nenhum)* + pasta com vídeos | Assistindo. Em **Filmes** e **VODs**, conta como completo |
@@ -87,6 +87,7 @@ Este arquivo é opcional e editado à mão. Pra quando algo sair errado no site:
 | `tmdb` | Corrigir uma capa errada, indicando a obra certa no TMDB | `"One Piece": "tv/37854"` |
 | `img` | Usar uma imagem própria (salva em `images/`) no lugar da capa do TMDB | `"Gameoverse": "animacao-gameoverse.webp"` |
 | `emoji` | Emoji reserva, mostrado quando a obra não tem capa | `"Orange": "🍊"` |
+| `aka` | Outros nomes que a busca do site também deve achar (além do nome original e do inglês, que vêm do TMDB) | `"Frieren": ["Furiren"]` |
 
 **A capa saiu errada?** Basta procurar a obra em [themoviedb.org](https://www.themoviedb.org). O endereço da página termina em algo como `/tv/12345` ou `/movie/12345`. Basta adicionar o valor em `tmdb`.
 
@@ -103,14 +104,25 @@ Este arquivo é opcional e editado à mão. Pra quando algo sair errado no site:
 
 A ordem das obras no site é preservada. Obras novas entram no fim da categoria.
 
+Além do que vem dos nomes das pastas, o robô também guarda no `data.json`: a data em que a pasta foi criada (`add`), a do vídeo mais novo (`upd`), a duração de cada vídeo (`d`, em segundos) e, pelo TMDB, o ano (`ano`) e os outros nomes da obra (`aka`). É isso que alimenta a ordenação por novidade/ano, o selo 🆕, o total de horas de react e a busca por nome original ou em inglês. Na primeira execução depois dessa mudança o robô demora um pouco mais, porque completa o `covers-cache.json` com essas informações.
+
 ---
 
 ## Para quem mantém o projeto
 
 **Arquivos**
-- `index.html`: o site
+- `index.html`: a "moldura" do site (menu, abas e o conteúdo fixo de cada aba)
+- `css/`: estilos, um arquivo por área (`base`, `layout`, `catalogo`, `patrocinar`, `paginas`)
+- `js/`: código, um arquivo por área. São carregados nesta ordem: `core` (navegação entre abas e tema) → `player` → `catalogo` → `patrocinar` → `inicio` → `setup` → `midiakit` → `apoiar` → `comunidade` → `cronograma` → `offline` → `tierlist` → `continuar` → `pwa` → `app` (carrega os dados e abre a aba do endereço)
+- `manifest.webmanifest` e `sw.js`: deixam o site instalável como app. **Num update grande de CSS/JS, troque a `VERSAO` no começo do `sw.js`** pra todo mundo receber a versão nova de uma vez (o catálogo e os outros `.json` sempre vêm da internet, sem precisar disso).
+- `midiakit/`, `midiakit/en/`, `tierlist/`, `cronograma/`, `offline/`, `patrocinar/`, `comunidade/`: páginas curtinhas que só redirecionam pra aba. Servem pra cada link ter a própria prévia no Discord/WhatsApp/X (ex.: `cinebruh.github.io/midiakit/`).
+- `images/og.png` (prévia do link) e `images/icon-*.png`, `images/apple-touch-icon.png` (ícones do app): gerados pela página `ferramentas/gerar-imagens.html`.
+- `cronograma.json`: programação da aba Cronograma. Por enquanto é um exemplo editado à mão; depois vai ser gerado pelo robô a partir do Trello.
+- `site.json`: informações do canal (textos, links, preços, doações, setup). Editável à mão.
 - `scripts/sync-drive.mjs`: o robô (Node 20+, sem dependências)
 - `.github/workflows/sync-catalog.yml`: roda o robô a cada hora e faz commit quando algo muda
+
+**Endereços**: cada aba tem o seu (`/#/catalogo`, `/#/patrocinar`…), e cada obra também (`/#/catalogo/frieren` abre o player direto; `/#/catalogo/frieren/2` abre na 2ª temporada).
 
 **Secrets do repositório** (Settings → Secrets and variables → Actions)
 - `GDRIVE_API_KEY` (obrigatória): chave da API do Google Drive. A pasta do Drive precisa estar **pública** (leitura).
