@@ -1,89 +1,90 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-01T03:03:50-03:00",
+  "atualizadoEm": "2026-11-11T07:29:10-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
     {
-      "data": "2026-11-02",
+      "data": "2026-11-11",
       "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        },
         {
           "titulo": "Mob Psycho 100",
           "cat": "animes",
           "lang": "dub",
-          "eps": "T2 Ep 7",
-          "status": "confirmado"
-        },
-        {
-          "titulo": "Just chatting",
+          "eps": "Eps 11, 12 e 13",
+          "patrocinador": "final",
           "status": "confirmado"
         }
       ]
     },
     {
-      "data": "2026-11-06",
+      "data": "2026-11-12",
       "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "Yu Yu Hakusho",
+          "cat": "animes",
+          "lang": "dub",
+          "eps": "Eps 4, 5 e 6",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "The Fragrant Flower Blooms With Dignity",
+          "cat": "animes",
+          "lang": "leg",
+          "eps": "Eps 10, 11, 12 e 13",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-13",
+      "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        },
         {
           "titulo": "Invencível",
           "cat": "series",
           "lang": "dub",
           "eps": "Ep 6",
+          "patrocinador": "Fanatical09",
           "status": "confirmado"
         }
       ]
     },
     {
-      "data": "2026-11-07",
+      "data": "2026-11-14",
       "folga": true
     },
     {
-      "data": "2026-11-08",
+      "data": "2026-11-15",
       "folga": true
     }
   ],
   "fila": [
-    {
-      "titulo": "HAIKYU!!",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 9 e 10",
-      "patrocinador": "Austeroz, QTNecros"
-    },
-    {
-      "titulo": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 3 ao 8",
-      "patrocinador": "HomemPassarod"
-    },
-    {
-      "titulo": "You and I Are Polar Opposites",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 1 ao 3",
-      "patrocinador": "QTNecros"
-    },
-    {
-      "titulo": "Parede de Gelo",
-      "cat": "animes",
-      "lang": "leg",
-      "eps": "T1 Eps 1 ao 6",
-      "patrocinador": "QTNecros"
-    },
-    {
-      "titulo": "The Promised Neverland",
-      "cat": "animes",
-      "lang": "leg",
-      "eps": "T1 Ep 1",
-      "patrocinador": "HomemPassarod"
-    },
     {
       "titulo": "Beck",
       "cat": "animes",
       "lang": "leg",
       "eps": "T1 Eps 4 ao 10",
       "patrocinador": "JeboyWolfgold"
+    },
+    {
+      "titulo": "Spy X Family",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 16 ao 25",
+      "patrocinador": "Locknell"
     },
     {
       "titulo": "Hunter X Hunter",
@@ -107,6 +108,20 @@
       "patrocinador": "Emir_Emir_Emir_"
     },
     {
+      "titulo": "March Comes In Like a Lion",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 13 ao 44",
+      "patrocinador": "HarleShine"
+    },
+    {
+      "titulo": "Ranking of Kings",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 6 ao 23",
+      "patrocinador": "HarleShine"
+    },
+    {
       "titulo": "Dan Da Dan",
       "cat": "animes",
       "lang": "dub",
@@ -119,13 +134,6 @@
       "lang": "dub",
       "eps": "T2 Eps 1 ao 3",
       "patrocinador": "RedFoxDoInterior"
-    },
-    {
-      "titulo": "takt op.Destiny",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 1 ao 12",
-      "patrocinador": "GODMWLS"
     },
     {
       "titulo": "The Rising of the Shield Hero",
@@ -149,6 +157,12 @@
       "status": "standby",
       "eps": "T2 Ep 1",
       "patrocinador": "Mateuz_Indisponivel"
+    },
+    {
+      "titulo": "Akira (1988)",
+      "cat": "filmes",
+      "lang": "dub",
+      "patrocinador": "DoctorFoxtrot"
     },
     {
       "titulo": "Sussurros do Coração",
@@ -175,8 +189,16 @@
       "patrocinador": "OTalDedinho"
     },
     {
+      "titulo": "O Senhor dos Anéis (Trilogia)",
+      "cat": "filmes",
+      "lang": "dub",
+      "eps": "Filmes ·",
+      "patrocinador": "Versão extendida"
+    },
+    {
       "titulo": "A Janela Secreta",
       "cat": "filmes",
+      "lang": "dub",
       "patrocinador": "Locknell"
     },
     {
@@ -218,6 +240,48 @@
       "lang": "dub",
       "eps": "T1 Eps 1 ao 5",
       "patrocinador": "DoctorFoxtrot"
+    },
+    {
+      "titulo": "HAIKYU!!",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 9 e 10",
+      "patrocinador": "Austeroz, QTNecros"
+    },
+    {
+      "titulo": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 3 ao 8",
+      "patrocinador": "HomemPassarod"
+    },
+    {
+      "titulo": "One Piece",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "Saga East Blue · Eps 11 ao 25",
+      "patrocinador": "Redivo_"
+    },
+    {
+      "titulo": "You and I Are Polar Opposites",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 3",
+      "patrocinador": "QTNecros"
+    },
+    {
+      "titulo": "Parede de Gelo",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 1 ao 6",
+      "patrocinador": "QTNecros"
+    },
+    {
+      "titulo": "The Promised Neverland",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Ep 1",
+      "patrocinador": "HomemPassarod"
     }
   ]
 }
