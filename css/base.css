@@ -1,0 +1,117 @@
+/* ===== Cinebruh · base: cores, tipografia e componentes usados em todas as abas ===== */
+:root{
+  --bg:#f0e5ea;--ink:#1a0f14;--paper:#fdf7fa;--muted:#8a6b78;
+  --border:#ae4c78;--sc:#623248;
+  --primary:#623248;--secondary:#c98da8;--accent:#ae4c78;
+  --animes:#ff68b4;--filmes:#E63946;--series:#1D6FE0;--tokusatsu:#FF7A00;--animacoes:#0FA958;--vods:#7B2FF7;
+  --display:"Bahnschrift","Franklin Gothic Heavy","Arial Black",system-ui,sans-serif;
+  --body:"Segoe UI",system-ui,-apple-system,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#190e13;--ink:#efe4e9;--paper:#241520;--muted:#c0a4b2;
+  --border:#b2507c;--sc:#723651;
+  --primary:#cc9cb2;--secondary:#723651;--accent:#b2507c;
+}
+:root{--shadow:6px 6px 0 var(--sc);--shadow-sm:3px 3px 0 var(--sc)}
+/* largura máxima do conteúdo: cresce em monitores grandes pra aproveitar a tela */
+:root{--wrap:1240px}
+@media (min-width:1500px){ :root{--wrap:1520px} }
+@media (min-width:1900px){ :root{--wrap:1800px} }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-anchor:none}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-anchor:none;}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+
+/* troca de tema suave: varre de cima pra baixo como uma camada só */
+@keyframes themeWipe{ from{clip-path:inset(0 0 100% 0)} to{clip-path:inset(0 0 0 0)} }
+::view-transition-old(root){ animation:none }
+::view-transition-new(root){ animation:themeWipe .45s ease }
+@media (prefers-reduced-motion:reduce){ ::view-transition-new(root){ animation:none } }
+
+/* ---------- Logo ---------- */
+.logo{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.5px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.logo .dot{background:var(--animes,#ff68b4);color:#fff;padding:2px 10px;border:3px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm);transform:rotate(-3deg)}
+
+/* ---------- Botões ---------- */
+.btn-live{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;
+  font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;
+  border:3px solid var(--border);border-radius:999px;padding:8px 15px;box-shadow:var(--shadow-sm);transition:transform .12s}
+.btn-live:hover{transform:translate(-2px,-2px)}
+.btn-live svg{flex:none;display:block}
+.tw{background:#9146FF;color:#fff}
+.ki{background:#53FC18;color:#0c0f07}
+.theme{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:12px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
+.theme:hover{transform:translate(-2px,-2px)}
+/* ícones do botão de tema (sol no claro, lua no escuro) */
+.moon{display:none}
+[data-theme="dark"] .sun{display:none}
+[data-theme="dark"] .moon{display:block}
+
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.cta{display:inline-block;font-family:var(--display);font-size:15px;letter-spacing:.5px;text-transform:uppercase;background:var(--ink);color:var(--bg);border:3px solid var(--border);border-radius:12px;padding:11px 18px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .12s}
+.cta.alt{background:var(--paper);color:var(--ink)}
+.cta:hover{transform:translate(-2px,-2px)}
+[data-theme="dark"] .cta{background:var(--primary);color:#190e13}
+[data-theme="dark"] .cta.alt{background:var(--secondary);color:#efe4e9}
+
+.lang-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.lang-group .lg-label{font-family:var(--display);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.lpill{font-family:var(--display);font-size:13px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:6px 13px;cursor:pointer;color:var(--ink);transition:transform .12s,box-shadow .12s;display:flex;align-items:center;gap:6px;min-height:36px;box-sizing:border-box;line-height:1}
+.lpill:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-sm)}
+.lpill.active{background:var(--ink);color:var(--bg)}
+
+/* ---------- Blocos de conteúdo (cabeçalho de seção, cartões de link) ---------- */
+.band{max-width:var(--wrap);margin:0 auto;padding:44px 20px 4px}
+.band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.band-head h2{font-family:var(--display);font-size:clamp(26px,4.4vw,42px);text-transform:uppercase;letter-spacing:.5px;line-height:1}
+.band-head .kicker{font-family:var(--display);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#ff68b4;padding:3px 11px;border:3px solid var(--border);border-radius:999px;box-shadow:var(--shadow-sm);transform:rotate(-2deg)}
+.band-sub{color:var(--muted);font-size:15px;max-width:660px;margin:12px 0 24px}
+.link-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.link-tile{display:flex;align-items:center;gap:13px;background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-sm);transition:transform .12s,box-shadow .12s;color:var(--ink)}
+.link-tile:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
+.link-tile .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;border:2px solid var(--border);font-size:22px;background:var(--bg)}
+.link-tile .txt{min-width:0}
+.link-tile .txt b{display:block;font-family:var(--display);font-size:16px;line-height:1.1}
+.link-tile .txt span{font-size:12px;color:var(--muted);word-break:break-word}
+.soc{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;border:3px solid var(--border);border-radius:999px;padding:9px 15px;color:#fff;box-shadow:var(--shadow-sm);transition:transform .12s}
+.soc:hover{transform:translate(-2px,-2px)}
+.soc svg{flex:none;display:block}
+.soc.tw{background:#9146FF}
+
+/* aba ainda em construção */
+.soon{background:var(--paper);border:3px dashed var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;max-width:720px}
+.soon p{font-size:15px}
+.soon ul{padding-left:20px;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:3px}
+
+/* ---------- Rodapé ---------- */
+footer{max-width:var(--wrap);margin:40px auto 0;padding:26px 20px 18px;border-top:3px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+footer .logo{font-size:20px}
+/* créditos do TMDB (exigência da API): logo oficial, menor que o do Cinebruh */
+.credits{flex:1 1 300px;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center}
+.credits img{height:12px;width:auto;display:block;flex:none}
+@media (max-width:700px){ .credits{order:3;flex-basis:100%;justify-content:flex-start;text-align:left} }
+
+/* ---------- Voltar ao topo ---------- */
+.totop{position:fixed;right:20px;bottom:20px;z-index:60;width:50px;height:50px;
+  display:flex;align-items:center;justify-content:center;
+  background:#ff68b4;color:#fff;border:3px solid var(--border);border-radius:14px;
+  box-shadow:var(--shadow-sm);cursor:pointer;opacity:0;pointer-events:none;
+  transform:translateY(12px);transition:opacity .2s ease,transform .2s ease}
+.totop.show{opacity:1;pointer-events:auto;transform:none}
+.totop.show:hover{transform:translate(-2px,-2px)}
+.totop svg{display:block}
+
+/* evita efeitos de :hover "presos" após toque em telas sem mouse */
+@media (hover:none){
+  .lpill:hover,.btn-live:hover,.soc:hover,.link-tile:hover,.cta:hover,.theme:hover,.totop.show:hover{transform:none}
+  .lpill:hover{box-shadow:none}
+  .link-tile:hover{box-shadow:var(--shadow-sm)}
+}
+@media print{
+  .side,.mhead,.tabbar,.sheet,.totop,.filter-cats,.filter-extra,.cta-row,.theme{display:none!important}
+  .link-tile{box-shadow:none}
+  body{padding-bottom:0!important}
+}

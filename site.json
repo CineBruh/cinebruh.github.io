@@ -1,0 +1,416 @@
+{
+  "_leia": "Informações do canal usadas pelo site. Editável à mão. Valores null = ainda não definidos (o site esconde ou mostra 'a combinar').",
+
+  "canal": {
+    "nome": "Bruna Rodrigues",
+    "apelido": "Bruh",
+    "handle": "Faribruh_",
+    "slogan": "Alegrando sua madrugada com papinho, react e gameplay",
+    "descricao": "Oii, sou a Bruh, apaixonada por flamingos e tiaras de gatinho. Aqui temos o foco em conversas, interações e eu também trago jogos pra gente jogar! Lives de madrugadinha, começando das 23h em diante!! Sejam todos bem-vindos!!",
+    "sobre": "Moro em Jundiaí, no interior de SP, e tenho uma flamingo de pelúcia chamada Genelva. As lives têm o foco em conversa e interação, e eu também trago jogos multiplayer pra gente jogar! Temos uma comunidade linda chamada Família Goiabinha: aqui tem muitas risadas, carinho, respeito e amor. Sinta-se muito bem-vindo pra fazer parte da nossa família <3",
+    "comunidade": "Família Goiabinha",
+    "idade": 26,
+    "altura": "1,64 e \"meio\"",
+    "alturaDica": "1,645 m, e o meio faz toda a diferença",
+    "local": "Jundiaí, SP",
+    "horario": "Lives de madrugada, a partir das 23h",
+    "contato": "contato.faribruh@gmail.com",
+    "parcerias": [
+      { "id": "redragon",  "nome": "Redragon",    "desc": "Periféricos gamer",                    "url": "https://www.redragon.store/", "cupom": "BRUH", "desconto": "5%" },
+      { "id": "enxada",    "nome": "Enxada Host", "desc": "Hospedagem de servidores de Minecraft e Hytale", "url": "https://enxadahost.com/r/bruh", "cupom": "BRUH", "desconto": "10%" },
+      { "id": "tinybuild", "nome": "tinyBuild",   "desc": "Desenvolvedora de Speedrunners, Hello Neighbor, Secret Neighbor, Party Hard, Totally Reliable Delivery Service e muito mais", "url": "https://www.tinybuild.com/games" }
+    ],
+    "imagens": {
+      "avatar": "images/avatar.jpg",
+      "avatarPos": "68% 28%",
+      "banner": "images/banner.png"
+    }
+  },
+
+  "live": {
+    "twitch": "brunarodrigues",
+    "kick": "brunarodrigues"
+  },
+
+  "links": [
+    { "id": "twitch",    "nome": "Twitch",    "url": "https://twitch.tv/brunarodrigues",       "user": "brunarodrigues", "destaque": true },
+    { "id": "kick",      "nome": "Kick",      "url": "https://kick.com/brunarodrigues",        "user": "brunarodrigues", "destaque": true },
+    { "id": "instagram", "nome": "Instagram", "url": "https://instagram.com/faribruh_",        "user": "@faribruh_" },
+    { "id": "tiktok",    "nome": "TikTok",    "url": "https://tiktok.com/@faribruh_",          "user": "@faribruh_" },
+    { "id": "youtube",   "nome": "YouTube",   "url": "https://youtube.com/@Faribruh_",         "user": "@Faribruh_" },
+    { "id": "x",         "nome": "X/Twitter", "url": "https://x.com/Faribruh_",                "user": "@Faribruh_" },
+    { "id": "threads",   "nome": "Threads",   "url": "https://threads.net/@faribruh_",         "user": "@faribruh_" },
+    { "id": "discord",   "nome": "Discord",   "url": "https://discord.gg/MUs6NbZJ3r",          "user": "Família Goiabinha" },
+    { "id": "steam",     "nome": "Steam",     "url": "https://steamcommunity.com/id/Faribruh", "user": "ID 299409702" },
+    { "id": "email",     "nome": "E-mail",    "url": "mailto:contato.faribruh@gmail.com",      "user": "contato.faribruh@gmail.com" }
+  ],
+
+  "extras": [
+    { "id": "trello",  "nome": "Trello Cinebruh",       "desc": "Cronograma, regras e histórico dos reacts", "url": "https://trello.com/b/b3LlCpc8/reacts-cinebruh" },
+    { "id": "ymp",     "nome": "Perfil cinematográfico", "desc": "Filmes assistidos e reviews da Bruna",     "url": "https://yourmovieprofile.com/pt-BR/u/Faribruh_" },
+    { "id": "drive",   "nome": "Drive completo",         "desc": "Todas as reações, direto da fonte",        "url": "https://drive.google.com/drive/folders/1iAgJHwf9WwZyZX6nGfWq0-KcjvjsZBiX" }
+  ],
+
+  "precos": {
+    "aviso": "Os conteúdos comprados ajudam muito e a Bruna é muito grata por cada um. Mas, como tem um cronograma e depende de horários e disponibilidade, nem sempre dá pra assistir no mesmo dia da compra. Quando surge uma vaga ou um reagendamento, ela faz o possível pra encaixar antes.",
+    "_leiaItens": "O preço de episódio depende da DURAÇÃO, não da categoria. maxMin = até quantos minutos vale aquela faixa (curto até 30, médio até 60, longo acima disso). Filme: até 150 min (2h30), depois disso é 'filme-longo'. Bits = o que a Bruna recebe (a Twitch fica com uma parte), por isso valem mais que o preço em reais.",
+    "itens": [
+      { "id": "curto",       "tipo": "eps",    "nome": "Episódio curto",     "valor": 12,   "bits": 250,  "maxMin": 30,  "desc": "UM episódio de até 30 min, o tamanho de um anime (~20 min). Vale pra anime, animação ou série curta." },
+      { "id": "curto-5",     "tipo": "eps",    "nome": "5+ episódios curtos", "valor": 50,   "bits": 1000, "eps": 5,      "desc": "A partir de 5 episódios curtos, cada um sai a R$10. Ex.: 5 eps = R$50, 8 eps = R$80.", "destaque": "Mais pedido · R$10 por ep" },
+      { "id": "medio",       "tipo": "eps",    "nome": "Episódio até 1h",    "valor": 20,   "bits": 400,  "maxMin": 60,  "desc": "UM episódio de série (ou anime e animação mais longos) de 30 min até 1h." },
+      { "id": "longo",       "tipo": "eps",    "nome": "Episódio de 1h+",    "valor": 30,   "bits": 600,                 "desc": "UM episódio com mais de 1h." },
+      { "id": "filme",       "tipo": "filmes", "nome": "Filme",              "valor": 40,   "bits": 800,  "maxMin": 150, "desc": "UM filme à sua escolha, de até 2h30." },
+      { "id": "filme-longo", "tipo": "filmes", "nome": "Filme 2h30+",        "valor": null, "bits": null,                "desc": "UM filme à sua escolha, com mais de 2h30." }
+    ],
+    "pacote": { "minEps": 5, "valorPorEp": 10, "bitsPorEp": 200, "faixas": ["curto"], "desc": "A partir de 5 episódios curtos (anime, animação ou série curta), cada um sai a R$10.", "_leia": "faixas: em quais faixas de duração o pacote vale (curto, medio, longo). bitsPorEp: bits por episódio no pacote (1000 bits ÷ 5)." }
+  },
+
+  "doacoes": {
+    "aviso": "Todo e qualquer valor doado ajuda a Bruna e o canal! Ao doar, lembre-se de que você está comprando uma mensagem pra aparecer na tela. O valor não é reembolsável.",
+    "principal": { "id": "pix", "nome": "Pix", "chave": "contato.faribruh@gmail.com", "tipoChave": "e-mail", "desc": "Direto pra Bruna, sem mensagem na tela." },
+    "_leiaOutras": "tela: true = a doação aparece com mensagem na tela (fica no grupo 'Com mensagem na tela'). Sem tela, vai pra 'Outras formas de doar'.",
+    "outras": [
+      { "id": "livepix",   "nome": "LivePix",      "url": "https://livepix.gg/faribruh",               "desc": "Pix com mensagem na tela", "tela": true },
+      { "id": "pixgg",     "nome": "PixGG",        "url": "https://pixgg.com/faribruh",                "desc": "Pix com mensagem na tela", "tela": true },
+      { "id": "wise",      "nome": "Wise",         "url": "https://wise.com/pay/me/brunaf1547",        "desc": "Internacional · Wisetag @brunaf1547 · sem mensagem na tela" },
+      { "id": "incentive", "nome": "Incentive.gg", "url": "https://incentive.gg/brunarodrigues",       "desc": "Metas de reacts: colabore direto numa meta · sem mensagem na tela" }
+    ],
+    "metas": { "fonte": "incentive", "url": "https://incentive.gg/brunarodrigues" },
+    "bits": {
+      "desc": "Doe bits pra ativar alertas sonoros:",
+      "alertas": [
+        { "bits": "10-50", "som": "Notificação do Discord" },
+        { "bits": "51-99", "som": "Kill (Valorant)" },
+        { "bits": "100",   "som": "Wow (Fairy Tail)" },
+        { "bits": "150",   "som": "Quero Caféé" },
+        { "bits": "200",   "som": "Ó o Gás" },
+        { "bits": "250",   "som": "Windows" },
+        { "bits": "300",   "som": "Tokyo Drift" },
+        { "bits": "400",   "som": "Malvadão" },
+        { "bits": "500",   "som": "Plantão Globo" },
+        { "bits": "666",   "som": "Mayers" },
+        { "bits": "700",   "som": "Naruto Battle" },
+        { "bits": "1000",  "som": "Rojão Estourado" },
+        { "bits": "5000",  "som": "Scary Freddy" },
+        { "bits": "10000", "som": "Susto Supremo" }
+      ]
+    },
+    "parede": {
+      "nome": "Parede do amor",
+      "desc": "Apoie o canal pra ter seu nomezinho na parede do amor!",
+      "formas": ["Sub, SubGift ou Prime", "100 bits", "R$5", "Presente na Steam", "Qualquer apoio ao canal"]
+    }
+  },
+
+  "apoioIndireto": [
+    { "id": "amazon",          "nome": "Compras na Amazon",   "url": "https://amzn.to/3uA0EcO", "desc": "Comprando por este link, você apoia o canal sem pagar nada a mais." },
+    { "id": "amazon-wishlist", "nome": "Wishlist da Amazon",  "url": "https://www.amazon.com.br/hz/wishlist/ls/LU5NW7TKRZV9", "desc": "Lista de desejos da Bruna." },
+    { "id": "steam-wishlist",  "nome": "Wishlist da Steam",   "url": "https://store.steampowered.com/wishlist/id/faribruh/", "desc": "Jogos que a Bruna quer ganhar.", "steamId64": "76561198259675430" }
+  ],
+
+  "subs": {
+    "titulo": "Faça parte da Família Goiabinha",
+    "beneficios": [
+      "Grupo dos subs no WhatsApp",
+      "Sem anúncios",
+      "Emotes especiais",
+      "Prioridade pra jogar com a Bruna",
+      "Tag especial no Discord",
+      "A Bruna te adiciona na Steam",
+      "Chat exclusivo",
+      "Imune ao chat lento",
+      "Sorteios exclusivos"
+    ]
+  },
+
+  "regras": {
+    "live": [
+      "Tenha respeito com a Bruna e com o chat.",
+      "Não faça spam ou flood.",
+      "Não fique se autopromovendo ou divulgando links sem que ela peça.",
+      "Não fique pedindo pra ser MOD ou VIP.",
+      "Tenha paciência enquanto ela estiver jogando: alguns jogos pedem mais concentração.",
+      "Evite dar spoilers, dizer onde tem itens ou dar dicas, a não ser que ela peça. Isso pode render timeout ou até ban.",
+      "Ela sempre responde todo mundo, mesmo que demore um pouquinho.",
+      "Se divirta, aqui é só amor <3"
+    ],
+    "discord": [
+      "Proibido conteúdo impróprio e links externos com sexo, susto, morte etc.",
+      "Evite mandar links, usar comandos e divulgar no canal Papeando.",
+      "Proibido ameaças ou importunação no privado dos membros.",
+      "Proibido qualquer tipo de discriminação (racismo, xenofobia, homofobia etc).",
+      "Divulgações só na sala Publicidade, e nunca no privado de membros.",
+      "Proibido sair e entrar do Discord pra causar spam ou tirar punições.",
+      "Proibido spam, flood, gritar e causar confusão nas calls.",
+      "Proibido brigas e ofensas entre membros.",
+      "Evite nicks ofensivos e caracteres especiais nos apelidos.",
+      "Proibido contas fake e selfbot.",
+      "Evite marcações desnecessárias ou excessivas a membros, staffs ou cargos.",
+      "Viu alguém descumprindo as regras? Marque um @Mods."
+    ]
+  },
+
+  "catalogo": {
+    "_leia": "download: mostra o botão '⬇ Baixar' no player. ATENÇÃO: o Google limita quantas vezes um arquivo pode ser baixado por dia. Se um episódio for muito baixado, o Drive pode bloquear o arquivo por até 24h (pra assistir também). Se acontecer, troque pra false. novoDias: por quantos dias uma obra/episódio novo ganha o selo 🆕.",
+    "download": true,
+    "novoDias": 7
+  },
+
+  "offline": {
+    "_leia": "Aba Reacts Offline: transmissão (câmera + conteúdo) à esquerda e o chat da Twitch à direita. player.plataforma: kick | twitch | loco | youtube. Em 'kick' e 'twitch', basta o 'canal' que o vídeo aparece no site. Na 'loco', o 'canal' gera o botão 'Assistir na Loco' (abre loco.com/streamers/CANAL); se a Loco der um endereço de incorporação (iframe), cole em 'embed' que o vídeo passa a aparecer no site. 'classificacao' 18 pede confirmação de idade antes de carregar a transmissão.",
+    "player": { "plataforma": "kick", "canal": "rodriguinha", "embed": null, "link": null, "_leia": "Conta da Kick só pros reacts offline. Pra voltar pra Loco: plataforma 'loco' e canal 'brunarodrigues'." },
+    "chat": "brunarodrigues",
+    "intro": "Sessões de react fora da live da Twitch, pra conteúdos que não podem passar lá. A transmissão fica aqui do lado do chat da Twitch, então dá pra comentar junto com a família como numa live normal.",
+    "proxima": {
+      "titulo": "Obsessão",
+      "cat": "filmes",
+      "lang": "dub",
+      "data": "2026-10-31",
+      "hora": "23:00",
+      "classificacao": "18",
+      "aviso": "Contém nudez e temas pesados.",
+      "patrocinador": null
+    },
+    "comoFunciona": [
+      "Na hora da sessão, a transmissão começa aqui no quadro grande (pela Kick, no canal rodriguinha).",
+      "O chat do lado é o chat da Twitch da Bruh. Entre com a sua conta da Twitch pra conversar.",
+      "Se o chat não carregar ou não deixar entrar, abra em outra janela pelo botão “Chat em janela”.",
+      "No celular, vire a tela pra ver a transmissão e o chat lado a lado."
+    ]
+  },
+
+  "comunidade": {
+    "_leia": "Aba Comunidade. Comandos copiados do StreamElements (streamelements.com/brunarodrigues/commands), só os que qualquer pessoa pode usar. Cada comando: { cmd, desc, grupo, quem: todos | subs }. Grupos: canal, cinebruh, apoio, musica, pontos, diversao. Espaço com 'copiar' vira botão que copia o texto.",
+    "intro": "A Família Goiabinha é a comunidade da Bruna: muitas risadas, carinho, respeito e amor. Chega mais!",
+    "espacos": [
+      { "id": "discord",     "nome": "Discord",               "desc": "Papo o dia todo, avisos de live e calls com a família.", "url": "https://discord.gg/MUs6NbZJ3r", "cta": "Entrar no Discord" },
+      { "id": "twitch",      "nome": "Chat da live",          "desc": "Onde tudo acontece, de madrugada a partir das 23h.",     "url": "https://twitch.tv/brunarodrigues", "cta": "Abrir a live" },
+      { "id": "whatsapp",    "nome": "Grupo dos subs",        "desc": "Grupo no WhatsApp exclusivo pra quem é sub.",            "nav": "apoiar", "cta": "Ver benefícios" },
+      { "id": "mine",        "nome": "Servidor de Minecraft", "desc": "Exclusivo pros subs, graças à Enxada Host. Vincule a Twitch no Discord pra ver a sala com o acesso.", "url": "https://discord.gg/MUs6NbZJ3r", "cta": "Ver no Discord" },
+      { "id": "parede",      "nome": "Parede do amor",        "desc": "Apoie o canal e ganhe seu nomezinho na parede.",          "nav": "apoiar", "cta": "Como entrar" }
+    ],
+    "pontos": {
+      "nome": "Flaminguinhos",
+      "desc": "Assistindo à live você ganha 20 Flaminguinhos a cada 10 minutos (subs ganham em dobro). Troque na loja do canal ou use no !msg pra mandar mensagem na tela.",
+      "loja": "https://streamelements.com/brunarodrigues/store",
+      "ranking": "https://streamelements.com/brunarodrigues/leaderboard"
+    },
+    "musica": {
+      "desc": "Peça música pelo chat da live com o !sr seguido do link ou do nome do vídeo no YouTube.",
+      "comando": "!sr link ou nome da música",
+      "regras": ["Até 45 músicas na fila", "Até 3 pedidos por pessoa", "Máximo de 11 minutos por música", "Só vídeos do YouTube"],
+      "url": "https://streamelements.com/brunarodrigues/mediarequest"
+    },
+    "comandos": [
+      { "cmd": "!regras",      "grupo": "canal",    "desc": "Regras do chat" },
+      { "cmd": "!backseat",    "grupo": "canal",    "desc": "Regra de spoilers e dicas durante os jogos" },
+      { "cmd": "!discord",     "grupo": "canal",    "desc": "Link do Discord da Família Goiabinha" },
+      { "cmd": "!sociais",     "grupo": "canal",    "desc": "Todas as redes da Bruh" },
+      { "cmd": "!insta",       "grupo": "canal",    "desc": "Instagram" },
+      { "cmd": "!reels",       "grupo": "canal",    "desc": "O reels mais recente no Instagram" },
+      { "cmd": "!tiktok",      "grupo": "canal",    "desc": "TikTok" },
+      { "cmd": "!youtube",     "grupo": "canal",    "desc": "YouTube" },
+      { "cmd": "!shorts",      "grupo": "canal",    "desc": "O Shorts mais recente no YouTube" },
+      { "cmd": "!chute",       "grupo": "canal",    "desc": "Live na Kick, sem anúncios" },
+      { "cmd": "!steam",       "grupo": "canal",    "desc": "Adicionar a Bruh na Steam" },
+      { "cmd": "!f5",          "grupo": "canal",    "desc": "Veio de raid? Como ajudar na média do canal" },
+      { "cmd": "!setup",       "grupo": "canal",    "desc": "Periféricos e peças do PC da Bruh, aqui no site" },
+      { "cmd": "!mic",         "grupo": "canal",    "desc": "Qual é o microfone da Bruh" },
+      { "cmd": "!webcam",      "grupo": "canal",    "desc": "Qual é a webcam da Bruh" },
+      { "cmd": "!uptime",      "grupo": "canal",    "desc": "Há quanto tempo a live está no ar" },
+      { "cmd": "!clip",        "grupo": "canal",    "desc": "Cria um clipe do momento" },
+      { "cmd": "!commands",    "grupo": "canal",    "desc": "Lista de comandos no StreamElements" },
+
+      { "cmd": "!hj",          "grupo": "cinebruh", "desc": "O que tem de react hoje" },
+      { "cmd": "!site",        "grupo": "cinebruh", "desc": "Link do site do Cinebruh" },
+      { "cmd": "!catálogo",    "grupo": "cinebruh", "desc": "Catálogo com todos os reacts" },
+      { "cmd": "!lista",       "grupo": "cinebruh", "desc": "Programação no Trello e histórico no YourMovieProfile" },
+      { "cmd": "!tierlist",    "grupo": "cinebruh", "desc": "Ver ou montar sua tier list dos reacts" },
+      { "cmd": "!offlive",     "grupo": "cinebruh", "desc": "Reacts Off Live, os que não podem passar na Twitch" },
+      { "cmd": "!cinebruh",    "grupo": "cinebruh", "desc": "Preços pra patrocinar um react" },
+      { "cmd": "!incentive",   "grupo": "cinebruh", "desc": "Patrocinar um react pelo Incentive" },
+      { "cmd": "!mídiakit",    "grupo": "cinebruh", "desc": "Mídia kit da Bruh, pra marcas" },
+
+      { "cmd": "!donate",      "grupo": "apoio",    "desc": "Formas de doar (com ou sem mensagem na tela)" },
+      { "cmd": "!bits",        "grupo": "apoio",    "desc": "Sons dos alertas de bits" },
+      { "cmd": "!bit",         "grupo": "apoio",    "desc": "Ganhar bits de graça pelo TwitchRPG" },
+      { "cmd": "!parede",      "grupo": "apoio",    "desc": "Como entrar na parede do amor" },
+      { "cmd": "!subathon",    "grupo": "apoio",    "desc": "Quanto tempo cada apoio soma na subathon" },
+      { "cmd": "!amazon",      "grupo": "apoio",    "desc": "Link de compras na Amazon que apoia o canal" },
+      { "cmd": "!wishlist",    "grupo": "apoio",    "desc": "Listas de desejos na Amazon e na Steam" },
+      { "cmd": "!cupom",     "grupo": "apoio",    "desc": "Cupom BRUH na Redragon" },
+      { "cmd": "!redragon",    "grupo": "apoio",    "desc": "Sobre a Redragon, parceira do canal" },
+      { "cmd": "!enxada",      "grupo": "apoio",    "desc": "Cupom BRUH na Enxada Host (10%)" },
+      { "cmd": "!tinybuild",   "grupo": "apoio",    "desc": "Sobre a tinyBuild, parceira do canal" },
+
+      { "cmd": "!sr",          "grupo": "musica",   "desc": "Pedir música: !sr + link ou nome no YouTube" },
+      { "cmd": "!song",        "grupo": "musica",   "desc": "Qual música está tocando" },
+      { "cmd": "!when",        "grupo": "musica",   "desc": "Quando a sua música vai tocar" },
+      { "cmd": "!wrongsong",   "grupo": "musica",   "desc": "Tirar o seu último pedido da fila" },
+      { "cmd": "!voteskip",    "grupo": "musica",   "desc": "Votar pra pular a música atual" },
+      { "cmd": "!fila",        "grupo": "musica",   "desc": "Link da fila de músicas" },
+
+      { "cmd": "!points",      "grupo": "pontos",   "desc": "Seus Flaminguinhos e sua posição no ranking" },
+      { "cmd": "!msg",         "grupo": "pontos",   "desc": "Mandar mensagem na tela (50 Flaminguinhos)" },
+      { "cmd": "!infomsg",     "grupo": "pontos",   "desc": "Regras e tempo de espera do !msg" },
+      { "cmd": "!enter",       "grupo": "pontos",   "desc": "Comprar bilhetes pra um sorteio" },
+      { "cmd": "!watchtime",   "grupo": "pontos",   "desc": "Quanto tempo você já assistiu" },
+      { "cmd": "!followage",   "grupo": "pontos",   "desc": "Há quanto tempo você segue o canal" },
+      { "cmd": "!accountage",  "grupo": "pontos",   "desc": "Idade da sua conta" },
+
+      { "cmd": "!hug",         "grupo": "diversao", "desc": "Mandar um abraço virtual pra alguém" },
+      { "cmd": "!rodriguinha", "grupo": "diversao", "desc": "Pergunte qualquer coisa pra IA do chat: !rodriguinha + sua pergunta" },
+      { "cmd": "!latada",      "grupo": "diversao", "desc": "Dar uma latada em alguém" },
+      { "cmd": "!tinder",      "grupo": "diversao", "desc": "Dar match com alguém aleatório do chat" },
+      { "cmd": "!roleta",      "grupo": "diversao", "desc": "Jogue com a sua vida" },
+      { "cmd": "!vanish",      "grupo": "diversao", "desc": "Sumir numa nuvem de fumaça" },
+      { "cmd": "!ban",         "grupo": "diversao", "desc": "\"Banir\" alguém de brincadeira" },
+      { "cmd": "!banido",      "grupo": "diversao", "desc": "Quantas vezes o martelo do ban já foi batido" },
+      { "cmd": "!caiu",        "grupo": "diversao", "desc": "Quantas vezes a Bruh já caiu" },
+      { "cmd": "!trap",        "grupo": "diversao", "desc": "Quantas vezes a Bruh caiu na armadilha" },
+      { "cmd": "!sempalavras", "grupo": "diversao", "desc": "Quantas vezes a Bruh ficou sem palavras" },
+      { "cmd": "!cadeira",     "grupo": "diversao", "desc": "Quantas vezes a cadeira gamer dominou a live" },
+      { "cmd": "!vivo",        "grupo": "diversao", "desc": "Quantas vezes a Vivo já trolou a live" },
+      { "cmd": "!mortes",      "grupo": "diversao", "desc": "Contador de mortes duvidosas", "quem": "subs" },
+      { "cmd": "!tectec",      "grupo": "diversao", "desc": "O tec-tec do teclado no seu ouvido" },
+      { "cmd": "!bolo",        "grupo": "diversao", "desc": "Resgatar o som do bolo" },
+      { "cmd": "!cavalo",      "grupo": "diversao", "desc": "Resgatar o som do cavalo" },
+      { "cmd": "!idade",       "grupo": "diversao", "desc": "A idade \"oficial\" da Bruh" },
+      { "cmd": "!timer",       "grupo": "diversao", "desc": "Capturar pokémons na live (Pokémon Community Game)" }
+    ]
+  },
+
+  "midiakit": {
+    "_leia": "Números do mídia kit (últimos 30 dias). Fontes: Beacons (beacons.ai/faribruh_/mediakit) pro Instagram, público e seguidores; TwitchMetrics/TwitchTracker pra Twitch. exemplo=true mostra o aviso de VERSÃO DE EXEMPLO. null = esconde o dado. Número com '+' no fim (\"100000+\") aparece como '100 mil+'.",
+    "exemplo": false,
+    "atualizadoEm": "novembro/2026",
+    "posicionamento": "Streamer de reacts e gameplay nas madrugadas, com uma comunidade fiel e participativa: a Família Goiabinha.",
+    "tags": ["streamer", "reacts", "anime & filmes", "gaming", "conversa & comunidade"],
+    "sobre": "Bruna Rodrigues, 26 anos, nascida em Jundiaí, interior de SP. Sou streamer e criadora de conteúdo na Twitch há 6 anos, com foco em interação com a comunidade, games, react e conteúdo geek. Lives de madrugada cheias de bom humor e conexão real com o público.",
+    "pdf": "https://beacons.ai/faribruh_/mediakit",
+    "_leiaPdf": "pdfArquivo: PDFs prontos do mídia kit (um por língua). Com o arquivo, o botão vira '📄 Baixar PDF'; sem, fica o 'Salvar em PDF' (imprimir a página).",
+    "pdfArquivo": { "pt": "midiakit/midiakit-bruna-rodrigues.pdf", "en": "midiakit/en/media-kit-bruna-rodrigues.pdf" },
+    "redes": {
+      "twitch":    { "dias": 30, "seguidores": 28891, "subs": 62, "mediaViewers": 60, "mediaViewsLive": 3100, "picoViewers": 85, "horasAssistidas": 961, "espectadoresUnicos": null, "horasLive": 16, "picoHistorico": 2864, "horasTotais": 6905 },
+      "instagram": { "dias": 30, "seguidores": 6352, "novosSeguidores": 286, "visualizacoes": 113664, "visualizacoesCresc": 359.8, "alcance": 12300, "contasEngajadas": 1200, "impressoes": 27700, "engajamento": 7.1, "engSeguidores": 5.22,
+                     "mediaReels": 4700, "mediaStories": 356, "mediaCurtidas": 215, "mediaComentarios": 99, "visitasPerfil": 370, "posts": 109 },
+      "threads":   { "dias": 30, "seguidores": 1400, "visitasPerfil": 124 },
+      "tiktok":    { "dias": 30, "seguidores": 1200, "mediaViews": 730, "engajamento": 7.5, "impressoes": 2900, "mediaCurtidas": 53, "mediaComentarios": 4, "conclusao": 14.48, "videos": 47, "curtidas": null },
+      "youtube":   { "dias": 30, "inscritos": 550, "mediaShorts": 1300, "impressoes": 10700, "engajamento": 2.6, "mediaCurtidas": 30, "videos": 38, "mediaViews": null },
+      "kick":      { "seguidores": 374, "mediaViewers": 10, "picoHistorico": 480, "horasTotais": 483 },
+      "discord":   { "membros": 813 }
+    },
+    "_leiaPublico": "Uma aba por rede. 'rede' escolhe o ícone. Nomes de país/cidade podem ter 'en' pra versão em inglês.",
+    "publico": [
+      { "fonte": "Instagram", "rede": "instagram", "dias": 30,
+        "genero": [ { "nome": "Masculino", "en": "Male", "p": 75.2 }, { "nome": "Feminino", "en": "Female", "p": 24.8 } ],
+        "idade": [ { "faixa": "18-24", "p": 13.5 }, { "faixa": "25-34", "p": 58 }, { "faixa": "35-44", "p": 21.3 }, { "faixa": "45-54", "p": 4.7 }, { "faixa": "55-64", "p": 1.2 } ],
+        "paises": [ { "nome": "Brasil", "en": "Brazil", "p": 92.1 }, { "nome": "Estados Unidos", "en": "United States", "p": 1.2 }, { "nome": "Portugal", "p": 1.1 },
+                    { "nome": "Japão", "en": "Japan", "p": 0.5 }, { "nome": "México", "en": "Mexico", "p": 0.4 }, { "nome": "Itália", "en": "Italy", "p": 0.3 } ],
+        "cidades": [ { "nome": "São Paulo", "p": 14.4 }, { "nome": "Jundiaí", "p": 4.2 }, { "nome": "Rio de Janeiro", "p": 3.7 },
+                     { "nome": "Curitiba", "p": 1.5 }, { "nome": "Belo Horizonte", "p": 1.5 }, { "nome": "Fortaleza", "p": 1.2 } ] },
+      { "fonte": "TikTok", "rede": "tiktok", "dias": 30,
+        "genero": [ { "nome": "Masculino", "en": "Male", "p": 70.7 }, { "nome": "Feminino", "en": "Female", "p": 29.3 } ],
+        "idade": [ { "faixa": "18-24", "p": 28.3 }, { "faixa": "25-34", "p": 53.1 }, { "faixa": "35-44", "p": 13.9 }, { "faixa": "45-54", "p": 3.1 }, { "faixa": "55-64", "p": 1.6 } ],
+        "paises": [ { "nome": "Brasil", "en": "Brazil", "p": 84.7 }, { "nome": "Outros", "en": "Others", "p": 12.5 }, { "nome": "Estados Unidos", "en": "United States", "p": 1 },
+                    { "nome": "Portugal", "p": 0.6 }, { "nome": "Espanha", "en": "Spain", "p": 0.2 }, { "nome": "México", "en": "Mexico", "p": 0.2 } ],
+        "cidades": [ { "nome": "São Paulo", "p": 10.6 }, { "nome": "Rio de Janeiro", "p": 3.1 }, { "nome": "Belo Horizonte", "p": 2.8 },
+                     { "nome": "Brasília", "p": 1.9 }, { "nome": "Curitiba", "p": 1.8 }, { "nome": "Neuquén (Argentina)", "en": "Neuquén (Argentina)", "p": 0.2 } ] },
+      { "fonte": "Threads", "rede": "threads", "dias": 30,
+        "genero": [ { "nome": "Masculino", "en": "Male", "p": 77.8 }, { "nome": "Feminino", "en": "Female", "p": 22.2 } ],
+        "idade": [ { "faixa": "18-24", "p": 9.8 }, { "faixa": "25-34", "p": 61.5 }, { "faixa": "35-44", "p": 23.3 }, { "faixa": "45-54", "p": 3.5 }, { "faixa": "55-64", "p": 0.9 } ],
+        "paises": [ { "nome": "Brasil", "en": "Brazil", "p": 93.2 }, { "nome": "Portugal", "p": 1.4 }, { "nome": "Estados Unidos", "en": "United States", "p": 1.4 },
+                    { "nome": "Japão", "en": "Japan", "p": 0.4 }, { "nome": "Chile", "p": 0.4 }, { "nome": "México", "en": "Mexico", "p": 0.4 } ] }
+    ],
+    "conteudo": ["Reacts de anime, filmes e séries", "Gameplays (terror, co-op e indies)", "Conversa com o chat", "Jogos com a comunidade"],
+    "formatos": [
+      { "icone": "📺", "nome": "Publi na live",           "desc": "Menção, banner na tela e comando no chat durante a transmissão." },
+      { "icone": "🏷️", "nome": "Cupom ou código",         "desc": "Código exclusivo divulgado em live, comandos e redes, com resultado mensurável." },
+      { "icone": "📦", "nome": "Unboxing e review",       "desc": "Primeiras impressões e uso real do produto ao vivo." },
+      { "icone": "🎮", "nome": "Gameplay patrocinada",    "desc": "Live dedicada a um jogo, com chamada pra wishlist ou compra." },
+      { "icone": "📱", "nome": "Post, story e vídeo curto", "desc": "Conteúdo no Instagram, TikTok e YouTube Shorts." },
+      { "icone": "🎟️", "nome": "Presença em evento",      "desc": "Cobertura e ativações em feiras como a BGS." }
+    ],
+    "eventos": [
+      { "nome": "BGS",       "ano": 2023, "papel": null },
+      { "nome": "BGS",       "ano": 2025, "papel": null },
+      { "nome": "Gamescom",  "ano": null, "papel": null },
+      { "nome": "BGS",       "ano": 2026, "papel": null }
+    ],
+    "_leiaMarcas": "logo: arquivo em images/marcas/ (ícone quadrado, .jpg ou .png, ~128px ou mais). Aparece num quadradinho com cantos arredondados. Se o arquivo não existir, aparece o nome da marca.",
+    "marcas": [
+      { "nome": "Redragon",      "logo": "images/marcas/redragon.jpg",  "url": "https://www.redragon.com.br",   "desc": "Parceira · cupom BRUH" },
+      { "nome": "Enxada Host",   "logo": "images/marcas/enxada.jpg",    "url": "https://enxadahost.com/r/bruh", "desc": "Parceira · cupom BRUH" },
+      { "nome": "tinyBuild",     "logo": "images/marcas/tinybuild.jpg", "url": "https://www.tinybuild.com",     "desc": "Parceira" },
+      { "nome": "Baer-Mate",     "logo": "images/marcas/baermate.jpg",  "url": "https://baermate.com",          "desc": "Publi" },
+      { "nome": "WAAW by Alok",  "logo": "images/marcas/waaw.jpg",      "url": "https://waaw.com.br",           "desc": "Publi" },
+      { "nome": "Amazon",        "logo": "images/marcas/amazon.jpg",    "url": "https://amzn.to/3uA0EcO",       "desc": "Afiliada" }
+    ],
+    "_leiaCases": "Cases reais: { marca, formato, plataforma, periodo, desc, url }. Os de _casesExemplo são só modelo e não aparecem no site.",
+    "cases": [],
+    "_casesExemplo": [
+      { "marca": "Redragon",  "formato": "Cupom + review ao vivo", "plataforma": "Twitch", "periodo": "2025 – hoje", "desc": "Uso dos periféricos nas lives, cupom BRUH fixo no chat e comando !redragon.", "url": null },
+      { "marca": "tinyBuild", "formato": "Gameplay patrocinada",   "plataforma": "Twitch", "periodo": "2026",        "desc": "Live dedicada a um lançamento, com chamada pra wishlist na Steam.", "url": null }
+    ],
+    "en": {
+      "_leia": "Versão em inglês (abre em #/midiakit/en). Listas seguem a MESMA ordem das listas em português acima. O que faltar aqui aparece em português.",
+      "posicionamento": "Brazilian streamer of late-night reacts and gameplay, with a loyal and highly engaged community: the Goiabinha Family.",
+      "tags": ["streamer", "reacts", "anime & movies", "gaming", "chat & community"],
+      "sobre": "Bruna Rodrigues, 26, born in Jundiaí, in the countryside of São Paulo, Brazil. I've been a streamer and content creator on Twitch for 6 years, focused on community interaction, games, reacts and geek content. Late-night streams full of good humor and a real connection with viewers.",
+      "horario": "Late-night streams, from 11 PM (Brasília time)",
+      "local": "Jundiaí, São Paulo, Brazil",
+      "atualizadoEm": "November 2026",
+      "conteudo": ["Anime, movie and TV series reacts", "Gameplay (horror, co-op and indies)", "Chatting with viewers", "Games with the community"],
+      "formatos": [
+        { "nome": "Live sponsorship",            "desc": "Shout-out, on-screen banner and chat command during the stream." },
+        { "nome": "Coupon or creator code",      "desc": "Exclusive code promoted on stream, chat commands and socials, with measurable results." },
+        { "nome": "Unboxing & review",           "desc": "First impressions and real use of the product, live." },
+        { "nome": "Sponsored gameplay",          "desc": "A dedicated stream for a game, with a call to wishlist or buy." },
+        { "nome": "Posts, stories & short videos", "desc": "Content on Instagram, TikTok and YouTube Shorts." },
+        { "nome": "Event appearances",           "desc": "Coverage and activations at fairs like BGS (Brasil Game Show)." }
+      ],
+      "marcas": [
+        { "desc": "Partner · code BRUH" },
+        { "desc": "Partner · code BRUH" },
+        { "desc": "Partner" },
+        { "desc": "Sponsored post" },
+        { "desc": "Sponsored post" },
+        { "desc": "Affiliate" }
+      ],
+      "cases": [],
+      "genero": ["Male", "Female"],
+      "regioes": ["São Paulo", "Jundiaí", "Rio de Janeiro", "Curitiba", "Belo Horizonte", "Fortaleza", "Other cities in Brazil", "Outside Brazil"]
+    }
+  },
+
+  "setup": {
+    "_leia": "link = página oficial do produto (sem ganho pra Bruna). afiliado = link de afiliado (mostra o aviso de afiliado na aba). Se tiver os dois, o botão usa o afiliado.",
+    "hardware": [
+      { "item": "Gabinete",    "nome": "GameMax Infinity", "afiliado": null },
+      { "item": "Placa-mãe",   "nome": "Asus ROG Strix B550-F Gaming DDR4", "afiliado": null },
+      { "item": "Processador", "nome": "AMD Ryzen 9 5900X 4.8GHz", "afiliado": null },
+      { "item": "Placa de vídeo", "nome": "Gigabyte GeForce RTX 4060 8GB", "afiliado": null },
+      { "item": "Memória",     "nome": "Asgard Bragi RGB DDR4 2x16GB 3600MHz CL14", "afiliado": null },
+      { "item": "Water cooler", "nome": "Cooler Master MasterLiquid Core Street Fighter 6 Chun-Li", "afiliado": null },
+      { "item": "Fonte",       "nome": "Thermaltake Smart 700W 80 Plus", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSHD Seagate FireCuda Híbrido 1TB", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD SanDisk Plus 120GB", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD Adata XPG Spectrix S40G 512GB", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD XPG S70 Blade 1TB", "afiliado": null }
+    ],
+    "perifericos": [
+      { "item": "Microfone",   "nome": "HyperX QuadCast 2S RGB", "afiliado": null },
+      { "item": "Headset",     "nome": "Redragon Zeus RGB Bubblegum", "link": "https://www.redragon.com.br/zeusrgb-bubblegum", "afiliado": null },
+      { "item": "Headset",     "nome": "Redragon Minos Lunar", "link": "https://www.redragon.com.br/minoslunar", "afiliado": null },
+      { "item": "Fone intra-auricular", "nome": "KZ EDX Pro", "afiliado": null },
+      { "item": "Mouse",       "nome": "Logitech G PRO X Superlight Magenta", "afiliado": null },
+      { "item": "Teclado",     "nome": "Redragon Kumara Pro Magnético Lunar White", "link": "https://www.redragon.com.br/kumarapro-magnetico-lw", "afiliado": null },
+      { "item": "Webcam",      "nome": "Logitech C920 Pro", "afiliado": null },
+      { "item": "Iluminação",  "nome": "Soft Ring Light MJ26", "afiliado": null },
+      { "item": "Monitor",     "nome": "AOC 24\" IPS 144Hz", "afiliado": null },
+      { "item": "Monitor",     "nome": "Samsung CF390 Curvo 24\"", "afiliado": null },
+      { "item": "Stream Deck", "nome": "Elgato Stream Deck Mini (6 teclas)", "afiliado": null },
+      { "item": "Cadeira",     "nome": "DXRacer Origin OK132 Rosa/Branco", "afiliado": null }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Cinebruh · Reacts da Bruh",
+  "short_name": "Cinebruh",
+  "description": "Os reacts da Bruna Rodrigues num lugar só: animes, filmes, séries, tokusatsu, animações e VODs.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./#/inicio",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f0e5ea",
+  "theme_color": "#ae4c78",
+  "categories": ["entertainment"],
+  "icons": [
+    { "src": "images/icon-192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "images/icon-512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Catálogo",      "url": "./#/catalogo",       "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Cronograma",    "url": "./#/cronograma",     "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Reacts Offline","url": "./#/offline",        "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Tier list",     "url": "./#/tierlist",       "icons": [{ "src": "images/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

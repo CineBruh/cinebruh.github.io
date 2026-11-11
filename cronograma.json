@@ -1,0 +1,223 @@
+{
+  "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
+  "exemplo": false,
+  "atualizadoEm": "2026-11-01T03:03:50-03:00",
+  "horario": "23h",
+  "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
+  "dias": [
+    {
+      "data": "2026-11-02",
+      "itens": [
+        {
+          "titulo": "Mob Psycho 100",
+          "cat": "animes",
+          "lang": "dub",
+          "eps": "T2 Ep 7",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "Just chatting",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-06",
+      "itens": [
+        {
+          "titulo": "Invencível",
+          "cat": "series",
+          "lang": "dub",
+          "eps": "Ep 6",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-07",
+      "folga": true
+    },
+    {
+      "data": "2026-11-08",
+      "folga": true
+    }
+  ],
+  "fila": [
+    {
+      "titulo": "HAIKYU!!",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 9 e 10",
+      "patrocinador": "Austeroz, QTNecros"
+    },
+    {
+      "titulo": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 3 ao 8",
+      "patrocinador": "HomemPassarod"
+    },
+    {
+      "titulo": "You and I Are Polar Opposites",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 3",
+      "patrocinador": "QTNecros"
+    },
+    {
+      "titulo": "Parede de Gelo",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 1 ao 6",
+      "patrocinador": "QTNecros"
+    },
+    {
+      "titulo": "The Promised Neverland",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Ep 1",
+      "patrocinador": "HomemPassarod"
+    },
+    {
+      "titulo": "Beck",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 4 ao 10",
+      "patrocinador": "JeboyWolfgold"
+    },
+    {
+      "titulo": "Hunter X Hunter",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 6",
+      "patrocinador": "DoctorFoxtrot"
+    },
+    {
+      "titulo": "To Your Eternity",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T2 Eps 1 e 2",
+      "patrocinador": "Emir_Emir_Emir_"
+    },
+    {
+      "titulo": "The Ancient Magus' Bride",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 6",
+      "patrocinador": "Emir_Emir_Emir_"
+    },
+    {
+      "titulo": "Dan Da Dan",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 6 ao 12",
+      "patrocinador": "RedFoxDoInterior"
+    },
+    {
+      "titulo": "Dan Da Dan",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T2 Eps 1 ao 3",
+      "patrocinador": "RedFoxDoInterior"
+    },
+    {
+      "titulo": "takt op.Destiny",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 12",
+      "patrocinador": "GODMWLS"
+    },
+    {
+      "titulo": "The Rising of the Shield Hero",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 15",
+      "patrocinador": "Redivo_"
+    },
+    {
+      "titulo": "I'm Standing on a Million Lives",
+      "cat": "animes",
+      "lang": "leg",
+      "status": "standby",
+      "eps": "T1 Eps 2 ao 12",
+      "patrocinador": "Mateuz_Indisponivel"
+    },
+    {
+      "titulo": "I'm Standing on a Million Lives",
+      "cat": "animes",
+      "lang": "leg",
+      "status": "standby",
+      "eps": "T2 Ep 1",
+      "patrocinador": "Mateuz_Indisponivel"
+    },
+    {
+      "titulo": "Sussurros do Coração",
+      "cat": "filmes",
+      "lang": "dub",
+      "patrocinador": "TykWolf"
+    },
+    {
+      "titulo": "Guerreiras do K-Pop",
+      "cat": "filmes",
+      "lang": "leg",
+      "patrocinador": "TykWolf"
+    },
+    {
+      "titulo": "Batman (1989)",
+      "cat": "filmes",
+      "lang": "leg",
+      "patrocinador": "HenriqueLaurentino40"
+    },
+    {
+      "titulo": "The Matrix",
+      "cat": "filmes",
+      "lang": "dub",
+      "patrocinador": "OTalDedinho"
+    },
+    {
+      "titulo": "A Janela Secreta",
+      "cat": "filmes",
+      "patrocinador": "Locknell"
+    },
+    {
+      "titulo": "Eu Quero Comer seu Pâncreas",
+      "cat": "filmes",
+      "lang": "leg",
+      "patrocinador": "QTNecros"
+    },
+    {
+      "titulo": "O Ritual (2011)",
+      "cat": "filmes",
+      "lang": "dub",
+      "patrocinador": "Locknell"
+    },
+    {
+      "titulo": "Mobile Suit Gundam: Char Contra-ataca!",
+      "cat": "filmes",
+      "lang": "leg",
+      "status": "standby",
+      "patrocinador": "DoctorFoxtrot"
+    },
+    {
+      "titulo": "Jujutsu Kaisen 0",
+      "cat": "filmes",
+      "lang": "dub",
+      "status": "standby",
+      "patrocinador": "Locknell"
+    },
+    {
+      "titulo": "Kaizoku Sentai Gokaiger",
+      "cat": "tokusatsu",
+      "lang": "leg",
+      "eps": "T1 Eps 1 ao 5",
+      "patrocinador": "Kiluhty"
+    },
+    {
+      "titulo": "Final Space",
+      "cat": "animacoes",
+      "lang": "dub",
+      "eps": "T1 Eps 1 ao 5",
+      "patrocinador": "DoctorFoxtrot"
+    }
+  ]
+}

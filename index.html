@@ -4,854 +4,333 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Cinebruh</title>
+<meta name="description" content="Os reacts da Bruna Rodrigues num lugar só: animes, filmes, séries, tokusatsu, animações e VODs.">
+<meta name="theme-color" content="#ae4c78">
 <link rel="icon" type="image/png" href="favicon.png?v=2">
-<link rel="apple-touch-icon" href="favicon.png?v=2">
-<style>
-  :root{
-    --bg:#f0e5ea;--ink:#1a0f14;--paper:#fdf7fa;--muted:#8a6b78;
-    --border:#ae4c78;--sc:#623248;
-    --primary:#623248;--secondary:#c98da8;--accent:#ae4c78;
-    --animes:#ff68b4;--filmes:#E63946;--series:#1D6FE0;--tokusatsu:#FF7A00;--animacoes:#0FA958;--vods:#7B2FF7;
-    --display:"Bahnschrift","Franklin Gothic Heavy","Arial Black",system-ui,sans-serif;
-    --body:"Segoe UI",system-ui,-apple-system,sans-serif;
-  }
-  [data-theme="dark"]{
-    --bg:#190e13;--ink:#efe4e9;--paper:#241520;--muted:#c0a4b2;
-    --border:#b2507c;--sc:#723651;
-    --primary:#cc9cb2;--secondary:#723651;--accent:#b2507c;
-  }
-  :root{--shadow:6px 6px 0 var(--sc);--shadow-sm:3px 3px 0 var(--sc)}
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;overflow-anchor:none}
-  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;
-    -webkit-font-smoothing:antialiased;padding-bottom:64px;overflow-x:hidden;overflow-anchor:none;}
-  a{color:inherit;text-decoration:none}
-
-  /* troca de tema suave: varre de cima pra baixo como uma camada só */
-  @keyframes themeWipe{ from{clip-path:inset(0 0 100% 0)} to{clip-path:inset(0 0 0 0)} }
-  ::view-transition-old(root){ animation:none }
-  ::view-transition-new(root){ animation:themeWipe .45s ease }
-  @media (prefers-reduced-motion:reduce){ ::view-transition-new(root){ animation:none } }
-
-  /* ---------- Top bar ---------- */
-  header.topbar{position:sticky;top:0;z-index:50;background:var(--bg)}
-  .topbar-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px}
-  .logo{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.5px;display:flex;align-items:center;gap:6px;white-space:nowrap}
-  .logo .dot{background:var(--animes,#ff68b4);color:#fff;padding:2px 10px;border:3px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm);transform:rotate(-3deg)}
-  .spacer{display:none}
-  .search{display:flex;align-items:center;gap:8px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:7px 15px;box-shadow:var(--shadow-sm);flex:1 1 auto;min-width:0}
-  .search input{border:none;outline:none;background:transparent;font-family:var(--body);font-size:15px;width:100%;color:var(--ink)}
-  .btn-live{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;
-    font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;
-    border:3px solid var(--border);border-radius:999px;padding:8px 15px;box-shadow:var(--shadow-sm);transition:transform .12s}
-  .btn-live:hover{transform:translate(-2px,-2px)}
-  .btn-live svg{flex:none;display:block}
-  .tw{background:#9146FF;color:#fff}
-  .ki{background:#53FC18;color:#0c0f07}
-  .theme{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;
-    background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:12px;box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
-  .theme:hover{transform:translate(-2px,-2px)}
-  .theme .moon,.themefab .moon{display:none}
-  [data-theme="dark"] .theme .sun,[data-theme="dark"] .themefab .sun{display:none}
-  [data-theme="dark"] .theme .moon,[data-theme="dark"] .themefab .moon{display:block}
-
-  /* ---------- Hero ---------- */
-  .hero{max-width:1240px;margin:0 auto;padding:38px 20px 20px}
-  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,7vw,72px);line-height:.95;letter-spacing:-1px;text-transform:uppercase}
-  .hero h1 .hl{color:#ff68b4}
-  .hero p{margin-top:14px;max-width:640px;font-size:clamp(15px,2vw,18px);color:var(--muted)}
-  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-  .stat{background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:10px 16px;box-shadow:var(--shadow-sm)}
-  .stat b{font-family:var(--display);font-size:26px;display:block;line-height:1}
-  .stat span{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
-  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-  .cta{font-family:var(--display);font-size:15px;letter-spacing:.5px;text-transform:uppercase;background:var(--ink);color:var(--bg);border:3px solid var(--border);border-radius:12px;padding:11px 18px;cursor:pointer;box-shadow:var(--shadow-sm);transition:transform .12s}
-  .cta.alt{background:var(--paper);color:var(--ink)}
-  .cta:hover{transform:translate(-2px,-2px)}
-  [data-theme="dark"] .cta{background:var(--primary);color:#190e13}
-  [data-theme="dark"] .cta.alt{background:var(--secondary);color:#efe4e9}
-
-  /* ---------- Filters ---------- */
-  .filters{background:var(--bg)}
-  .filter-cats{position:sticky;top:61px;z-index:45;background:var(--bg);border-bottom:3px solid var(--border);padding:12px 0}
-  .filter-extra{position:relative;z-index:30;background:var(--bg);padding:12px 0;border-bottom:3px solid var(--border)}
-  .filters-inner{max-width:1240px;margin:0 auto;padding:0 20px;display:flex;gap:12px 14px;flex-wrap:wrap;align-items:center}
-  .pills{display:flex;gap:9px;flex-wrap:wrap}
-  .lang-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .lang-group .lg-label{font-family:var(--display);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-  .lpill{font-family:var(--display);font-size:13px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:6px 13px;cursor:pointer;color:var(--ink);transition:transform .12s,box-shadow .12s;display:flex;align-items:center;gap:6px;min-height:36px;box-sizing:border-box;line-height:1}
-  .lpill:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-sm)}
-  .lpill.active{background:var(--ink);color:var(--bg)}
-  .filters.compact #statuspills, .filters.compact #langpills{display:none}
-  .section{scroll-margin-top:120px}
-  .pill{font-family:var(--display);font-size:14px;letter-spacing:.5px;background:var(--paper);border:3px solid var(--border);border-radius:999px;padding:7px 15px;cursor:pointer;transition:transform .12s,box-shadow .12s;display:flex;align-items:center;gap:7px;color:var(--ink)}
-  .pill:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-sm)}
-  .pill .ic{width:13px;height:13px;border-radius:50%;border:2px solid var(--border)}
-  .pill[data-cat="todos"] .ic{background:var(--ink)}
-  .pill[data-cat="animes"] .ic{background:var(--animes)}
-  .pill[data-cat="filmes"] .ic{background:var(--filmes)}
-  .pill[data-cat="series"] .ic{background:var(--series)}
-  .pill[data-cat="tokusatsu"] .ic{background:var(--tokusatsu)}
-  .pill[data-cat="animacoes"] .ic{background:var(--animacoes)}
-  .pill[data-cat="vods"] .ic{background:var(--vods)}
-  .pill.active{color:#fff}
-  .pill[data-cat="todos"].active{background:var(--ink);color:#fff}
-  [data-theme="dark"] .pill[data-cat="todos"].active{background:#E3B23C;color:#1a0f14}
-  .pill[data-cat="animes"].active{background:var(--animes)}
-  .pill[data-cat="filmes"].active{background:var(--filmes)}
-  .pill[data-cat="series"].active{background:var(--series)}
-  .pill[data-cat="tokusatsu"].active{background:var(--tokusatsu)}
-  .pill[data-cat="animacoes"].active{background:var(--animacoes)}
-  .pill[data-cat="vods"].active{background:var(--vods)}
-  .pill.active .ic{background:#fff!important}
-  [data-theme="dark"] .pill[data-cat="todos"].active .ic{background:#1a0f14!important}
-
-  /* ---------- Shelves / capsules ---------- */
-  main{max-width:1240px;margin:0 auto;padding:4px 20px 40px}
-  .section{padding-top:34px}
-  .section-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
-  .section-head .tag{font-family:var(--display);font-size:clamp(20px,3.2vw,32px);text-transform:uppercase;letter-spacing:.5px;padding:4px 15px;border:3px solid var(--border);border-radius:12px;color:#fff;box-shadow:var(--shadow-sm)}
-  .section[data-cat="animes"] .tag{background:var(--animes)}
-  .section[data-cat="filmes"] .tag{background:var(--filmes)}
-  .section[data-cat="series"] .tag{background:var(--series)}
-  .section[data-cat="tokusatsu"] .tag{background:var(--tokusatsu)}
-  .section[data-cat="animacoes"] .tag{background:var(--animacoes)}
-  .section[data-cat="vods"] .tag{background:var(--vods)}
-  .section-head .count{font-size:13px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-
-  .shelf{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,158px),1fr))}
-  .cap{display:block;position:relative;border:3px solid var(--border);border-radius:14px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow-sm);transition:transform .14s,box-shadow .14s;animation:pop .4s both}
-  .cap:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
-  @keyframes pop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .cap-art{position:relative;aspect-ratio:2/3;background:linear-gradient(150deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .cap-art .em{font-size:58px;opacity:.95;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.28));transition:transform .3s}
-  .cap:hover .cap-art .em{transform:scale(1.14) rotate(-5deg)}
-  .cap-cat{position:absolute;top:8px;left:8px;font-family:var(--display);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;padding:3px 8px;border-radius:6px}
-  .cap-done{position:absolute;top:8px;right:8px;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#0FA958;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
-  .cap-scrim{position:absolute;left:0;right:0;bottom:0;padding:30px 9px 9px;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,0))}
-  .cap-title{font-family:var(--display);color:#fff;font-size:15px;line-height:1.05;text-shadow:0 1px 5px rgba(0,0,0,.7)}
-  .cap-meta{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-top:6px}
-  .seg{font-family:var(--display);font-size:11px;line-height:1;color:#fff;border:2px solid rgba(255,255,255,.55);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
-  .seg.clik{cursor:pointer;transition:filter .12s,transform .12s}
-  .seg.clik:hover{filter:brightness(1.13);transform:translateY(-1px)}
-  .seg.g{background:#0FA958;border-color:#0FA958}
-  .seg.y{background:#E8A400;border-color:#E8A400}
-  .seg.r{background:#E63946;border-color:#E63946}
-  .seg.nota{background:#F5C518;border-color:#F5C518;color:#1a0f14}
-  .seg.ghost{visibility:hidden}
-  .cap-eps{font-family:var(--display);font-size:11px;line-height:1;color:#fff;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.45);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
-  .st-inc{background:#8a6b78}
-  .legend{max-width:1240px;margin:8px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--body);font-size:11px;color:var(--muted)}
-  .legend .seg{color:#fff}
-  .legend .cap-eps{color:var(--ink);background:var(--paper);border-color:var(--border)}
-  .cap-hover{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;background:rgba(0,0,0,.32)}
-  .cap:hover .cap-hover{opacity:1}
-  .cap-hover span{font-family:var(--display);font-size:13px;letter-spacing:.5px;color:#111;background:#fff;border:2px solid #111;border-radius:8px;padding:7px 12px}
-  .cap-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .cap.inc .cap-art{filter:grayscale(1) contrast(.95)}
-  .cap.inc:hover .cap-art{filter:grayscale(.5)}
-  .cap-inc{position:absolute;top:8px;right:8px;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#5a5550;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
-  .cap-br{position:absolute;right:8px;bottom:8px;z-index:2;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-  .cap-lang{font-family:var(--display);font-size:11px;line-height:1;letter-spacing:.5px;background:rgba(255,255,255,.93);color:#111;border:2px solid #111;border-radius:6px;padding:4px 8px}
-  .cap-nota{display:inline-flex;align-items:center;gap:3px;font-family:var(--display);font-size:11px;line-height:1;letter-spacing:.5px;background:#F5C518;color:#1a0f14;border:2px solid transparent;border-radius:6px;padding:4px 8px}
-  .cap-nota b{font-size:15px;font-weight:800}
-  .cap-tl{position:absolute;top:8px;left:8px;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
-  .cap-tr{position:absolute;top:8px;right:8px;z-index:2}
-  .cap-tr .cap-lang{display:inline-flex;align-items:center;gap:3px;height:23px;box-sizing:border-box;padding:0 8px}
-  .cap-tl .cap-badge,.cap-tl .cap-open{display:inline-flex;align-items:center;height:23px;box-sizing:border-box}
-  .cap-badge{font-family:var(--display);font-size:10px;letter-spacing:.5px;color:#fff;border:2px solid #fff;border-radius:6px;padding:2px 6px}
-  .st-completo{background:#0FA958}
-  .st-assistindo{background:#ff68b4}
-  .st-fila{background:#5a5550}
-  .st-embreve{background:#FF7A00}
-  .cap-open{font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#F5A623;color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px}
-  .cap.locked{cursor:default}
-  .cap.locked .cap-art{filter:saturate(.8)}
-  .cap.locked.inc .cap-art{filter:grayscale(1) contrast(.95)}
-  .empty{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--display);font-size:20px}
-
-  /* ---------- Content bands ---------- */
-  .band{max-width:1240px;margin:0 auto;padding:52px 20px 4px;scroll-margin-top:128px}
-  .band-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
-  .band-head h2{font-family:var(--display);font-size:clamp(26px,4.4vw,42px);text-transform:uppercase;letter-spacing:.5px;line-height:1}
-  .band-head .kicker{font-family:var(--display);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#ff68b4;padding:3px 11px;border:3px solid var(--border);border-radius:999px;box-shadow:var(--shadow-sm);transform:rotate(-2deg)}
-  .band-sub{color:var(--muted);font-size:15px;max-width:660px;margin:12px 0 24px}
-  .price-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
-  .price{background:var(--paper);border:3px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:6px}
-  .price .tier{font-family:var(--display);font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#fff;align-self:flex-start;padding:3px 10px;border-radius:8px;border:2px solid var(--border)}
-  .price.f .tier{background:#E63946}.price.s .tier{background:#1D6FE0}.price.a .tier{background:#ff68b4}
-  .price .amount{font-family:var(--display);font-size:32px;line-height:1;margin-top:6px}
-  .price .bits{font-size:13px;color:var(--muted);font-weight:700}
-  .price .desc{font-size:14px;margin-top:6px}
-  .price-note{grid-column:1/-1;margin-top:4px;background:#FFEEBF;color:#1A1512;border:3px solid var(--border);border-radius:12px;padding:13px 16px;font-size:14px;box-shadow:var(--shadow-sm)}
-  [data-theme="dark"] .price-note{background:#37301c;color:#f0e2bd}
-  .link-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
-  .link-tile{display:flex;align-items:center;gap:13px;background:var(--paper);border:3px solid var(--border);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow-sm);transition:transform .12s,box-shadow .12s;color:var(--ink)}
-  .link-tile:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow)}
-  .link-tile .ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;border:2px solid var(--border);font-size:22px;background:var(--bg)}
-  .link-tile .txt{min-width:0}
-  .link-tile .txt b{display:block;font-family:var(--display);font-size:16px;line-height:1.1}
-  .link-tile .txt span{font-size:12px;color:var(--muted);word-break:break-word}
-  .social-row{display:flex;flex-wrap:wrap;gap:10px}
-  .soc{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:14px;letter-spacing:.5px;line-height:1;border:3px solid var(--border);border-radius:999px;padding:9px 15px;color:#fff;box-shadow:var(--shadow-sm);transition:transform .12s}
-  .soc:hover{transform:translate(-2px,-2px)}
-  .soc svg{flex:none;display:block}
-  .soc.tw{background:#9146FF}.soc.ki{background:#53FC18;color:#0c0f07}.soc.ig{background:#E1306C}
-  .soc.tt{background:#111;color:#fff}.soc.yt{background:#FF0000}.soc.x{background:#111;color:#fff}.soc.dc{background:#5865F2}
-
-  footer{max-width:1240px;margin:20px auto 0;padding:26px 20px 10px;border-top:3px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
-  footer .logo{font-size:20px}
-
-  .totop{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:60;width:50px;height:50px;
-    display:flex;align-items:center;justify-content:center;
-    background:#ff68b4;color:#fff;border:3px solid var(--border);border-radius:14px;
-    box-shadow:var(--shadow-sm);cursor:pointer;opacity:0;pointer-events:none;
-    transform:translateY(12px);transition:opacity .2s ease,transform .2s ease}
-  .totop.show{opacity:1;pointer-events:auto;transform:none}
-  .totop.show:hover{transform:translate(-2px,-2px)}
-  .totop svg{display:block}
-  .themefab{position:fixed;right:20px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:60;width:50px;height:50px;
-    display:none;align-items:center;justify-content:center;
-    background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:14px;
-    box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .12s}
-  .themefab:hover{transform:translate(-2px,-2px)}
-  .themefab svg{display:block}
-
-  @media (max-width:600px){
-    .shelf{grid-template-columns:repeat(3,1fr);gap:10px}
-    .cap-art .em{font-size:42px}
-    .cap-title{font-size:12px}
-    .cap-meta{gap:3px;margin-top:4px}
-    .seg,.cap-eps,.cap-lang,.cap-nota{font-size:9px;padding:3px 6px;border-width:1.5px}
-    .cap-badge,.cap-open{font-size:9px;padding:2px 5px;letter-spacing:.3px}
-    .cap-tr .cap-lang{height:20px;padding:0 6px;border-width:2px}
-    .cap-tl .cap-badge,.cap-tl .cap-open{height:20px}
-    .cap-nota b{font-size:12px}
-    .hero{padding:16px 20px 14px}
-    .topbar-inner .spacer{display:none}
-    .btn-live{width:44px;height:44px;padding:0;gap:0}
-    .btn-live .lbl{display:none}
-    .btn-live svg{width:18px;height:18px}
-    .btn-live.tw{margin-left:auto}
-    .search{width:100%;order:5}
-    .filter-cats,.filter-extra{padding:9px 0}
-    /* filtros viram faixa de rolagem horizontal (padrão de app nativo) */
-    .filters-inner{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-    .filters-inner::-webkit-scrollbar{display:none}
-    .pills,.lang-group{flex-wrap:nowrap}
-    .lang-group{flex:0 0 auto}
-    .pill,.lpill,.lang-group .lg-label{flex:0 0 auto;white-space:nowrap}
-    .pills{gap:7px}
-    .pill{font-size:12px;padding:5px 11px;gap:6px}
-    .pill .ic{width:10px;height:10px}
-    .lpill{font-size:12px;padding:5px 11px}
-    .lang-group .lg-label{font-size:11px}
-    .logo{font-size:19px;gap:7px}
-    .logo .dot{padding:2px 7px;border-width:2px}
-    .search{padding:6px 13px}
-    .search input{font-size:14px}
-    /* cabeçalho compacto ao rolar: some Twitch/Kick/tema e a busca sobe pro lado do logo */
-    .scrolled .btn-live,
-    .scrolled .theme{display:none}
-    .scrolled .search{order:0;width:auto;flex:1 1 0;min-width:0}
-    .scrolled .search input{min-width:0}
-    .scrolled .topbar-inner{padding-top:8px;padding-bottom:8px}
-    /* botão de tema flutuante quando compacto */
-    .scrolled .themefab{display:flex}
-  }
-  @media (max-width:430px){
-    .shelf{grid-template-columns:repeat(2,1fr);gap:12px}
-    .cap-art .em{font-size:48px}
-    .cap-title{font-size:13px}
-  }
-  /* evita efeitos de :hover "presos" após toque em telas sem mouse */
-  @media (hover:none){
-    .cap:hover,.pill:hover,.lpill:hover,.btn-live:hover,.soc:hover,.link-tile:hover,.cta:hover,.theme:hover,.themefab:hover,.totop.show:hover,.seg.clik:hover{transform:none}
-    .cap:hover{box-shadow:var(--shadow-sm)}
-    .cap:hover .cap-art .em{transform:none}
-    .cap:hover .cap-hover{opacity:0}
-    .pill:hover,.lpill:hover{box-shadow:none}
-    .link-tile:hover{box-shadow:var(--shadow-sm)}
-  }
-  @media print{
-    .topbar,.filters,.cta-row,.theme{display:none}
-    .cap,.price,.link-tile{box-shadow:none}
-    body{padding-bottom:0}
-  }
-</style>
+<!-- app instalável -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cinebruh">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<!-- prévia ao colar o link (Discord, WhatsApp, X, Telegram…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cinebruh">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://cinebruh.github.io/">
+<meta property="og:title" content="Cinebruh · Os reacts da Bruh">
+<meta property="og:description" content="Animes, filmes, séries, tokusatsu, animações e VODs com a reação da Bruna Rodrigues. Assista aqui, veja o cronograma e peça o seu react!">
+<meta property="og:image" content="https://cinebruh.github.io/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cinebruh: os reacts da Bruna Rodrigues">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Faribruh_">
+<!-- aplica o tema salvo antes de pintar a página (evita piscar claro→escuro) -->
+<script>try{var t=localStorage.getItem('bru-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/catalogo.css">
+<link rel="stylesheet" href="css/patrocinar.css">
+<link rel="stylesheet" href="css/paginas.css">
+<link rel="stylesheet" href="css/intro.css">
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="logo">Cine <span class="dot">Bruh</span></div>
-    <div class="spacer"></div>
-    <label class="search">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="search" type="text" placeholder="Buscar obra…" autocomplete="off" aria-label="Buscar obra na biblioteca">
-    </label>
-    <a class="btn-live tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Twitch">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
-      <span class="lbl">Twitch</span>
-    </a>
-    <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Kick">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>
-      <span class="lbl">Kick</span>
-    </a>
-    <button class="theme" id="theme" aria-label="Alternar tema">
-      <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
-      <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+<!-- ============ VINHETA DE ENTRADA (some sozinha; ver js/intro.js) ============ -->
+<div class="intro" id="intro" role="presentation" aria-hidden="true">
+  <div class="intro-word"><div class="intro-blur">
+    <!-- "Cinebruh" em letra cursiva, desenhado traço a traço (cada <path> é uma "caneta"; ordem e tempo no style) -->
+    <svg viewBox="0 0 620 200" aria-label="Cinebruh"><g transform="translate(66 0) skewX(-6)">
+      <path pathLength="1" style="--d:.45s;--w:.35s" d="M98 62 C80 40 40 46 34 92 C28 138 70 152 104 128"/>
+      <path pathLength="1" style="--d:2.05s;--w:.8s" d="M100 132 C112 118 118 104 122 96 C118 112 114 130 120 140 C126 146 134 138 140 128 C144 116 148 104 150 96 L146 140 C152 110 164 96 176 98 C188 100 184 124 184 136 C186 146 196 142 202 132 C214 122 232 112 230 100 C228 90 210 92 206 108 C202 126 214 144 232 140 C242 138 248 132 252 126 C262 110 278 70 274 48 C270 34 256 40 256 60 L254 138 C262 112 282 100 292 110 C300 120 292 142 272 140 C284 134 296 116 304 104 C310 96 316 104 322 100 C324 114 322 128 326 140 C330 130 336 110 350 100 C344 120 344 140 358 140 C370 140 378 120 380 98 C378 118 376 138 388 140 C396 141 402 134 408 126 C420 108 436 70 432 48 C428 34 414 40 414 60 L412 140 C418 116 430 100 442 100 C454 100 452 124 452 136 C454 146 466 144 478 128"/>
+      <path pathLength="1" style="--d:.12s;--w:2.9s" d="M124 77 L128 74"/>
+    </g></svg>
+  </div></div>
+  <span class="intro-skip">Toque pra pular</span>
+</div>
+<script>try{var iv=document.getElementById('intro'),force=/[?&]intro\b/.test(location.search);
+if(!force&&(sessionStorage.getItem('bru-intro')||matchMedia('(prefers-reduced-motion: reduce)').matches))iv.remove();
+else{sessionStorage.setItem('bru-intro','1');document.documentElement.classList.add('intro-on');}}catch(e){}</script>
+
+<div class="app">
+
+  <!-- ============ MENU LATERAL (computador) ============ -->
+  <aside class="side" aria-label="Menu">
+    <a class="logo" href="#/inicio" data-nav="inicio" aria-label="Cinebruh — início"><span class="lw">Cine</span><span class="dot">Bruh</span></a>
+    <nav class="nav" id="nav" aria-label="Abas do site"></nav>
+    <div class="side-foot">
+      <a class="btn-live tw" href="https://twitch.tv/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Twitch" title="Twitch">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        <span class="lbl">Twitch</span>
+      </a>
+      <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Kick" title="Kick">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>
+        <span class="lbl">Kick</span>
+      </a>
+      <button class="btn-live inst js-install" type="button" hidden aria-label="Instalar o Cinebruh como app" title="Instalar app">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+        <span class="lbl">Instalar app</span>
+      </button>
+      <button class="side-theme js-theme" type="button" aria-label="Alternar tema claro/escuro" title="Tema claro/escuro">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+        <span class="lbl">Tema</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="content">
+
+    <!-- ============ CABEÇALHO (celular) ============ -->
+    <header class="mhead">
+      <a class="logo" href="#/inicio" data-nav="inicio" aria-label="Cinebruh — início"><span class="lw">Cine</span><span class="dot">Bruh</span></a>
+      <a class="btn-live tw" href="https://twitch.tv/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Twitch">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        <span class="lbl">Twitch</span>
+      </a>
+      <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener" aria-label="Assistir na Kick">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>
+        <span class="lbl">Kick</span>
+      </a>
+      <button class="theme js-theme" type="button" aria-label="Alternar tema claro/escuro">
+        <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+        <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+    </header>
+
+    <main id="app">
+
+      <!-- ============ INÍCIO ============ -->
+      <section class="page" data-page="inicio" hidden>
+        <div class="home" id="home"><p class="home-desc">Carregando…</p></div>
+      </section>
+
+      <!-- ============ TIER LIST ============ -->
+      <section class="page" data-page="tierlist" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Tier list</h2><span class="kicker">Do S ao F</span></div>
+          <div id="tier-box"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+      <!-- ============ CATÁLOGO ============ -->
+      <section class="page" data-page="catalogo" hidden>
+        <div class="hero">
+          <h1>Reações da <span class="hl">Bruna</span><br>num lugar só</h1>
+          <p>A biblioteca completa dos reacts da Bruna Rodrigues — lives ao vivo na Twitch e na Kick. Escolha a categoria, clique na capa e assista aos episódios e temporadas direto por aqui.</p>
+          <div class="stats">
+            <div class="stat"><b id="s-titles">0</b><span>obras</span></div>
+            <div class="stat"><b id="s-prog">0</b><span>em andamento</span></div>
+            <div class="stat"><b id="s-done">0</b><span>concluídas</span></div>
+            <div class="stat" id="s-hours-box" hidden><b id="s-hours">0</b><span>horas de react</span></div>
+          </div>
+        </div>
+
+        <div class="filter-cats">
+          <div class="filters-inner">
+            <label class="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input id="search" type="search" placeholder="Buscar obra…" autocomplete="off" aria-label="Buscar obra na biblioteca">
+            </label>
+            <div class="pills" id="pills">
+              <button class="pill active" data-cat="todos"><span class="ic"></span>Todos</button>
+              <button class="pill" data-cat="animes"><span class="ic"></span>Animes</button>
+              <button class="pill" data-cat="filmes"><span class="ic"></span>Filmes</button>
+              <button class="pill" data-cat="series"><span class="ic"></span>Séries</button>
+              <button class="pill" data-cat="tokusatsu"><span class="ic"></span>Tokusatsu</button>
+              <button class="pill" data-cat="animacoes"><span class="ic"></span>Animações</button>
+              <button class="pill" data-cat="vods"><span class="ic"></span>VODs</button>
+            </div>
+          </div>
+        </div>
+        <div class="filter-extra">
+          <div class="filters-inner">
+            <div class="lang-group" id="statuspills">
+              <span class="lg-label">Status</span>
+              <button class="lpill active" data-status="all">Todos</button>
+              <button class="lpill" data-status="completo">Completo</button>
+              <button class="lpill" data-status="assistindo">Assistindo</button>
+              <button class="lpill" data-status="fila">Na fila</button>
+              <button class="lpill" data-status="embreve">Off Live</button>
+              <button class="lpill" data-status="aberto" title="Obras em que dá pra patrocinar os próximos episódios">💰 Aceita patrocínio</button>
+            </div>
+            <div class="lang-group" id="langpills">
+              <span class="lg-label">Áudio</span>
+              <button class="lpill active" data-lang="all">Todos</button>
+              <button class="lpill" data-lang="dub">🎙️ Dublado</button>
+              <button class="lpill" data-lang="leg">💬 Legendado</button>
+            </div>
+            <div class="lang-group" id="sortpills">
+              <span class="lg-label">Ordem</span>
+              <button class="lpill active" data-sort="padrao">Padrão</button>
+              <button class="lpill" data-sort="novos">🆕 Novidades</button>
+              <button class="lpill" data-sort="nota">★ Nota</button>
+              <button class="lpill" data-sort="ano">📅 Ano</button>
+              <button class="lpill" data-sort="az">A–Z</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shelves" id="shelves"><div class="empty">Carregando o catálogo…</div></div>
+      </section>
+
+      <!-- ============ PATROCINAR ============ -->
+      <section class="page" data-page="patrocinar" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Peça um react</h2><span class="kicker">Cinebruh</span></div>
+          <p class="band-sub">Mande o valor em reais pelas formas da aba Apoiar (ou o equivalente em bits na Twitch) e escolha o que a Bruna vai reagir nas próximas lives — tudo conforme o cronograma. Em algumas obras você pode colaborar com as metas diretamente pelo Incentive.gg (e também pode doar por lá).</p>
+          <div class="price-grid" id="price-grid">
+            <div class="price f"><span class="tier">Filme</span><span class="amount">R$40</span><span class="bits">ou 800 bits</span><span class="desc">Você escolhe UM filme de até 2h30.</span></div>
+            <div class="price s"><span class="tier">Série até 1h</span><span class="amount">R$20</span><span class="bits">ou 400 bits</span><span class="desc">UM episódio de série, à sua escolha, de até 1h.</span></div>
+            <div class="price s"><span class="tier">Série 1h+</span><span class="amount">R$30</span><span class="bits">ou 600 bits</span><span class="desc">UM episódio de série, à sua escolha, de 1h ou mais.</span></div>
+            <div class="price a"><span class="tier">Anime</span><span class="amount">R$12</span><span class="bits">ou 250 bits</span><span class="desc">UM episódio de anime à sua escolha.</span></div>
+            <div class="price a"><span class="tier">Anime · 5 eps</span><span class="amount">R$50</span><span class="bits">ou 1000 bits</span><span class="desc">CINCO episódios do anime à sua escolha.</span></div>
+            <div class="price-note">💡 <b>Pacote:</b> fechando pacotes com 5 ou mais episódios, cada episódio sai a <b>R$10,00</b>.</div>
+          </div>
+          <div class="cta-row">
+            <a class="cta" href="https://incentive.gg/brunarodrigues" target="_blank" rel="noopener">🎯 Ver metas no Incentive.gg</a>
+            <a class="cta alt" href="#/apoiar" data-nav="apoiar">💸 Formas de pagamento</a>
+          </div>
+
+          <div class="rp" id="recent-pat" hidden></div>
+
+          <div class="calc" id="calc">
+            <h3 class="pick-title">🧮 Monte seu pedido</h3>
+            <p class="pick-sub">Busque a obra (vale o nome em português, inglês ou o original), escolha a duração e os episódios. O total já sai com o desconto do pacote, e o pedido fica pronto pra copiar e mandar junto com o pagamento.</p>
+            <div class="calc-grid">
+              <div class="calc-f calc-wide"><span>Obra</span>
+                <div class="calc-search">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                  <input id="calc-t" type="text" placeholder="Busque o anime, série ou filme…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="calc-sug" aria-expanded="false" aria-label="Buscar obra">
+                  <div class="calc-sug" id="calc-sug" role="listbox" hidden></div>
+                </div>
+                <div class="calc-picked" id="calc-picked" hidden></div>
+              </div>
+              <div class="calc-f calc-wide"><span>O que você quer</span>
+                <div class="lang-group" id="calc-tipo"><button class="lpill active" type="button" data-t="eps">📺 Episódios</button><button class="lpill" type="button" data-t="filmes">🎬 Filme</button></div>
+              </div>
+              <div class="calc-f calc-wide"><span>Duração de cada um</span>
+                <div class="lang-group" id="calc-dur"></div>
+                <small class="calc-hint" id="calc-dur-hint"></small>
+              </div>
+              <label class="calc-f" data-for="eps"><span>Temporada</span><input id="calc-s" type="number" min="1" value="1" inputmode="numeric"></label>
+              <div class="calc-f" data-for="eps"><span>Episódios</span>
+                <div class="calc-eps"><input id="calc-de" type="number" min="1" value="1" inputmode="numeric" aria-label="Do episódio"><span>até</span><input id="calc-ate" type="number" min="1" value="1" inputmode="numeric" aria-label="Até o episódio"></div>
+              </div>
+            </div>
+            <div class="calc-out" id="calc-out"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CRONOGRAMA ============ -->
+      <section class="page" data-page="cronograma" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Cronograma</h2><span class="kicker">Programação</span></div>
+          <div id="cronograma-box"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+      <!-- ============ REACTS OFFLINE ============ -->
+      <section class="page" data-page="offline" hidden>
+        <div id="offline-box"><div class="band"><p class="home-desc">Carregando…</p></div></div>
+      </section>
+
+      <!-- ============ APOIAR ============ -->
+      <section class="page" data-page="apoiar" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Apoie a Bruna</h2><span class="kicker">Doações</span></div>
+          <p class="band-sub">Toda ajuda faz diferença: escolha a forma que preferir pra apoiar o canal, garantir seu react ou ajudar nas metas.</p>
+          <div id="apoiar-box"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+      <!-- ============ MÍDIA KIT ============ -->
+      <section class="page" data-page="midiakit" hidden>
+        <div class="band">
+          <div id="midiakit"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+      <!-- ============ SETUP ============ -->
+      <section class="page" data-page="setup" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Setup</h2><span class="kicker">Da Bruh</span></div>
+          <p class="band-sub">O PC e os periféricos que a Bruna usa nas lives.</p>
+          <div id="setup"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+      <!-- ============ COMUNIDADE ============ -->
+      <section class="page" data-page="comunidade" hidden>
+        <div class="band">
+          <div class="band-head"><h2>Comunidade</h2><span class="kicker">Família Goiabinha</span></div>
+          <div id="comunidade-box"><p class="home-desc">Carregando…</p></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="logo">Cine <span class="dot">Bruh</span></div>
+      <div class="credits">
+        <a href="https://www.themoviedb.org" target="_blank" rel="noopener" aria-label="The Movie Database (TMDB)"><img src="https://www.themoviedb.org/assets/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB"></a>
+        <span>Capas fornecidas pelo TMDB. Este site usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.</span>
+      </div>
+      <a class="soc tw" href="https://twitch.tv/brunarodrigues" target="_blank" rel="noopener" style="box-shadow:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>BrunaRodrigues</a>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ BARRA INFERIOR (celular) ============ -->
+<nav class="tabbar" id="tabbar" aria-label="Abas do site"></nav>
+
+<!-- ============ FOLHA "MAIS" (celular) ============ -->
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="Mais abas">
+    <div class="sheet-grip"></div>
+    <div class="sheet-title">Mais do Cinebruh</div>
+    <div class="sheet-grid" id="sheet-grid"></div>
+    <div class="sheet-row">
+      <a class="btn-live tw" href="https://twitch.tv/brunarodrigues" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>Twitch
+      </a>
+      <a class="btn-live ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>Kick
+      </a>
+      <button class="sheet-theme js-theme" type="button" aria-label="Alternar tema claro/escuro">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+        Tema
+      </button>
+    </div>
+    <button class="btn-live inst sheet-install js-install" type="button" hidden>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Instalar o Cinebruh como app
     </button>
   </div>
-</header>
-
-<section class="hero">
-  <h1>Reações da <span class="hl">Bruna</span><br>num lugar só</h1>
-  <p>A biblioteca completa dos reacts da Bruna Rodrigues — lives ao vivo na Twitch e na Kick. Escolha a categoria, clique na capa e assista aos episódios e temporadas direto por aqui.</p>
-  <div class="stats">
-    <div class="stat"><b id="s-titles">0</b><span>obras</span></div>
-    <div class="stat"><b id="s-prog">0</b><span>em andamento</span></div>
-    <div class="stat"><b id="s-done">0</b><span>concluídas</span></div>
-  </div>
-  <div class="cta-row">
-    <button class="cta" onclick="document.getElementById('precos').scrollIntoView()">Peça um react</button>
-    <button class="cta alt" onclick="document.getElementById('apoiar').scrollIntoView()">Apoie a Bruna</button>
-    <button class="cta alt" onclick="document.getElementById('redes').scrollIntoView()">Redes &amp; mais</button>
-  </div>
-</section>
-
-<div class="filter-cats">
-  <div class="filters-inner">
-    <div class="pills" id="pills">
-      <button class="pill active" data-cat="todos"><span class="ic"></span>Todos</button>
-      <button class="pill" data-cat="animes"><span class="ic"></span>Animes</button>
-      <button class="pill" data-cat="filmes"><span class="ic"></span>Filmes</button>
-      <button class="pill" data-cat="series"><span class="ic"></span>Séries</button>
-      <button class="pill" data-cat="tokusatsu"><span class="ic"></span>Tokusatsu</button>
-      <button class="pill" data-cat="animacoes"><span class="ic"></span>Animações</button>
-      <button class="pill" data-cat="vods"><span class="ic"></span>VODs</button>
-    </div>
-  </div>
 </div>
-<div class="filter-extra">
-  <div class="filters-inner">
-    <div class="lang-group" id="statuspills">
-      <span class="lg-label">Status</span>
-      <button class="lpill active" data-status="all">Todos</button>
-      <button class="lpill" data-status="completo">Completo</button>
-      <button class="lpill" data-status="assistindo">Assistindo</button>
-      <button class="lpill" data-status="fila">Na fila</button>
-      <button class="lpill" data-status="embreve">Off Live</button>
-      <button class="lpill" data-status="aberto">Em aberto</button>
-    </div>
-    <div class="lang-group" id="langpills">
-      <span class="lg-label">Áudio</span>
-      <button class="lpill active" data-lang="all">Todos</button>
-      <button class="lpill" data-lang="dub">🎙️ Dublado</button>
-      <button class="lpill" data-lang="leg">💬 Legendado</button>
-    </div>
-  </div>
-</div>
-
-<main id="main"></main>
-
-<!-- ============ PREÇOS ============ -->
-<section class="band" id="precos">
-  <div class="band-head"><h2>Peça um react</h2><span class="kicker">Cinebruh</span></div>
-  <p class="band-sub">Mande o valor em reais pelas formas logo abaixo (ou o equivalente em bits na Twitch) e escolha o que a Bruna vai reagir nas próximas lives — tudo conforme o cronograma. Em algumas obras você pode colaborar com as metas diretamente pelo Incentive.gg (e também pode doar por lá).</p>
-  <div class="price-grid">
-    <div class="price f"><span class="tier">Filme</span><span class="amount">R$40</span><span class="bits">ou 500 bits</span><span class="desc">Você escolhe UM filme de até 2h.</span></div>
-    <div class="price s"><span class="tier">Série até 1h</span><span class="amount">R$20</span><span class="bits">ou 250 bits</span><span class="desc">UM episódio de série, à sua escolha, de até 1h.</span></div>
-    <div class="price s"><span class="tier">Série 1h+</span><span class="amount">R$30</span><span class="bits">ou 400 bits</span><span class="desc">UM episódio de série, à sua escolha, de 1h ou mais.</span></div>
-    <div class="price a"><span class="tier">Anime</span><span class="amount">R$12</span><span class="bits">ou 150 bits</span><span class="desc">UM episódio de anime à sua escolha.</span></div>
-    <div class="price a"><span class="tier">Anime · 5 eps</span><span class="amount">R$50</span><span class="bits">ou 700 bits</span><span class="desc">CINCO episódios do anime à sua escolha.</span></div>
-    <div class="price-note">💡 <b>Pacote:</b> fechando pacotes com 5 ou mais episódios, cada episódio sai a <b>R$10,00</b>.</div>
-  </div>
-  <div class="cta-row"><a class="cta" href="https://incentive.gg/brunarodrigues" target="_blank" rel="noopener">🎯 Ver metas no Incentive.gg</a></div>
-</section>
-
-<!-- ============ APOIAR ============ -->
-<section class="band" id="apoiar">
-  <div class="band-head"><h2>Apoie a Bruna</h2><span class="kicker">Doações</span></div>
-  <p class="band-sub">Escolha o canal que preferir para mandar sua contribuição e ajudar nas metas ou garantir seu react.</p>
-  <div class="link-grid">
-    <a class="link-tile" href="https://livepix.gg/faribruh" target="_blank" rel="noopener"><span class="ic">💸</span><span class="txt"><b>LivePix</b><span>livepix.gg/faribruh</span></span></a>
-    <a class="link-tile" href="https://pixgg.com/faribruh" target="_blank" rel="noopener"><span class="ic">⚡</span><span class="txt"><b>PixGG</b><span>pixgg.com/faribruh</span></span></a>
-    <a class="link-tile" href="https://streamlabs.com/brunarodrigues/tip" target="_blank" rel="noopener"><span class="ic">🎛️</span><span class="txt"><b>Streamlabs</b><span>streamlabs.com/brunarodrigues/tip</span></span></a>
-    <a class="link-tile" href="https://wise.com/pay/me/brunaf1547" target="_blank" rel="noopener"><span class="ic">🌍</span><span class="txt"><b>Wise</b><span>Wisetag @brunaf1547</span></span></a>
-    <button class="link-tile" style="cursor:pointer;text-align:left;font:inherit" onclick="copyPix(this)" data-pix="contato.faribruh@gmail.com"><span class="ic">🔑</span><span class="txt"><b>Chave Pix (e-mail)</b><span>contato.faribruh@gmail.com · clique p/ copiar</span></span></button>
-    <a class="link-tile" href="https://incentive.gg/brunarodrigues" target="_blank" rel="noopener"><span class="ic">🎯</span><span class="txt"><b>Incentive.gg</b><span>Metas de reacts</span></span></a>
-  </div>
-</section>
-
-<!-- ============ REDES ============ -->
-<section class="band" id="redes">
-  <div class="band-head"><h2>Redes &amp; mais</h2><span class="kicker">Siga a Bruna</span></div>
-  <p class="band-sub">As lives acontecem ao vivo na Twitch e na Kick. Fora isso, é só seguir por aí:</p>
-  <div class="social-row">
-    <a class="soc tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>Twitch</a>
-    <a class="soc ki" href="https://kick.com/brunarodrigues" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5.5v6.2L15 3h6.6l-7.1 8.9L22 21h-6.8l-4.2-6.4-1.5 1.9V21H4z"/></svg>Kick</a>
-    <a class="soc ig" href="https://instagram.com/faribruh_" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram</a>
-    <a class="soc tt" href="https://tiktok.com/@faribruh_" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 01-1-2.8h-3.2v12.9a2.6 2.6 0 11-1.8-2.5V9.9a5.8 5.8 0 00-.8-.05 5.86 5.86 0 105.86 5.86V8.9a7.5 7.5 0 004.34 1.4V7.1a4.3 4.3 0 01-3.4-1.3z"/></svg>TikTok</a>
-    <a class="soc yt" href="https://youtube.com/faribruh" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>YouTube</a>
-    <a class="soc x" href="https://x.com/Faribruh_" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.48l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>X/Twitter</a>
-    <a class="soc dc" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0015.4 2.85a.07.07 0 00-.08.04c-.2.38-.44.87-.6 1.25a18.3 18.3 0 00-5.42 0c-.17-.4-.4-.87-.62-1.25a.08.08 0 00-.08-.04A19.7 19.7 0 003.7 4.4a.07.07 0 00-.03.02C.53 9.05-.32 13.6.1 18.1a.08.08 0 00.03.05 19.9 19.9 0 006 3.03.08.08 0 00.08-.03c.46-.63.87-1.3 1.23-2a.08.08 0 00-.04-.11c-.65-.25-1.27-.55-1.87-.89a.08.08 0 01-.01-.13l.37-.29a.07.07 0 01.08-.01 14.2 14.2 0 0012.06 0 .07.07 0 01.08.01l.37.29a.08.08 0 01-.01.13c-.6.35-1.22.64-1.87.89a.08.08 0 00-.04.11c.36.7.78 1.36 1.23 2a.08.08 0 00.08.03 19.8 19.8 0 006-3.03.08.08 0 00.04-.05c.5-5.18-.84-9.69-3.56-13.7a.06.06 0 00-.03-.02zM8.02 15.4c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.96 2.42-2.16 2.42zm7.97 0c-1.18 0-2.16-1.08-2.16-2.42 0-1.33.96-2.42 2.16-2.42 1.21 0 2.18 1.1 2.16 2.42 0 1.34-.95 2.42-2.16 2.42z"/></svg>Discord</a>
-  </div>
-  <div class="link-grid" style="margin-top:22px">
-    <a class="link-tile" href="https://trello.com/b/b3LlCpc8/reacts-cinebruh" target="_blank" rel="noopener"><span class="ic">📋</span><span class="txt"><b>Trello Cinebruh</b><span>Cronograma, regras e histórico dos reacts</span></span></a>
-    <a class="link-tile" href="https://yourmovieprofile.com/pt-BR/u/Faribruh_" target="_blank" rel="noopener"><span class="ic">🎬</span><span class="txt"><b>Perfil cinematográfico</b><span>Filmes assistidos e reviews da Bruna</span></span></a>
-    <a class="link-tile" href="https://drive.google.com/drive/folders/1iAgJHwf9WwZyZX6nGfWq0-KcjvjsZBiX" target="_blank" rel="noopener"><span class="ic">🗂️</span><span class="txt"><b>Drive completo</b><span>Todas as reações, direto da fonte</span></span></a>
-  </div>
-</section>
-
-<footer>
-  <div class="logo">Cine <span class="dot">Bruh</span></div>
-  <a class="soc tw" href="https://twitch.tv/Brunarodrigues" target="_blank" rel="noopener" style="box-shadow:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>BrunaRodrigues</a>
-  <div>Biblioteca de reações da Bruna · arquivo no Google Drive</div>
-</footer>
-
-<button class="themefab" id="themefab" aria-label="Alternar tema claro/escuro" title="Modo claro/escuro">
-  <svg class="sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/></svg>
-  <svg class="moon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-</button>
 
 <button class="totop" id="totop" aria-label="Voltar ao topo" title="Voltar ao topo">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
 </button>
 
-<script>
-const F = id => `https://drive.google.com/drive/folders/${id}`;      /* pasta (todos os eps) */
-const V = id => `https://drive.google.com/file/d/${id}/view`;         /* arquivo único */
-
-const CAT_LABEL = {animes:"Animes",filmes:"Filmes",series:"Séries",tokusatsu:"Tokusatsu",animacoes:"Animações",vods:"VODs"};
-const ORDER = ["animes","filmes","series","tokusatsu","animacoes","vods"];
-const CAT_GRADS = {
-  animes:[["#ff68b4","#7A1846"],["#FF6FB0","#8A2A5A"],["#B15CFF","#521C86"],["#FF477E","#7A1638"],["#F55D3E","#7A2416"]],
-  filmes:[["#E63946","#7B1E27"],["#FF6B35","#7A2E12"],["#C1121F","#5A0A10"],["#FF4D6D","#7A1830"]],
-  series:[["#1D6FE0","#0A2E63"],["#3A86FF","#173F8A"],["#00A8E8","#004E6B"],["#4361EE","#1A2A7A"]],
-  tokusatsu:[["#FF7A00","#7A3A00"],["#FB5607","#7A2A00"],["#FF9E00","#7A4B00"]],
-  animacoes:[["#0FA958","#08542C"],["#12B886","#075E45"],["#06A77D","#054D3A"],["#38B000","#1A5200"]],
-  vods:[["#7B2FF7","#3A1370"],["#B84DFF","#4A1C7A"]],
-};
-
-/* Catálogo agora vem de data.json — fonte única de dados do site.
-   Editável à mão ou por automação futura (sync do Drive). */
-let DATA = [], LANG_MAP = {}, IMG_MAP = {};
-
-/* LANG_MAP (fallback de idioma) agora vem de data.json */
-
-
-/* IMG_MAP (capas: título -> arquivo em images/) agora vem de data.json */
-
-const main = document.getElementById('main');
-const searchEl = document.getElementById('search');
-let activeCat = 'todos', activeLang = 'all', activeStatus = 'all', query = '';
-
-/* estatísticas e primeiro render são disparados após carregar o data.json (ver fim do script) */
-
-function statusOf(it){
-  const base = it.status || ((it.cat==='filmes' || it.cat==='vods') ? 'completo' : 'assistindo');
-  // obra com temporadas vira "concluída" quando TODAS as temporadas estão completas (verdes)
-  // e a obra não está "em aberto". Se alguma estiver em andamento (amarela) ou na fila (vazia), não.
-  if(base==='assistindo' && !it.aberto && it.seasons && it.seasons.length && it.seasons.every(s=>s.s==='g')){
-    return 'completo';
-  }
-  return base;
-}
-function matches(it){
-  if(activeCat!=='todos' && it.cat!==activeCat) return false;
-  if(activeStatus!=='all'){
-    if(activeStatus==='aberto'){ if(!it.aberto) return false; }
-    else if(statusOf(it)!==activeStatus) return false;
-  }
-  if(activeLang!=='all'){
-    const lg = it.lang || LANG_MAP[it.t];
-    if(!lg) return false;
-    if(lg!=='both' && lg!==activeLang) return false;
-  }
-  if(!query) return true;
-  return it.t.toLowerCase().includes(query.toLowerCase());
-}
-
-function capHTML(it, i){
-  const g = CAT_GRADS[it.cat][i % CAT_GRADS[it.cat].length];
-  const st = statusOf(it);
-  const ST = {completo:["✓ Completo","st-completo"], assistindo:["Assistindo","st-assistindo"], fila:["Na fila","st-fila"], embreve:["Off Live","st-embreve"], incompleto:["Incompleto","st-inc"]};
-  const stKey = it.incomplete ? 'incompleto' : st;
-  const meta = ST[stKey] || ST.assistindo;
-  const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
-  const open = it.aberto ? `<span class="cap-open">Em aberto</span>` : '';
-  const LANG = {dub:"🎙️ Dub", leg:"💬 Leg", both:"Dub + Leg"};
-  const lgv = it.lang || LANG_MAP[it.t];
-  const lang = lgv ? `<span class="cap-lang">${LANG[lgv]}</span>` : '';
-  const imgFile = IMG_MAP[it.t] || it.img;
-  const imgSrc = imgFile ? (/^https?:\/\//.test(imgFile) ? imgFile : `images/${imgFile}`) : '';
-  const art = `<span class="em">${it.em}</span>` + (imgFile ? `<img src="${imgSrc}" alt="${it.t}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
-  let info = '';
-  if(it.seasons && it.seasons.length){
-    const desc = {g:'completa',y:'em andamento',r:'vazia / faltando'};
-    const segs = it.seasons.map((s,si)=>{
-      const label = s.l || ('T'+s.n);
-      return (s.id && s.s!=='r')
-        ? `<span class="seg ${s.s} clik" data-si="${si}" data-url="${F(s.id)}" title="Abrir ${label} no Drive">${label}</span>`
-        : `<span class="seg ${s.s}" title="${label} — ${desc[s.s]||''}">${label}</span>`;
-    }).join('');
-    info = `<div class="cap-meta">${segs}</div>`;
-  } else if(it.eps && it.cat!=='filmes'){
-    info = `<div class="cap-meta"><span class="cap-eps" title="Episódios disponíveis no Drive">▦ ${it.eps} ep${it.eps>1?'s':''}</span></div>`;
-  } else {
-    // sem temporada/episódio: reserva a mesma altura pra o título não ficar atrás da nota/idioma
-    info = `<div class="cap-meta" aria-hidden="true"><span class="seg ghost">&nbsp;</span></div>`;
-  }
-  const nota = it.nota ? `<span class="cap-nota" title="Nota da Bruna">★<b>${it.nota}</b></span>` : '';
-  const tr = lang ? `<div class="cap-tr">${lang}</div>` : '';
-  const br = nota ? `<div class="cap-br">${nota}</div>` : '';
-  const playable = it.url && st!=='embreve';   // "em breve" ainda não tem reação pra assistir
-  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live':'Na fila');
-  const inner = `
-      <div class="cap-art" style="--c1:${g[0]};--c2:${g[1]}">
-        ${art}
-        <div class="cap-tl">${badge}${open}</div>
-        ${tr}
-        ${br}
-        <div class="cap-scrim"><div class="cap-title">${it.t}</div>${info}</div>
-        <div class="cap-hover"><span>${hover}</span></div>
-      </div>`;
-  const cls = `cap${it.incomplete?' inc':''}${playable?'':' locked'}`;
-  const style = `style="animation-delay:${Math.min(i*30,360)}ms"`;
-  return playable
-    ? `<a class="${cls}" href="${it.url}" target="_blank" rel="noopener" data-i="${it._i}" ${style}>${inner}</a>`
-    : `<div class="${cls}" data-i="${it._i}" ${style}>${inner}</div>`;
-}
-
-function render(){
-  const cats = activeCat==='todos' ? ORDER : [activeCat];
-  let html = '', any = false;
-  cats.forEach(cat=>{
-    const items = DATA.filter(it=>it.cat===cat && matches(it));
-    if(!items.length) return;
-    any = true;
-    html += `
-      <section class="section" data-cat="${cat}">
-        <div class="section-head">
-          <span class="tag">${CAT_LABEL[cat]}</span>
-          <span class="count">${items.length} obra(s)</span>
-        </div>
-        <div class="shelf">${items.map((it,i)=>capHTML(it,i)).join('')}</div>
-      </section>`;
-  });
-  main.innerHTML = any ? html : `<div class="empty">Nada encontrado 😢<br>Tenta outra busca ou categoria.</div>`;
-}
-
-document.getElementById('pills').addEventListener('click', e=>{
-  const btn = e.target.closest('.pill'); if(!btn) return;
-  document.querySelectorAll('#pills .pill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active'); activeCat = btn.dataset.cat; render(); toResults();
-});
-document.getElementById('statuspills').addEventListener('click', e=>{
-  const btn = e.target.closest('.lpill'); if(!btn) return;
-  document.querySelectorAll('#statuspills .lpill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active'); activeStatus = btn.dataset.status; render(); toResults();
-});
-document.getElementById('langpills').addEventListener('click', e=>{
-  const btn = e.target.closest('.lpill'); if(!btn) return;
-  document.querySelectorAll('#langpills .lpill').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active'); activeLang = btn.dataset.lang; render(); toResults();
-});
-searchEl.addEventListener('input', e=>{ query = e.target.value.trim(); render(); });
-/* ---------- player embutido: assistir sem sair do site ---------- */
-const playerCSS = document.createElement('style');
-playerCSS.textContent = `
-body.noscroll{overflow:hidden}
-.player{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(10,6,10,.72)}
-.player.open{display:flex}
-.player-box{width:min(960px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;background:#fff;border-radius:16px;overflow-x:hidden;overflow-y:auto;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.player-head{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
-.player-title{font-weight:700;font-size:15px;flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1a0f14}
-.player-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
-.player-drive{font-size:13px;font-weight:600;text-decoration:none;color:#fff;background:var(--accent);padding:7px 12px;border-radius:8px;white-space:nowrap}
-.player-drive:hover{filter:brightness(1.05)}
-.player-close{border:0;background:rgba(0,0,0,.06);color:#1a0f14;width:34px;height:34px;border-radius:8px;font-size:15px;cursor:pointer;line-height:1}
-.player-close:hover{background:rgba(0,0,0,.12)}
-.player-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
-.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player-note{font-size:12px;color:#6b5560;background:#faf3ee;padding:8px 12px;text-align:center}
-[data-theme="dark"] .player-box{background:#241820}
-[data-theme="dark"] .player-head{border-bottom-color:rgba(255,255,255,.1)}
-[data-theme="dark"] .player-title{color:#f4e9ef}
-[data-theme="dark"] .player-close{background:rgba(255,255,255,.1);color:#f4e9ef}
-[data-theme="dark"] .player-close:hover{background:rgba(255,255,255,.18)}
-[data-theme="dark"] .player-note{color:#c9b3bf;background:#2f2029}
-.player-fail{font-size:12px;line-height:1.4;color:#7a1e1e;background:#fdeaea;border-top:1px solid #f3caca;padding:9px 14px;text-align:center}
-.player-fail[hidden]{display:none}
-[data-theme="dark"] .player-fail{color:#ffb3b3;background:#3a1f24;border-top-color:#5a2b30}
-@media (max-width:600px){
-  .player{padding:0}
-  .player-box{width:100%;max-height:100vh;height:100%;border-radius:0}
-  .player-frame{flex:0 0 auto;aspect-ratio:16/9}
-}
-.player-eps{display:flex;gap:6px;overflow-x:auto;padding:10px 12px;background:#fff;border-top:1px solid rgba(0,0,0,.06);scrollbar-width:thin;cursor:grab;user-select:none;-webkit-user-select:none}
-.player-eps.grabbing,.player-eps.grabbing .pep{cursor:grabbing}
-.player-eps[hidden]{display:none}
-.pep{flex:0 0 auto;min-width:40px;height:34px;padding:0 10px;border:1px solid rgba(0,0,0,.12);background:#fbf5f0;color:#1a0f14;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer}
-.pep:hover{border-color:var(--accent)}
-.pep.active{background:var(--accent);border-color:var(--accent);color:#fff}
-[data-theme="dark"] .player-eps{background:#241820;border-top-color:rgba(255,255,255,.08)}
-[data-theme="dark"] .pep{background:#2f2029;color:#f4e9ef;border-color:rgba(255,255,255,.14)}
-.player-seasons{display:flex;gap:6px;overflow-x:auto;padding:10px 12px 0;background:#fff;scrollbar-width:thin}
-.player-seasons[hidden]{display:none}
-.psn{flex:0 0 auto;padding:6px 13px;border:1px solid rgba(0,0,0,.12);background:#fbf5f0;color:#1a0f14;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.psn:hover{border-color:var(--accent)}
-.psn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-[data-theme="dark"] .player-seasons{background:#241820}
-[data-theme="dark"] .psn{background:#2f2029;color:#f4e9ef;border-color:rgba(255,255,255,.14)}`;
-document.head.appendChild(playerCSS);
-
-const player = document.createElement('div');
-player.className = 'player'; player.id = 'player';
-player.innerHTML = `
-  <div class="player-box" role="dialog" aria-modal="true" aria-label="Player de vídeo">
-    <div class="player-head">
-      <span class="player-title"></span>
-      <div class="player-actions">
-        <a class="player-drive" target="_blank" rel="noopener">Abrir no Drive ↗</a>
-        <button class="player-close" type="button" aria-label="Fechar">✕</button>
-      </div>
-    </div>
-    <div class="player-frame"><iframe allow="autoplay; fullscreen; encrypted-media" allowfullscreen referrerpolicy="no-referrer"></iframe></div>
-    <div class="player-seasons" hidden></div>
-    <div class="player-eps" hidden></div>
-    <div class="player-note"></div>
-    <div class="player-fail" hidden>Não carregou ou está em branco? Seu navegador pode estar bloqueando cookies de terceiros — permita-os para este site ou use “Abrir no Drive” acima.</div>
-  </div>`;
-document.body.appendChild(player);
-const playerTitle = player.querySelector('.player-title');
-const playerFrame = player.querySelector('iframe');
-const playerDrive = player.querySelector('.player-drive');
-const playerNote  = player.querySelector('.player-note');
-const playerFail  = player.querySelector('.player-fail');
-const playerEps   = player.querySelector('.player-eps');
-const playerSeasons = player.querySelector('.player-seasons');
-let failTimer = null;
-let epState = null;
-let epDragged = false;
-/* se o iframe carregar (mesmo página de erro do Drive), some com o aviso de falha */
-playerFrame.addEventListener('load', ()=>{ clearTimeout(failTimer); playerFail.hidden = true; });
-
-/* helper: carrega uma URL no iframe e arma o aviso de falha */
-function setFrame(src){
-  playerFail.hidden = true;
-  clearTimeout(failTimer);
-  playerFrame.src = src;
-  failTimer = setTimeout(()=>{ playerFail.hidden = false; }, 7000);
-}
-function showModal(){ player.classList.add('open'); document.body.classList.add('noscroll'); }
-
-/* ----- modo lista de episódios ----- */
-function renderEps(){
-  if(!epState){ playerEps.hidden = true; playerEps.innerHTML = ''; return; }
-  playerEps.hidden = false;
-  playerEps.innerHTML = epState.list.map((e,idx)=>{
-    const cls = 'pep' + (idx===epState.i?' active':'');
-    const tip = e.sr ? `Episódio ${e.n} — sem reação (disponível)` : `Episódio ${e.n}`;
-    return `<button class="${cls}" data-i="${idx}" title="${tip}">${e.n}</button>`;
-  }).join('');
-  const act = playerEps.querySelector('.pep.active');
-  if(act) act.scrollIntoView({inline:'center', block:'nearest'});
-}
-/* abas de temporada (só aparecem quando há mais de uma temporada catalogada) */
-function renderSeasons(){
-  if(!epState || !epState.seasons || epState.seasons.length < 2){ playerSeasons.hidden = true; playerSeasons.innerHTML = ''; return; }
-  playerSeasons.hidden = false;
-  playerSeasons.innerHTML = epState.seasons.map((s,si)=>`<button class="psn${si===epState.si?' active':''}" data-si="${si}" type="button">${s.label}</button>`).join('');
-}
-function selectSeason(si){
-  if(!epState || !epState.seasons || !epState.seasons[si]) return;
-  epState.si = si;
-  epState.list = epState.seasons[si].list;
-  renderSeasons();
-  playEp(0);
-}
-function playEp(idx){
-  if(!epState) return;
-  const e = epState.list[idx];
-  if(!e) return;
-  epState.i = idx;
-  const sLabel = (epState.seasons && epState.seasons.length) ? epState.seasons[epState.si].label : '';
-  playerTitle.textContent = `${epState.title}${sLabel?` — ${sLabel}`:''} — Ep ${e.n}`;
-  playerDrive.href = `https://drive.google.com/file/d/${e.id}/view`;
-  playerNote.textContent = ''; playerNote.style.display = 'none';
-  setFrame(`https://drive.google.com/file/d/${e.id}/preview`);
-  renderEps();
-}
-function openEpisodes(title, episodes, folderUrl){
-  const list = (episodes||[]).filter(e=>e && e.id);
-  if(!list.length){ if(folderUrl) openPlayer(folderUrl, title); return; }
-  epState = { title: title||'', list, i: 0 };
-  showModal();
-  renderSeasons();
-  playEp(0);
-}
-/* abre uma obra com temporadas no player, com abas pra trocar de temporada sem sair do site */
-function openSeasonsPlayer(it, startSi){
-  const seasons = (it.seasons||[])
-    .map(s=>({ raw:s, label: s.l || ('T'+s.n), list: (s.ep||[]).filter(e=>e && e.id) }))
-    .filter(s=>s.list.length);
-  if(!seasons.length){ openPlayer(it.url, it.t); return; }   // nenhuma temporada catalogada ainda → grade da pasta
-  let si = 0;
-  if(startSi!=null && it.seasons[startSi]){
-    const idx = seasons.findIndex(s=>s.raw===it.seasons[startSi]);
-    if(idx>=0) si = idx;
-  }
-  epState = { title: it.t, seasons, si, list: seasons[si].list, i: 0 };
-  showModal();
-  renderSeasons();
-  playEp(0);
-}
-
-/* ----- modo arquivo único / pasta ----- */
-function openPlayer(url, title){
-  if(!url) return;
-  epState = null; renderEps(); renderSeasons();
-  const file = url.match(/\/file\/d\/([^/]+)/);
-  const folder = url.match(/\/folders\/([^/?#]+)/);
-  let src = '', note = '';
-  if(file){
-    src = `https://drive.google.com/file/d/${file[1]}/preview`;
-  } else if(folder){
-    src = `https://drive.google.com/embeddedfolderview?id=${folder[1]}#grid`;
-    note = 'Vários episódios nesta pasta — clique em um arquivo para assistir.';
-  } else {
-    window.open(url, '_blank', 'noopener'); return;
-  }
-  playerTitle.textContent = title || '';
-  playerDrive.href = url;
-  playerNote.textContent = note;
-  playerNote.style.display = note ? '' : 'none';
-  setFrame(src);
-  showModal();
-}
-function closePlayer(){
-  clearTimeout(failTimer);
-  playerFail.hidden = true;
-  epState = null; renderEps(); renderSeasons();
-  player.classList.remove('open');
-  document.body.classList.remove('noscroll');
-  playerFrame.src = 'about:blank';
-}
-player.addEventListener('click', e=>{ if(e.target===player || e.target.closest('.player-close')) closePlayer(); });
-playerEps.addEventListener('click', e=>{ if(epDragged){ epDragged=false; return; } const b = e.target.closest('.pep'); if(b) playEp(Number(b.dataset.i)); });
-playerSeasons.addEventListener('click', e=>{ const b = e.target.closest('.psn'); if(b) selectSeason(Number(b.dataset.si)); });
-/* arrastar a faixa de episódios com o mouse (esquerda/direita) */
-let epDown=false, epStartX=0, epStartLeft=0;
-playerEps.addEventListener('pointerdown', e=>{ if(e.pointerType && e.pointerType!=='mouse') return; epDown=true; epDragged=false; epStartX=e.clientX; epStartLeft=playerEps.scrollLeft; playerEps.classList.add('grabbing'); });
-playerEps.addEventListener('pointermove', e=>{ if(!epDown) return; const dx=e.clientX-epStartX; if(Math.abs(dx)>4) epDragged=true; playerEps.scrollLeft=epStartLeft-dx; });
-const epEnd=()=>{ epDown=false; playerEps.classList.remove('grabbing'); };
-playerEps.addEventListener('pointerup', epEnd);
-playerEps.addEventListener('pointerleave', epEnd);
-playerEps.addEventListener('pointercancel', epEnd);
-document.addEventListener('keydown', e=>{
-  if(!player.classList.contains('open')) return;
-  if(e.key==='Escape'){ closePlayer(); return; }
-  if(epState && (e.key==='ArrowRight' || e.key==='ArrowLeft')){
-    const j = epState.i + (e.key==='ArrowRight' ? 1 : -1);
-    if(epState.list[j]) playEp(j);
-  }
-});
-
-/* cliques nos cards e temporadas abrem o player embutido, sem redirecionar */
-main.addEventListener('click', e=>{
-  const capEl = e.target.closest('.cap');
-  const it = capEl ? DATA[+capEl.dataset.i] : null;
-  const seg = e.target.closest('.seg.clik');
-  if(seg){
-    e.preventDefault(); e.stopPropagation();
-    const season = it && it.seasons ? it.seasons[+seg.dataset.si] : null;
-    const label = season ? (season.l || ('T'+season.n)) : seg.textContent.trim();
-    const title = it ? it.t : '';
-    if(it && it.seasons) openSeasonsPlayer(it, +seg.dataset.si);
-    else openPlayer(seg.dataset.url, title ? `${title} — ${label}` : label);
-    return;
-  }
-  const card = e.target.closest('a.cap');
-  if(card){
-    e.preventDefault();
-    if(it && it.seasons && it.seasons.length) openSeasonsPlayer(it, 0);
-    else if(it && it.episodes && it.episodes.length) openEpisodes(it.t, it.episodes, it.url);
-    else openPlayer(card.getAttribute('href'), it ? it.t : '');
-  }
-});
-
-/* barra de filtros: encaixa embaixo do topo e recolhe status/áudio ao rolar */
-const topbarEl = document.querySelector('.topbar');
-const catsEl = document.querySelector('.filter-cats');
-function syncSticky(){
-  // mede a altura do topo no estado COMPACTO (é assim que ele fica quando os filtros grudam)
-  const wasScrolled = document.body.classList.contains('scrolled');
-  document.body.classList.add('scrolled');
-  const h = topbarEl.offsetHeight;
-  if(!wasScrolled) document.body.classList.remove('scrolled');
-  catsEl.style.top = (h - 1) + 'px';
-}
-syncSticky();
-window.addEventListener('resize', syncSticky);
-window.addEventListener('load', syncSticky);
-function toResults(){
-  const sec = main.querySelector('.section') || main;
-  requestAnimationFrame(()=>sec.scrollIntoView({behavior:'smooth', block:'start'}));
-}
-
-/* tema claro/escuro */
-const root = document.documentElement;
-try{ const saved = localStorage.getItem('bru-theme'); if(saved) root.setAttribute('data-theme', saved); }catch(e){}
-function toggleTheme(){
-  const next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-  const apply = ()=>{
-    root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('bru-theme', next); }catch(e){}
-  };
-  if(document.startViewTransition){ document.startViewTransition(apply); }
-  else{ apply(); }
-}
-document.getElementById('theme').addEventListener('click', toggleTheme);
-document.getElementById('themefab').addEventListener('click', toggleTheme);
-
-/* copiar chave Pix */
-function copyPix(btn){
-  const key = btn.dataset.pix, label = btn.querySelector('.txt span'), original = label.textContent;
-  const done = ()=>{ label.textContent='Copiado! ✅'; setTimeout(()=>label.textContent=original,1800); };
-  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(key).then(done).catch(done); }
-  else{ const t=document.createElement('textarea');t.value=key;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);done(); }
-}
-window.copyPix = copyPix;
-
-/* voltar ao topo + cabeçalho compacto ao rolar (celular) */
-const toTop = document.getElementById('totop');
-let condensed = false;
-window.addEventListener('scroll', ()=>{
-  const y = window.scrollY;
-  toTop.classList.toggle('show', y > 400);
-  const wantCond = condensed ? (y > 24) : (y > 90);
-  if(wantCond !== condensed){
-    condensed = wantCond;
-    document.body.classList.toggle('scrolled', condensed);
-  }
-}, {passive:true});
-toTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
-
-/* ---- carrega o catálogo de data.json e só então inicializa a página ---- */
-function boot(){
-  DATA.forEach((d,i)=>{ d._i = i; });   // índice global estável, usado pelos cliques do player
-  const counted = DATA.filter(d=>d.cat!=='vods');   // VODs não entram nos contadores do topo
-  document.getElementById('s-titles').textContent = counted.length;
-  document.getElementById('s-done').textContent = counted.filter(d=>statusOf(d)==='completo').length;
-  document.getElementById('s-prog').textContent = counted.filter(d=>statusOf(d)==='assistindo').length;
-  render();
-}
-fetch('data.json', {cache:'no-cache'})
-  .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-  .then(j=>{ DATA = j.data || []; LANG_MAP = j.lang || {}; IMG_MAP = j.img || {}; boot(); })
-  .catch(err=>{ console.error('Falha ao carregar data.json:', err); main.innerHTML = '<div class="empty">Não consegui carregar o catálogo agora 😢<br>Tente recarregar a página em instantes.</div>'; });
-</script>
+<script src="js/core.js" defer></script>
+<script src="js/player.js" defer></script>
+<script src="js/catalogo.js" defer></script>
+<script src="js/patrocinar.js" defer></script>
+<script src="js/inicio.js" defer></script>
+<script src="js/setup.js" defer></script>
+<script src="js/midiakit.js" defer></script>
+<script src="js/apoiar.js" defer></script>
+<script src="js/comunidade.js" defer></script>
+<script src="js/cronograma.js" defer></script>
+<script src="js/offline.js" defer></script>
+<script src="js/tierlist.js" defer></script>
+<script src="js/continuar.js" defer></script>
+<script src="js/pwa.js" defer></script>
+<script src="js/intro.js" defer></script>
+<script src="js/app.js" defer></script>
 </body>
 </html>
