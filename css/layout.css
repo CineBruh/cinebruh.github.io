@@ -120,6 +120,8 @@ body{padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom,0px))}
 .home-banner img{width:100%;height:100%;object-fit:cover;display:block}
 .home-banner + .home-card{margin-top:calc(-39px - clamp(32px,6vw,58px) * .475);padding-left:18px;position:relative}
 @media (max-width:600px){ .home-banner{aspect-ratio:3/1;border-radius:14px} .home-banner + .home-card{margin-top:-49px;padding-left:10px} }
+/* tema escuro com banner: o nome fica em cima do banner claro, então vai em preto */
+[data-theme="dark"] .home-banner + .home-card .home-id h1{color:#1a0f14}
 .home-handle{color:var(--muted);font-weight:700;font-size:14px;margin-top:6px}
 .home-slogan{font-family:var(--display);font-size:clamp(17px,2.6vw,22px);line-height:1.2;margin-top:24px}
 .home-desc{color:var(--muted);margin-top:8px;max-width:660px;font-size:15px}

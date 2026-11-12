@@ -75,7 +75,8 @@
 .cap-art .em{font-size:58px;opacity:.95;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.28));transition:transform .3s}
 .cap:hover .cap-art .em{transform:scale(1.14) rotate(-5deg)}
 .cap-scrim{position:absolute;left:0;right:0;bottom:0;padding:30px 9px 9px;background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,0))}
-.cap-title{font-family:var(--display);color:#fff;font-size:15px;line-height:1.05;text-shadow:0 1px 5px rgba(0,0,0,.7)}
+.cap-title{font-family:var(--display);color:#fff;font-size:15px;line-height:1.05;text-shadow:0 1px 5px rgba(0,0,0,.7);overflow-wrap:anywhere}
+.cap{min-width:0}
 .cap-meta{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-top:6px}
 .seg{font-family:var(--display);font-size:11px;line-height:1;color:#fff;border:2px solid rgba(255,255,255,.55);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
 .seg.clik{cursor:pointer;transition:filter .12s,transform .12s}
@@ -160,7 +161,8 @@ a.rp-chip:hover{transform:translate(-1px,-1px)}
 .empty{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--display);font-size:20px}
 
 @media (max-width:600px){
-  .shelf{grid-template-columns:repeat(3,1fr);gap:10px}
+  /* minmax(0,…): um título comprido sem espaço (ex.: nome de VOD) não alarga a coluna e empurra a página pra fora da tela */
+  .shelf{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .cap-art .em{font-size:42px}
   .cap-title{font-size:12px}
   .cap-meta{gap:3px;margin-top:4px}
@@ -171,23 +173,28 @@ a.rp-chip:hover{transform:translate(-1px,-1px)}
   .cap-aka{font-size:9.5px}
   .cap-nota b{font-size:12px}
   .hero{padding:14px 20px 14px}
-  .filter-cats,.filter-extra{padding:9px 0}
-  .filter-cats .filters-inner{flex-direction:column;align-items:stretch;gap:9px}
-  .search{max-width:none;flex:0 0 auto;padding:6px 13px}
+  /* a fileira de categorias não quebra linha; sem isso a largura "natural" dela (todas as pílulas lado a lado)
+     alargava a faixa inteira e a busca esticava pra fora da tela. overflow:hidden + grid minmax(0,…) prendem
+     a faixa na largura da tela, e quem rola pro lado é só a fileira de pílulas */
+  .filter-cats,.filter-extra{padding:9px 0;max-width:100vw;overflow:hidden;min-width:0}
+  .filter-cats .filters-inner{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+  .filter-cats .filters-inner > *{min-width:0}
+  .search{max-width:none;width:auto;flex:0 0 auto;padding:6px 13px}
+  .page,.shelves,#cont-cat{min-width:0;max-width:100vw}
   .search input{font-size:14px}
   /* filtros viram faixa de rolagem horizontal (padrão de app nativo) */
   .filter-extra .filters-inner,.pills{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .filter-extra .filters-inner::-webkit-scrollbar,.pills::-webkit-scrollbar{display:none}
   .lang-group{flex-wrap:nowrap;flex:0 0 auto}
   .pill,.lpill,.lang-group .lg-label{flex:0 0 auto;white-space:nowrap}
-  .pills{gap:7px;margin:0 -20px;padding:0 20px}
+  .pills{gap:7px;margin:0 -20px;padding:0 20px;touch-action:pan-x pan-y;overscroll-behavior-x:contain}
   .pill{font-size:12px;padding:5px 11px;gap:6px}
   .pill .ic{width:10px;height:10px}
   .lpill{font-size:12px;padding:5px 11px}
   .lang-group .lg-label{font-size:11px}
 }
 @media (max-width:430px){
-  .shelf{grid-template-columns:repeat(2,1fr);gap:12px}
+  .shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .cap-art .em{font-size:48px}
   .cap-title{font-size:13px}
 }
@@ -213,7 +220,10 @@ body.noscroll{overflow:hidden}
 .player-dl{font-size:13px;font-weight:600;text-decoration:none;color:var(--accent);background:transparent;border:2px solid var(--accent);padding:5px 10px;border-radius:8px;white-space:nowrap}
 .player-dl:hover{background:var(--accent);color:#fff}
 .player-dl[hidden]{display:none}
+button.player-dl{font-family:inherit;cursor:pointer;line-height:inherit}
 @media (max-width:600px){ .player-dl{padding:5px 8px;font-size:12px} .player-drive{padding:7px 9px;font-size:12px} }
+/* celular: o título já ocupa pouco espaço, então os botões ficam só com o ícone */
+@media (max-width:480px){ .player-share{font-size:0!important;padding:5px 9px!important} .player-share::before{content:'🔗';font-size:14px} }
 .player-close{border:0;background:rgba(0,0,0,.06);color:#1a0f14;width:34px;height:34px;border-radius:8px;font-size:15px;cursor:pointer;line-height:1}
 .player-close:hover{background:rgba(0,0,0,.12)}
 .player-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
