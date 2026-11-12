@@ -370,6 +370,21 @@ function doneEps(it, s){
   }
   return s === 1 ? ok(it.episodes) : new Set();
 }
+/* até qual episódio da temporada já está pago no Trello (o robô grava em "pg"), mesmo sem vídeo ainda */
+function pagoAte(it, s){
+  if(!it) return 0;
+  if(it.seasons && it.seasons.length){
+    const ss = it.seasons.find(x => x.n === s) || (s === 1 && !it.seasons.some(x => x.n != null) ? it.seasons[0] : null);
+    return (ss && ss.pg) || 0;
+  }
+  return s === 1 ? (it.pg || 0) : 0;
+}
+/* pula os episódios que já têm patrocinador: { s, ep, last, pago } (pago = até onde já pagaram) */
+function pulaPagos(it, nx){
+  if(!nx) return nx;
+  const pg = pagoAte(it, nx.s);
+  return pg >= nx.ep ? { ...nx, ep: pg + 1, pago: pg } : nx;
+}
 /* próximo episódio que dá pra patrocinar: { s, ep, last } (last = onde ela parou) */
 function nextEp(it){
   if(it.cat === 'filmes' || it.cat === 'vods') return null;
@@ -377,14 +392,14 @@ function nextEp(it){
     const num = it.seasons.filter(x => x.n != null);
     if(!num.length) return null;
     const withEp = num.filter(x => (x.ep||[]).some(e => !e.sr));
-    if(!withEp.length) return { s: num[0].n, ep: 1, last: null };
+    if(!withEp.length) return pulaPagos(it, { s: num[0].n, ep: 1, last: null });
     const cur = withEp[withEp.length - 1];
     const max = Math.max(...cur.ep.filter(e => !e.sr).map(e => e.n));
-    if(cur.s === 'g'){ const nxt = num.find(x => x.n > cur.n); return nxt ? { s: nxt.n, ep: 1, last: null, fimT: cur.n } : null; }
-    return { s: cur.n, ep: max + 1, last: max };
+    if(cur.s === 'g'){ const nxt = num.find(x => x.n > cur.n); return nxt ? pulaPagos(it, { s: nxt.n, ep: 1, last: null, fimT: cur.n }) : null; }
+    return pulaPagos(it, { s: cur.n, ep: max + 1, last: max });
   }
   const eps = (it.episodes||[]).filter(e => !e.sr).map(e => e.n);
-  return eps.length ? { s: 1, ep: Math.max(...eps) + 1, last: Math.max(...eps) } : { s: 1, ep: 1, last: null };
+  return pulaPagos(it, eps.length ? { s: 1, ep: Math.max(...eps) + 1, last: Math.max(...eps) } : { s: 1, ep: 1, last: null });
 }
 const findWork = name => { const k = normQ(name); return k && DATA_READY ? DATA.find(d => d.cat !== 'vods' && normQ(d.t) === k) || null : null; };
 
@@ -434,12 +449,16 @@ function calcDraw(){
     tips.push(`<div class="calc-tip">💡 Com mais ${pc.minEps - n} ep${pc.minEps - n > 1 ? 's' : ''} vira pacote: cada episódio sai a ${fmtBRL(pc.valorPorEp)} (${pc.minEps} por ${fmtBRL(q5.valor)}). <button class="calc-link" type="button" data-pac>Fechar ${pc.minEps} episódios</button></div>`);
   }
   if(w && calc.tipo === 'eps'){
-    const done = doneEps(w, calc.s), rep = [];
-    for(let i = de; i <= ate; i++) if(done.has(i)) rep.push(i);
+    const done = doneEps(w, calc.s), rep = [], pagos = [];
+    const pg = pagoAte(w, calc.s);
+    for(let i = de; i <= ate; i++){ if(done.has(i)) rep.push(i); else if(i <= pg) pagos.push(i); }
     const nx = nextEp(w);
-    if(rep.length) tips.push(`<div class="calc-tip warn">⚠️ A Bruh já reagiu ${rep.length > 1 ? 'aos eps' : 'ao ep'} ${ranges(rep)} da T${calc.s}. Dá pra assistir no catálogo!${nx ? ` <button class="calc-link" type="button" data-next>Começar do ep ${nx.ep}${nx.s !== calc.s ? ` da T${nx.s}` : ''}</button>` : ''}</div>`);
-    else if(nx && nx.last) tips.push(`<div class="calc-tip ok">✓ Essa obra está no Cinebruh. A Bruh parou no ep ${nx.last} da T${nx.s}.</div>`);
-    else tips.push(`<div class="calc-tip ok">✓ Essa obra já está no Cinebruh.</div>`);
+    const pagoTxt = nx && nx.pago ? ` Até o ep ${nx.pago} já está patrocinado.` : '';
+    const nxBtn = nx ? ` <button class="calc-link" type="button" data-next>Começar do ep ${nx.ep}${nx.s !== calc.s ? ` da T${nx.s}` : ''}</button>` : '';
+    if(rep.length) tips.push(`<div class="calc-tip warn">⚠️ A Bruh já reagiu ${rep.length > 1 ? 'aos eps' : 'ao ep'} ${ranges(rep)} da T${calc.s}. Dá pra assistir no catálogo!${nxBtn}</div>`);
+    else if(pagos.length) tips.push(`<div class="calc-tip warn">⚠️ ${pagos.length > 1 ? 'Os eps' : 'O ep'} ${ranges(pagos)} da T${calc.s} já ${pagos.length > 1 ? 'foram patrocinados' : 'foi patrocinado'} e vão ao ar em breve.${nxBtn}</div>`);
+    else if(nx && nx.last) tips.push(`<div class="calc-tip ok">✓ Essa obra está no Cinebruh. A Bruh parou no ep ${nx.last} da T${nx.s}.${pagoTxt}</div>`);
+    else tips.push(`<div class="calc-tip ok">✓ Essa obra já está no Cinebruh.${pagoTxt}</div>`);
   } else if(w && calc.tipo === 'filmes' && statusOf(w) !== 'fila'){
     tips.push(`<div class="calc-tip warn">⚠️ Esse filme já está no Cinebruh. Dá pra assistir no catálogo!</div>`);
   }
@@ -587,7 +606,10 @@ function renderAsk(st){
   if(!nx || !PRECO()){ el.hidden = true; el.innerHTML = ''; return; }
   const multi = it.seasons && it.seasons.filter(x => x.n != null).length > 1;
   const q = quote({ eps: 1, faixa: faixaPadrao(it) });
-  const msg = nx.last ? `A Bruh parou no <b>ep ${nx.last}${multi ? ` da T${nx.s}` : ''}</b>. Quer o próximo?`
+  const tT = multi ? ` da T${nx.s}` : '';
+  const msg = nx.last && nx.pago ? `A Bruh parou no <b>ep ${nx.last}${tT}</b> e até o <b>ep ${nx.pago}</b> já está patrocinado. Quer o seguinte?`
+    : nx.last ? `A Bruh parou no <b>ep ${nx.last}${tT}</b>. Quer o próximo?`
+    : nx.pago ? `Até o <b>ep ${nx.pago}${tT}</b> já está patrocinado. Quer o seguinte?`
     : nx.fimT ? `A Bruh terminou a <b>T${nx.fimT}</b>. Quer ver a T${nx.s}?` : 'Quer ver a Bruh começando essa?';
   el.innerHTML = `<span>${msg}</span><button class="cta" type="button" data-ask>💰 Patrocinar o ep ${nx.ep}${q && q.valor != null ? ` · ${fmtBRL(q.valor)}` : ''}</button>`;
   el.hidden = false;

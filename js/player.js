@@ -9,6 +9,7 @@ player.innerHTML = `
     <div class="player-head">
       <span class="player-title"></span>
       <div class="player-actions">
+        <button class="player-dl player-share" type="button" hidden title="Copiar o link direto pra este episódio">🔗 Compartilhar</button>
         <a class="player-dl" target="_blank" rel="noopener" hidden title="Baixar este vídeo pelo Google Drive">⬇ Baixar</a>
         <a class="player-drive" target="_blank" rel="noopener">Abrir no Drive ↗</a>
         <button class="player-close" type="button" aria-label="Fechar">✕</button>
@@ -32,16 +33,21 @@ const playerEps   = player.querySelector('.player-eps');
 const playerSeasons = player.querySelector('.player-seasons');
 const playerDl = player.querySelector('.player-dl');
 const playerInfo = player.querySelector('.player-info');
+const playerShare = player.querySelector('.player-share');
 let playerWork = null;                                     // obra aberta (pra mostrar patrocinador e review)
+/* algum episódio da obra tem o nick no Trello? Então o Trello diz episódio a episódio quem pagou,
+   e episódio sem nick NÃO foi desse patrocinador (ex.: Frieren T1 foi do chat, só a T2 foi paga) */
+const porEpisodio = it => (it.seasons||[]).some(s => (s.ep||[]).some(e => e.por)) || (it.episodes||[]).some(e => e.por);
 /* embaixo do vídeo: quem patrocinou este episódio (ou a obra) e a review/nota da Bruh, tudo vindo do Trello */
 function renderInfo(ep){
   const it = playerWork;
-  if(!it){ playerInfo.hidden = true; playerInfo.innerHTML = ''; return; }
+  if(!it){ playerInfo.hidden = true; playerInfo.innerHTML = ''; playerShare.hidden = true; return; }
   const por = (ep && ep.por) || (!ep || it.cat === 'filmes' ? (it.pat||[]).join(', ') : '');
   const parts = [];
   if(ep && ep.chat) parts.push(`<span class="pi-pat">🗳️ Escolha do chat</span>`);
   else if(por) parts.push(`<span class="pi-pat" title="Obrigada pelo patrocínio!">💜 Patrocínio: <b>${esc(por)}</b></span>`);
-  else if((it.pat||[]).length) parts.push(`<span class="pi-pat pi-soft">💜 Patrocinadores da obra: ${esc(it.pat.join(', '))}</span>`);
+  else if(it.chat) parts.push(`<span class="pi-pat">🗳️ Escolha do chat</span>`);
+  else if((it.pat||[]).length && !porEpisodio(it)) parts.push(`<span class="pi-pat pi-soft">💜 Patrocinadores da obra: ${esc(it.pat.join(', '))}</span>`);
   if(it.review || it.nota){
     const nota = it.nota ? `<span class="pi-nota">★ ${it.nota}</span>` : '';
     parts.push(it.review
@@ -50,7 +56,39 @@ function renderInfo(ep){
   }
   playerInfo.innerHTML = parts.join('');
   playerInfo.hidden = !parts.length;
+  playerShare.hidden = !it._slug;
 }
+/* link direto do que está tocando agora: #/catalogo/obra/temporada/episódio */
+function shareLink(){
+  const it = playerWork; if(!it) return '';
+  let si = 0, n = null;
+  if(epState){
+    const e = epState.list[epState.i]; n = e ? e.n : null;
+    if(epState.seasons && epState.seasons[epState.si]) si = epState.seasons[epState.si].ri;
+  }
+  return location.origin + location.pathname + workHash(it, si, n);
+}
+function shareFeedback(txt){
+  const old = playerShare.dataset.lbl || (playerShare.dataset.lbl = playerShare.textContent);
+  playerShare.textContent = txt;
+  clearTimeout(playerShare._t);
+  playerShare._t = setTimeout(()=>{ playerShare.textContent = old; }, 1800);
+}
+playerShare.addEventListener('click', async ()=>{
+  const url = shareLink(); if(!url) return;
+  // no celular abre o menu de compartilhar do sistema (WhatsApp, Discord…); no PC só copia
+  if(navigator.share && matchMedia('(hover:none)').matches){
+    try{ await navigator.share({ title: playerTitle.textContent, url }); return; }
+    catch(err){ if(err && err.name === 'AbortError') return; }
+  }
+  try{ await navigator.clipboard.writeText(url); shareFeedback('✓ Link copiado!'); }
+  catch{
+    const ta = document.createElement('textarea'); ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand('copy'); ta.remove();
+    shareFeedback(ok ? '✓ Link copiado!' : 'Não deu pra copiar');
+  }
+});
 /* botão de baixar: liga/desliga em site.json → catalogo.download */
 const dlOn = () => !(typeof SITE !== 'undefined' && SITE && SITE.catalogo && SITE.catalogo.download === false);
 function setDownload(fileId){

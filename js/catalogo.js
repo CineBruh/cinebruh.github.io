@@ -79,7 +79,15 @@ function statusOf(it){
   }
   return base;
 }
-const isPlayable = it => !!it.url && statusOf(it)!=='embreve';   // "Off Live" ainda não tem reação pra assistir
+/* tem react gravado de verdade? A pasta pode existir no Drive só com a temporada vazia (ex.: obra em aberto
+   que ainda não começou) ou só com o original "(SEM REAÇÃO)": aí não tem o que assistir. */
+function hasReact(it){
+  if(!it.url) return false;
+  if(it.seasons && it.seasons.length) return it.seasons.some(s => (s.ep||[]).some(e => !e.sr));
+  if(it.episodes && it.episodes.length) return it.episodes.some(e => !e.sr);
+  return it.cat==='filmes' || it.cat==='vods' || !it.tr;   // filme/VOD é um vídeo só; obra antiga sem lista de eps confia no link
+}
+const isPlayable = it => hasReact(it) && statusOf(it)!=='embreve';   // "Off Live" ainda não tem reação pra assistir
 /* obra na fila já paga inteira (o robô marca "pago" pelo Trello; filme é sempre pago inteiro):
    não tem o que pedir, só esperar a vez no cronograma */
 const paidQueue = it => statusOf(it)==='fila' && (it.pago || it.cat==='filmes');
@@ -144,7 +152,7 @@ function capHTML(it, i){
   const br = nota ? `<div class="cap-br">${nota}</div>` : '';
   const playable = isPlayable(it);
   const pago = paidQueue(it);
-  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live · ver sessões':(pago?'📅 Já patrocinado · ver a fila':'💰 Quero esse react'));
+  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live · ver sessões':(pago||it.pago?'📅 Já patrocinado · ver a fila':st==='fila'?'💰 Quero esse react':'⏳ React em breve · patrocine'));
   const ask = st==='fila' && it.cat!=='vods' && !pago ? `<span class="cap-ask" data-pedir role="button">💰 Peça esse react</span>` : '';
   const aka = akaHit(it);
   const secs = workSecs(it);
@@ -160,7 +168,7 @@ function capHTML(it, i){
         <div class="cap-hover"><span>${hover}</span>${extra ? `<small>${extra}</small>` : ''}</div>
       </div>`;
   const dim = SORT_HAS[activeSort] && !SORT_HAS[activeSort](it);   // ordem por nota/novidade/ano: apaga quem não tem
-  const cls = `cap${it.incomplete?' inc':''}${playable?'':' locked'}${st==='fila'||st==='embreve'?' ask':''}${dim?' dim':''}`;
+  const cls = `cap${it.incomplete?' inc':''}${playable?'':' locked'}${!playable && st!=='completo'?' ask':''}${dim?' dim':''}`;
   const style = `style="animation-delay:${Math.min(i*30,360)}ms"`;
   return playable
     ? `<a class="${cls}" href="${workHash(it)}" data-i="${it._i}" ${style}>${inner}</a>`
@@ -273,11 +281,13 @@ shelves.addEventListener('click', e=>{
   const it = capEl ? DATA[+capEl.dataset.i] : null;
   /* "Patrocine" / "Peça esse react": vai pra calculadora já com a obra e o próximo episódio */
   if(it && e.target.closest('[data-pedir]')){ e.preventDefault(); e.stopPropagation(); pedirObra(it); return; }
-  /* capa trancada: "Na fila" vira pedido (filme já pago leva pro cronograma), "Off Live" leva pros Reacts Offline */
+  /* capa trancada: "Na fila" ou em aberto sem react ainda vira pedido (já pago leva pro cronograma), "Off Live" leva pros Reacts Offline */
   if(it && capEl.classList.contains('locked')){
     const st = statusOf(it);
     if(paidQueue(it)) go('cronograma');
-    else if(st==='fila') pedirObra(it); else if(st==='embreve') go('offline');
+    else if(st==='embreve') go('offline');
+    else if(it.pago) go('cronograma');
+    else if(st!=='completo') pedirObra(it);
     return;
   }
   const seg = e.target.closest('.seg.clik');
