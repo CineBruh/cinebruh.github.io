@@ -135,8 +135,10 @@ async function main() {
       continue;
     }
 
-    // Obra concluída
-    if (status(w) === 'completo' && status(a) !== 'completo') concluidas.push(`✅ ${nome(w)} foi concluído!`);
+    // Obra concluída (se o Trello já marcou tudo mas faltam vídeos no Drive, avisa que estão subindo)
+    const emBreve = n => n ? ` · ${n > 1 ? `${n} eps` : '1 ep'} em breve no Drive` : '';
+    const fdObra = (w.fd || 0) + (w.seasons || []).reduce((t, s) => t + (s.fd || 0), 0);
+    if (status(w) === 'completo' && status(a) !== 'completo') concluidas.push(`✅ ${nome(w)} foi concluído!${emBreve(fdObra)}`);
 
     // Episódios novos, por temporada
     const epsA = epsPorTemporada(a);
@@ -150,7 +152,7 @@ async function main() {
     if (status(w) !== 'completo') {
       const tempsA = new Map((a.seasons || []).map(s => [rotulo(s), s.s]));
       for (const s of w.seasons || [])
-        if (s.s === 'g' && tempsA.get(rotulo(s)) !== 'g') concluidas.push(`🟢 ${nome(w)} · ${rotulo(s)} completa`);
+        if (s.s === 'g' && tempsA.get(rotulo(s)) !== 'g') concluidas.push(`🟢 ${nome(w)} · ${rotulo(s)} completa${emBreve(s.fd)}`);
     }
   }
 

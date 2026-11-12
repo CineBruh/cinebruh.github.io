@@ -273,6 +273,13 @@ function findChecklist(cls, s) {
   return s.n === 1 && cls.length === 1 && cls[0].n == null ? cls[0] : null;
 }
 const clDone = cl => cl.done || (cl.items.length > 0 && cl.items.every(i => i.done));
+// "pg" = último episódio da temporada que já tem patrocinador (nick ou Chat) no Trello, mesmo que ainda não
+// tenha vídeo. Ex.: Beck com os eps 1 a 10 pagos e a Bruh no 3 → pg 10, e o site oferece a partir do 11.
+function paidUpTo(cl) {
+  if (!cl) return null;
+  const nums = cl.items.filter(i => i.n != null && (cl.nicks.length || i.nicks.length || i.chat)).map(i => i.n);
+  return nums.length ? Math.max(...nums) : null;
+}
 function tagEpisodes(eps, cl) {
   if (!cl || !eps) return;
   for (const e of eps) {
@@ -281,6 +288,13 @@ function tagEpisodes(eps, cl) {
     if (nicks.length) e.por = nicks.join(', ');
     if (it && it.chat) e.chat = 1;
   }
+}
+// "fd" = episódios já marcados como assistidos no Trello que ainda não estão no Drive (vídeo subindo).
+// O aviso do Discord usa pra dizer "em breve no Drive" quando a temporada é concluída antes do upload.
+function faltaNoDrive(eps, cl) {
+  if (!cl) return 0;
+  const tem = new Set((eps || []).filter(e => !e.sr).map(e => e.n));
+  return cl.items.filter(i => i.done && i.n != null && !tem.has(i.n)).length;
 }
 function mergeSeasons(w, c) {
   const cls = c.checklists;
@@ -291,15 +305,23 @@ function mergeSeasons(w, c) {
       if (cl) used.add(cl);
       if (s.ep && s.ep.length) s.s = (c.kind === 'completo' || (cl && clDone(cl))) ? 'g' : (cl ? 'y' : s.s);
       tagEpisodes(s.ep, cl);
+      const pg = paidUpTo(cl); if (pg) s.pg = pg;
+      const fd = faltaNoDrive(s.ep, cl); if (fd) s.fd = fd;
     }
     // temporada/parte que só existe no Trello (paga, mas ainda sem vídeo no Drive)
-    for (const cl of cls) if (!used.has(cl) && cl.items.length) w.seasons.push(cl.n != null ? { n: cl.n, s: 'r' } : { l: cl.l, s: 'r' });
+    for (const cl of cls) if (!used.has(cl) && cl.items.length) {
+      const pg = paidUpTo(cl);
+      w.seasons.push({ ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: 'r', ...(pg ? { pg } : {}) });
+    }
     w.seasons.sort((a, b) => (a.n ?? 1e3) - (b.n ?? 1e3));
   } else if (w.episodes) {
-    tagEpisodes(w.episodes, cls.find(cl => cl.n === 1) || (cls.length === 1 ? cls[0] : null));
+    const cl = cls.find(cl => cl.n === 1) || (cls.length === 1 ? cls[0] : null);
+    tagEpisodes(w.episodes, cl);
+    const pg = paidUpTo(cl); if (pg) w.pg = pg;
+    const fd = faltaNoDrive(w.episodes, cl); if (fd) w.fd = fd;
   } else if (cls.some(cl => cl.items.length) && c.cat !== 'filmes') {
     // obra sem vídeo nenhum no Drive: mostra as temporadas do Trello (sem link)
-    w.seasons = cls.filter(cl => cl.items.length).map(cl => ({ ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: clDone(cl) ? 'g' : cl.items.some(i => i.done) ? 'y' : 'r' }));
+    w.seasons = cls.filter(cl => cl.items.length).map(cl => { const pg = paidUpTo(cl); return { ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: clDone(cl) ? 'g' : cl.items.some(i => i.done) ? 'y' : 'r', ...(pg ? { pg } : {}) }; });
   }
 }
 
@@ -323,6 +345,8 @@ function applyCard(o, w, c) {
   if (nota != null) o.nota = nota;
   if (w.eps != null) o.eps = w.eps;
   if (w.episodes && w.episodes.length) o.episodes = w.episodes;
+  if (w.pg) o.pg = w.pg;                                                 // obra sem temporadas: pago até o ep N
+  if (w.fd) o.fd = w.fd;                                                 // eps assistidos que ainda não subiram pro Drive
   if (w.seasons && w.seasons.length) o.seasons = w.seasons;
   if (w.add) o.add = w.add;
   if (w.upd && w.upd !== w.add) o.upd = w.upd;
