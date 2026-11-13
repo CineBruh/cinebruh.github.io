@@ -4,7 +4,7 @@
    - CSS, JS e imagens do site: abre na hora com a cópia guardada e atualiza por trás.
    - Drive, TMDB, Twitch etc. (outros sites): o navegador cuida sozinho, nada é guardado.
    Ao mudar CSS/JS num update grande, troque a VERSAO pra todo mundo receber de uma vez. */
-const VERSAO = 'cinebruh-2026-11-13c';
+const VERSAO = 'cinebruh-2026-11-13d';
 const BASICO = [
   './', 'index.html', 'manifest.webmanifest', 'favicon.png',
   'css/base.css', 'css/layout.css', 'css/catalogo.css', 'css/patrocinar.css', 'css/paginas.css', 'css/intro.css',
