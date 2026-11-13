@@ -5,7 +5,25 @@ let installEvt = null;
 
 /* o service worker só roda no site publicado (na prévia e em arquivos locais ele atrapalharia) */
 if('serviceWorker' in navigator && (/\.github\.io$/.test(location.hostname) || location.hostname === 'localhost')){
-  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  const tinhaVersao = !!navigator.serviceWorker.controller;   // primeira visita não conta como "atualização"
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').then(reg => {
+    /* o app instalado fica aberto em segundo plano por dias e o navegador só procura versão nova
+       quando a página é carregada: então procura também sempre que o app volta pra frente */
+    let ultima = Date.now();
+    document.addEventListener('visibilitychange', () => {
+      if(document.visibilityState === 'visible' && Date.now() - ultima > 5 * 60 * 1000){ ultima = Date.now(); reg.update().catch(()=>{}); }
+    });
+  }).catch(()=>{}));
+
+  /* versão nova assumiu: a página aberta ainda está com o CSS/JS antigo, então recarrega uma vez.
+     Se tiver vídeo tocando, não interrompe: só avisa e recarrega quando a pessoa tocar */
+  let recarregou = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if(!tinhaVersao || recarregou) return;
+    const assistindo = document.querySelector('#player iframe[src^="http"]');   // fechar o player põe about:blank
+    if(!assistindo || document.visibilityState === 'hidden'){ recarregou = true; location.reload(); return; }
+    toast('Tem uma versão nova do Cinebruh! <button type="button" class="toast-act" onclick="location.reload()">Atualizar</button>', 15000);
+  });
 }
 
 function showInstall(on){ document.querySelectorAll('.js-install').forEach(b => b.hidden = !on); }

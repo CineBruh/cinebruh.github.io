@@ -41,7 +41,7 @@ function renderHome(site){
   const idInfo = [!banner && c.handle && `@${esc(c.handle)}`, c.idade && `${c.idade} anos`,
     c.altura && `<span class="home-alt" title="${esc(c.alturaDica||'')}">📏 ${esc(c.altura)}</span>`].filter(Boolean);
   document.getElementById('home').innerHTML = `
-    ${banner ? `<div class="home-banner"><img src="${esc(banner)}" alt="" onerror="this.parentNode.remove()"></div>` : ''}
+    ${banner ? `<div class="home-banner"><img src="${esc(banner)}" alt="" onload="nomeSobreBanner()" onerror="this.parentNode.remove();nomeSobreBanner()"></div>` : ''}
     <div class="home-card">
       <div class="home-avatar">${av ? `<img src="${esc(av)}" alt="${esc(c.nome)}" style="object-position:${esc(avPos)}" onerror="this.remove()">` : ''}🦩</div>
       <div class="home-id">
@@ -62,7 +62,26 @@ function renderHome(site){
       `<a class="link-tile" href="${esc(x.url)}" target="_blank" rel="noopener"><span class="ic">${EXTRA_EMOJI[x.id]||'🔗'}</span><span class="txt"><b>${esc(x.nome)}</b><span>${esc(x.desc||'')}</span></span></a>`
     ).join('')}</div>` : ''}`;
   renderHomeExtra();
+  nomeSobreBanner();
 }
+
+/* o nome está em cima do banner? Mede na tela em vez de supor: no celular o nome pode quebrar pra baixo da foto,
+   e se a imagem do banner não carregar ela some. Conta como "em cima" quando o meio do nome fica acima da borda de baixo do banner */
+function nomeSobreBanner(){
+  const h1 = document.querySelector('#home .home-id h1'); if(!h1) return;
+  const bn = document.querySelector('#home .home-banner');
+  let sobre = false;
+  if(bn && bn.offsetParent){
+    const b = bn.getBoundingClientRect(), n = h1.getBoundingClientRect();
+    sobre = n.top + n.height / 2 < b.bottom && n.left < b.right;
+  }
+  h1.classList.toggle('sobre-banner', sobre);
+}
+let nsbTimer;
+addEventListener('resize', () => { clearTimeout(nsbTimer); nsbTimer = setTimeout(nomeSobreBanner, 120); });
+/* a Início pode ter sido desenhada escondida (abrindo direto noutra aba): mede de novo quando ela aparece */
+addEventListener('hashchange', () => setTimeout(nomeSobreBanner, 50));
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(nomeSobreBanner);
 
 /* ---------- Início: live aqui mesmo, próxima live (do cronograma) e favoritas da Bruh (nota 10) ----------
    Chamada de novo quando o catálogo e o cronograma terminam de carregar. */

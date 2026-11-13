@@ -161,6 +161,7 @@ A ordem das obras segue a ordem do quadro do Trello.
 - `site.json`: informações do canal, editáveis à mão: textos, redes, links, preços em bits, doações, comandos, setup, banner da Início, canal do player do Off Live e todo o **mídia kit** (números das redes, público, marcas).
 - `midiakit/`, `midiakit/en/`, `tierlist/`, `cronograma/`, `offline/`, `patrocinar/`, `comunidade/`: páginas curtinhas que só redirecionam pra aba. Servem pra cada link ter a própria prévia no Discord/WhatsApp/X.
 - `images/`: `og.png` (prévia do link), `icon-*.png` e `apple-touch-icon.png` (ícones do app), `banner.png` (banner da Início) e `marcas/*.jpg` (logos do mídia kit).
+- `DESIGN.md`: regras de layout (espaços, alturas, cantos, fontes) e exceções. Leia antes de mexer no CSS.
 - `scripts/sync-drive.mjs`: o robô (Node 20+, sem dependências). Lê o Drive e junta com o Trello.
 - `scripts/trello.mjs`: leitura do quadro do Trello e montagem do cronograma.
 - `scripts/notify-discord.mjs`: avisos no Discord.

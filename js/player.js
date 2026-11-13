@@ -25,13 +25,13 @@ player.innerHTML = `
   </div>`;
 document.body.appendChild(player);
 const playerTitle = player.querySelector('.player-title');
-const playerFrame = player.querySelector('iframe');
+let playerFrame = player.querySelector('iframe');
 const playerDrive = player.querySelector('.player-drive');
 const playerNote  = player.querySelector('.player-note');
 const playerFail  = player.querySelector('.player-fail');
 const playerEps   = player.querySelector('.player-eps');
 const playerSeasons = player.querySelector('.player-seasons');
-const playerDl = player.querySelector('.player-dl');
+const playerDl = player.querySelector('a.player-dl');   // "a": o Compartilhar também usa a classe .player-dl
 const playerInfo = player.querySelector('.player-info');
 const playerShare = player.querySelector('.player-share');
 let playerWork = null;                                     // obra aberta (pra mostrar patrocinador e review)
@@ -100,13 +100,25 @@ let failTimer = null;
 let epState = null;
 let epDragged = false;
 /* se o iframe carregar (mesmo página de erro do Drive), some com o aviso de falha */
-playerFrame.addEventListener('load', ()=>{ clearTimeout(failTimer); playerFail.hidden = true; });
+const frameLoaded = ()=>{ clearTimeout(failTimer); playerFail.hidden = true; };
+playerFrame.addEventListener('load', frameLoaded);
 
+/* troca o vídeo criando um iframe novo em vez de mudar o src do atual: mudar o src empilha uma entrada
+   no histórico do navegador a cada episódio, e aí fechar o player (que volta no histórico) precisava
+   de vários cliques, um por episódio aberto */
+function swapFrame(src){
+  const novo = document.createElement('iframe');
+  for(const a of ['allow','allowfullscreen','referrerpolicy']) if(playerFrame.hasAttribute(a)) novo.setAttribute(a, playerFrame.getAttribute(a));
+  novo.addEventListener('load', frameLoaded);
+  novo.src = src;
+  playerFrame.replaceWith(novo);
+  playerFrame = novo;
+}
 /* helper: carrega uma URL no iframe e arma o aviso de falha */
 function setFrame(src){
   playerFail.hidden = true;
   clearTimeout(failTimer);
-  playerFrame.src = src;
+  swapFrame(src);
   failTimer = setTimeout(()=>{ playerFail.hidden = false; }, 7000);
 }
 function showModal(){ player.classList.add('open'); document.body.classList.add('noscroll'); }
@@ -215,7 +227,7 @@ function closePlayer(){
   playerWork = null; renderInfo(null);
   player.classList.remove('open');
   document.body.classList.remove('noscroll');
-  playerFrame.src = 'about:blank';
+  swapFrame('about:blank');
   if(typeof renderContinue === 'function') renderContinue();   // atualiza "Continuar assistindo"
 }
 /* fechar pelo ✕, pelo fundo ou pelo Esc: se a obra foi aberta por um clique no site, volta no histórico
