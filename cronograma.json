@@ -1,27 +1,10 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-13T03:55:40-03:00",
+  "atualizadoEm": "2026-11-14T07:38:51-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
-    {
-      "data": "2026-11-13",
-      "itens": [
-        {
-          "titulo": "Just Chatting",
-          "status": "confirmado"
-        },
-        {
-          "titulo": "Invencível",
-          "cat": "series",
-          "lang": "dub",
-          "eps": "Ep 6",
-          "patrocinador": "Fanatical09",
-          "status": "confirmado"
-        }
-      ]
-    },
     {
       "data": "2026-11-14",
       "folga": true
@@ -242,6 +225,13 @@
       "lang": "leg",
       "eps": "T1 Ep 1",
       "patrocinador": "HomemPassarod"
+    },
+    {
+      "titulo": "Invencível",
+      "cat": "series",
+      "lang": "dub",
+      "eps": "T1 Ep 6",
+      "patrocinador": "Fanatical09"
     }
   ]
 }
