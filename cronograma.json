@@ -1,12 +1,93 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-15T06:35:57-03:00",
+  "atualizadoEm": "2026-11-16T06:55:49-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
     {
-      "data": "2026-11-15",
+      "data": "2026-11-16",
+      "itens": [
+        {
+          "titulo": "Just chatting",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "The Fragrant Flower Blooms With Dignity",
+          "cat": "animes",
+          "lang": "leg",
+          "eps": "Eps 12 e 13 final",
+          "patrocinador": "QTNecros, God",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-17",
+      "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-18",
+      "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-19",
+      "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "Yu Yu Hakusho",
+          "cat": "animes",
+          "lang": "dub",
+          "eps": "Eps 4, 5 e 6",
+          "patrocinador": "Redivo",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "The Fragrant Flower Blooms With Dignity",
+          "cat": "animes",
+          "lang": "leg",
+          "eps": "Eps 12 e 13 final",
+          "patrocinador": "QTNecros, God",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-20",
+      "itens": [
+        {
+          "titulo": "Just Chatting",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "Invencível",
+          "cat": "series",
+          "lang": "dub",
+          "eps": "Ep 6",
+          "patrocinador": "Fanatical09",
+          "status": "confirmado"
+        }
+      ]
+    },
+    {
+      "data": "2026-11-21",
+      "folga": true
+    },
+    {
+      "data": "2026-11-22",
       "folga": true
     }
   ],
@@ -221,13 +302,6 @@
       "lang": "leg",
       "eps": "T1 Ep 1",
       "patrocinador": "HomemPassarod"
-    },
-    {
-      "titulo": "Invencível",
-      "cat": "series",
-      "lang": "dub",
-      "eps": "T1 Ep 6",
-      "patrocinador": "Fanatical09"
     }
   ]
 }
