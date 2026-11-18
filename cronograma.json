@@ -1,19 +1,10 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-17T00:59:09-03:00",
+  "atualizadoEm": "2026-11-18T01:32:16-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
-    {
-      "data": "2026-11-17",
-      "itens": [
-        {
-          "titulo": "Just Chatting",
-          "status": "confirmado"
-        }
-      ]
-    },
     {
       "data": "2026-11-18",
       "itens": [
@@ -76,6 +67,20 @@
   ],
   "fila": [
     {
+      "titulo": "Dan Da Dan",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 6 ao 12",
+      "patrocinador": "RedFoxDoInterior"
+    },
+    {
+      "titulo": "Dan Da Dan",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T2 Eps 1 ao 3",
+      "patrocinador": "RedFoxDoInterior"
+    },
+    {
       "titulo": "Beck",
       "cat": "animes",
       "lang": "leg",
@@ -123,20 +128,6 @@
       "lang": "dub",
       "eps": "T1 Eps 6 ao 23",
       "patrocinador": "HarleShine"
-    },
-    {
-      "titulo": "Dan Da Dan",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 6 ao 12",
-      "patrocinador": "RedFoxDoInterior"
-    },
-    {
-      "titulo": "Dan Da Dan",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T2 Eps 1 ao 3",
-      "patrocinador": "RedFoxDoInterior"
     },
     {
       "titulo": "The Rising of the Shield Hero",
