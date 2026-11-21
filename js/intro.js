@@ -5,7 +5,7 @@
 (function(){
   const el = document.getElementById('intro');
   if(!el) return;
-  const DURACAO = 3700;   // ms até começar a sumir (escrita ≈3s + um respiro)
+  const DURACAO = 3800;   // ms até começar a sumir (caneta 0,35s→2,95s + pingo até 3,1s + um respiro)
   let saiu = false;
 
   function sair(){

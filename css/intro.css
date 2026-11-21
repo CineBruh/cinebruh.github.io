@@ -1,6 +1,6 @@
 /* ===== Vinheta de entrada: "Cinebruh" escrito à mão sobre fundo escuro desfocado =====
    Aparece uma vez por sessão (ver o script logo no começo do <body> e js/intro.js).
-   Linha do tempo: fundo entra · C · "inebruh" num traço só · pingo do i (≈3s) · some com fade. */
+   Linha do tempo: fundo entra · "Cinebruh" num traço só (≈2,6s) · pingo do i · some com fade. */
 html.intro-on, html.intro-on body{ overflow:hidden; }
 
 .intro{
@@ -10,7 +10,6 @@ html.intro-on, html.intro-on body{ overflow:hidden; }
   -webkit-backdrop-filter:blur(22px) saturate(.7);
   backdrop-filter:blur(22px) saturate(.7);
   cursor:pointer;
-  animation:intro-in .35s ease-out both;
   transition:opacity .7s ease, backdrop-filter .7s ease, -webkit-backdrop-filter .7s ease;
 }
 .intro.out{
@@ -22,11 +21,15 @@ html.intro-on, html.intro-on body{ overflow:hidden; }
    com a duração (--d) e o momento em que começa (--w). pathLength="1" deixa o "comprimento" de todo traço igual a 1. */
 .intro-word{ width:min(86vw, 760px); }
 .intro-word svg{ display:block; width:100%; height:auto; overflow:visible; }
-.intro-word path{
+/* letras preenchidas (rosa da intro) com o brilho por fora; o brilho fica no <g> de fora pra máscara não cortá-lo */
+.intro-word .ink path{ fill:#f4acca; }
+.intro-word .ink-glow{ filter:drop-shadow(0 0 10px rgba(255,104,180,.45)); }
+/* a "caneta": traço branco grosso dentro da máscara; onde ele passa, a letra aparece.
+   Mais grosso que a letra pra cobrir as curvas mesmo quando o caminho não passa bem no meio */
+.intro-word mask polyline, .intro-word mask line{
   fill:none;
-  stroke:#fff; stroke-width:7; stroke-linecap:round; stroke-linejoin:round;
+  stroke:#fff; stroke-width:18; stroke-linecap:round; stroke-linejoin:round;
   stroke-dasharray:1; stroke-dashoffset:1;
-  filter:drop-shadow(0 0 10px rgba(255,104,180,.45));
   animation:intro-draw var(--d, 1s) cubic-bezier(.35,.1,.55,.95) var(--w, 0s) forwards;
 }
 /* começa um pouco fora de foco e entra em foco enquanto escreve (igual à da Dessa) */

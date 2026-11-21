@@ -384,33 +384,33 @@
   },
 
   "setup": {
-    "_leia": "link = página oficial do produto (sem ganho pra Bruna). afiliado = link de afiliado (mostra o aviso de afiliado na aba). Se tiver os dois, o botão usa o afiliado.",
+    "_leia": "link = página oficial do produto (sem ganho pra Bruna). afiliado = link de afiliado (mostra o aviso de afiliado na aba). Se tiver os dois, o botão usa o afiliado. foto = imagem em images/setup/ (opcional; sem foto aparece o emoji).",
     "hardware": [
-      { "item": "Gabinete",    "nome": "GameMax Infinity", "afiliado": null },
-      { "item": "Placa-mãe",   "nome": "Asus ROG Strix B550-F Gaming DDR4", "afiliado": null },
-      { "item": "Processador", "nome": "AMD Ryzen 9 5900X 4.8GHz", "afiliado": null },
-      { "item": "Placa de vídeo", "nome": "Gigabyte GeForce RTX 4060 8GB", "afiliado": null },
-      { "item": "Memória",     "nome": "Asgard Bragi RGB DDR4 2x16GB 3600MHz CL14", "afiliado": null },
-      { "item": "Water cooler", "nome": "Cooler Master MasterLiquid Core Street Fighter 6 Chun-Li", "afiliado": null },
-      { "item": "Fonte",       "nome": "Thermaltake Smart 700W 80 Plus", "afiliado": null },
-      { "item": "Armazenamento", "nome": "SSHD Seagate FireCuda Híbrido 1TB", "afiliado": null },
-      { "item": "Armazenamento", "nome": "SSD SanDisk Plus 120GB", "afiliado": null },
-      { "item": "Armazenamento", "nome": "SSD Adata XPG Spectrix S40G 512GB", "afiliado": null },
-      { "item": "Armazenamento", "nome": "SSD XPG S70 Blade 1TB", "afiliado": null }
+      { "item": "Gabinete",    "nome": "GameMax Infinity", "foto": "images/setup/GameMax Infinity.webp", "afiliado": null },
+      { "item": "Placa-mãe",   "nome": "Asus ROG Strix B550-F Gaming DDR4", "foto": "images/setup/Asus ROG Strix B550-F Gaming DDR4.jpg", "afiliado": null },
+      { "item": "Processador", "nome": "AMD Ryzen 9 5900X 4.8GHz", "foto": "images/setup/AMD Ryzen 9 5900X 4.8GHz.jpg", "afiliado": null },
+      { "item": "Placa de vídeo", "nome": "Gigabyte GeForce RTX 4060 8GB", "foto": "images/setup/Gigabyte GeForce RTX 4060 8GB.jpg", "afiliado": null },
+      { "item": "Memória",     "nome": "Asgard Bragi RGB DDR4 2x16GB 3600MHz CL14", "foto": "images/setup/Asgard Bragi RGB DDR4 2x16GB 3600MHz CL14.jpg", "afiliado": null },
+      { "item": "Water cooler", "nome": "Cooler Master MasterLiquid Core Street Fighter 6 Chun-Li", "foto": "images/setup/Cooler Master MasterLiquid Core Street Fighter 6 Chun-Li.jpg", "afiliado": null },
+      { "item": "Fonte",       "nome": "Thermaltake Smart 700W 80 Plus", "foto": "images/setup/Thermaltake Smart 700W 80 Plus.jpg", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSHD Seagate FireCuda Híbrido 1TB", "foto": "images/setup/SSHD Seagate FireCuda Híbrido 1TB.jpg", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD SanDisk Plus 120GB", "foto": "images/setup/SSD SanDisk Plus 120GB.jpg", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD Adata XPG Spectrix S40G 512GB", "foto": "images/setup/SSD Adata XPG Spectrix S40G 512GB.jpg", "afiliado": null },
+      { "item": "Armazenamento", "nome": "SSD XPG S70 Blade 1TB", "foto": "images/setup/SSD XPG S70 Blade 1TB.jpg", "afiliado": null }
     ],
     "perifericos": [
-      { "item": "Microfone",   "nome": "HyperX QuadCast 2S RGB", "afiliado": null },
-      { "item": "Headset",     "nome": "Redragon Zeus RGB Bubblegum", "link": "https://www.redragon.com.br/zeusrgb-bubblegum", "afiliado": null },
-      { "item": "Headset",     "nome": "Redragon Minos Lunar", "link": "https://www.redragon.com.br/minoslunar", "afiliado": null },
-      { "item": "Fone intra-auricular", "nome": "KZ EDX Pro", "afiliado": null },
-      { "item": "Mouse",       "nome": "Logitech G PRO X Superlight Magenta", "afiliado": null },
-      { "item": "Teclado",     "nome": "Redragon Kumara Pro Magnético Lunar White", "link": "https://www.redragon.com.br/kumarapro-magnetico-lw", "afiliado": null },
-      { "item": "Webcam",      "nome": "Logitech C920 Pro", "afiliado": null },
-      { "item": "Iluminação",  "nome": "Soft Ring Light MJ26", "afiliado": null },
-      { "item": "Monitor",     "nome": "AOC 24\" IPS 144Hz", "afiliado": null },
-      { "item": "Monitor",     "nome": "Samsung CF390 Curvo 24\"", "afiliado": null },
-      { "item": "Stream Deck", "nome": "Elgato Stream Deck Mini (6 teclas)", "afiliado": null },
-      { "item": "Cadeira",     "nome": "DXRacer Origin OK132 Rosa/Branco", "afiliado": null }
+      { "item": "Microfone",   "nome": "HyperX QuadCast 2S RGB", "foto": "images/setup/HyperX QuadCast 2S RGB.webp", "afiliado": null },
+      { "item": "Headset",     "nome": "Redragon Zeus RGB Bubblegum", "foto": "images/setup/Redragon Zeus RGB Bubblegum.jpg", "link": "https://www.redragon.com.br/zeusrgb-bubblegum", "afiliado": null },
+      { "item": "Headset",     "nome": "Redragon Minos Lunar", "foto": "images/setup/Redragon Minos Lunar.jpg", "link": "https://www.redragon.com.br/minoslunar", "afiliado": null },
+      { "item": "Fone intra-auricular", "nome": "KZ EDX Pro", "foto": "images/setup/KZ EDX Pro.webp", "afiliado": null },
+      { "item": "Mouse",       "nome": "Logitech G PRO X Superlight Magenta", "foto": "images/setup/Logitech G PRO X Superlight Magenta.webp", "afiliado": null },
+      { "item": "Teclado",     "nome": "Redragon Kumara Pro Magnético Lunar White", "foto": "images/setup/Redragon Kumara Pro Magnético Lunar White.png", "link": "https://www.redragon.com.br/kumarapro-magnetico-lw", "afiliado": null },
+      { "item": "Webcam",      "nome": "Logitech C920 Pro", "foto": "images/setup/Logitech C920 Pro.webp", "afiliado": null },
+      { "item": "Iluminação",  "nome": "Soft Ring Light MJ26", "foto": "images/setup/Soft Ring Light MJ26.webp", "afiliado": null },
+      { "item": "Monitor",     "nome": "AOC 24\" IPS 144Hz", "foto": "images/setup/AOC 24 IPS 144Hz.jpg", "afiliado": null },
+      { "item": "Monitor",     "nome": "Samsung CF390 Curvo 24\"", "foto": "images/setup/Samsung CF390 Curvo 24.webp", "afiliado": null },
+      { "item": "Stream Deck", "nome": "Elgato Stream Deck Mini (6 teclas)", "foto": "images/setup/Elgato Stream Deck Mini (6 teclas).jpg", "afiliado": null },
+      { "item": "Cadeira",     "nome": "DXRacer Origin OK132 Rosa/Branco", "foto": "images/setup/DXRacer Origin OK133 Rosa.jpg", "afiliado": null }
     ]
   }
 }

@@ -185,8 +185,9 @@ a.rp-chip:hover{transform:translate(-1px,-1px)}
   /* filtros viram faixa de rolagem horizontal (padrão de app nativo) */
   .filter-extra .filters-inner,.pills{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .filter-extra .filters-inner::-webkit-scrollbar,.pills::-webkit-scrollbar{display:none}
-  .lang-group{flex-wrap:nowrap;flex:0 0 auto}
-  .pill,.lpill,.lang-group .lg-label{flex:0 0 auto;white-space:nowrap}
+  /* só na barra de filtros do catálogo: fora dela (ex.: calculadora do Patrocinar) as pílulas quebram linha normalmente */
+  .filter-extra .lang-group{flex-wrap:nowrap;flex:0 0 auto}
+  .pill,.filter-extra .lpill,.filter-extra .lang-group .lg-label{flex:0 0 auto;white-space:nowrap}
   .pills{gap:var(--s2);margin:0 calc(-1 * var(--pad-page));padding:0 var(--pad-page);touch-action:pan-x pan-y;overscroll-behavior-x:contain}
   /* chips da barra grudada no topo: 36px (exceção aos 44px de toque) pra barra não ocupar meia tela */
   .filter-cats .pill,.filter-extra .lpill{min-height:36px;font-size:var(--fs-xs);padding:0 var(--s3);gap:6px}

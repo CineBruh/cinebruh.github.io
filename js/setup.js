@@ -21,8 +21,10 @@ function gearHTML(g, parcerias){
     ? `<a class="gear-buy" href="${esc(g.afiliado)}" target="_blank" rel="noopener sponsored">🛒 Ver na loja</a>`
     : g.link ? `<a class="gear-buy" href="${esc(g.link)}" target="_blank" rel="noopener">Ver produto ↗</a>` : '';
   const cupom = p ? `<button class="gear-cupom" type="button" data-cupom="${esc(p.cupom)}" title="Copiar cupom ${esc(p.cupom)}">🏷️ ${esc(p.cupom)} · ${esc(p.desconto)} off</button>` : '';
+  /* sem foto (ou se ela não carregar) fica o emoji no mesmo quadro: todos os cards têm a mesma altura */
+  const foto = g.foto ? `<img src="${esc(g.foto)}" alt="${esc(g.nome)}" loading="lazy" decoding="async" onerror="this.remove()">` : '';
   return `<div class="gear${p?' partner':''}">
-    <span class="gear-ic" aria-hidden="true">${GEAR_ICON[g.item] || '🔧'}</span>
+    <span class="gear-ph"><span class="gear-em" aria-hidden="true">${GEAR_ICON[g.item] || '🔧'}</span>${foto}</span>
     <span class="gear-tx">
       <span class="gear-kind">${esc(g.item)}</span>
       <span class="gear-name">${esc(g.nome)}</span>
