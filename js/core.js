@@ -151,5 +151,5 @@ document.querySelectorAll('.js-theme').forEach(b=>b.addEventListener('click', to
 
 /* ---------- Voltar ao topo ---------- */
 const toTop = document.getElementById('totop');
-window.addEventListener('scroll', ()=>{ toTop.classList.toggle('show', window.scrollY > 400); }, {passive:true});
+window.addEventListener('scroll', ()=>{ toTop.classList.toggle('show', window.scrollY > 600); }, {passive:true});
 toTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));

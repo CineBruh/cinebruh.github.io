@@ -128,6 +128,8 @@ footer .logo{font-size:var(--fs-xl)}
 .credits{flex:1 1 300px;display:flex;align-items:center;justify-content:center;gap:var(--s2);text-align:center}
 .credits img{height:12px;width:auto;display:block;flex:none}
 @media (max-width:700px){ .credits{order:3;flex-basis:100%;justify-content:flex-start;text-align:left} }
+/* reserva espaço à direita no desktop para o botão .totop não cobrir o link do rodapé */
+@media (min-width:900px){ footer{padding-right:calc(var(--pad-page) + var(--h-ctl-lg) + var(--s3))} }
 
 /* ---------- Voltar ao topo ---------- */
 .totop{position:fixed;right:var(--s5);bottom:var(--s5);z-index:60;width:var(--h-ctl-lg);height:var(--h-ctl-lg);
@@ -137,6 +139,7 @@ footer .logo{font-size:var(--fs-xl)}
   transform:translateY(12px);transition:opacity .2s ease,transform .2s ease}
 .totop.show{opacity:1;pointer-events:auto;transform:none}
 .totop.show:hover{transform:translate(-2px,-2px)}
+body:has(input:focus) .totop{opacity:0;pointer-events:none}
 .totop svg{display:block}
 @media (max-width:600px){ .totop{right:var(--s4)} }
 
