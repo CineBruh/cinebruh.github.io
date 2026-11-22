@@ -103,14 +103,25 @@ export function tmdbRef(v, cat) {
 
 // ───────────────────────────── CHECKLISTS ─────────────────────────────
 // "Temporada 2 (JandersonShady)" · "Temporada 1  (✅)" · "Saga East Blue ()" · "Programação"
+// Nick real usado nos cartões: sem espaços ou acentos (ex.: Locknell, Emir_Emir_Emir_, 1pandagamer_)
+const isNick = x => /^[A-Za-z0-9_.-]+$/.test(x) && /[A-Za-z]/.test(x);
 function parseChecklistName(name) {
   let label = String(name || '').trim(), nicks = [], done = false;
   const m = label.match(/\(([^)]*)\)\s*$/);
   if (m) {
-    label = label.slice(0, m.index).trim();
     const inner = m[1].trim();
-    if (/✅|✔/.test(inner)) done = true;
-    else if (inner) nicks = splitNicks(inner);
+    if (!inner) {
+      label = label.slice(0, m.index).trim();
+    } else if (/✅|✔/.test(inner)) {
+      done = true;
+      label = label.slice(0, m.index).trim();
+    } else {
+      const cand = splitNicks(inner);
+      if (cand.length && cand.every(x => isNick(x) || isChat(x))) {
+        nicks = cand;
+        label = label.slice(0, m.index).trim();
+      }
+    }
   }
   if (/✅/.test(label)) { done = true; label = label.replace(/✅/g, '').trim(); }
   const n = label.match(/(?:temporada|season|^t)\s*(\d+)/i);
@@ -325,6 +336,7 @@ export function buildCronograma(cards, works, idx, warn, horarioPadrao = '23h') 
     if (w.kind === 'completo' || marcados.has(keyOf(w.name))) continue;
     const base = { titulo: w.name, cat: w.cat, ...(w.lang ? { lang: w.lang } : {}) };
     if (w.flags.has('standby')) base.status = 'standby';
+    const antes = fila.length;
     if (w.checklists.length) {
       for (const cl of w.checklists) {
         const pend = cl.items.filter(i => !i.done && (i.nicks.length || cl.nicks.length));
@@ -335,8 +347,10 @@ export function buildCronograma(cards, works, idx, warn, horarioPadrao = '23h') 
         const eps = nums.length === 1 ? `Ep ${nums[0]}` : nums.length ? `Eps ${rangeText(nums)}` : '';
         fila.push({ ...base, eps: (label + eps).trim(), patrocinador: nicks.join(', ') });
       }
-    } else if (w.kind === 'fila' && (w.pat.length || w.pago) && !w.flags.has('offlive')) {
-      fila.push({ ...base, ...(w.pat.length ? { patrocinador: w.pat.join(', ') } : {}) });   // pago sem nick conhecido ("????")
+    }
+    if (fila.length === antes && w.kind === 'fila' && (w.pat.length || w.pago) && !w.flags.has('offlive') &&
+        (!w.checklists.length || (w.cat === 'filmes' && w.checklists.some(cl => cl.items.some(i => !i.done))))) {
+      fila.push({ ...base, ...(w.pat.length ? { patrocinador: w.pat.join(', ') } : {}) });   // pago na descrição ("Patrocinado por:") ou sem nick conhecido ("????")
     }
   }
   if (offline) delete offline._t;
