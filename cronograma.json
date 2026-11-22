@@ -1,14 +1,10 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-21T08:22:19-03:00",
+  "atualizadoEm": "2026-11-22T05:06:51-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
-    {
-      "data": "2026-11-21",
-      "folga": true
-    },
     {
       "data": "2026-11-22",
       "folga": true
