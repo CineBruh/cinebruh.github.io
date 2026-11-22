@@ -22,7 +22,7 @@ html.intro-on, html.intro-on body{ overflow:hidden; }
 .intro-word{ width:min(86vw, 760px); }
 .intro-word svg{ display:block; width:100%; height:auto; overflow:visible; }
 /* letras preenchidas (rosa da intro) com o brilho por fora; o brilho fica no <g> de fora pra máscara não cortá-lo */
-.intro-word .ink path{ fill:#f4acca; }
+.intro-word .ink path{ fill:#FFD2E9; }
 .intro-word .ink-glow{ filter:drop-shadow(0 0 10px rgba(255,104,180,.45)); }
 /* a "caneta": traço branco grosso dentro da máscara; onde ele passa, a letra aparece.
    Mais grosso que a letra pra cobrir as curvas mesmo quando o caminho não passa bem no meio */

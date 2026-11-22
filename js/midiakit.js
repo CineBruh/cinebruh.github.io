@@ -172,8 +172,8 @@ function renderMidiakit(site){
         ${netsTop.length ? `<div class="mk-mini">${netsTop.map(n=>`<a href="${n.url}" target="_blank" rel="noopener" title="${n.nome}">${brandIcon(n.id)}<b>${nCompact(redes[n.id][n.base])}</b></a>`).join('')}</div>` : ''}
         <div class="cta-row">
           ${contato ? `<a class="cta" href="${mailto}">${t.trabalhar}</a>` : ''}
-          ${mk.pdf ? `<a class="cta alt" href="${esc(mk.pdf)}" target="_blank" rel="noopener">${t.pdf}</a>` : ''}
-          ${(mk.pdfArquivo || {})[MK_LANG] ? `<a class="cta alt" href="${esc(mk.pdfArquivo[MK_LANG])}" download id="mk-pdf" hidden>${t.baixarPdf}</a>` : ''}
+          ${mk.pdf ? `<a class="cta alt" href="${escUrl(mk.pdf)}" target="_blank" rel="noopener">${t.pdf}</a>` : ''}
+          ${(mk.pdfArquivo || {})[MK_LANG] ? `<a class="cta alt" href="${escUrl(mk.pdfArquivo[MK_LANG])}" download id="mk-pdf" hidden>${t.baixarPdf}</a>` : ''}
           <button class="cta alt" type="button" id="mk-print">${t.salvarPdf}</button>
           <button class="cta alt" type="button" id="mk-share">${t.copiar}</button>
           <a class="cta alt" href="${outra}" hreflang="${MK_LANG === 'en' ? 'pt-BR' : 'en'}" title="${t.outraT}">🌐 ${t.outra}</a>
@@ -228,7 +228,7 @@ function renderMidiakit(site){
     <div class="mk-brands">${marcas.map((m,i)=>{
       const desc = pick('marcas',i,'desc') || m.desc;
       const inner = `${m.logo ? `<img src="${esc(m.logo)}" alt="" loading="lazy" onerror="this.remove()">` : ''}<b>${esc(m.nome)}</b>${desc ? `<span>${esc(desc)}</span>` : ''}`;
-      return m.url ? `<a class="mk-brand" href="${esc(m.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="mk-brand">${inner}</div>`;
+      return m.url ? `<a class="mk-brand" href="${escUrl(m.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="mk-brand">${inner}</div>`;
     }).join('')}</div>` : ''}
 
     ${cases.length ? `<h3 class="mk-h">${t.hCases}</h3>
@@ -238,7 +238,7 @@ function renderMidiakit(site){
       <span class="mk-case-top"><b>${esc(k.marca)}</b>${k.exemplo ? ex : ''}</span>
       <span class="mk-case-meta">${[pick('cases',i,'formato') || k.formato, k.plataforma, pick('cases',i,'periodo') || k.periodo].filter(Boolean).map(esc).join(' · ')}</span>
       ${desc ? `<span>${esc(desc)}</span>` : ''}
-      ${k.url ? `<a class="mk-link" href="${esc(k.url)}" target="_blank" rel="noopener">${t.verCont}</a>` : ''}
+      ${k.url ? `<a class="mk-link" href="${escUrl(k.url)}" target="_blank" rel="noopener">${t.verCont}</a>` : ''}
     </div>`;
     }).join('')}</div>` : ''}
 

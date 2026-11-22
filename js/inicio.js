@@ -25,7 +25,7 @@ function brandIcon(id){
 }
 function linkHTML(l){
   const ext = /^https?:/.test(l.url);
-  return `<a class="lt lt-${esc(l.id)}${l.destaque?' destaque':''}" href="${esc(l.url)}"${ext?' target="_blank" rel="noopener"':''}>
+  return `<a class="lt lt-${esc(l.id)}${l.destaque?' destaque':''}" href="${escUrl(l.url)}"${ext?' target="_blank" rel="noopener"':''}>
     ${brandIcon(l.id)}
     <span class="ltx"><b>${esc(l.nome)}</b><span>${esc(l.user||'')}</span></span>
     <span class="arr">↗</span></a>`;
@@ -59,7 +59,7 @@ function renderHome(site){
     <div id="home-extra"></div>
     ${(site.links||[]).length ? `<h2 class="home-sub">Onde encontrar a Bruh</h2><div class="ltree">${site.links.map(linkHTML).join('')}</div>` : ''}
     ${(site.extras||[]).length ? `<h2 class="home-sub">Mais do Cinebruh</h2><div class="link-grid">${site.extras.map(x=>
-      `<a class="link-tile" href="${esc(x.url)}" target="_blank" rel="noopener"><span class="ic">${EXTRA_EMOJI[x.id]||'🔗'}</span><span class="txt"><b>${esc(x.nome)}</b><span>${esc(x.desc||'')}</span></span></a>`
+      `<a class="link-tile" href="${escUrl(x.url)}" target="_blank" rel="noopener"><span class="ic">${EXTRA_EMOJI[x.id]||'🔗'}</span><span class="txt"><b>${esc(x.nome)}</b><span>${esc(x.desc||'')}</span></span></a>`
     ).join('')}</div>` : ''}`;
   renderHomeExtra();
   nomeSobreBanner();

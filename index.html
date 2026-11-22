@@ -41,7 +41,6 @@
 <!-- ============ VINHETA DE ENTRADA (some sozinha; ver js/intro.js) ============ -->
 <div class="intro" id="intro" role="presentation" aria-hidden="true">
   <div class="intro-word"><div class="intro-blur">
-    <!-- "Cinebruh" em letra cursiva, desenhado traço a traço (cada <path> é uma "caneta"; ordem e tempo no style) -->
     <!-- "Cinebruh" cursivo (Cinebruh Intro.svg): as letras ficam escondidas e a "caneta" da máscara vai revelando.
          Pra trocar o desenho: letras dentro de .ink, caminho da caneta dentro do <mask> (com pathLength="1" e os tempos no style) -->
     <svg viewBox="0 0 620 200" aria-label="Cinebruh">
@@ -289,7 +288,7 @@ else{sessionStorage.setItem('bru-intro','1');document.documentElement.classList.
     </main>
 
     <footer>
-      <div class="logo">Cine <span class="dot">Bruh</span></div>
+      <div class="logo"><span class="lw">Cine</span><span class="dot">Bruh</span></div>
       <div class="credits">
         <a href="https://www.themoviedb.org" target="_blank" rel="noopener" aria-label="The Movie Database (TMDB)"><img src="https://www.themoviedb.org/assets/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt="TMDB"></a>
         <span>Capas fornecidas pelo TMDB. Este site usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.</span>
@@ -297,7 +296,6 @@ else{sessionStorage.setItem('bru-intro','1');document.documentElement.classList.
       <a class="soc tw" href="https://twitch.tv/brunarodrigues" target="_blank" rel="noopener" style="box-shadow:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>BrunaRodrigues</a>
     </footer>
   </div>
-</div>
 
 <!-- ============ BARRA INFERIOR (celular) ============ -->
 <nav class="tabbar" id="tabbar" aria-label="Abas do site"></nav>

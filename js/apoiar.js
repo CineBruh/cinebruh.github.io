@@ -22,14 +22,14 @@ function renderApoiar(site){
 
     ${outras.length ? [['Com mensagem na tela', outras.filter(o => o.tela)], ['Outras formas de doar', outras.filter(o => !o.tela)]]
       .filter(([, l]) => l.length).map(([tit, l]) => `<h3 class="mk-h">${tit}</h3>
-    <div class="link-grid">${l.map(o=>`<a class="link-tile" href="${esc(o.url)}" target="_blank" rel="noopener"><span class="ic">${ICO[o.id]||'💜'}</span><span class="txt"><b>${esc(o.nome)}</b><span>${esc(o.desc||'')}</span></span></a>`).join('')}</div>`).join('') : ''}
+    <div class="link-grid">${l.map(o=>`<a class="link-tile" href="${escUrl(o.url)}" target="_blank" rel="noopener"><span class="ic">${ICO[o.id]||'💜'}</span><span class="txt"><b>${esc(o.nome)}</b><span>${esc(o.desc||'')}</span></span></a>`).join('')}</div>`).join('') : ''}
 
     ${d.aviso ? `<div class="setup-note" style="margin-top:18px">ℹ️ <span>${esc(d.aviso)}</span></div>` : ''}
 
     ${ind.length || parc.length ? `<h3 class="mk-h">Apoie sem gastar nada a mais</h3>
     <div class="link-grid">
       ${ind.map(a => a.url
-        ? `<a class="link-tile" href="${esc(a.url)}" target="_blank" rel="noopener${a.id==='amazon'?' sponsored':''}"><span class="ic">${ICO[a.id]||'💜'}</span><span class="txt"><b>${esc(a.nome)}</b><span>${esc(a.desc||'')}</span></span></a>`
+        ? `<a class="link-tile" href="${escUrl(a.url)}" target="_blank" rel="noopener${a.id==='amazon'?' sponsored':''}"><span class="ic">${ICO[a.id]||'💜'}</span><span class="txt"><b>${esc(a.nome)}</b><span>${esc(a.desc||'')}</span></span></a>`
         : `<button class="link-tile ap-btn" type="button" data-copy="${esc(a.codigo||'')}"><span class="ic">${ICO[a.id]||'💜'}</span><span class="txt"><b>${esc(a.nome)}: ${esc(a.codigo||'')}</b><span>${esc(a.desc||'')} · clique p/ copiar</span></span></button>`).join('')}
       ${parc.map(p=>`<button class="link-tile ap-btn" type="button" data-copy="${esc(p.cupom)}"><span class="ic">🏷️</span><span class="txt"><b>${esc(p.nome)} · ${esc(p.cupom)}</b><span>${esc(p.desconto)} de desconto · clique p/ copiar</span></span></button>`).join('')}
     </div>` : ''}

@@ -18,8 +18,8 @@ const partnerOf = (nome, parcerias) =>
 function gearHTML(g, parcerias){
   const p = partnerOf(g.nome, parcerias);
   const buy = g.afiliado
-    ? `<a class="gear-buy" href="${esc(g.afiliado)}" target="_blank" rel="noopener sponsored">🛒 Ver na loja</a>`
-    : g.link ? `<a class="gear-buy" href="${esc(g.link)}" target="_blank" rel="noopener">Ver produto ↗</a>` : '';
+    ? `<a class="gear-buy" href="${escUrl(g.afiliado)}" target="_blank" rel="noopener sponsored">🛒 Ver na loja</a>`
+    : g.link ? `<a class="gear-buy" href="${escUrl(g.link)}" target="_blank" rel="noopener">Ver produto ↗</a>` : '';
   const cupom = p ? `<button class="gear-cupom" type="button" data-cupom="${esc(p.cupom)}" title="Copiar cupom ${esc(p.cupom)}">🏷️ ${esc(p.cupom)} · ${esc(p.desconto)} off</button>` : '';
   /* sem foto (ou se ela não carregar) fica o emoji no mesmo quadro: todos os cards têm a mesma altura */
   const foto = g.foto ? `<img src="${esc(g.foto)}" alt="${esc(g.nome)}" loading="lazy" decoding="async" onerror="this.remove()">` : '';
@@ -44,8 +44,8 @@ function renderSetup(site){
   const temAfiliado = all.some(g => g.afiliado);
   const amazon = (site.apoioIndireto || []).find(a => a.id === 'amazon' && a.url);
   const notes = [
-    amazon ? `<div class="setup-note">📦 <span>Vai comprar algo pela Amazon? Use o <a href="${esc(amazon.url)}" target="_blank" rel="noopener sponsored" style="text-decoration:underline;font-weight:700">link de afiliado da Bruh</a>: é só finalizar sua compra depois de entrar pelo link, e assim você apoia o canal diretamente!</span></div>` : '',
-    ...parceiros.map(p => `<div class="setup-note">🤝 <span>A Bruna é parceira da <b>${esc(p.nome)}</b>: use o cupom <button class="gear-cupom" type="button" data-cupom="${esc(p.cupom)}">🏷️ ${esc(p.cupom)}</button> pra ganhar ${esc(p.desconto)} de desconto${p.url ? ` na <a href="${esc(p.url)}" target="_blank" rel="noopener" style="text-decoration:underline">loja oficial</a>` : ''}.</span></div>`),
+    amazon ? `<div class="setup-note">📦 <span>Vai comprar algo pela Amazon? Use o <a href="${escUrl(amazon.url)}" target="_blank" rel="noopener sponsored" style="text-decoration:underline;font-weight:700">link de afiliado da Bruh</a>: é só finalizar sua compra depois de entrar pelo link, e assim você apoia o canal diretamente!</span></div>` : '',
+    ...parceiros.map(p => `<div class="setup-note">🤝 <span>A Bruna é parceira da <b>${esc(p.nome)}</b>: use o cupom <button class="gear-cupom" type="button" data-cupom="${esc(p.cupom)}">🏷️ ${esc(p.cupom)}</button> pra ganhar ${esc(p.desconto)} de desconto${p.url ? ` na <a href="${escUrl(p.url)}" target="_blank" rel="noopener" style="text-decoration:underline">loja oficial</a>` : ''}.</span></div>`),
     temAfiliado ? `<div class="setup-note">💜 <span>Alguns links são de afiliado: comprando por eles, você apoia a Bruna sem pagar nada a mais.</span></div>` : '',
   ].join('');
 

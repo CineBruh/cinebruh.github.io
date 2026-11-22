@@ -28,7 +28,7 @@ function spaceHTML(s){
   if(s.copiar) return `<button class="cm-space cm-${esc(s.id)}" type="button" data-copy="${esc(s.copiar)}">${body}<em data-cta>${esc(s.cta||'Copiar')} ⧉</em></button>`;
   const href = s.nav ? '#/'+s.nav : s.url;
   const ext = !s.nav && /^https?:/.test(href);
-  return `<a class="cm-space cm-${esc(s.id)}" href="${esc(href)}"${s.nav?` data-nav="${esc(s.nav)}"`:''}${ext?' target="_blank" rel="noopener"':''}>
+  return `<a class="cm-space cm-${esc(s.id)}" href="${escUrl(href)}"${s.nav?` data-nav="${esc(s.nav)}"`:''}${ext?' target="_blank" rel="noopener"':''}>
     ${body}<em>${esc(s.cta||'Abrir')} ${ext?'↗':'→'}</em></a>`;
 }
 
@@ -50,13 +50,13 @@ function renderComunidade(site){
         <p>${esc(mu.desc||'')}</p>
         ${mu.comando ? `<button class="cm-cmd" type="button" data-copy="!sr " style="margin-top:10px"><code>${esc(mu.comando)}</code><span>Copiar o !sr</span></button>` : ''}
         ${(mu.regras||[]).length ? `<div class="mk-cats" style="margin-top:10px">${mu.regras.map(r=>`<span class="chip">${esc(r)}</span>`).join('')}</div>` : ''}
-        ${mu.url ? `<a class="mk-link" href="${esc(mu.url)}" target="_blank" rel="noopener">Ver a fila e o que está tocando ↗</a>` : ''}
+        ${mu.url ? `<a class="mk-link" href="${escUrl(mu.url)}" target="_blank" rel="noopener">Ver a fila e o que está tocando ↗</a>` : ''}
       </div>` : ''}
       ${pt ? `<div class="mk-card"><h4>🦩 ${esc(pt.nome||'Pontos do canal')}</h4>
         <p>${esc(pt.desc||'')}</p>
         <div class="cta-row" style="margin-top:12px">
-          ${pt.loja ? `<a class="cta" href="${esc(pt.loja)}" target="_blank" rel="noopener">🛍️ Loja de pontos</a>` : ''}
-          ${pt.ranking ? `<a class="cta alt" href="${esc(pt.ranking)}" target="_blank" rel="noopener">🏆 Ranking</a>` : ''}
+          ${pt.loja ? `<a class="cta" href="${escUrl(pt.loja)}" target="_blank" rel="noopener">🛍️ Loja de pontos</a>` : ''}
+          ${pt.ranking ? `<a class="cta alt" href="${escUrl(pt.ranking)}" target="_blank" rel="noopener">🏆 Ranking</a>` : ''}
         </div>
       </div>` : ''}
     </div>` : ''}

@@ -3,7 +3,8 @@
    separada da do robô, que fica nos secrets do GitHub. Vazia = busca desativada. */
 const TMDB_KEY = '47b4f1fdc40f6fc95d26127e7b36c781';
 const TMDB_API = 'https://api.themoviedb.org/3';
-const TIMG = (p, size) => p ? `https://image.tmdb.org/t/p/${size}${p}` : '';
+/* imagem do TMDB: o caminho vem da API, então só aceita o formato dela ("/abc123.jpg") */
+const TIMG = (p, size) => p && /^\/[\w.-]+$/.test(p) ? `https://image.tmdb.org/t/p/${size}${p}` : '';
 /* a busca agora mora no campo "Obra" do "Monte seu pedido" */
 const pickQ = document.getElementById('calc-t');
 const pickGrid = document.getElementById('calc-sug');
@@ -154,7 +155,7 @@ tm.innerHTML = `<div class="tm-box" role="dialog" aria-modal="true" aria-label="
 document.body.appendChild(tm);
 const tmBox = tm.querySelector('.tm-box');
 const TM_CLOSE = `<button class="tm-close" type="button" aria-label="Fechar">✕</button>`;
-function closePick(){ tmSeq++; tm.classList.remove('open'); document.body.classList.remove('noscroll'); }
+function closePick(){ tmSeq++; tm.classList.remove('open'); document.body.classList.remove('noscroll'); soltarModal(tm); }
 tm.addEventListener('click', e=>{ if(e.target===tm || e.target.closest('.tm-close')) closePick(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && tm.classList.contains('open')) closePick(); });
 onLeave.push(()=>{ if(tm.classList.contains('open')) closePick(); });
@@ -245,6 +246,7 @@ async function openPick(r){
   tmBox.innerHTML = `${TM_CLOSE}<div class="tm-loading">Carregando…</div>`;
   tmBox.scrollTop = 0;
   tm.classList.add('open'); document.body.classList.add('noscroll');
+ focarModal(tm, tm.querySelector('.tm-close'));
   try{
     const d = await tmdb(`/${r.media_type}/${r.id}`, {append_to_response:'credits,videos,watch/providers', include_video_language:'pt,en,null'});
     if(!d.overview){
@@ -473,7 +475,7 @@ function calcDraw(){
         ${q && q.economia > 0 ? `<span class="calc-save">Pacote: você economiza ${fmtBRL(q.economia)}</span>` : ''}</div>
       <div class="calc-acts">
         <button class="cta" type="button" data-copy-pedido>📋 Copiar pedido</button>
-        ${livepix ? `<a class="cta alt" href="${esc(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : ''}
+        ${livepix ? `<a class="cta alt" href="${escUrl(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : ''}
         <a class="cta alt" href="#/apoiar" data-nav="apoiar">Outras formas</a>
       </div>
     </div>

@@ -115,7 +115,7 @@ function capHTML(it, i){
   const stKey = it.incomplete ? 'incompleto' : st;
   const meta = ST[stKey] || ST.assistindo;
   const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
-  const open = it.aberto ? `<span class="cap-open" data-pedir role="button" title="Patrocinar os próximos episódios">💰 Patrocine</span>` : '';
+  const open = it.aberto ? `<span class="cap-open" data-pedir title="Patrocinar os próximos episódios">💰 Patrocine</span>` : '';
   const nv = isNew(it);
   const novo = nv ? `<span class="cap-new">🆕 ${nv}</span>` : '';
   const pausa = it.pausa ? `<span class="cap-new cap-pausa" title="Pausada por enquanto">⏸ Em pausa</span>` : '';
@@ -124,7 +124,7 @@ function capHTML(it, i){
   const lang = lgv ? `<span class="cap-lang">${LANG[lgv]}</span>` : '';
   const imgFile = IMG_MAP[it.t] || it.img;
   const imgSrc = imgFile ? (/^https?:\/\//.test(imgFile) ? imgFile : `images/${imgFile}`) : '';
-  const art = `<span class="em">${it.em}</span>` + (imgFile ? `<img src="${imgSrc}" alt="${it.t}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
+   const art = `<span class="em">${esc(it.em)}</span>` + (imgFile ? `<img src="${esc(imgSrc)}" alt="${esc(it.t)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '');
   let info = '';
   if(it.seasons && it.seasons.length > SEG_MAX){
     // muitas temporadas: uma faixa fininha (uma risca por temporada) + o total, pra não tomar a capa toda
@@ -135,7 +135,7 @@ function capHTML(it, i){
   } else if(it.seasons && it.seasons.length){
     const desc = {g:'completa',y:'em andamento',r:'vazia / faltando'};
     const segs = it.seasons.map((s,si)=>{
-      const label = s.l || ('T'+s.n);
+         const label = esc(s.l || ('T'+s.n));
       return (s.id && s.s!=='r')
         ? `<span class="seg ${s.s} clik" data-si="${si}" data-url="${F(s.id)}" title="Assistir ${label}">${label}</span>`
         : `<span class="seg ${s.s}" title="${label} — ${desc[s.s]||''}">${label}</span>`;
@@ -153,7 +153,7 @@ function capHTML(it, i){
   const playable = isPlayable(it);
   const pago = paidQueue(it);
   const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live · ver sessões':(pago||it.pago?'📅 Já patrocinado · ver a fila':st==='fila'?'💰 Quero esse react':'⏳ React em breve · patrocine'));
-  const ask = st==='fila' && it.cat!=='vods' && !pago ? `<span class="cap-ask" data-pedir role="button">💰 Peça esse react</span>` : '';
+  const ask = st==='fila' && it.cat!=='vods' && !pago ? `<span class="cap-ask" data-pedir>💰 Peça esse react</span>` : '';
   const aka = akaHit(it);
   const secs = workSecs(it);
   const pat = (it.pat||[]).length ? `💜 ${it.pat.slice(0,2).join(', ')}${it.pat.length>2 ? ` +${it.pat.length-2}` : ''}` : '';
@@ -164,7 +164,7 @@ function capHTML(it, i){
         <div class="cap-tl">${badge}${open}${pausa}${novo}</div>
         ${tr}
         ${br}
-        <div class="cap-scrim"><div class="cap-title">${it.t}</div>${aka ? `<div class="cap-aka">${esc(aka)}</div>` : ''}${info}${ask}</div>
+        <div class="cap-scrim"><div class="cap-title">${esc(it.t)}</div>${aka ? `<div class="cap-aka">${esc(aka)}</div>` : ''}${info}${ask}</div>
         <div class="cap-hover"><span>${hover}</span>${extra ? `<small>${extra}</small>` : ''}</div>
       </div>`;
   const dim = SORT_HAS[activeSort] && !SORT_HAS[activeSort](it);   // ordem por nota/novidade/ano: apaga quem não tem

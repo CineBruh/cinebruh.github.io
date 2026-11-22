@@ -121,7 +121,7 @@ function setFrame(src){
   swapFrame(src);
   failTimer = setTimeout(()=>{ playerFail.hidden = false; }, 7000);
 }
-function showModal(){ player.classList.add('open'); document.body.classList.add('noscroll'); }
+function showModal(){ player.classList.add('open'); document.body.classList.add('noscroll'); focarModal(player, player.querySelector('.player-close')); }
 const playerOpen = () => player.classList.contains('open');
 
 /* ----- modo lista de episódios ----- */
@@ -142,7 +142,7 @@ function renderEps(){
 function renderSeasons(){
   if(!epState || !epState.seasons || epState.seasons.length < 2){ playerSeasons.hidden = true; playerSeasons.innerHTML = ''; return; }
   playerSeasons.hidden = false;
-  playerSeasons.innerHTML = epState.seasons.map((s,si)=>`<button class="psn${si===epState.si?' active':''}" data-si="${si}" type="button">${s.label}</button>`).join('');
+  playerSeasons.innerHTML = epState.seasons.map((s,si)=>`<button class="psn${si===epState.si?' active':''}" data-si="${si}" type="button">${esc(s.label)}</button>`).join('');
 }
 function selectSeason(si){
   if(!epState || !epState.seasons || !epState.seasons[si]) return;
@@ -226,6 +226,7 @@ function closePlayer(){
   epState = null; renderEps(); renderSeasons();
   playerWork = null; renderInfo(null);
   player.classList.remove('open');
+  soltarModal(player);
   document.body.classList.remove('noscroll');
   swapFrame('about:blank');
   if(typeof renderContinue === 'function') renderContinue();   // atualiza "Continuar assistindo"

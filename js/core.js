@@ -3,6 +3,9 @@
    e compartilham as variáveis de topo entre si. */
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* link vindo de dado (site.json, Trello, API): bloqueia javascript:/data:/vbscript: e já escapa pro atributo */
+const safeUrl = u => /^\s*(javascript|data|vbscript):/i.test(String(u ?? '')) ? '#' : String(u ?? '');
+const escUrl = u => esc(safeUrl(u));
 
 /* copia texto e chama done() quando terminar (com ou sem API de área de transferência) */
 function copyText(txt, done){
@@ -112,11 +115,22 @@ document.addEventListener('click', e=>{
   else go(a.dataset.nav);
 });
 
+/* janelas (player, detalhes da obra, folha "Mais"): ao abrir, o foco vai pra dentro; ao fechar, volta pro que estava antes */
+const focoAntes = new WeakMap();
+function focarModal(box, alvo){
+  if(box.contains(document.activeElement)) return;   // já estava aberta (ex.: trocou de episódio)
+  focoAntes.set(box, document.activeElement);
+  if(alvo) alvo.focus({preventScroll:true});
+}
+function soltarModal(box){
+  const el = focoAntes.get(box); focoAntes.delete(box);
+  if(el && el.focus && document.contains(el)) el.focus({preventScroll:true});
+}
 /* folha "Mais" */
 const sheet = document.getElementById('sheet');
 const tabMoreBtn = document.getElementById('tab-more');
-function openSheet(){ sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); }
-function closeSheet(){ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); }
+function openSheet(){ sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); focarModal(sheet, sheet.querySelector('.sheet-item')); }
+function closeSheet(){ if(!sheet.classList.contains('open')) return; sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); soltarModal(sheet); }
 tabMoreBtn.addEventListener('click', ()=> sheet.classList.contains('open') ? closeSheet() : openSheet());
 sheet.addEventListener('click', e=>{ if(e.target === sheet) closeSheet(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && sheet.classList.contains('open')) closeSheet(); });

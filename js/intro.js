@@ -14,10 +14,12 @@
     el.classList.add('out');
     document.documentElement.classList.remove('intro-on');
     setTimeout(() => el.remove(), 750);
-    removeEventListener('keydown', sair);
+    removeEventListener('keydown', pular);
   }
 
   const t = setTimeout(sair, DURACAO);
-  el.addEventListener('click', () => { clearTimeout(t); sair(); });
-  addEventListener('keydown', () => { clearTimeout(t); sair(); }, {once:true});
+  /* mesma função nos dois: assim o removeEventListener acima consegue tirar o da tecla */
+  function pular(){ clearTimeout(t); sair(); }
+  el.addEventListener('click', pular);
+  addEventListener('keydown', pular, {once:true});
 })();

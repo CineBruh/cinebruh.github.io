@@ -80,7 +80,7 @@ function olPlayerInner(){
       <b>${link ? `A transmissão é na ${esc(olPlatName(OFF.player))}` : 'A transmissão aparece aqui'}</b>
       ${px ? `<p>Próxima sessão: <strong>${esc(px.titulo)}</strong>${t ? `<br>${esc(olDateLabel(t))}` : ''}</p>` : '<p>Ainda não tem sessão marcada.</p>'}
       ${t && olCountdown(t) ? `<span class="cr-clock ol-clock">${olCountdown(t)}</span>` : ''}
-      ${link ? `<a class="cta" href="${esc(link)}" target="_blank" rel="noopener">▶ Assistir na ${esc(olPlatName(OFF.player))}</a>
+      ${link ? `<a class="cta" href="${escUrl(link)}" target="_blank" rel="noopener">▶ Assistir na ${esc(olPlatName(OFF.player))}</a>
         <small class="ol-ph-hint">Abre numa aba nova. O chat da Twitch continua aqui do lado.</small>` : ''}
     </div>`;
 }
@@ -138,7 +138,7 @@ function renderOffline(site){
         ${canFs ? `<button class="ol-btn" type="button" id="ol-fs" title="Transmissão e chat em tela cheia"><b>⛶</b><span>Tela cheia</span></button>` : ''}
         <button class="ol-btn${chatOn ? '' : ' active'}" type="button" id="ol-chatbtn"><b>💬</b><span>${chatOn ? 'Esconder chat' : 'Mostrar chat'}</span></button>
         ${pop ? `<a class="ol-btn" href="${pop}" target="_blank" rel="noopener" title="Abre o chat da Twitch numa janela separada"><b>↗</b><span>Chat em janela</span></a>` : ''}
-        ${link ? `<a class="ol-btn" href="${esc(link)}" target="_blank" rel="noopener"><b>↗</b><span>Abrir na ${esc(olPlatName(OFF.player))}</span></a>` : ''}
+        ${link ? `<a class="ol-btn" href="${escUrl(link)}" target="_blank" rel="noopener"><b>↗</b><span>Abrir na ${esc(olPlatName(OFF.player))}</span></a>` : ''}
       </div>
     </div>
 
@@ -160,7 +160,7 @@ function renderOffline(site){
           ${px.aviso ? `<p class="ol-warn">⚠️ ${esc(px.aviso)}</p>` : ''}
           ${px.patrocinador ? `<p class="cr-sp">💜 Patrocínio de <b>${esc(px.patrocinador)}</b></p>` : ''}
           <div class="cta-row" style="margin-top:14px">
-            ${t && t > Date.now() ? `<a class="cta" href="${esc(olCalendar(px, t))}" target="_blank" rel="noopener">📅 Lembrar na agenda</a>` : ''}
+            ${t && t > Date.now() ? `<a class="cta" href="${escUrl(olCalendar(px, t))}" target="_blank" rel="noopener">📅 Lembrar na agenda</a>` : ''}
             <a class="cta alt" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener">🔔 Avisos no Discord</a>
           </div>
         </div>` : ''}
