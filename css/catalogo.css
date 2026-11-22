@@ -79,6 +79,8 @@
 .cap-scrim{position:absolute;left:0;right:0;bottom:0;padding:var(--s6) var(--s2) var(--s2);background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,0))}
 .cap-title{font-family:var(--display);color:#fff;font-size:15px;line-height:1.05;text-shadow:0 1px 5px rgba(0,0,0,.7);overflow-wrap:anywhere}
 .cap-meta{display:flex;flex-wrap:wrap;gap:var(--s1);align-items:center;margin-top:var(--s2)}
+/* reserva espaço à direita quando há selo de nota (.cap-br), evitando colisão com os chips de temporada */
+.cap-br + .cap-scrim .cap-meta{padding-right:52px}
 /* selos dentro da capa: miniaturas, ficam fora da escala de propósito */
 .seg{font-family:var(--display);font-size:11px;line-height:1;color:#fff;border:2px solid rgba(255,255,255,.55);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
 .seg.clik{cursor:pointer;transition:filter .12s,transform .12s}
@@ -167,6 +169,7 @@ a.rp-chip:hover{transform:translate(-1px,-1px)}
   .cap-art .em{font-size:40px}
   .cap-title{font-size:12px}
   .cap-meta{gap:3px;margin-top:var(--s1)}
+  .cap-br + .cap-scrim .cap-meta{padding-right:42px}
   .seg,.cap-eps,.cap-lang,.cap-nota{font-size:9px;padding:3px 6px;border-width:1.5px}
   .cap-badge,.cap-open,.cap-new{font-size:9px;padding:2px 5px;letter-spacing:.3px}
   .cap-tr .cap-lang{height:20px;padding:0 6px;border-width:2px}
