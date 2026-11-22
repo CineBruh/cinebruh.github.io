@@ -1,7 +1,7 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-22T05:06:51-03:00",
+  "atualizadoEm": "2026-11-22T19:31:58-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
@@ -131,8 +131,7 @@
       "titulo": "O Senhor dos Anéis (Trilogia)",
       "cat": "filmes",
       "lang": "dub",
-      "eps": "Filmes ·",
-      "patrocinador": "Versão extendida"
+      "patrocinador": "Locknell"
     },
     {
       "titulo": "A Janela Secreta",
@@ -151,6 +150,13 @@
       "cat": "filmes",
       "lang": "dub",
       "patrocinador": "Locknell"
+    },
+    {
+      "titulo": "Mobile Suit Gundam (Filmes 1, 2 e 3)",
+      "cat": "filmes",
+      "lang": "leg",
+      "status": "standby",
+      "patrocinador": "DoctorFoxtrot"
     },
     {
       "titulo": "Mobile Suit Gundam: Char Contra-ataca!",
