@@ -29,11 +29,18 @@ const olChatSrc = () => OFF && OFF.chat && OL_HOST
   ? `https://www.twitch.tv/embed/${encodeURIComponent(OFF.chat)}/chat?parent=${OL_HOST}${olDark() ? '&darkpopout' : ''}` : '';
 const olChatPopout = () => OFF && OFF.chat ? `https://www.twitch.tv/popout/${encodeURIComponent(OFF.chat)}/chat?popout=` : '';
 
-/* horário da próxima sessão (sempre em horário de Brasília) */
+/* horário da próxima sessão (sempre em horário de Brasília); ignora datas já passadas */
 function olWhen(px){
   if(!px || !px.data) return null;
   const t = Date.parse(`${px.data}T${px.hora || '23:00'}:00-03:00`);
   return isNaN(t) ? null : t;
+}
+function olNext(){
+  const px = OFF && OFF.proxima;
+  if(!px) return null;
+  const t = olWhen(px);
+  if(t !== null && t <= Date.now() - 4 * 3600e3) return null;
+  return px;
 }
 function olCountdown(t){
   if(!t) return '';
@@ -59,11 +66,11 @@ function olCalendar(px, t){
   return `https://calendar.google.com/calendar/render?${q}`;
 }
 
-const olNeedsAge = () => OFF && OFF.proxima && String(OFF.proxima.classificacao) === '18' && localStorage.getItem(OL_AGE_KEY) !== '1';
+const olNeedsAge = () => { const px = olNext(); return !!(px && String(px.classificacao) === '18' && localStorage.getItem(OL_AGE_KEY) !== '1'); };
 
 /* ---------- conteúdo do quadro grande ---------- */
 function olPlayerInner(){
-  const px = OFF.proxima, t = olWhen(px);
+  const px = olNext(), t = olWhen(px);
   const src = olPlayerSrc(OFF.player);
   if(src && olNeedsAge()) return `<div class="ol-ph ol-gate">
       <span class="ol-ph-ic">🔞</span>
@@ -124,10 +131,35 @@ function renderOffline(site){
   OFF = site.offline || null;
   const el = document.getElementById('offline-box');
   if(!OFF){ el.innerHTML = '<div class="band"><div class="soon"><p>Em breve 💜</p></div></div>'; return; }
-  const px = OFF.proxima, t = olWhen(px);
+  const px = olNext(), t = olWhen(px);
   const link = olPlayerLink(OFF.player), pop = olChatPopout();
   const canFs = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
   const chatOn = localStorage.getItem(OL_CHAT_KEY) !== '0';
+  const nextCard = px ? `<div class="ol-next">
+          <span class="mk-kicker">Próxima sessão</span>
+          <h3 id="ol-next-t">${esc(px.titulo)}</h3>
+          <div class="ol-badges">
+            ${String(px.classificacao) === '18' ? '<span class="ol-age">18+</span>' : px.classificacao ? `<span class="ol-age a${esc(px.classificacao)}">${esc(px.classificacao)}</span>` : ''}
+            ${px.cat && CAT_LABEL[px.cat] ? `<span class="chip">${CAT_LABEL[px.cat]}</span>` : ''}
+            ${px.lang === 'dub' ? '<span class="chip">🎙️ Dublado</span>' : px.lang === 'leg' ? '<span class="chip">💬 Legendado</span>' : ''}
+          </div>
+          ${t ? `<p class="ol-when">📅 ${esc(olDateLabel(t))} <small>(Brasília)</small></p>` : ''}
+          ${t && olCountdown(t) ? `<span class="cr-clock ol-clock">${olCountdown(t)}</span>` : ''}
+          ${px.aviso ? `<p class="ol-warn">⚠️ ${esc(px.aviso)}</p>` : ''}
+          ${px.patrocinador ? `<p class="cr-sp">💜 Patrocínio de <b>${esc(px.patrocinador)}</b></p>` : ''}
+          <div class="cta-row" style="margin-top:14px">
+            ${t && t > Date.now() ? `<a class="cta" href="${escUrl(olCalendar(px, t))}" target="_blank" rel="noopener">📅 Lembrar na agenda</a>` : ''}
+            <a class="cta alt" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener">🔔 Avisos no Discord</a>
+          </div>
+        </div>`
+    : `<div class="ol-next">
+          <span class="mk-kicker">Próxima sessão</span>
+          <h3>Ainda não tem sessão marcada</h3>
+          <p class="ol-when" style="font-weight:400;opacity:.8">Quando a Bruna agendar o próximo React Offline, ele aparece aqui.</p>
+          <div class="cta-row" style="margin-top:14px">
+            <a class="cta alt" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener">🔔 Avisos no Discord</a>
+          </div>
+        </div>`;
 
   el.innerHTML = `
     <div class="ol${chatOn ? '' : ' no-chat'}" id="ol-wrap">
@@ -147,23 +179,7 @@ function renderOffline(site){
       ${OFF.intro ? `<p class="band-sub">${esc(OFF.intro)}</p>` : ''}
 
       <div class="ol-cards">
-        ${px ? `<div class="ol-next">
-          <span class="mk-kicker">Próxima sessão</span>
-          <h3 id="ol-next-t">${esc(px.titulo)}</h3>
-          <div class="ol-badges">
-            ${String(px.classificacao) === '18' ? '<span class="ol-age">18+</span>' : px.classificacao ? `<span class="ol-age a${esc(px.classificacao)}">${esc(px.classificacao)}</span>` : ''}
-            ${px.cat && CAT_LABEL[px.cat] ? `<span class="chip">${CAT_LABEL[px.cat]}</span>` : ''}
-            ${px.lang === 'dub' ? '<span class="chip">🎙️ Dublado</span>' : px.lang === 'leg' ? '<span class="chip">💬 Legendado</span>' : ''}
-          </div>
-          ${t ? `<p class="ol-when">📅 ${esc(olDateLabel(t))} <small>(Brasília)</small></p>` : ''}
-          ${t && olCountdown(t) ? `<span class="cr-clock ol-clock">${olCountdown(t)}</span>` : ''}
-          ${px.aviso ? `<p class="ol-warn">⚠️ ${esc(px.aviso)}</p>` : ''}
-          ${px.patrocinador ? `<p class="cr-sp">💜 Patrocínio de <b>${esc(px.patrocinador)}</b></p>` : ''}
-          <div class="cta-row" style="margin-top:14px">
-            ${t && t > Date.now() ? `<a class="cta" href="${escUrl(olCalendar(px, t))}" target="_blank" rel="noopener">📅 Lembrar na agenda</a>` : ''}
-            <a class="cta alt" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener">🔔 Avisos no Discord</a>
-          </div>
-        </div>` : ''}
+        ${nextCard}
         ${(OFF.comoFunciona||[]).length ? `<div class="mk-card"><h4>Como funciona</h4>
           <ol class="ol-steps">${OFF.comoFunciona.map(s=>`<li>${esc(s)}</li>`).join('')}</ol></div>` : ''}
       </div>
@@ -195,7 +211,7 @@ function renderOfflineQueue(){
   if(!box || !DATA_READY) return;
   const list = DATA.filter(d => statusOf(d) === 'embreve');
   if(!list.length){ box.innerHTML = ''; return; }
-  const nxt = OFF && OFF.proxima ? slugify(OFF.proxima.titulo) : '';
+  const px = olNext(), nxt = px ? slugify(px.titulo) : '';
   box.innerHTML = `<h3 class="mk-h">Na fila do Off Live <span class="cm-count">${list.length}</span></h3>
     <div class="mk-cats">${list.map(d=>`<span class="chip${d._slug === nxt ? ' ol-chip-next' : ''}">${esc(d.em || '🎬')} ${esc(d.t)}${d._slug === nxt ? ' · próxima' : ''}</span>`).join('')}</div>`;
 }
@@ -204,7 +220,7 @@ onRoute.offline = () => {
   olMount();
   clearInterval(olTimer);
   olTimer = setInterval(()=>{
-    const t = OFF && olWhen(OFF.proxima);
+    const t = olWhen(olNext());
     document.querySelectorAll('.ol-clock').forEach(k => k.textContent = olCountdown(t));
   }, 30e3);
 };
