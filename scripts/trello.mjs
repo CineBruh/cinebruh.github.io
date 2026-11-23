@@ -75,7 +75,8 @@ function readLabels(names) {
 
 // ───────────────────────────── DESCRIÇÃO ─────────────────────────────
 const DESC_KEYS = { tmdb: 'tmdb', drive: 'drive', dia: 'dia', 'patrocinado por': 'pat', patrocinadores: 'pat',
-  review: 'review', obs: 'obs', classificacao: 'classificacao', aviso: 'aviso' };
+  review: 'review', obs: 'obs', classificacao: 'classificacao', aviso: 'aviso',
+  status: 'status', inicio: 'inicio', resumo: 'resumo' };
 function parseDesc(desc) {
   const out = {};
   let cur = null;
@@ -83,7 +84,7 @@ function parseDesc(desc) {
     const m = line.match(/^\s*\**\s*([A-Za-zÀ-ú ]{2,20}?)\s*\**\s*:\s*(.*)$/);
     const key = m && DESC_KEYS[keyOf(m[1])];
     if (key) { cur = key; out[key] = plain(m[2]); continue; }
-    if (cur === 'review' || cur === 'obs' || cur === 'aviso') {     // texto que continua na linha de baixo
+    if (cur === 'review' || cur === 'obs' || cur === 'aviso' || cur === 'resumo') {     // texto que continua na linha de baixo
       const t = plain(line);
       if (t) out[cur] = (out[cur] ? out[cur] + '\n' : '') + t;
     }
@@ -274,12 +275,45 @@ function sponsorsFor(work, eps) {
   return nicks;
 }
 
+function parseSubathonState(raw) {
+  const k = keyOf(raw).replace(/\s+/g, '');
+  if (!k) return null;
+  if (['ativo', 'aovivo', 'live', 'on', 'subathonativo'].includes(k)) return 'ativo';
+  if (['breve', 'embreve', 'subathonbreve'].includes(k)) return 'breve';
+  if (['encerrado', 'encerrada', 'finalizado', 'finalizada', 'fim', 'subathonencerrado'].includes(k)) return 'encerrado';
+  if (['off', 'desligado', 'desligada', 'inativo'].includes(k)) return 'off';
+  return null;
+}
+
+function parseSubathon(cards) {
+  const card = cards.find(c => (c.kind === 'cronograma' || c.kind === 'infos') && /^subathon\b/.test(keyOf(c.name)));
+  if (!card) return null;
+  let estado = parseSubathonState(card.desc.status);
+  if (!estado) {
+    for (const fl of card.flags) {
+      const s = parseSubathonState(fl);
+      if (s) { estado = s; break; }
+    }
+  }
+  if (!estado || estado === 'off') return null;
+  const metas = card.checklists.flatMap(cl => cl.items).map(i => ({ texto: i.text, feita: i.done })).filter(m => m.texto);
+  return {
+    estado,
+    ...(card.desc.inicio ? { inicio: card.desc.inicio } : {}),
+    ...(card.desc.obs ? { obs: card.desc.obs } : {}),
+    ...(card.desc.resumo ? { resumo: card.desc.resumo } : {}),
+    ...(metas.length ? { metas } : {}),
+  };
+}
+
 export function buildCronograma(cards, works, idx, warn, horarioPadrao = '23h') {
   const now = brNow(), today = iso(now);
   const days = new Map();
   let offline = null;
+  const subathon = parseSubathon(cards);
   const crono = cards.filter(c => c.kind === 'cronograma');
   for (const c of crono) {
+    if (/^subathon\b/.test(keyOf(c.name))) continue;
     const d = parseDayTitle(c.name, today);
     if (!d) { warn(`Cartão do CRONOGRAMA sem data no título (ignorado): "${c.name}"`); continue; }
     const fl = c.flags;
@@ -354,7 +388,7 @@ export function buildCronograma(cards, works, idx, warn, horarioPadrao = '23h') 
     }
   }
   if (offline) delete offline._t;
-  return { horario: horarioPadrao, dias, fila, offline };
+  return { horario: horarioPadrao, dias, fila, offline, subathon };
 }
 function rangeText(nums) {
   const s = [...new Set(nums)].sort((a, b) => a - b);

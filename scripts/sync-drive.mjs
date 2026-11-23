@@ -460,6 +460,7 @@ async function writeCronograma(cr) {
     dias: cr.dias,
     fila: cr.fila,
     ...(cr.offline ? { offline: cr.offline } : {}),
+    ...(cr.subathon ? { subathon: cr.subathon } : {}),
   };
   const same = !prev.exemplo && JSON.stringify({ ...prev, atualizadoEm: null, _leia: null }) === JSON.stringify({ ...body, _leia: null });
   if (same) { console.log(`📅 ${CRONO_FILE}: nada mudou.`); return; }
