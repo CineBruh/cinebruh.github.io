@@ -1,9 +1,13 @@
-# Cloudflare Worker · Cinebruh API (Etapa 2A: LivePix)
+# Cloudflare Worker · Cinebruh API (Etapa 2A + 2B: LivePix -> Discord/Trello)
 # NUNCA coloque chaves ou segredos neste arquivo (repositório público).
 # Cadastre os segredos via:
 #   npx wrangler secret put LIVEPIX_CLIENT_ID
 #   npx wrangler secret put LIVEPIX_CLIENT_SECRET
 #   npx wrangler secret put LIVEPIX_WEBHOOK_SECRET
+#   npx wrangler secret put DISCORD_WEBHOOK_PEDIDOS
+#   npx wrangler secret put TRELLO_KEY
+#   npx wrangler secret put TRELLO_TOKEN
+#   npx wrangler secret put TRELLO_LIST_PEDIDOS
 
 name = "cinebruh-api"
 main = "src/index.js"
@@ -13,3 +17,8 @@ compatibility_date = "2026-11-01"
 ALLOWED_ORIGINS = "https://cinebruh.github.io,http://localhost:8080,http://localhost:3000"
 SITE_URL = "https://cinebruh.github.io"
 LIVEPIX_SCOPE = "payments:write payments:read webhooks"
+
+# Etapa 2B (opcional): descomente após criar o namespace com `npx wrangler kv namespace create PEDIDOS_KV`
+# [[kv_namespaces]]
+# binding = "PEDIDOS_KV"
+# id = "SEU_KV_NAMESPACE_ID"

@@ -1,20 +1,21 @@
 /**
- * Cinebruh API · Cloudflare Worker (Etapa 2A: LivePix)
+ * Cinebruh API · Cloudflare Worker (Etapas 2A + 2B: LivePix -> Discord / Trello)
  *
  * Rotas:
- *   GET  /health               -> status do Worker e se a LivePix está configurada
+ *   GET  /health               -> status do Worker e quais integrações estão ativas
  *   POST /api/pedido           -> recalcula o pedido no servidor e cria pagamento na LivePix
  *   POST /api/donate           -> valida valor/mensagem e cria pagamento na LivePix
- *   POST /api/webhook/livepix  -> receptor de webhooks (base pronta para a Etapa 2B)
+ *   POST /api/webhook/livepix  -> confirma pagamento, evita duplicidade (KV) e avisa Discord / cria cartão no Trello
  *
  * Segredos (definidos no painel da Cloudflare ou via `wrangler secret put`):
- *   LIVEPIX_CLIENT_ID
- *   LIVEPIX_CLIENT_SECRET
- *   LIVEPIX_WEBHOOK_SECRET     (opcional na 2A; usado na 2B)
+ *   LIVEPIX_CLIENT_ID, LIVEPIX_CLIENT_SECRET, LIVEPIX_WEBHOOK_SECRET
+ *   DISCORD_WEBHOOK_PEDIDOS    (opcional — aviso de pedido pago no canal privado)
+ *   TRELLO_KEY, TRELLO_TOKEN, TRELLO_LIST_PEDIDOS (opcional — cria cartão na lista de conferência)
  */
 
 const LIVEPIX_OAUTH_URL = 'https://oauth.livepix.gg/oauth2/token';
 const LIVEPIX_PAYMENTS_URL = 'https://api.livepix.gg/v2/payments';
+const TRELLO_CARDS_URL = 'https://api.trello.com/1/cards';
 
 /* Espelha as regras de site.json -> precos.
    Se mudar algum preço no site.json, atualize aqui também. */
@@ -44,6 +45,7 @@ const FAIXA_NOME = {
 };
 
 let tokenCache = { value: null, exp: 0 };
+const processedMem = new Set();
 
 /* ---------- Helpers HTTP / CORS ---------- */
 function allowedOrigins(env) {
@@ -78,6 +80,10 @@ function json(data, status = 200, request, env) {
 
 function cleanText(v, max = 140) {
   return String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, max);
+}
+
+function fmtBRL(v) {
+  return 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 /* ---------- Cálculo de preço no servidor (nunca confia no valor do cliente) ---------- */
@@ -160,9 +166,7 @@ async function getLivePixToken(env) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: form.toString(),
   });
-  if (!res.ok) {
-    throw new Error(`LivePix OAuth HTTP ${res.status}`);
-  }
+  if (!res.ok) throw new Error(`LivePix OAuth HTTP ${res.status}`);
   const data = await res.json();
   if (!data.access_token) throw new Error('LivePix OAuth sem access_token');
   tokenCache = {
@@ -195,9 +199,7 @@ async function createLivePixPayment(env, { amountCents, redirectUrl }) {
       redirectUrl,
     }),
   });
-  if (!res.ok) {
-    throw new Error(`LivePix Payment HTTP ${res.status}`);
-  }
+  if (!res.ok) throw new Error(`LivePix Payment HTTP ${res.status}`);
   const body = await res.json();
   const data = body?.data || body || {};
   return {
@@ -209,6 +211,104 @@ async function createLivePixPayment(env, { amountCents, redirectUrl }) {
 
 function isLivePixReady(env) {
   return env?.MOCK_LIVEPIX === '1' || Boolean(env?.LIVEPIX_CLIENT_ID && env?.LIVEPIX_CLIENT_SECRET);
+}
+
+/* ---------- Etapa 2B: KV (idempotência + metadados), Trello e Discord ---------- */
+async function kvSaveOrder(env, ref, data) {
+  if (!env?.PEDIDOS_KV || !ref) return;
+  try {
+    await env.PEDIDOS_KV.put(`order:${ref}`, JSON.stringify({ ...data, createdAt: new Date().toISOString() }), {
+      expirationTtl: 7 * 86400,
+    });
+  } catch {}
+}
+
+async function kvGetOrder(env, ref) {
+  if (!env?.PEDIDOS_KV || !ref) return null;
+  try {
+    const raw = await env.PEDIDOS_KV.get(`order:${ref}`);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+async function isDuplicate(env, ref) {
+  if (!ref) return false;
+  if (processedMem.has(ref)) return true;
+  if (env?.PEDIDOS_KV) {
+    try {
+      const done = await env.PEDIDOS_KV.get(`done:${ref}`);
+      if (done) { processedMem.add(ref); return true; }
+    } catch {}
+  }
+  return false;
+}
+
+async function markProcessed(env, ref) {
+  if (!ref) return;
+  processedMem.add(ref);
+  if (processedMem.size > 500) processedMem.clear();
+  if (env?.PEDIDOS_KV) {
+    try {
+      await env.PEDIDOS_KV.put(`done:${ref}`, new Date().toISOString(), { expirationTtl: 30 * 86400 });
+    } catch {}
+  }
+}
+
+async function createTrelloOrderCard(env, order, ref) {
+  if (!env?.TRELLO_KEY || !env?.TRELLO_TOKEN || !env?.TRELLO_LIST_PEDIDOS) return null;
+  if (!order || order.kind !== 'pedido') return null;
+  const descLines = [
+    order.nick ? `Patrocinado por: ${order.nick}` : null,
+    `Obs: ${order.descricao}`,
+    `Valor pago: ${fmtBRL(order.valor)} (LivePix ref: ${ref})`,
+  ].filter(Boolean);
+
+  if (env?.MOCK_EXTERNAL === '1') {
+    return { mock: true, url: `https://trello.com/c/mock-${ref}`, name: order.titulo };
+  }
+
+  const params = new URLSearchParams({
+    key: env.TRELLO_KEY,
+    token: env.TRELLO_TOKEN,
+    idList: env.TRELLO_LIST_PEDIDOS,
+    name: order.titulo,
+    desc: descLines.join('\n'),
+  });
+  const res = await fetch(`${TRELLO_CARDS_URL}?${params.toString()}`, { method: 'POST' });
+  if (!res.ok) throw new Error(`Trello HTTP ${res.status}`);
+  const card = await res.json();
+  return { id: card.id, url: card.shortUrl || card.url || null };
+}
+
+async function notifyDiscordPayment(env, order, ref, trelloCard) {
+  if (!env?.DISCORD_WEBHOOK_PEDIDOS) return false;
+  const isPedido = order && order.kind === 'pedido';
+  const title = isPedido ? `🎬 Novo pedido pago: ${order.titulo}` : '💜 Novo Pix confirmado (LivePix)';
+  const fields = [];
+  if (order?.valor != null) fields.push({ name: 'Valor', value: fmtBRL(order.valor), inline: true });
+  if (order?.nick || order?.nome) fields.push({ name: 'Quem', value: order.nick || order.nome, inline: true });
+  if (order?.descricao) fields.push({ name: 'Detalhes', value: order.descricao });
+  if (order?.mensagem) fields.push({ name: 'Mensagem', value: order.mensagem });
+  if (trelloCard?.url) fields.push({ name: 'Cartão no Trello', value: trelloCard.url });
+  fields.push({ name: 'Referência LivePix', value: `\`${ref}\``, inline: true });
+
+  if (env?.MOCK_EXTERNAL === '1') return true;
+
+  const res = await fetch(env.DISCORD_WEBHOOK_PEDIDOS, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      embeds: [{
+        title,
+        color: isPedido ? 0xff68b4 : 0x9146ff,
+        fields,
+        timestamp: new Date().toISOString(),
+      }],
+    }),
+  });
+  return res.ok;
 }
 
 /* ---------- Roteador principal ---------- */
@@ -226,6 +326,9 @@ export async function handleRequest(request, env = {}) {
       ok: true,
       service: 'cinebruh-api',
       livepix: isLivePixReady(env),
+      kv: Boolean(env?.PEDIDOS_KV),
+      discord: Boolean(env?.DISCORD_WEBHOOK_PEDIDOS),
+      trello: Boolean(env?.TRELLO_KEY && env?.TRELLO_TOKEN && env?.TRELLO_LIST_PEDIDOS),
       mock: env?.MOCK_LIVEPIX === '1',
     }, 200, request, env);
   }
@@ -243,6 +346,18 @@ export async function handleRequest(request, env = {}) {
         amountCents: calc.amountCents,
         redirectUrl: `${siteUrl}/#/patrocinar`,
       });
+      await kvSaveOrder(env, pay.reference, {
+        kind: 'pedido',
+        titulo: calc.titulo,
+        tipo: calc.tipo,
+        dur: calc.dur,
+        s: calc.s,
+        de: calc.de,
+        ate: calc.ate,
+        nick: calc.nick,
+        valor: calc.valor,
+        descricao: calc.descricao,
+      });
       return json({
         ok: true,
         valor: calc.valor,
@@ -251,7 +366,7 @@ export async function handleRequest(request, env = {}) {
         redirectUrl: pay.redirectUrl,
         mock: pay.mock,
       }, 201, request, env);
-    } catch (err) {
+    } catch {
       return json({ error: 'Não consegui gerar o pagamento na LivePix agora.' }, 502, request, env);
     }
   }
@@ -269,6 +384,12 @@ export async function handleRequest(request, env = {}) {
         amountCents: don.amountCents,
         redirectUrl: `${siteUrl}/#/apoiar`,
       });
+      await kvSaveOrder(env, pay.reference, {
+        kind: 'donate',
+        nome: don.nome,
+        mensagem: don.mensagem,
+        valor: don.valor,
+      });
       return json({
         ok: true,
         valor: don.valor,
@@ -278,20 +399,44 @@ export async function handleRequest(request, env = {}) {
         redirectUrl: pay.redirectUrl,
         mock: pay.mock,
       }, 201, request, env);
-    } catch (err) {
+    } catch {
       return json({ error: 'Não consegui gerar o pagamento na LivePix agora.' }, 502, request, env);
     }
   }
 
   if (request.method === 'POST' && path === '/api/webhook/livepix') {
-    // Base preparada para a Etapa 2B (confirmação -> aviso no Discord / cartão no Trello).
     if (env?.LIVEPIX_WEBHOOK_SECRET) {
-      const got = request.headers.get('X-LivePix-Secret') || '';
+      const got = request.headers.get('X-LivePix-Secret') || url.searchParams.get('secret') || '';
       if (got !== env.LIVEPIX_WEBHOOK_SECRET) {
         return json({ error: 'Unauthorized' }, 401, request, env);
       }
     }
-    return json({ ok: true, received: true }, 200, request, env);
+    let payload = {};
+    try { payload = await request.json(); } catch { return json({ error: 'JSON inválido.' }, 400, request, env); }
+
+    const res = payload?.resource || payload?.data || payload || {};
+    const ref = String(res.reference || res.id || payload.reference || '').trim();
+    if (!ref) return json({ ok: true, ignored: true }, 200, request, env);
+
+    if (await isDuplicate(env, ref)) {
+      return json({ ok: true, duplicate: true, reference: ref }, 200, request, env);
+    }
+
+    const order = await kvGetOrder(env, ref);
+    let trelloCard = null;
+    let discordSent = false;
+    try { trelloCard = await createTrelloOrderCard(env, order, ref); } catch {}
+    try { discordSent = await notifyDiscordPayment(env, order, ref, trelloCard); } catch {}
+
+    await markProcessed(env, ref);
+    return json({
+      ok: true,
+      processed: true,
+      reference: ref,
+      foundOrder: Boolean(order),
+      trello: Boolean(trelloCard),
+      discord: discordSent,
+    }, 200, request, env);
   }
 
   return json({ error: 'Rota não encontrada.' }, 404, request, env);
