@@ -1,0 +1,15 @@
+# Cloudflare Worker · Cinebruh API (Etapa 2A: LivePix)
+# NUNCA coloque chaves ou segredos neste arquivo (repositório público).
+# Cadastre os segredos via:
+#   npx wrangler secret put LIVEPIX_CLIENT_ID
+#   npx wrangler secret put LIVEPIX_CLIENT_SECRET
+#   npx wrangler secret put LIVEPIX_WEBHOOK_SECRET
+
+name = "cinebruh-api"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://cinebruh.github.io,http://localhost:8080,http://localhost:3000"
+SITE_URL = "https://cinebruh.github.io"
+LIVEPIX_SCOPE = "payments:write payments:read webhooks"
