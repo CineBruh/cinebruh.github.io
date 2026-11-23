@@ -386,6 +386,19 @@ body.ol-cinema .ol{--sw:0px}
 .ap-bit b{font-family:var(--display);font-size:var(--fs-md);color:#9146FF}
 .ap-bit span{font-size:var(--fs-sm)}
 .ap-subs{display:grid;gap:var(--s2) var(--s5);grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));padding-left:var(--s5);font-size:var(--fs-sm)}
+/* formulário de donate LivePix (só aparece quando site.json -> api.livepix = true) */
+.ap-don{margin-top:var(--s5);background:var(--paper);border:3px solid var(--border);border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--shadow)}
+.ap-don h3{font-family:var(--display);font-size:clamp(20px,3vw,26px);text-transform:uppercase;line-height:1.05;margin-top:var(--s1)}
+.ap-don > p{margin-top:var(--s2);font-size:var(--fs-sm);color:var(--muted)}
+.ap-don-presets{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.ap-don-grid{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));margin-top:var(--s4)}
+.ap-don-f{display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.ap-don-wide{grid-column:1/-1}
+.ap-don-f > span{font-size:var(--fs-xs);font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+/* 16px: abaixo disso o iPhone dá zoom ao tocar no campo */
+.ap-don-f input{font:inherit;font-size:var(--fs-md);color:var(--ink);background:var(--bg);border:3px solid var(--border);border-radius:var(--r-md);min-height:var(--h-ctl);padding:0 var(--s3);min-width:0;width:100%}
+.ap-don-err{font-size:var(--fs-sm);font-weight:700;color:#d93636;align-self:center}
+@media (max-width:600px){ .ap-don{padding:var(--s4)} }
 
 /* ---------- Comunidade ---------- */
 .cm-spaces{display:grid;gap:var(--gap-grid);grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));margin-top:var(--s4)}

@@ -32,6 +32,12 @@
     "kick": "brunarodrigues"
   },
 
+  "api": {
+    "_leia": "Fase 2 (Cloudflare Worker em worker/). Enquanto url for null ou livepix for false, o site funciona igual à Fase 1.",
+    "url": null,
+    "livepix": false
+  },
+
   "links": [
     { "id": "twitch",    "nome": "Twitch",    "url": "https://twitch.tv/brunarodrigues",       "user": "brunarodrigues", "destaque": true },
     { "id": "kick",      "nome": "Kick",      "url": "https://kick.com/brunarodrigues",        "user": "brunarodrigues", "destaque": true },

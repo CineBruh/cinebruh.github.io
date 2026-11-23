@@ -7,6 +7,7 @@ function renderApoiar(site){
   const ind = (site.apoioIndireto || []);
   const parc = ((site.canal || {}).parcerias || []).filter(p => p.cupom);
   const subs = site.subs || {};
+  const apiUrl = (site.api && site.api.livepix && site.api.url) ? String(site.api.url).replace(/\/+$/, '') : null;
   const ICO = {livepix:'💸', pixgg:'⚡', wise:'🌍', incentive:'🎯', amazon:'📦', 'amazon-wishlist':'🎁', 'steam-wishlist':'🎮', epic:'🕹️'};
 
   el.innerHTML = `
@@ -19,6 +20,24 @@ function renderApoiar(site){
         <span class="ap-small">Chave ${esc(pix.tipoChave || '')}</span>
       </div>
     </div>` : ''}
+
+    ${apiUrl ? `<form class="ap-don" id="ap-don" novalidate>
+      <span class="mk-kicker">Com mensagem na tela</span>
+      <h3>💸 Enviar Pix pelo LivePix</h3>
+      <p>Escolha o valor, escreva sua mensagem e vá direto pro pagamento.</p>
+      <div class="ap-don-presets">
+        ${[5, 10, 20, 50].map(v => `<button class="lpill" type="button" data-don-v="${v}">R$${v}</button>`).join('')}
+      </div>
+      <div class="ap-don-grid">
+        <label class="ap-don-f"><span>Seu nome / nick</span><input id="don-nome" type="text" maxlength="40" placeholder="Como aparece na tela" autocomplete="off"></label>
+        <label class="ap-don-f"><span>Valor (R$)</span><input id="don-val" type="number" min="2" max="5000" step="1" value="10" inputmode="decimal"></label>
+        <label class="ap-don-f ap-don-wide"><span>Mensagem</span><input id="don-msg" type="text" maxlength="250" placeholder="Mande um recado pra Bruna…" autocomplete="off"></label>
+      </div>
+      <div class="cta-row" style="margin-top:16px">
+        <button class="cta" type="submit" id="don-go">💸 Gerar Pix no LivePix</button>
+        <span class="ap-don-err" id="don-err" role="status" aria-live="polite"></span>
+      </div>
+    </form>` : ''}
 
     ${outras.length ? [['Com mensagem na tela', outras.filter(o => o.tela)], ['Outras formas de doar', outras.filter(o => !o.tela)]]
       .filter(([, l]) => l.length).map(([tit, l]) => `<h3 class="mk-h">${tit}</h3>
@@ -50,7 +69,46 @@ function renderApoiar(site){
 }
 
 document.getElementById('apoiar-box').addEventListener('click', e=>{
+  const pv = e.target.closest('[data-don-v]');
+  if(pv){
+    const inp = document.getElementById('don-val');
+    if(inp) inp.value = pv.dataset.donV;
+    return;
+  }
   const b = e.target.closest('[data-copy]'); if(!b || !b.dataset.copy) return;
   const original = b.innerHTML;
   copyText(b.dataset.copy, ()=>{ b.innerHTML = '<span class="txt"><b>Copiado! ✅</b></span>'; setTimeout(()=>b.innerHTML = original, 1600); });
+});
+
+document.getElementById('apoiar-box').addEventListener('submit', e=>{
+  if(e.target.id !== 'ap-don') return;
+  e.preventDefault();
+  const apiUrl = (typeof SITE !== 'undefined' && SITE && SITE.api && SITE.api.livepix && SITE.api.url) ? String(SITE.api.url).replace(/\/+$/, '') : null;
+  if(!apiUrl) return;
+  const nome = (document.getElementById('don-nome') || {}).value?.trim() || '';
+  const valor = Number(String((document.getElementById('don-val') || {}).value || '').replace(',', '.'));
+  const mensagem = (document.getElementById('don-msg') || {}).value?.trim() || '';
+  const errEl = document.getElementById('don-err');
+  const btn = document.getElementById('don-go');
+  if(!Number.isFinite(valor) || valor < 2){
+    if(errEl) errEl.textContent = 'Informe um valor a partir de R$2.';
+    return;
+  }
+  if(errEl) errEl.textContent = '';
+  const orig = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Gerando Pix…';
+  fetch(`${apiUrl}/api/donate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nome, valor, mensagem }),
+  }).then(r => r.json().then(j => ({ ok: r.ok, j }))).then(({ ok, j }) => {
+    if(ok && j && j.redirectUrl){
+      const w = window.open(j.redirectUrl, '_blank', 'noopener');
+      if(!w) location.href = j.redirectUrl;
+      return;
+    }
+    throw new Error((j && j.error) || 'Não consegui gerar o Pix agora.');
+  }).catch(err => {
+    if(errEl) errEl.textContent = err.message || 'Não consegui gerar o Pix agora.';
+  }).finally(() => { btn.disabled = false; btn.textContent = orig; });
 });

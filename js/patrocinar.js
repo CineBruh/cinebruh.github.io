@@ -301,6 +301,7 @@ window.copyPix = copyPix;
    O preço do episódio depende da DURAÇÃO, não da categoria:
    curto (até 30 min: anime, animação ou série curta) · até 1h · mais de 1h. Filme: até 2h · mais de 2h. */
 const PRECO = () => (typeof SITE !== 'undefined' && SITE && SITE.precos) || null;
+const apiLivePixUrl = () => (typeof SITE !== 'undefined' && SITE && SITE.api && SITE.api.livepix && SITE.api.url) ? String(SITE.api.url).replace(/\/+$/, '') : null;
 const precoItem = id => { const p = PRECO(); return p ? (p.itens||[]).find(i=>i.id===id) || null : null; };
 const fmtBRL = v => 'R$' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2});
 const FAIXA_NOME = { curto:'Episódio curto', medio:'Episódio até 1h', longo:'Episódio de 1h+', filme:'Filme', 'filme-longo':'Filme 2h30+' };
@@ -466,7 +467,12 @@ function calcDraw(){
   }
 
   const livepix = ((SITE.doacoes || {}).outras || []).find(o => o.id === 'livepix');
+  const apiUrl = apiLivePixUrl();
+  const nickBox = cIn('calc-nick-box'); if(nickBox) nickBox.hidden = !apiUrl;
   const durNome = (DUR[calc.tipo].find(([id]) => id === calc.dur) || [, ''])[1].toLowerCase();
+  const payBtn = (apiUrl && q && q.valor != null)
+    ? `<button class="cta alt" type="button" data-pay-livepix>💸 Pagar no LivePix</button>`
+    : (livepix ? `<a class="cta alt" href="${escUrl(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : '');
   out.innerHTML = `
     <div class="calc-total">
       <div><span class="calc-lbl">${calc.tipo === 'filmes' ? `Filme · ${durNome}` : `${n} episódio${n > 1 ? 's' : ''} · ${durNome}`}</span>
@@ -475,7 +481,7 @@ function calcDraw(){
         ${q && q.economia > 0 ? `<span class="calc-save">Pacote: você economiza ${fmtBRL(q.economia)}</span>` : ''}</div>
       <div class="calc-acts">
         <button class="cta" type="button" data-copy-pedido>📋 Copiar pedido</button>
-        ${livepix ? `<a class="cta alt" href="${escUrl(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : ''}
+        ${payBtn}
         <a class="cta alt" href="#/apoiar" data-nav="apoiar">Outras formas</a>
       </div>
     </div>
@@ -526,6 +532,38 @@ if(calcBox){
     if(cp){
       if(!cIn('calc-t').value.trim()){ cIn('calc-t').focus(); cIn('calc-t').classList.add('need'); setTimeout(() => cIn('calc-t').classList.remove('need'), 1200); return; }
       copyText(calcText(), () => { const o = cp.textContent; cp.textContent = 'Copiado! ✅'; setTimeout(() => cp.textContent = o, 1800); });
+    }
+    const pay = e.target.closest('[data-pay-livepix]');
+    if(pay){
+      const titulo = cIn('calc-t').value.trim();
+      if(!titulo){ cIn('calc-t').focus(); cIn('calc-t').classList.add('need'); setTimeout(() => cIn('calc-t').classList.remove('need'), 1200); return; }
+      const apiUrl = apiLivePixUrl(); if(!apiUrl) return;
+      const orig = pay.textContent;
+      pay.disabled = true; pay.textContent = 'Gerando Pix…';
+      fetch(`${apiUrl}/api/pedido`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          titulo,
+          tipo: calc.tipo,
+          dur: calc.dur,
+          s: calc.s,
+          de: calc.de,
+          ate: calc.ate,
+          nick: (cIn('calc-nick') && cIn('calc-nick').value.trim()) || '',
+        }),
+      }).then(r => r.json().then(j => ({ ok: r.ok, j }))).then(({ ok, j }) => {
+        if(ok && j && j.redirectUrl){
+          const w = window.open(j.redirectUrl, '_blank', 'noopener');
+          if(!w) location.href = j.redirectUrl;
+          return;
+        }
+        throw new Error((j && j.error) || 'Erro ao gerar Pix');
+      }).catch(err => {
+        const fb = ((SITE.doacoes || {}).outras || []).find(o => o.id === 'livepix');
+        if(typeof toast === 'function') toast(err.message || 'Não consegui gerar o Pix agora.');
+        if(fb && fb.url) window.open(fb.url, '_blank', 'noopener');
+      }).finally(() => { pay.disabled = false; pay.textContent = orig; });
     }
   });
   calcBox.addEventListener('input', e => {
