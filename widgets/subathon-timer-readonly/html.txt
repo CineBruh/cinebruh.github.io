@@ -1,0 +1,18 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+<div class="wrap rot" id="wrap">
+  <div class="labelrow">
+    <span class="label"><span id="title">SUBATHON</span></span>
+    <span class="icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+
+  <div class="box" id="box">
+    <div class="days" id="days"></div>
+    <div class="time" id="time">00:00:00</div>
+    <div class="status" id="status"></div>
+    <svg class="midcr" width="23" height="32" viewBox="0 0 23 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.341 15.989c-2.284-1.846-8.479-10.433-9.657-13.927-.07-.204-.129-.312-.233-.312-.103 0-.163.108-.232.312-1.18 3.494-7.373 12.081-9.658 13.927-.06.047-.11.137-.11.172s.05.125.11.172c2.285 1.846 8.479 10.433 9.658 13.928.069.204.129.312.232.312s.164-.108.232-.312c1.18-3.495 7.374-12.082 9.658-13.928.06-.047.11-.137.11-.172s-.05-.125-.11-.172Z" fill="var(--accent)" stroke="var(--border)" stroke-width="4"/></svg>
+  </div>
+</div>

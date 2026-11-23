@@ -196,8 +196,11 @@
     "overlayMetas": null,
     "quantoVale": [
       { "icone": "💜", "acao": "Sub Tier 1 / Prime", "tempo": "+5 min" },
-      { "icone": "💎", "acao": "100 bits", "tempo": "+2 min" },
-      { "icone": "💸", "acao": "R$ 5 no Pix / LivePix", "tempo": "+5 min" }
+      { "icone": "💜", "acao": "Sub Tier 2", "tempo": "+10 min" },
+      { "icone": "👑", "acao": "Sub Tier 3", "tempo": "+20 min" },
+      { "icone": "💚", "acao": "Sub na Kick", "tempo": "+5 min" },
+      { "icone": "💎", "acao": "A cada 100 bits", "tempo": "+6 min" },
+      { "icone": "💸", "acao": "A cada R$ 5 no Pix / LivePix", "tempo": "+7 min" }
     ],
     "metas": [
       { "valor": 500,  "titulo": "IRL no Restaurante",       "horas": 12 },

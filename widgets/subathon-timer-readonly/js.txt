@@ -1,0 +1,140 @@
+/* =====================================================================
+   Cronômetro de subathon (SOMENTE LEITURA, para embutir no Cinebruh)
+   Lê a chave brunaSubathonTimer do SE_API.store e ouve kvstore:update.
+   NUNCA grava no SE_API.store, NUNCA soma subs/bits/donates e NUNCA
+   executa comandos do chat.
+   ===================================================================== */
+const KEY = 'brunaSubathonTimer';
+const POLL_MS = 15000;
+
+let F = {};
+let state = null;   // { running, endTime, remaining, ended }
+let lastShown = '';
+
+const $ = id => document.getElementById(id);
+
+function num(v, d) {
+  const n = parseFloat(String(v).replace(',', '.'));
+  return isFinite(n) ? n : d;
+}
+
+function applyStyle() {
+  const r = document.documentElement.style;
+  const set = (k, v) => { if (v !== undefined && v !== '') r.setProperty(k, v); };
+  set('--accent', F.accentColor);
+  set('--labeltext', F.labelTextColor);
+  set('--boxbg', F.boxColor);
+  set('--border', F.borderColor);
+  set('--text', F.textColor);
+  set('--brdr', num(F.borderRadius, 23) + 'px');
+  set('--timeSize', num(F.timeSize, 56) + 'px');
+  set('--labelSize', num(F.labelSize, 18) + 'px');
+  $('title').textContent = F.title || 'SUBATHON';
+  $('wrap').classList.toggle('rot', F.rotate !== false);
+}
+
+function remaining(st = state) {
+  if (!st) return 0;
+  return st.running ? Math.max(0, st.endTime - Date.now()) : Math.max(0, st.remaining);
+}
+
+function fmt(ms) {
+  const t = Math.ceil(ms / 1000);
+  const h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60;
+  return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function splitDays(ms) {
+  const style = F.dayStyle || 'badge';
+  const day = 86400000;
+  const t = Math.ceil(ms / 1000) * 1000;
+  if (style === 'off' || t < day) return { days: 0, rest: fmt(ms), style };
+  const days = Math.floor(t / day);
+  return { days, rest: fmt(t - days * day), style };
+}
+
+function bump() {
+  const box = $('box');
+  box.classList.remove('bump');
+  void box.offsetWidth;
+  box.classList.add('bump');
+}
+
+function render() {
+  if (!state) return;
+  const rem = remaining();
+  const ended = (state.ended || state.running) && rem <= 0;
+  $('wrap').classList.toggle('ended', ended);
+
+  const p = ended ? null : splitDays(rem);
+  const key = ended ? 'END' : p.days + '|' + p.rest + '|' + p.style;
+  if (key !== lastShown) {
+    lastShown = key;
+    const timeEl = $('time');
+    const daysEl = $('days');
+    if (ended) {
+      timeEl.textContent = F.endText || 'ACABOU!';
+      daysEl.textContent = '';
+    } else if (p.days && p.style === 'short') {
+      timeEl.innerHTML = '';
+      const d = document.createElement('span');
+      d.className = 'dshort';
+      d.textContent = p.days + (F.dayShort || 'D');
+      timeEl.append(d, document.createTextNode(p.rest));
+      daysEl.textContent = '';
+    } else {
+      timeEl.textContent = p.rest;
+      daysEl.textContent = p.days
+        ? p.days + ' ' + (p.days === 1 ? (F.dayWord || 'DIA') : (F.daysWord || 'DIAS'))
+        : '';
+    }
+  }
+
+  let st = '';
+  if (!ended && !state.running && rem > 0 && F.showPaused !== false) st = F.pausedText || 'PAUSADO';
+  if ($('status').textContent !== st) $('status').textContent = st;
+}
+
+function applyExternalState(saved, animate) {
+  if (!saved || typeof saved !== 'object' || !('running' in saved)) return;
+  const prevRem = remaining();
+  const next = {
+    running: !!saved.running,
+    endTime: +saved.endTime || 0,
+    remaining: +saved.remaining || 0,
+    ended: !!saved.ended,
+  };
+  const nextRem = remaining(next);
+  state = next;
+  render();
+  if (animate && nextRem > prevRem + 1500) bump();
+}
+
+async function syncFromStore(animate) {
+  try {
+    const saved = await SE_API.store.get(KEY);
+    applyExternalState(saved, animate);
+  } catch (e) {}
+}
+
+/* Ouve SOMENTE kvstore:update da chave KEY — nenhum evento de sub/bits/donate/chat é processado */
+window.addEventListener('onEventReceived', obj => {
+  if (!obj.detail || obj.detail.listener !== 'kvstore:update') return;
+  const d = obj.detail.event && (obj.detail.event.data || obj.detail.event);
+  if (!d) return;
+  const key = String(d.key || '');
+  if (key !== KEY && key !== 'customWidget.' + KEY) return;
+  applyExternalState(d.value, true);
+});
+
+window.addEventListener('onWidgetLoad', async obj => {
+  F = obj.detail.fieldData || {};
+  applyStyle();
+  await syncFromStore(false);
+  if (!state) {
+    state = { running: false, endTime: 0, remaining: Math.max(0, num(F.startHours, 4)) * 3600000, ended: false };
+    render();
+  }
+  setInterval(render, 250);
+  setInterval(() => syncFromStore(true), POLL_MS);
+});

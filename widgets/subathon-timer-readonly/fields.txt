@@ -1,0 +1,41 @@
+{
+  "title": {
+    "type": "text",
+    "label": "Título",
+    "value": "SUBATHON",
+    "group": "⏱️ | Cronômetro"
+  },
+  "startHours": {
+    "type": "number",
+    "label": "Tempo padrão caso o cronômetro ainda não tenha sido iniciado",
+    "value": 4,
+    "group": "⏱️ | Cronômetro"
+  },
+  "dayStyle": {
+    "type": "dropdown",
+    "label": "Mostrar dias quando passar de 24h",
+    "value": "badge",
+    "options": {
+      "badge": "Etiqueta acima do tempo (2 DIAS)",
+      "short": "Junto do tempo (2D 04:20:00)",
+      "off": "Não mostrar dias (52:20:00)"
+    },
+    "group": "⏱️ | Cronômetro"
+  },
+  "dayWord": { "type": "text", "label": "Palavra para 1 dia", "value": "DIA", "group": "⏱️ | Cronômetro" },
+  "daysWord": { "type": "text", "label": "Palavra para vários dias", "value": "DIAS", "group": "⏱️ | Cronômetro" },
+  "dayShort": { "type": "text", "label": "Letra dos dias no estilo curto", "value": "D", "group": "⏱️ | Cronômetro" },
+  "endText": { "type": "text", "label": "Texto quando o tempo acabar", "value": "ACABOU! 💜", "group": "⏱️ | Cronômetro" },
+  "showPaused": { "type": "checkbox", "label": "Mostrar aviso quando estiver pausado", "value": true, "group": "⏱️ | Cronômetro" },
+  "pausedText": { "type": "text", "label": "Texto do aviso de pausa", "value": "PAUSADO", "group": "⏱️ | Cronômetro" },
+
+  "accentColor": { "type": "colorpicker", "label": "Cor de destaque", "value": "#e670a2", "group": "🎨 | Visual" },
+  "labelTextColor": { "type": "colorpicker", "label": "Cor do texto das etiquetas", "value": "#fefefe", "group": "🎨 | Visual" },
+  "boxColor": { "type": "colorpicker", "label": "Cor da caixa", "value": "#fefefe", "group": "🎨 | Visual" },
+  "textColor": { "type": "colorpicker", "label": "Cor do tempo", "value": "#202020", "group": "🎨 | Visual" },
+  "borderColor": { "type": "colorpicker", "label": "Cor da borda", "value": "#787777", "group": "🎨 | Visual" },
+  "borderRadius": { "type": "slider", "label": "Arredondamento", "value": 23, "min": 0, "max": 40, "step": 1, "group": "🎨 | Visual" },
+  "timeSize": { "type": "slider", "label": "Tamanho do tempo", "value": 52, "min": 24, "max": 140, "step": 1, "group": "🎨 | Visual" },
+  "labelSize": { "type": "slider", "label": "Tamanho das etiquetas", "value": 18, "min": 10, "max": 40, "step": 1, "group": "🎨 | Visual" },
+  "rotate": { "type": "checkbox", "label": "Etiqueta inclinada", "value": true, "group": "🎨 | Visual" }
+}
