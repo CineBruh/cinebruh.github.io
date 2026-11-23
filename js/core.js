@@ -22,6 +22,7 @@ const ICON = {
   star:     '<path d="M12 3.2l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.6l-5.2 2.8 1-5.9L3.5 9.4l5.9-.8z"/>',
   calendar: '<rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/>',
   radio:    '<circle cx="12" cy="12" r="2"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/>',
+  clock:    '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   tier:     '<rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="12.5" height="4" rx="1.5"/><rect x="3" y="16" width="7" height="4" rx="1.5"/>',
   heart:    '<path d="M12 20s-7.5-4.6-9.3-9.2A4.9 4.9 0 0 1 12 7.1a4.9 4.9 0 0 1 9.3 3.7C19.5 15.4 12 20 12 20z"/>',
   chart:    '<path d="M3.5 20.5h17"/><path d="M7 16.5v-5M12 16.5V6M17 16.5v-8"/>',
@@ -40,6 +41,7 @@ const PAGES = [
   {id:'patrocinar', label:'Patrocinar',     icon:'star',     bar:true},
   {id:'cronograma', label:'Cronograma',     icon:'calendar', bar:true},
   {id:'offline',    label:'Reacts Offline', icon:'radio'},
+  {id:'subathon',   label:'Subathon',       icon:'clock',    opt:true},
   {id:'tierlist',   label:'Tier list',      icon:'tier'},
   {id:'apoiar',     label:'Apoiar',         icon:'heart',    sep:true},
   {id:'midiakit',   label:'Mídia kit',      icon:'chart'},
@@ -96,14 +98,20 @@ window.addEventListener('popstate', route);
 
 /* ---------- Monta o menu lateral, a barra inferior e a folha "Mais" ---------- */
 document.getElementById('nav').innerHTML = PAGES.map(p=>
-  `${p.sep?'<div class="nav-sep" role="separator"></div>':''}<a href="#/${p.id}" data-nav="${p.id}" title="${p.label}">${svgI(p.icon)}<span class="nl">${p.label}</span></a>`
+  `${p.sep?'<div class="nav-sep" role="separator"></div>':''}<a href="#/${p.id}" data-nav="${p.id}" title="${p.label}"${p.opt?' hidden':''}>${svgI(p.icon)}<span class="nl">${p.label}</span></a>`
 ).join('');
 document.getElementById('tabbar').innerHTML =
   PAGES.filter(p=>p.bar).map(p=>`<a class="tab" href="#/${p.id}" data-nav="${p.id}"><span class="ti">${svgI(p.icon)}</span><span class="tl">${p.label}</span></a>`).join('') +
   `<button class="tab" id="tab-more" type="button" aria-haspopup="dialog" aria-controls="sheet"><span class="ti">${svgI('more')}</span><span class="tl">Mais</span></button>`;
 document.getElementById('sheet-grid').innerHTML = PAGES.filter(p=>!p.bar).map(p=>
-  `<a class="sheet-item" href="#/${p.id}" data-nav="${p.id}">${svgI(p.icon)}<span>${p.label}</span></a>`
+  `<a class="sheet-item" href="#/${p.id}" data-nav="${p.id}"${p.opt?' hidden':''}>${svgI(p.icon)}<span>${p.label}</span></a>`
 ).join('');
+function setNavVisible(id, on, live){
+  document.querySelectorAll(`[data-nav="${id}"]`).forEach(el=>{
+    el.hidden = !on;
+    el.classList.toggle('is-live', !!live);
+  });
+}
 
 /* cliques nos itens de menu: navegam sem recarregar; tocar na aba atual volta pro topo */
 document.addEventListener('click', e=>{

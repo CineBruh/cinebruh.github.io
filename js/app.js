@@ -5,7 +5,7 @@ const getJSON = url => fetch(url, {cache:'no-cache'}).then(r=>{ if(!r.ok) throw 
 route();   // mostra a aba certa já, enquanto os dados carregam
 
 const siteP = getJSON('site.json')
-  .then(j=>{ SITE = j; renderHome(j); renderSetup(j); renderApoiar(j); renderComunidade(j); renderOffline(j); renderPrecos(j); return j; })
+  .then(j=>{ SITE = j; renderHome(j); renderSetup(j); renderApoiar(j); renderComunidade(j); renderOffline(j); renderPrecos(j); if(typeof renderSubathon==='function') renderSubathon(); return j; })
   .catch(err=>{
     failHome(err);
     document.getElementById('comunidade-box').innerHTML = '<div class="soon"><p>Não consegui carregar agora 😢</p><a class="cta alt" href="https://discord.gg/MUs6NbZJ3r" target="_blank" rel="noopener">Entrar no Discord ↗</a></div>';
@@ -26,6 +26,6 @@ Promise.allSettled([siteP, dataP]).then(()=>{ if(SITE){ renderMidiakit(SITE); re
    Se o Trello tiver uma sessão de Off Live marcada, ela vira a "Próxima sessão" da aba Reacts Offline
    (no lugar da que está escrita à mão no site.json). */
 dataP.finally(()=> getJSON('cronograma.json').then(j=>{
-  bootCronograma(j); renderHomeExtra(); renderRecentPat();
+  bootCronograma(j); renderHomeExtra(); renderRecentPat(); if(typeof renderSubathon==='function') renderSubathon();
   if(j.offline) siteP.then(s=>{ if(!s) return; s.offline = {...(s.offline||{}), proxima: j.offline}; renderOffline(s); renderOfflineQueue(); });
 }).catch(failCronograma));

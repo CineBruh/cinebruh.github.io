@@ -185,6 +185,37 @@
     ]
   },
 
+  "subathon": {
+    "_leia": "estado: 'auto' (segue o cartão SUBATHON no Trello via cronograma.json) | 'off' | 'breve' | 'ativo' | 'encerrado'. overlayTimer e overlayMetas: URLs das overlays SOMENTE LEITURA do StreamElements (nunca a overlay original da live).",
+    "estado": "auto",
+    "titulo": "Subathon da Bruh",
+    "subtitulo": "Lives sem parar enquanto o cronômetro não zerar! Cada apoio soma tempo no relógio e libera metas especiais.",
+    "inicio": null,
+    "resumo": null,
+    "overlayTimer": null,
+    "overlayMetas": null,
+    "quantoVale": [
+      { "icone": "💜", "acao": "Sub Tier 1 / Prime", "tempo": "+5 min" },
+      { "icone": "💎", "acao": "100 bits", "tempo": "+2 min" },
+      { "icone": "💸", "acao": "R$ 5 no Pix / LivePix", "tempo": "+5 min" }
+    ],
+    "metas": [
+      { "valor": 500,  "titulo": "IRL no Restaurante",       "horas": 12 },
+      { "valor": 1000, "titulo": "Jogar VISAGE de Cosplay",  "horas": 12 },
+      { "valor": 1500, "titulo": "IRL no Piquenique",        "horas": 12 },
+      { "valor": 2000, "titulo": "Montar Quebra-Cabeças",    "horas": 12 },
+      { "valor": 2500, "titulo": "Live de 24 Horas",         "horas": 12 },
+      { "valor": 3000, "titulo": "IRL na Praia",             "horas": 12 },
+      { "valor": 3500, "titulo": "IRL Fazendo Tatuagem",     "horas": 12 },
+      { "valor": 4000, "titulo": "Maratona de Jogos Ruins",  "horas": 12 }
+    ],
+    "regras": [
+      "O cronômetro só para quando chegar a zero ou no limite combinado pela Bruna.",
+      "Cada meta batida libera o desafio correspondente e soma horas extras no cronômetro.",
+      "Doações pelo LivePix e subs/bits na Twitch contam automaticamente."
+    ]
+  },
+
   "comunidade": {
     "_leia": "Aba Comunidade. Comandos copiados do StreamElements (streamelements.com/brunarodrigues/commands), só os que qualquer pessoa pode usar. Cada comando: { cmd, desc, grupo, quem: todos | subs }. Grupos: canal, cinebruh, apoio, musica, pontos, diversao. Espaço com 'copiar' vira botão que copia o texto.",
     "intro": "A Família Goiabinha é a comunidade da Bruna: muitas risadas, carinho, respeito e amor. Chega mais!",

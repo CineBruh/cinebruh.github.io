@@ -435,4 +435,38 @@ button.cm-space{font:inherit;text-align:left;cursor:pointer}
 .cm-rules[open] summary::after{transform:rotate(180deg)}
 .cm-rules ol{padding:0 var(--s4) var(--s4) 40px;display:grid;gap:var(--s2);font-size:var(--fs-sm);line-height:1.45}
 @media print{ .cm-space,.cm-cmd,.cm-rules{box-shadow:none} .cm-rules ol{display:grid} }
+
+/* ---------- Subathon ---------- */
+.nav a.is-live::after{content:'';width:8px;height:8px;border-radius:50%;background:#ff3b5c;margin-left:auto;box-shadow:0 0 0 3px rgba(255,59,92,.28)}
+.sb-banner{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s3);margin-bottom:var(--s5);padding:var(--s3) var(--s4);
+  background:var(--paper);color:var(--ink);border:3px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);transition:transform .12s,box-shadow .12s}
+.sb-banner:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow)}
+.sb-banner.live{border-color:#ff68b4}
+.sb-dot{font-family:var(--display);font-size:var(--fs-xs);letter-spacing:.6px;text-transform:uppercase;background:#ff68b4;color:#fff;padding:var(--s1) var(--s3);border-radius:var(--r-pill);border:2px solid var(--border)}
+.sb-banner b{font-family:var(--display);font-size:var(--fs-md);text-transform:uppercase}
+.sb-banner span:last-child{font-size:var(--fs-sm);color:var(--muted)}
+.sb-stage{display:grid;gap:var(--gap-grid);grid-template-columns:minmax(0,1fr);margin-top:var(--s4)}
+@media (min-width:1000px){ .sb-stage{grid-template-columns:minmax(0,1.75fr) minmax(280px,1fr)} }
+.sb-live{position:relative;aspect-ratio:16/9;background:#0b0710;border:3px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.sb-chat{position:relative;min-height:360px;background:var(--paper);border:3px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.sb-live iframe,.sb-chat iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.sb-widgets{display:grid;gap:var(--gap-grid);grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.sb-frame{position:relative;min-height:180px;background:var(--paper);border:3px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+.sb-frame-metas{min-height:420px}
+.sb-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.sb-rates{display:grid;gap:var(--gap-grid);grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.sb-rate{display:flex;flex-direction:column;gap:var(--s1);background:var(--paper);border:3px solid var(--border);border-radius:var(--r-lg);padding:var(--pad-card);box-shadow:var(--shadow-sm)}
+.sb-ric{font-size:var(--fs-2xl);line-height:1}
+.sb-rate b{font-family:var(--display);font-size:var(--fs-2xl);color:var(--accent);line-height:1.1}
+.sb-rate span:last-child{font-size:var(--fs-sm);color:var(--muted)}
+.sb-prog{height:16px;background:var(--paper);border:3px solid var(--border);border-radius:var(--r-pill);overflow:hidden;margin-bottom:var(--s4);box-shadow:var(--shadow-sm)}
+.sb-prog i{display:block;height:100%;background:#0FA958;transition:width .4s ease}
+.sb-goals{display:grid;gap:var(--s2);grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.sb-goal{display:flex;align-items:center;gap:var(--s3);background:var(--paper);border:3px solid var(--border);border-radius:var(--r-md);padding:var(--s3) var(--s4);box-shadow:var(--shadow-sm)}
+.sb-goal.done{opacity:.75;border-color:#0FA958}
+.sb-goal.done .sb-gtx{text-decoration:line-through}
+.sb-gamt{flex:none;font-family:var(--display);font-size:var(--fs-sm);background:#ff68b4;color:#fff;border:2px solid var(--border);border-radius:var(--r-pill);padding:var(--s1) var(--s3);white-space:nowrap}
+.sb-gck{flex:none;font-size:var(--fs-lg);line-height:1}
+.sb-gtx{flex:1;min-width:0;font-weight:700;font-size:var(--fs-sm)}
+.sb-gbon{flex:none;font-family:var(--display);font-size:var(--fs-xs);background:#F5C518;color:#1a0f14;border:2px solid var(--border);border-radius:var(--r-pill);padding:2px var(--s2);white-space:nowrap}
   

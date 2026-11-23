@@ -6,7 +6,7 @@ let installEvt = null;
 /* o service worker só roda no site publicado (na prévia e em arquivos locais ele atrapalharia) */
 if('serviceWorker' in navigator && (/\.github\.io$/.test(location.hostname) || location.hostname === 'localhost')){
   const tinhaVersao = !!navigator.serviceWorker.controller;   // primeira visita não conta como "atualização"
-  addEventListener('load', () => navigator.serviceWorker.register('sw.js').then(reg => {
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(reg => {
     /* o app instalado fica aberto em segundo plano por dias e o navegador só procura versão nova
        quando a página é carregada: então procura também sempre que o app volta pra frente */
     let ultima = Date.now();

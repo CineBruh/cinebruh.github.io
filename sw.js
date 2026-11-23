@@ -4,18 +4,18 @@
    - CSS, JS e imagens do site: abre na hora com a cópia guardada e atualiza por trás.
    - Drive, TMDB, Twitch etc. (outros sites): o navegador cuida sozinho, nada é guardado.
    Ao mudar CSS/JS num update grande, troque a VERSAO pra todo mundo receber de uma vez. */
-const VERSAO = 'cinebruh-2026-11-23a';
+const VERSAO = 'cinebruh-2026-11-23c';
 const BASICO = [
   './', 'index.html', 'manifest.webmanifest', 'favicon.png',
   'css/base.css', 'css/layout.css', 'css/catalogo.css', 'css/patrocinar.css', 'css/paginas.css', 'css/intro.css',
   'js/core.js', 'js/player.js', 'js/catalogo.js', 'js/patrocinar.js', 'js/inicio.js', 'js/setup.js',
-  'js/midiakit.js', 'js/apoiar.js', 'js/comunidade.js', 'js/cronograma.js', 'js/offline.js',
+  'js/midiakit.js', 'js/apoiar.js', 'js/comunidade.js', 'js/cronograma.js', 'js/offline.js', 'js/subathon.js',
   'js/tierlist.js', 'js/continuar.js', 'js/pwa.js', 'js/intro.js', 'js/app.js',
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSAO)
-    .then(c => Promise.allSettled(BASICO.map(u => c.add(u))))   // se um arquivo faltar, os outros ainda entram
+    .then(c => Promise.allSettled(BASICO.map(u => c.add(new Request(u, { cache: 'reload' })))))   // busca sempre da rede pra não guardar cópia velha do cache HTTP
     .then(() => self.skipWaiting()));
 });
 

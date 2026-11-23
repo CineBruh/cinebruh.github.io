@@ -41,6 +41,7 @@ function renderHome(site){
   const idInfo = [!banner && c.handle && `@${esc(c.handle)}`, c.idade && `${c.idade} anos`,
     c.altura && `<span class="home-alt" title="${esc(c.alturaDica||'')}">📏 ${esc(c.altura)}</span>`].filter(Boolean);
   document.getElementById('home').innerHTML = `
+    <div id="home-subathon"></div>
     ${banner ? `<div class="home-banner"><img src="${esc(banner)}" alt="" onload="nomeSobreBanner()" onerror="this.parentNode.remove();nomeSobreBanner()"></div>` : ''}
     <div class="home-card">
       <div class="home-avatar">${av ? `<img src="${esc(av)}" alt="${esc(c.nome)}" style="object-position:${esc(avPos)}" onerror="this.remove()">` : ''}🦩</div>
