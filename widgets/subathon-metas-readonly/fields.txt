@@ -1,0 +1,112 @@
+{
+  "title": {
+    "type": "text",
+    "label": "Título",
+    "value": "METAS",
+    "group": "🎯 | Metas"
+  },
+  "currency": {
+    "type": "text",
+    "label": "Símbolo da moeda",
+    "value": "R$",
+    "group": "🎯 | Metas"
+  },
+  "showBonus": {
+    "type": "checkbox",
+    "label": "Mostrar as horas extras (+12H) ao lado de cada meta",
+    "value": true,
+    "group": "🎯 | Metas"
+  },
+
+  "g1Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 500, "group": "🥇 | Meta 1" },
+  "g1Title": { "type": "text", "label": "Descrição", "value": "IRL no Restaurante", "group": "🥇 | Meta 1" },
+  "g1Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 1" },
+
+  "g2Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 1000, "group": "🥇 | Meta 2" },
+  "g2Title": { "type": "text", "label": "Descrição", "value": "Jogar VISAGE de Cosplay", "group": "🥇 | Meta 2" },
+  "g2Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 2" },
+
+  "g3Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 1500, "group": "🥇 | Meta 3" },
+  "g3Title": { "type": "text", "label": "Descrição", "value": "IRL no Piquenique", "group": "🥇 | Meta 3" },
+  "g3Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 3" },
+
+  "g4Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 2000, "group": "🥇 | Meta 4" },
+  "g4Title": { "type": "text", "label": "Descrição", "value": "Montar Quebra-Cabeças", "group": "🥇 | Meta 4" },
+  "g4Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 4" },
+
+  "g5Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 2500, "group": "🥇 | Meta 5" },
+  "g5Title": { "type": "text", "label": "Descrição", "value": "Live de 24 Horas", "group": "🥇 | Meta 5" },
+  "g5Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 5" },
+
+  "g6Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 3000, "group": "🥇 | Meta 6" },
+  "g6Title": { "type": "text", "label": "Descrição", "value": "IRL na Praia", "group": "🥇 | Meta 6" },
+  "g6Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 6" },
+
+  "g7Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 3500, "group": "🥇 | Meta 7" },
+  "g7Title": { "type": "text", "label": "Descrição", "value": "IRL Fazendo Tatuagem", "group": "🥇 | Meta 7" },
+  "g7Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 7" },
+
+  "g8Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 4000, "group": "🥇 | Meta 8" },
+  "g8Title": { "type": "text", "label": "Descrição", "value": "Maratona de Jogos Ruins", "group": "🥇 | Meta 8" },
+  "g8Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 12, "group": "🥇 | Meta 8" },
+
+  "g9Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 9" },
+  "g9Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 9" },
+  "g9Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 9" },
+
+  "g10Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 10" },
+  "g10Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 10" },
+  "g10Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 10" },
+
+  "g11Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 11" },
+  "g11Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 11" },
+  "g11Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 11" },
+
+  "g12Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 12" },
+  "g12Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 12" },
+  "g12Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 12" },
+
+  "g13Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 13" },
+  "g13Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 13" },
+  "g13Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 13" },
+
+  "g14Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 14" },
+  "g14Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 14" },
+  "g14Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 14" },
+
+  "g15Amount": { "type": "number", "label": "Valor (R$) — deixe 0 para não usar", "value": 0, "group": "🥇 | Meta 15" },
+  "g15Title": { "type": "text", "label": "Descrição", "value": "", "group": "🥇 | Meta 15" },
+  "g15Hours": { "type": "number", "label": "Horas extras (apenas exibição)", "value": 0, "group": "🥇 | Meta 15" },
+
+  "showBar": { "type": "checkbox", "label": "Mostrar barra", "value": true, "group": "📊 | Barra" },
+  "barMode": {
+    "type": "dropdown",
+    "label": "A barra mostra o progresso até...",
+    "value": "next",
+    "options": { "next": "a próxima meta", "final": "a última meta" },
+    "group": "📊 | Barra"
+  },
+  "showNext": { "type": "checkbox", "label": "Mostrar o nome da próxima meta embaixo da barra", "value": true, "group": "📊 | Barra" },
+  "nextLabel": { "type": "text", "label": "Texto antes da próxima meta", "value": "PRÓXIMA", "group": "📊 | Barra" },
+  "allDoneText": { "type": "text", "label": "Texto quando todas as metas forem batidas", "value": "TODAS AS METAS BATIDAS! 💜", "group": "📊 | Barra" },
+
+  "showList": { "type": "checkbox", "label": "Mostrar lista de metas", "value": true, "group": "📜 | Lista" },
+  "visibleGoals": { "type": "slider", "label": "Quantas metas aparecem na lista", "value": 6, "min": 1, "max": 15, "step": 1, "group": "📜 | Lista" },
+  "keepDoneVisible": { "type": "checkbox", "label": "Manter a última meta batida visível (riscada) no topo", "value": true, "group": "📜 | Lista" },
+  "confetti": { "type": "checkbox", "label": "Confete quando bater uma meta", "value": true, "group": "📜 | Lista" },
+
+  "accentColor": { "type": "colorpicker", "label": "Cor de destaque", "value": "#e670a2", "group": "🎨 | Visual" },
+  "doneColor": { "type": "colorpicker", "label": "Cor das metas batidas", "value": "#69a576", "group": "🎨 | Visual" },
+  "todoColor": { "type": "colorpicker", "label": "Cor das próximas metas", "value": "#2e9cdd", "group": "🎨 | Visual" },
+  "labelTextColor": { "type": "colorpicker", "label": "Cor do texto das etiquetas", "value": "#fefefe", "group": "🎨 | Visual" },
+  "boxColor": { "type": "colorpicker", "label": "Cor das caixas", "value": "#fefefe", "group": "🎨 | Visual" },
+  "textColor": { "type": "colorpicker", "label": "Cor do texto", "value": "#202020", "group": "🎨 | Visual" },
+  "trackColor": { "type": "colorpicker", "label": "Cor do fundo da barra", "value": "#ebe7e9", "group": "🎨 | Visual" },
+  "borderColor": { "type": "colorpicker", "label": "Cor da borda", "value": "#787777", "group": "🎨 | Visual" },
+  "borderRadius": { "type": "slider", "label": "Arredondamento", "value": 23, "min": 0, "max": 40, "step": 1, "group": "🎨 | Visual" },
+  "width": { "type": "slider", "label": "Largura", "value": 420, "min": 260, "max": 700, "step": 10, "group": "🎨 | Visual" },
+  "bigSize": { "type": "slider", "label": "Tamanho do valor arrecadado", "value": 30, "min": 16, "max": 70, "step": 1, "group": "🎨 | Visual" },
+  "goalSize": { "type": "slider", "label": "Tamanho do texto das metas", "value": 16, "min": 10, "max": 32, "step": 1, "group": "🎨 | Visual" },
+  "labelSize": { "type": "slider", "label": "Tamanho da etiqueta", "value": 18, "min": 10, "max": 40, "step": 1, "group": "🎨 | Visual" },
+  "rotate": { "type": "checkbox", "label": "Etiqueta inclinada", "value": true, "group": "🎨 | Visual" }
+}
