@@ -1,7 +1,7 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-24T10:55:28-03:00",
+  "atualizadoEm": "2026-11-24T20:31:03-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
@@ -72,8 +72,10 @@
           "status": "confirmado"
         },
         {
-          "titulo": "Batman",
-          "patrocinador": "1989",
+          "titulo": "Batman (1989)",
+          "cat": "filmes",
+          "lang": "leg",
+          "patrocinador": "HenriqueLaurentino40",
           "status": "confirmado"
         }
       ]
@@ -191,12 +193,6 @@
       "cat": "filmes",
       "lang": "leg",
       "patrocinador": "TykWolf"
-    },
-    {
-      "titulo": "Batman (1989)",
-      "cat": "filmes",
-      "lang": "leg",
-      "patrocinador": "HenriqueLaurentino40"
     },
     {
       "titulo": "The Matrix",
