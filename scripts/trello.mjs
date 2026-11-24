@@ -104,24 +104,30 @@ export function tmdbRef(v, cat) {
 
 // ───────────────────────────── CHECKLISTS ─────────────────────────────
 // "Temporada 2 (JandersonShady)" · "Temporada 1  (✅)" · "Saga East Blue ()" · "Programação"
-// Nick real usado nos cartões: sem espaços ou acentos (ex.: Locknell, Emir_Emir_Emir_, 1pandagamer_)
+// Nick real usado nos cartões: sem espaços ou acentos e com ao menos uma letra (ex.: Locknell, Emir_Emir_Emir_, 1pandagamer_)
 const isNick = x => /^[A-Za-z0-9_.-]+$/.test(x) && /[A-Za-z]/.test(x);
+function splitTrailingNicks(str) {
+  const m = String(str || '').trim().match(/\(([^)]*)\)\s*$/);
+  if (!m) return null;
+  const inner = m[1].trim();
+  if (!inner) return { idx: m.index, inner, nicks: [], empty: true };
+  const cand = splitNicks(inner);
+  if (cand.length && cand.every(x => isNick(x) || isChat(x))) {
+    return { idx: m.index, inner, nicks: cand, empty: false };
+  }
+  return null;
+}
 function parseChecklistName(name) {
   let label = String(name || '').trim(), nicks = [], done = false;
   const m = label.match(/\(([^)]*)\)\s*$/);
-  if (m) {
-    const inner = m[1].trim();
-    if (!inner) {
-      label = label.slice(0, m.index).trim();
-    } else if (/✅|✔/.test(inner)) {
-      done = true;
-      label = label.slice(0, m.index).trim();
-    } else {
-      const cand = splitNicks(inner);
-      if (cand.length && cand.every(x => isNick(x) || isChat(x))) {
-        nicks = cand;
-        label = label.slice(0, m.index).trim();
-      }
+  if (m && /✅|✔/.test(m[1])) {
+    done = true;
+    label = label.slice(0, m.index).trim();
+  } else {
+    const tr = splitTrailingNicks(label);
+    if (tr) {
+      nicks = tr.nicks;
+      label = label.slice(0, tr.idx).trim();
     }
   }
   if (/✅/.test(label)) { done = true; label = label.replace(/✅/g, '').trim(); }
@@ -131,9 +137,10 @@ function parseChecklistName(name) {
 // "Episódio 7 (Austeroz, Fulana)" · "Ep 7" · "Episódio 1 (Chat)" · "Episódio 5.5" (especial entre o 5 e o 6)
 function parseItem(it) {
   const name = plain(it.name);
-  const m = name.match(/(?:epis[oó]dio|ep\.?)\s*(\d+(?:[.,]\d+)?)/i) || name.match(/(\d+(?:[.,]\d+)?)/);
-  const p = name.match(/\(([^)]*)\)\s*$/);
-  let nicks = p ? splitNicks(p[1]) : [];
+  const tr = splitTrailingNicks(name);
+  const body = tr ? name.slice(0, tr.idx).trim() : name;
+  const m = body.match(/(?:epis[oó]dio|ep\.?)\s*(\d+(?:[.,]\d+)?)/i) || body.match(/(\d+(?:[.,]\d+)?)/);
+  let nicks = tr ? tr.nicks : [];
   const chat = nicks.some(isChat);
   nicks = nicks.filter(x => !isChat(x));
   return { n: m ? Number(m[1].replace(',', '.')) : null, done: it.state === 'complete', nicks, chat, text: name, pos: it.pos };
@@ -238,7 +245,8 @@ const horaLabel = h => { const [H, M] = h.split(':'); return `${Number(H)}h${M !
 // Acha a obra pelo COMEÇO do texto (o nome mais longo que bate), assim nomes com " - " no meio
 // (ex.: "KONOSUBA - God's blessing…") não quebram. Sem obra conhecida, separa no primeiro " · ".
 function parseProgItem(text, idx) {
-  const clean = text.replace(/\s*\([^)]*\)\s*$/, '').trim();
+  const tr = splitTrailingNicks(text);
+  const clean = tr ? String(text).slice(0, tr.idx).trim() : String(text || '').trim();
   const k = keyOf(clean);
   let best = null;
   for (const [nk, w] of idx) if ((k === nk || k.startsWith(nk + ' ')) && (!best || nk.length > best[0].length)) best = [nk, w];
@@ -326,8 +334,8 @@ export function buildCronograma(cards, works, idx, warn, horarioPadrao = '23h') 
     for (const it of items) {
       const p = parseProgItem(it.text, idx);
       const w = p.work;
-      const ownNicks = (it.text.match(/\(([^)]*)\)\s*$/) || [])[1];
-      const nicks = ownNicks ? splitNicks(ownNicks).filter(x => !isChat(x)) : sponsorsFor(w, p.eps);
+      const tr = splitTrailingNicks(it.text);
+      const nicks = tr && tr.nicks.length ? tr.nicks.filter(x => !isChat(x)) : sponsorsFor(w, p.eps);
       const status = fl.has('cancelado') ? 'cancelado' : fl.has('adiado') ? 'adiado' : (w && w.flags.has('standby')) ? 'standby' : 'confirmado';
       const o = { titulo: p.titulo };
       if (w) { o.cat = w.cat; if (w.lang) o.lang = w.lang; }
