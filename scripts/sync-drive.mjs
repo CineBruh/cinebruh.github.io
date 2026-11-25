@@ -184,8 +184,10 @@ function extraLabel(name) {
   return l.replace(/\(\s*\)/g, '').replace(/^[\s.·:_-]+|[\s.·:_-]+$/g, '').replace(/\s{2,}/g, ' ') || 'Extra';
 }
 function buildEpisodes(videos) {
+  const many = videos.length > 1;
   const raw = videos.map(v => {
-    const m = v.name.match(/\b(?:ep|epis[oó]dio)\.?\s*(\d+(?:[.,]\d+)?)/i);       // "Ep5.5" = episódio especial entre o 5 e o 6
+    const m = v.name.match(/\b(?:ep|epis[oó]dio)\.?\s*(\d+(?:[.,]\d+)?)/i)       // "Ep5.5" = episódio especial entre o 5 e o 6
+           || (many && v.name.match(/^\s*(\d{1,3}(?:[.,]\d+)?)\s*[.\-–)]\s*\S/)); // "14. Nome do episódio.mp4"
     const sr = /sem\s*rea[cç][aã]o/i.test(v.name);
     const n = m ? Number(m[1].replace(',', '.')) : null;
     const x = n == null || EXTRA_RX.test(v.name);
