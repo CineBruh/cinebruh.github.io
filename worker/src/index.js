@@ -11,6 +11,7 @@
  *   LIVEPIX_CLIENT_ID, LIVEPIX_CLIENT_SECRET, LIVEPIX_WEBHOOK_SECRET
  *   DISCORD_WEBHOOK_PEDIDOS    (opcional — aviso de pedido pago no canal privado)
  *   TRELLO_KEY, TRELLO_TOKEN, TRELLO_LIST_PEDIDOS (opcional — cria cartão na lista de conferência)
+ *   GITHUB_TOKEN               (opcional — dispara o workflow sync-catalog.yml de hora em hora)
  */
 
 const LIVEPIX_OAUTH_URL = 'https://oauth.livepix.gg/oauth2/token';
@@ -329,6 +330,7 @@ export async function handleRequest(request, env = {}) {
       kv: Boolean(env?.PEDIDOS_KV),
       discord: Boolean(env?.DISCORD_WEBHOOK_PEDIDOS),
       trello: Boolean(env?.TRELLO_KEY && env?.TRELLO_TOKEN && env?.TRELLO_LIST_PEDIDOS),
+      githubSync: Boolean(env?.GITHUB_TOKEN),
       mock: env?.MOCK_LIVEPIX === '1',
     }, 200, request, env);
   }
@@ -442,4 +444,34 @@ export async function handleRequest(request, env = {}) {
   return json({ error: 'Rota não encontrada.' }, 404, request, env);
 }
 
-export default { fetch: handleRequest };
+/* ---------- Cron Trigger: dispara o workflow sync-catalog.yml no GitHub ---------- */
+export async function triggerCatalogSync(env = {}) {
+  if (!env?.GITHUB_TOKEN) return { ok: false, skipped: true };
+  const repo = env.GITHUB_REPO || 'CineBruh/cinebruh.github.io';
+  const workflow = env.GITHUB_WORKFLOW || 'sync-catalog.yml';
+  if (env?.MOCK_EXTERNAL === '1') {
+    return { ok: true, mock: true, repo, workflow };
+  }
+  const url = `https://api.github.com/repos/${repo}/actions/workflows/${workflow}/dispatches`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github+json',
+      'User-Agent': 'cinebruh-api-worker',
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ref: 'main' }),
+  });
+  if (!res.ok) throw new Error(`GitHub dispatch HTTP ${res.status}`);
+  return { ok: true, status: res.status };
+}
+
+export async function handleScheduled(event, env = {}, ctx) {
+  const job = triggerCatalogSync(env).catch(() => ({ ok: false }));
+  if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(job);
+  return job;
+}
+
+export default { fetch: handleRequest, scheduled: handleScheduled };

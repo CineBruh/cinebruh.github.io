@@ -8,6 +8,7 @@
 #   npx wrangler secret put TRELLO_KEY
 #   npx wrangler secret put TRELLO_TOKEN
 #   npx wrangler secret put TRELLO_LIST_PEDIDOS
+#   npx wrangler secret put GITHUB_TOKEN
 
 name = "cinebruh-api"
 main = "src/index.js"
@@ -17,6 +18,11 @@ compatibility_date = "2026-11-01"
 ALLOWED_ORIGINS = "https://cinebruh.github.io,http://localhost:8080,http://localhost:3000"
 SITE_URL = "https://cinebruh.github.io"
 LIVEPIX_SCOPE = "payments:write payments:read webhooks"
+GITHUB_REPO = "CineBruh/cinebruh.github.io"
+GITHUB_WORKFLOW = "sync-catalog.yml"
+
+[triggers]
+crons = ["17 * * * *"]
 
 # Etapa 2B (opcional): descomente após criar o namespace com `npx wrangler kv namespace create PEDIDOS_KV`
 # [[kv_namespaces]]

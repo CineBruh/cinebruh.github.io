@@ -46,7 +46,11 @@ Isso sobe o Worker em `http://localhost:8787` em modo simulado.
    npx wrangler secret put TRELLO_KEY
    npx wrangler secret put TRELLO_TOKEN
    npx wrangler secret put TRELLO_LIST_PEDIDOS
+
+   # Cron Trigger de hora em hora (dispara o sync-catalog.yml sem depender do cron do GitHub)
+   npx wrangler secret put GITHUB_TOKEN
    ```
+   *(Para o `GITHUB_TOKEN`, crie um Fine-grained Personal Access Token no GitHub restrito ao repositório `CineBruh/cinebruh.github.io` com permissão **Actions: Read and write**.)*
 5. Ative no `site.json` da raiz do Cinebruh:
    ```json
    "api": {
