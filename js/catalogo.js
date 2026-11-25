@@ -96,8 +96,7 @@ function hasPendingUpload(it){
   if(it.cat === 'vods' || statusOf(it) === 'embreve') return false;
   if(missingDriveCount(it) > 0) return true;
   if(!hasReact(it)){
-    const st = statusOf(it);
-    if(st === 'assistindo' || st === 'completo') return true;
+    if(statusOf(it) === 'completo') return true;
     if((it.seasons || []).some(s => s.s === 'y' || s.s === 'g')) return true;
   }
   return false;

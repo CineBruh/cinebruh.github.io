@@ -293,8 +293,16 @@ function tagEpisodes(eps, cl) {
 // O aviso do Discord usa pra dizer "em breve no Drive" quando a temporada é concluída antes do upload.
 function faltaNoDrive(eps, cl) {
   if (!cl) return 0;
-  const tem = new Set((eps || []).filter(e => !e.sr).map(e => e.n));
-  return cl.items.filter(i => i.done && i.n != null && !tem.has(i.n)).length;
+  const list = eps || [];
+  const tem = new Set(list.map(e => e.n));
+  const extrasDrive = list.filter(e => e.l || e.n === 0).length;
+  let missNorm = 0, doneExtras = 0;
+  for (const i of cl.items) {
+    if (!i.done) continue;
+    if (i.n != null && i.n > 0) { if (!tem.has(i.n)) missNorm++; }
+    else if (i.n === 0 || EXTRA_RX.test(i.text || '')) doneExtras++;
+  }
+  return missNorm + Math.max(0, doneExtras - extrasDrive);
 }
 function mergeSeasons(w, c) {
   const cls = c.checklists;
