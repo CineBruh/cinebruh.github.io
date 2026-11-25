@@ -311,7 +311,8 @@ function mergeSeasons(w, c) {
     // temporada/parte que só existe no Trello (paga, mas ainda sem vídeo no Drive)
     for (const cl of cls) if (!used.has(cl) && cl.items.length) {
       const pg = paidUpTo(cl);
-      w.seasons.push({ ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: 'r', ...(pg ? { pg } : {}) });
+      const fd = faltaNoDrive([], cl);
+      w.seasons.push({ ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: clDone(cl) ? 'g' : cl.items.some(i => i.done) ? 'y' : 'r', ...(pg ? { pg } : {}), ...(fd ? { fd } : {}) });
     }
     w.seasons.sort((a, b) => (a.n ?? 1e3) - (b.n ?? 1e3));
   } else if (w.episodes) {
@@ -321,7 +322,11 @@ function mergeSeasons(w, c) {
     const fd = faltaNoDrive(w.episodes, cl); if (fd) w.fd = fd;
   } else if (cls.some(cl => cl.items.length) && c.cat !== 'filmes') {
     // obra sem vídeo nenhum no Drive: mostra as temporadas do Trello (sem link)
-    w.seasons = cls.filter(cl => cl.items.length).map(cl => { const pg = paidUpTo(cl); return { ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: clDone(cl) ? 'g' : cl.items.some(i => i.done) ? 'y' : 'r', ...(pg ? { pg } : {}) }; });
+    w.seasons = cls.filter(cl => cl.items.length).map(cl => {
+      const pg = paidUpTo(cl);
+      const fd = faltaNoDrive([], cl);
+      return { ...(cl.n != null ? { n: cl.n } : { l: cl.l }), s: clDone(cl) ? 'g' : cl.items.some(i => i.done) ? 'y' : 'r', ...(pg ? { pg } : {}), ...(fd ? { fd } : {}) };
+    });
   }
 }
 

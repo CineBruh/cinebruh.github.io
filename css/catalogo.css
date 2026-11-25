@@ -88,6 +88,7 @@
 .seg.g{background:#0FA958;border-color:#0FA958}
 .seg.y{background:#E8A400;border-color:#E8A400}
 .seg.r{background:#E63946;border-color:#E63946}
+.seg.soon{border-style:dashed;border-color:rgba(255,255,255,.85);opacity:.85}
 .seg.ghost{visibility:hidden}
 .cap-eps{font-family:var(--display);font-size:11px;line-height:1;color:#fff;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.45);border-radius:6px;padding:4px 8px;letter-spacing:.3px}
 .st-inc{background:#8a6b78}
@@ -115,6 +116,7 @@
 .cap-new{display:inline-flex;align-items:center;height:24px;box-sizing:border-box;font-family:var(--display);font-size:10px;letter-spacing:.5px;background:#fff;color:#111;border:2px solid #111;border-radius:6px;padding:2px 7px;animation:newPulse 2.4s ease-in-out infinite}
 @keyframes newPulse{50%{box-shadow:0 0 0 3px rgba(255,104,180,.55)}}
 .cap-pausa{background:#3a3f4b;color:#fff;border-color:#fff;animation:none}
+.cap-soon{background:#5B4BDB;color:#fff;border-color:#fff;animation:none}
 .cap-aka{margin-top:var(--s1);font-size:10.5px;line-height:1.15;color:rgba(255,255,255,.82);font-style:italic;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .cap.locked{cursor:default}
 .cap.locked.ask{cursor:pointer}

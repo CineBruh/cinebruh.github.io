@@ -88,6 +88,20 @@ function hasReact(it){
   return it.cat==='filmes' || it.cat==='vods' || !it.tr;   // filme/VOD é um vídeo só; obra antiga sem lista de eps confia no link
 }
 const isPlayable = it => hasReact(it) && statusOf(it)!=='embreve';   // "Off Live" ainda não tem reação pra assistir
+/* episódios marcados como assistidos no Trello mas ainda não disponíveis no Drive */
+function missingDriveCount(it){
+  return (it.fd || 0) + (it.seasons || []).reduce((sum, s) => sum + (s.fd || 0), 0);
+}
+function hasPendingUpload(it){
+  if(it.cat === 'vods' || statusOf(it) === 'embreve') return false;
+  if(missingDriveCount(it) > 0) return true;
+  if(!hasReact(it)){
+    const st = statusOf(it);
+    if(st === 'assistindo' || st === 'completo') return true;
+    if((it.seasons || []).some(s => s.s === 'y' || s.s === 'g')) return true;
+  }
+  return false;
+}
 /* obra na fila já paga inteira (o robô marca "pago" pelo Trello; filme é sempre pago inteiro):
    não tem o que pedir, só esperar a vez no cronograma */
 const paidQueue = it => statusOf(it)==='fila' && (it.pago || it.cat==='filmes');
@@ -116,7 +130,13 @@ function capHTML(it, i){
   const meta = ST[stKey] || ST.assistindo;
   const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
   const open = it.aberto ? `<span class="cap-open" data-pedir title="Patrocinar os próximos episódios">💰 Patrocine</span>` : '';
-  const nv = isNew(it);
+  const pendingUp = hasPendingUpload(it);
+  const missN = missingDriveCount(it);
+  const playable = isPlayable(it);
+  const soon = pendingUp
+    ? `<span class="cap-new cap-soon" title="${missN ? `${missN} episódio(s) assistido(s) em live, ainda subindo pro Drive` : 'Episódios assistidos em live, ainda subindo pro Drive'}">⏳ ${playable && missN ? `+${missN} em breve` : 'Em breve'}</span>`
+    : '';
+  const nv = (pendingUp && !playable) ? '' : isNew(it);
   const novo = nv ? `<span class="cap-new">🆕 ${nv}</span>` : '';
   const pausa = it.pausa ? `<span class="cap-new cap-pausa" title="Pausada por enquanto">⏸ Em pausa</span>` : '';
   const LANG = {dub:"🎙️ Dub", leg:"💬 Leg", both:"Dub + Leg"};
@@ -136,9 +156,10 @@ function capHTML(it, i){
     const desc = {g:'completa',y:'em andamento',r:'vazia / faltando'};
     const segs = it.seasons.map((s,si)=>{
          const label = esc(s.l || ('T'+s.n));
-      return (s.id && s.s!=='r')
-        ? `<span class="seg ${s.s} clik" data-si="${si}" data-url="${F(s.id)}" title="Assistir ${label}">${label}</span>`
-        : `<span class="seg ${s.s}" title="${label} — ${desc[s.s]||''}">${label}</span>`;
+      const noVideo = !s.id || !(s.ep && s.ep.some(e => !e.sr));
+      if(!noVideo && s.s!=='r') return `<span class="seg ${s.s} clik" data-si="${si}" data-url="${F(s.id)}" title="Assistir ${label}">${label}</span>`;
+      const soonSeg = noVideo && (s.s==='y' || s.s==='g');
+      return `<span class="seg ${s.s}${soonSeg?' soon':''}" title="${label} — ${soonSeg?'em breve no Drive':(desc[s.s]||'')}">${label}</span>`;
     }).join('');
     info = `<div class="cap-meta">${segs}</div>`;
   } else if(it.eps && it.cat!=='filmes'){
@@ -150,9 +171,8 @@ function capHTML(it, i){
   const nota = it.nota ? `<span class="cap-nota" title="Nota da Bruna">★<b>${it.nota}</b></span>` : '';
   const tr = lang ? `<div class="cap-tr">${lang}</div>` : '';
   const br = nota ? `<div class="cap-br">${nota}</div>` : '';
-  const playable = isPlayable(it);
   const pago = paidQueue(it);
-  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live · ver sessões':(pago||it.pago?'📅 Já patrocinado · ver a fila':st==='fila'?'💰 Quero esse react':'⏳ React em breve · patrocine'));
+  const hover = playable ? (it.cat==='vods'?'▶ Assistir':(it.incomplete?'▶ Ver parcial':'▶ Ver reações')) : (st==='embreve'?'Off Live · ver sessões':(pendingUp?'⏳ Em breve no Drive':(pago||it.pago?'📅 Já patrocinado · ver a fila':st==='fila'?'💰 Quero esse react':'⏳ React em breve · patrocine')));
   const ask = st==='fila' && it.cat!=='vods' && !pago ? `<span class="cap-ask" data-pedir>💰 Peça esse react</span>` : '';
   const aka = akaHit(it);
   const secs = workSecs(it);
@@ -161,7 +181,7 @@ function capHTML(it, i){
   const inner = `
       <div class="cap-art" style="--c1:${g[0]};--c2:${g[1]}">
         ${art}
-        <div class="cap-tl">${badge}${open}${pausa}${novo}</div>
+        <div class="cap-tl">${badge}${open}${pausa}${soon}${novo}</div>
         ${tr}
         ${br}
         <div class="cap-scrim"><div class="cap-title">${esc(it.t)}</div>${aka ? `<div class="cap-aka">${esc(aka)}</div>` : ''}${info}${ask}</div>
