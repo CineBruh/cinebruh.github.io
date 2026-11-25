@@ -53,7 +53,8 @@ function sugRow(r, i){
     const d = r._cat, f = IMG_MAP[d.t] || d.img, img = f ? (/^https?:\/\//.test(f) ? f : `images/${f}`) : '';
     return `<div class="sg" role="option" data-i="${i}"><div class="sg-art">${d.em || ''}${img ? `<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</div>
       <div class="sg-txt"><b>${esc(d.t)}</b><span>${esc(SG_CAT[d.cat] || d.cat)}${d.ano ? ` · ${d.ano}` : ''}</span></div>
-      <span class="sg-in">No Cinebruh · ${SG_ST[statusOf(d)] || ''}</span></div>`;
+      <span class="sg-in">No Cinebruh · ${SG_ST[statusOf(d)] || ''}</span>
+      ${TMDB_KEY ? `<button class="sg-more" type="button" data-more="${i}" title="Sinopse, elenco, trailer e episódios">Detalhes</button>` : ''}</div>`;
   }
   const [kl, kc] = kindLabel(r);
   return `<div class="sg" role="option" data-i="${i}"><div class="sg-art">${r.poster_path ? `<img src="${TIMG(r.poster_path,'w92')}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</div>
@@ -77,11 +78,37 @@ async function pickSearch(){
   try{
     const res = await tmdb('/search/multi', { query:q, include_adult:'false' });
     if(seq !== pickSeq) return;
-    const list = (res.results||[]).filter(r => (r.media_type === 'movie' || r.media_type === 'tv') && !cat.includes(inCatalog(r))).slice(0, 8);
+    const all = (res.results||[]).filter(r => r.media_type === 'movie' || r.media_type === 'tv');
+    for(const item of pickResults){
+      if(item._cat) item._tmdb = all.find(r => inCatalog(r) === item._cat) || null;
+    }
+    const list = all.filter(r => !cat.includes(inCatalog(r))).slice(0, 8);
     pickResults = pickResults.concat(list);
     draw(pickResults.length ? '' : '<div class="sg-note">Nada encontrado 😢 Tenta outro nome (vale o título original também).</div>');
   }catch(err){
     if(seq === pickSeq) draw('<div class="sg-note">Não consegui buscar no TMDB agora. Dá pra escrever o nome e seguir assim mesmo.</div>');
+  }
+}
+/* abre a janela de detalhes do TMDB para uma obra que já está no catálogo */
+async function openCatDetails(w, cached){
+  if(!w) return;
+  if(cached){ openPick(cached); return; }
+  if(!TMDB_KEY) return;
+  const seq = ++tmSeq;
+  tmBox.innerHTML = `${TM_CLOSE}<div class="tm-loading">Carregando…</div>`;
+  tmBox.scrollTop = 0;
+  tm.classList.add('open'); document.body.classList.remove('noscroll'); document.body.classList.add('noscroll');
+  focarModal(tm, tm.querySelector('.tm-close'));
+  try{
+    const res = await tmdb('/search/multi', { query: w.t, include_adult: 'false' });
+    if(seq !== tmSeq) return;
+    const want = w.cat === 'filmes' ? 'movie' : 'tv';
+    const items = (res.results||[]).filter(r => r.media_type === 'movie' || r.media_type === 'tv');
+    const hit = items.find(r => inCatalog(r) === w) || items.find(r => r.media_type === want) || items[0];
+    if(hit){ openPick(hit); return; }
+    tmBox.innerHTML = `${TM_CLOSE}<div class="tm-loading">Não achei os detalhes dessa obra no TMDB 😢</div>`;
+  }catch(err){
+    if(seq === tmSeq) tmBox.innerHTML = `${TM_CLOSE}<div class="tm-loading">Não consegui carregar os detalhes 😢<br>Tenta de novo em instantes.</div>`;
   }
 }
 /* escolheu uma sugestão: preenche o pedido */
@@ -90,8 +117,8 @@ async function choosePick(r){
   sugShow(''); pickSeq++;
   if(r._cat){
     const w = r._cat, nx = nextEp(w);
-    setPicked(null);
-    fillCalc({ titulo: w.t, tipo: tipoOf(w), dur: faixaPadrao(w), s: nx ? nx.s : 1, de: nx ? nx.ep : 1, ate: nx ? nx.ep : 1, lock: lockOf(w) });
+    setPicked({ _cat: w, _tmdb: r._tmdb || null, title: w.t });
+    fillCalc({ titulo: w.t, tipo: tipoOf(w), dur: faixaPadrao(w), s: nx ? nx.s : 1, de: nx ? nx.ep : 1, ate: nx ? nx.ep : 1, keepPick: true, lock: lockOf(w) });
     return;
   }
   const isMovie = r.media_type === 'movie', title = r.title || r.name, hit = inCatalog(r);
@@ -114,6 +141,16 @@ async function choosePick(r){
 function setPicked(r){
   picked = r;
   if(!r){ calc.lock = null; pickedBox.hidden = true; pickedBox.innerHTML = ''; return; }
+  if(r._cat){
+    const d = r._cat, f = IMG_MAP[d.t] || d.img, img = f ? (/^https?:\/\//.test(f) ? f : `images/${f}`) : '';
+    const kc = d.cat === 'filmes' ? 't-filme' : d.cat === 'animes' ? 't-anime' : 't-serie';
+    const info = [d.ano, SG_ST[statusOf(d)] ? `✓ No Cinebruh · ${SG_ST[statusOf(d)]}` : '✓ No Cinebruh'].filter(Boolean).join(' · ');
+    pickedBox.innerHTML = `${img ? `<img src="${esc(img)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}
+      <div class="sg-txt"><b>${esc(d.t)}</b><span><i class="pk-type ${kc}">${esc(SG_CAT[d.cat] || d.cat)}</i>${info ? ` · ${info}` : ''}</span></div>
+      ${TMDB_KEY ? `<button class="cta alt" type="button" data-picked-more>ℹ️ Detalhes e episódios</button>` : ''}`;
+    pickedBox.hidden = false;
+    return;
+  }
   const [kl, kc] = kindLabel(r), isMovie = r.media_type === 'movie';
   const info = [yearOf(r), r._runtime ? (isMovie ? fmtMin(r._runtime) : `~${r._runtime} min/ep`) : '', r._seasons ? `${r._seasons} temporada${r._seasons > 1 ? 's' : ''}` : ''].filter(Boolean).join(' · ');
   pickedBox.innerHTML = `${r.poster_path ? `<img src="${TIMG(r.poster_path,'w92')}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}
@@ -143,10 +180,13 @@ if(pickQ){
   document.addEventListener('pointerdown', e => { if(!e.target.closest('.calc-search')) sugShow(''); });
   pickGrid.addEventListener('click', e => {
     const more = e.target.closest('[data-more]');
-    if(more){ const r = pickResults[+more.dataset.more]; sugShow(''); openPick(r); return; }
+    if(more){ const r = pickResults[+more.dataset.more]; sugShow(''); if(r && r._cat) openCatDetails(r._cat, r._tmdb); else openPick(r); return; }
     const row = e.target.closest('.sg'); if(row) choosePick(pickResults[+row.dataset.i]);
   });
-  pickedBox.addEventListener('click', e => { if(e.target.closest('[data-picked-more]') && picked) openPick(picked); });
+  pickedBox.addEventListener('click', e => {
+    if(!e.target.closest('[data-picked-more]') || !picked) return;
+    if(picked._cat) openCatDetails(picked._cat, picked._tmdb); else openPick(picked);
+  });
 }
 
 const tm = document.createElement('div');
@@ -518,7 +558,8 @@ onRoute.patrocinar = rest => {
   if(rest[0] !== 'pedir' || !DATA_READY) return;
   const it = DATA.find(d => d._slug === rest[1]); if(!it) return;
   const s = parseInt(rest[2], 10) || 1, ep = parseInt(rest[3], 10) || 1;
-  fillCalc({ titulo: it.t, tipo: tipoOf(it), dur: faixaPadrao(it), s, de: ep, ate: ep, lock: lockOf(it) });
+  setPicked({ _cat: it, _tmdb: null, title: it.t });
+  fillCalc({ titulo: it.t, tipo: tipoOf(it), dur: faixaPadrao(it), s, de: ep, ate: ep, keepPick: true, lock: lockOf(it) });
   scrollToCalc();
 };
 
