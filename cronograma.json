@@ -1,35 +1,10 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-24T20:31:03-03:00",
+  "atualizadoEm": "2026-11-25T04:25:43-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
-    {
-      "data": "2026-11-24",
-      "itens": [
-        {
-          "titulo": "Just Chatting",
-          "status": "confirmado"
-        },
-        {
-          "titulo": "SAKAMOTO DAYS",
-          "cat": "animes",
-          "lang": "dub",
-          "eps": "14, 15 e 16",
-          "patrocinador": "MD_Professor",
-          "status": "confirmado"
-        },
-        {
-          "titulo": "HAIKYU!!",
-          "cat": "animes",
-          "lang": "dub",
-          "eps": "Eps 9 e 10",
-          "patrocinador": "Austeroz, QTNecros",
-          "status": "confirmado"
-        }
-      ]
-    },
     {
       "data": "2026-11-25",
       "itens": [
@@ -260,10 +235,17 @@
       "patrocinador": "DoctorFoxtrot"
     },
     {
+      "titulo": "HAIKYU!!",
+      "cat": "animes",
+      "lang": "dub",
+      "eps": "T1 Eps 9 e 10",
+      "patrocinador": "Austeroz, QTNecros"
+    },
+    {
       "titulo": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cat": "animes",
       "lang": "dub",
-      "eps": "T1 Eps 3 ao 8",
+      "eps": "T1 Eps 3 ao 9",
       "patrocinador": "HomemPassarod"
     },
     {
@@ -284,7 +266,7 @@
       "titulo": "The Promised Neverland",
       "cat": "animes",
       "lang": "leg",
-      "eps": "T1 Ep 1",
+      "eps": "T1 Eps 1 e 2",
       "patrocinador": "HomemPassarod"
     }
   ]
