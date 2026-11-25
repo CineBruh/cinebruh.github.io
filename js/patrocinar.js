@@ -342,6 +342,8 @@ window.copyPix = copyPix;
    curto (até 30 min: anime, animação ou série curta) · até 1h · mais de 1h. Filme: até 2h · mais de 2h. */
 const PRECO = () => (typeof SITE !== 'undefined' && SITE && SITE.precos) || null;
 const apiLivePixUrl = () => (typeof SITE !== 'undefined' && SITE && SITE.api && SITE.api.livepix && SITE.api.url) ? String(SITE.api.url).replace(/\/+$/, '') : null;
+const incentiveMetaUrl = () => (typeof SITE !== 'undefined' && SITE && SITE.doacoes && SITE.doacoes.metas && SITE.doacoes.metas.url) || 'https://incentive.gg/brunarodrigues';
+const useIncentive = it => !!(it && it.meta && !apiLivePixUrl());
 const precoItem = id => { const p = PRECO(); return p ? (p.itens||[]).find(i=>i.id===id) || null : null; };
 const fmtBRL = v => 'R$' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2});
 const FAIXA_NOME = { curto:'Episódio curto', medio:'Episódio até 1h', longo:'Episódio de 1h+', filme:'Filme', 'filme-longo':'Filme 2h30+' };
@@ -510,9 +512,11 @@ function calcDraw(){
   const apiUrl = apiLivePixUrl();
   const nickBox = cIn('calc-nick-box'); if(nickBox) nickBox.hidden = !apiUrl;
   const durNome = (DUR[calc.tipo].find(([id]) => id === calc.dur) || [, ''])[1].toLowerCase();
-  const payBtn = (apiUrl && q && q.valor != null)
-    ? `<button class="cta alt" type="button" data-pay-livepix>💸 Pagar no LivePix</button>`
-    : (livepix ? `<a class="cta alt" href="${escUrl(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : '');
+  const payBtn = useIncentive(w)
+    ? `<a class="cta alt" href="${escUrl(incentiveMetaUrl())}" target="_blank" rel="noopener">🎯 Meta no Incentive.gg</a>`
+    : (apiUrl && q && q.valor != null)
+      ? `<button class="cta alt" type="button" data-pay-livepix>💸 Pagar no LivePix</button>`
+      : (livepix ? `<a class="cta alt" href="${escUrl(livepix.url)}" target="_blank" rel="noopener">💸 Pagar no LivePix</a>` : '');
   out.innerHTML = `
     <div class="calc-total">
       <div><span class="calc-lbl">${calc.tipo === 'filmes' ? `Filme · ${durNome}` : `${n} episódio${n > 1 ? 's' : ''} · ${durNome}`}</span>
@@ -551,6 +555,7 @@ function scrollToCalc(){ setTimeout(() => calcBox.scrollIntoView({behavior:'smoo
 function pedirReact(o){ fillCalc(o); if(currentPage !== 'patrocinar') go('patrocinar'); scrollToCalc(); }
 /* botão "Quero esse react" das capas e "próximo episódio" do player: link compartilhável #/patrocinar/pedir/obra/T/ep */
 function pedirObra(it, s, ep){
+  if(useIncentive(it)){ window.open(incentiveMetaUrl(), '_blank', 'noopener'); return; }
   const nx = s ? { s, ep: ep || 1 } : nextEp(it);
   go('patrocinar', ['pedir', it._slug, ...(nx ? [nx.s, nx.ep] : [])]);
 }
@@ -692,7 +697,13 @@ function renderAsk(st){
     : nx.last ? `A Bruh parou no <b>ep ${nx.last}${tT}</b>. Quer o próximo?`
     : nx.pago ? `Até o <b>ep ${nx.pago}${tT}</b> já está patrocinado. Quer o seguinte?`
     : nx.fimT ? `A Bruh terminou a <b>T${nx.fimT}</b>. Quer ver a T${nx.s}?` : 'Quer ver a Bruh começando essa?';
-  el.innerHTML = `<span>${msg}</span><button class="cta" type="button" data-ask>💰 Patrocinar o ep ${nx.ep}${q && q.valor != null ? ` · ${fmtBRL(q.valor)}` : ''}</button>`;
+  const btnTxt = useIncentive(it)
+    ? '🎯 Colaborar na meta · Incentive.gg'
+    : `💰 Patrocinar o ep ${nx.ep}${q && q.valor != null ? ` · ${fmtBRL(q.valor)}` : ''}`;
+  el.innerHTML = `<span>${msg}</span><button class="cta" type="button" data-ask>${btnTxt}</button>`;
   el.hidden = false;
-  el.querySelector('[data-ask]').onclick = () => { closePlayer(); pedirObra(it, nx.s, nx.ep); };
+  el.querySelector('[data-ask]').onclick = () => {
+    if(useIncentive(it)){ window.open(incentiveMetaUrl(), '_blank', 'noopener'); return; }
+    closePlayer(); pedirObra(it, nx.s, nx.ep);
+  };
 }

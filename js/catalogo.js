@@ -129,7 +129,8 @@ function capHTML(it, i){
   const stKey = it.incomplete ? 'incompleto' : st;
   const meta = ST[stKey] || ST.assistindo;
   const badge = `<span class="cap-badge ${meta[1]}">${meta[0]}</span>`;
-  const open = it.aberto ? `<span class="cap-open" data-pedir title="Patrocinar os próximos episódios">💰 Patrocine</span>` : '';
+  const incMeta = typeof useIncentive === 'function' && useIncentive(it);
+  const open = it.aberto ? `<span class="cap-open" data-pedir title="${incMeta ? 'Colaborar com a meta no Incentive.gg' : 'Patrocinar os próximos episódios'}">${incMeta ? '🎯 Meta Incentive' : '💰 Patrocine'}</span>` : '';
   const pendingUp = hasPendingUpload(it);
   const missN = missingDriveCount(it);
   const playable = isPlayable(it);
