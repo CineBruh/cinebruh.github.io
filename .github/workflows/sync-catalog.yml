@@ -2,7 +2,7 @@ name: Sincronizar catálogo (Trello + Drive → data.json)
 
 on:
   schedule:
-    - cron: '17 * * * *'    # a cada hora, aos :17 (minuto "quebrado" para rodar menos atrasado)
+    - cron: '0 * * * *'     # backup na hora cheia (o Worker da Cloudflare dispara pontualmente)
   workflow_dispatch: {}       # botão "Run workflow" para rodar na hora
 
 permissions:

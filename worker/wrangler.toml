@@ -22,9 +22,9 @@ GITHUB_REPO = "CineBruh/cinebruh.github.io"
 GITHUB_WORKFLOW = "sync-catalog.yml"
 
 [triggers]
-crons = ["17 * * * *"]
+crons = ["0 * * * *"]
 
 # Etapa 2B (opcional): descomente após criar o namespace com `npx wrangler kv namespace create PEDIDOS_KV`
-# [[kv_namespaces]]
-# binding = "PEDIDOS_KV"
-# id = "SEU_KV_NAMESPACE_ID"
+ [[kv_namespaces]]
+ binding = "PEDIDOS_KV"
+ id = "70caea61578547e887840d65f438ea29"

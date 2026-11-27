@@ -7,7 +7,7 @@ O site se atualiza sozinho. Um robô lê o **quadro do Trello** e a **pasta do G
 ## Como funciona
 
 1. A Bruna organiza o quadro [REACTS - CINEBRUH](https://trello.com/b/b3LlCpc8/reacts-cinebruh) e sobe os vídeos no Drive.
-2. A cada **hora** (aos :17), o robô lê os dois e atualiza o `data.json` e o `cronograma.json`.
+2. A cada **hora em ponto** (`20:00`, `21:00`… via Cron Trigger do Worker na Cloudflare, com backup do GitHub Actions), o robô lê os dois e atualiza o `data.json` e o `cronograma.json`.
 3. O site é atualizado logo depois, com capas puxadas automaticamente do TMDB.
 4. Se algo mudou, o robô **avisa no Discord** (ver abaixo).
 
@@ -39,6 +39,7 @@ O passo a passo de onde marcar cada coisa está no **[GUIA-TRELLO.md](GUIA-TRELL
   - Item **marcado** = já assistido. Episódios especiais podem ter decimal: `Episódio 5.5`.
 - **Descrição:** linhas `Patrocinado por:`, `Review:`, `Dia:`, `TMDB:`, `Drive:`, `Obs:` e, no cronograma, `Classificação:` e `Aviso:`.
 - **Cronograma:** um cartão por dia na lista `CRONOGRAMA`, com a data no título (`Seg 02/11 · 21h`) e a checklist `Programação` (`Mob Psycho 100 · T2 Ep 7`). O nick do patrocinador vem sozinho do cartão da obra. Etiquetas `Folga`, `Adiado`, `Cancelado` e `Off Live` (sessão offline).
+- **Subathon:** um cartão `SUBATHON` em `CRONOGRAMA` ou `INFOS` com etiqueta/linha `Status:` (`Breve`, `Ativo`, `Encerrado` ou `Off`) liga/desliga a aba `#/subathon` sozinho.
 
 O que o site faz com isso:
 - Episódio sem nick numa obra com nicks por episódio **não** herda o patrocinador da obra (ex.: Frieren T1 = escolha do chat, T2 = paga).
@@ -90,7 +91,7 @@ Subpastas dentro da obra: `Temporada 1`, `Temporada 2` etc. Subpastas sem númer
 
 Os vídeos ficam com **`Ep` seguido do número** em qualquer parte do nome do arquivo:
 
-- `Chainsaw Man Ep1.mp4`, `Ep 2`, `ep.3`… e especiais com decimal: `Ep 5.5`. **Não** vale `Episódio 1`.
+- `Chainsaw Man Ep1.mp4`, `Ep 2`, `ep.3`… e especiais com decimal: `Ep 5.5` (em pastas com vários episódios, também vale numeração no começo do arquivo como `14. Nome.mp4`). **Não** vale `Episódio 1` solto no meio.
 - `Ep 0`, `Especial` e `OVA` aparecem como extras da temporada.
 - `(SEM REAÇÃO)` quando é apenas o episódio puro, sem a reação.
 
@@ -139,7 +140,7 @@ Opcional e editado à mão, pra quando algo sair errado no site. **Com o Trello,
 O robô reescreve estes arquivos a cada sincronização:
 
 - `data.json`: o catálogo.
-- `cronograma.json`: a aba Cronograma, a fila de patrocinados e a próxima sessão do Off Live.
+- `cronograma.json`: a aba Cronograma, a fila de patrocinados, a próxima sessão do Off Live e o status da Subathon.
 - `covers-cache.json`: capas e dados do TMDB já encontrados, pras execuções ficarem rápidas.
 - `sync-avisos.json`: os alertas da última rodada (o Discord compara com a anterior pra não repetir).
 
@@ -156,11 +157,13 @@ A ordem das obras segue a ordem do quadro do Trello.
 **Arquivos**
 - `index.html`: a "moldura" do site (menu, abas, vinheta de entrada e o conteúdo fixo de cada aba)
 - `css/`: estilos, um arquivo por área (`base`, `layout`, `catalogo`, `patrocinar`, `paginas`, `intro`)
-- `js/`: código, um arquivo por área. Ordem de carregamento: `core` (navegação e tema) → `player` → `catalogo` → `patrocinar` → `inicio` → `setup` → `midiakit` → `apoiar` → `comunidade` → `cronograma` → `offline` → `tierlist` → `continuar` → `pwa` → `intro` → `app` (carrega os dados e abre a aba do endereço)
+- `js/`: código, um arquivo por área. Ordem de carregamento: `core` (navegação e tema) → `player` → `catalogo` → `patrocinar` → `inicio` → `setup` → `midiakit` → `apoiar` → `comunidade` → `cronograma` → `offline` → `subathon` → `tierlist` → `continuar` → `pwa` → `intro` → `app` (carrega os dados e abre a aba do endereço)
 - `manifest.webmanifest` e `sw.js`: deixam o site instalável como app. **Num update de CSS/JS, troque a `VERSAO` no começo do `sw.js`** pra todo mundo receber a versão nova de uma vez (os `.json` sempre vêm da internet).
-- `site.json`: informações do canal, editáveis à mão: textos, redes, links, preços em bits, doações, comandos, setup, banner da Início, canal do player do Off Live e todo o **mídia kit** (números das redes, público, marcas).
-- `midiakit/`, `midiakit/en/`, `tierlist/`, `cronograma/`, `offline/`, `patrocinar/`, `comunidade/`: páginas curtinhas que só redirecionam pra aba. Servem pra cada link ter a própria prévia no Discord/WhatsApp/X.
-- `images/`: `og.png` (prévia do link), `icon-*.png` e `apple-touch-icon.png` (ícones do app), `banner.png` (banner da Início) e `marcas/*.jpg` (logos do mídia kit).
+- `site.json`: informações do canal, editáveis à mão: textos, redes, links, preços em bits, doações, comandos, setup, banner da Início, canal do player do Off Live, configurações da Subathon, flag `api` e todo o **mídia kit** (números das redes, público, marcas).
+- `midiakit/`, `midiakit/en/`, `tierlist/`, `cronograma/`, `offline/`, `subathon/`, `patrocinar/`, `comunidade/`: páginas curtinhas que só redirecionam pra aba. Servem pra cada link ter a própria prévia no Discord/WhatsApp/X.
+- `images/`: `og.png` (prévia do link), `icon-*.png` e `apple-touch-icon.png` (ícones do app), `banner.webp` (banner da Início), `meme-invencivel.jpg` e `marcas/*.jpg` (logos do mídia kit).
+- `worker/`: Cloudflare Worker (`cinebruh-api`) para o Cron Trigger pontual do `sync-catalog.yml` e integração opcional com LivePix / Discord / Trello (ver `worker/README.md`).
+- `widgets/`: versões **somente leitura** das overlays do StreamElements (cronômetro e metas) para embutir com segurança na aba `#/subathon`.
 - `DESIGN.md`: regras de layout (espaços, alturas, cantos, fontes) e exceções. Leia antes de mexer no CSS.
 - `scripts/sync-drive.mjs`: o robô (Node 20+, sem dependências). Lê o Drive e junta com o Trello.
 - `scripts/trello.mjs`: leitura do quadro do Trello e montagem do cronograma.
