@@ -1,7 +1,7 @@
 {
   "_leia": "Gerado pelo robô a partir da lista CRONOGRAMA do Trello (não edite à mão). status: confirmado | adiado | standby | cancelado. hora = horário daquele dia (sem hora, vale \"horario\"). offline = próxima sessão de React Offline (cartão com etiqueta Off Live).",
   "exemplo": false,
-  "atualizadoEm": "2026-11-27T01:39:31-03:00",
+  "atualizadoEm": "2026-11-27T08:18:19-03:00",
   "horario": "23h",
   "aviso": "O cronograma pode mudar por imprevistos. Quando algo for adiado ou cancelado, aparece marcado aqui.",
   "dias": [
@@ -17,14 +17,23 @@
           "cat": "series",
           "lang": "dub",
           "eps": "Ep 6",
-          "patrocinador": "Fanatical09",
+          "patrocinador": "Fanatical, LucasScobby",
           "status": "confirmado"
         },
         {
           "titulo": "Batman (1989)",
           "cat": "filmes",
           "lang": "leg",
+          "eps": "(HenriqueLaurentino",
           "patrocinador": "HenriqueLaurentino40",
+          "status": "confirmado"
+        },
+        {
+          "titulo": "HAIKYU!!",
+          "cat": "animes",
+          "lang": "dub",
+          "eps": "Ep 9 e 10",
+          "patrocinador": "Austeroz, QTNecros",
           "status": "confirmado"
         }
       ]
@@ -52,13 +61,6 @@
       "lang": "dub",
       "eps": "T2 Eps 1 ao 3",
       "patrocinador": "RedFoxDoInterior"
-    },
-    {
-      "titulo": "Beck",
-      "cat": "animes",
-      "lang": "leg",
-      "eps": "T1 Eps 4 ao 10",
-      "patrocinador": "JeboyWolfgold"
     },
     {
       "titulo": "Spy X Family",
@@ -209,18 +211,25 @@
       "patrocinador": "DoctorFoxtrot"
     },
     {
-      "titulo": "HAIKYU!!",
-      "cat": "animes",
-      "lang": "dub",
-      "eps": "T1 Eps 9 e 10",
-      "patrocinador": "Austeroz, QTNecros"
-    },
-    {
       "titulo": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cat": "animes",
       "lang": "dub",
       "eps": "T1 Eps 3 ao 9",
       "patrocinador": "HomemPassarod"
+    },
+    {
+      "titulo": "Welcome to Demon School! Iruma Kun",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 1 e 2",
+      "patrocinador": "DudsHentaii"
+    },
+    {
+      "titulo": "The Unwanted Undead Adventurer",
+      "cat": "animes",
+      "lang": "leg",
+      "eps": "T1 Eps 1 ao 5",
+      "patrocinador": "DudsHentaii"
     },
     {
       "titulo": "You and I Are Polar Opposites",
