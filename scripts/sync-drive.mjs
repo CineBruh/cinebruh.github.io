@@ -185,13 +185,14 @@ function extraLabel(name) {
 }
 function buildEpisodes(videos) {
   const many = videos.length > 1;
+  const recentCutoff = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
   const raw = videos.map(v => {
     const m = v.name.match(/\b(?:ep|epis[oó]dio)\.?\s*(\d+(?:[.,]\d+)?)/i)       // "Ep5.5" = episódio especial entre o 5 e o 6
            || (many && v.name.match(/^\s*(\d{1,3}(?:[.,]\d+)?)\s*[.\-–)]\s*\S/)); // "14. Nome do episódio.mp4"
     const sr = /sem\s*rea[cç][aã]o/i.test(v.name);
     const n = m ? Number(m[1].replace(',', '.')) : null;
     const x = n == null || EXTRA_RX.test(v.name);
-    return { n, x, k: x ? (n == null ? 1e9 : n + 0.5) : n, id: v.id, sr, d: durSec(v), name: v.name };
+    return { n, x, k: x ? (n == null ? 1e9 : n + 0.5) : n, id: v.id, sr, d: durSec(v), add: day(v.createdTime), name: v.name };
   });
   raw.sort((a, b) => a.k - b.k);                               // ordena por número (extras no lugar deles)
   const anyNumbered = raw.some(e => !e.x);
@@ -204,6 +205,7 @@ function buildEpisodes(videos) {
     if (e.x && anyNumbered) o.l = extraLabel(e.name);
     if (e.sr) o.sr = 1;                                       // "(SEM REAÇÃO)"
     if (e.d) o.d = e.d;
+    if (e.add && e.add >= recentCutoff) o.add = e.add;        // só episódios recentes, pra calcular "+N eps novos"
     out.push(o);
   }
   return out;

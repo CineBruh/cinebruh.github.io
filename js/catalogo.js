@@ -32,11 +32,20 @@ function akaHit(it){
 /* datas e selo de novidade */
 const lastDate = it => [it.upd, it.add].filter(Boolean).sort().pop() || '';
 const NOVO_DIAS = () => (typeof SITE !== 'undefined' && SITE && SITE.catalogo && SITE.catalogo.novoDias) || 7;
+const daysAgo = d => (Date.now() - Date.parse(d + 'T12:00:00-03:00')) / 864e5;
+function newEpsCount(it){
+  const lim = NOVO_DIAS();
+  const eps = it.seasons && it.seasons.length ? it.seasons.flatMap(s => s.ep || []) : (it.episodes || []);
+  return eps.filter(e => !e.sr && e.add && daysAgo(e.add) <= lim).length;
+}
 function isNew(it){
   const d = lastDate(it); if(!d) return '';
-  const dias = (Date.now() - Date.parse(d + 'T12:00:00-03:00')) / 864e5;
-  if(dias > NOVO_DIAS()) return '';
-  return it.upd && it.add && it.upd > it.add && it.cat !== 'filmes' ? 'Ep novo' : 'Novo';
+  if(daysAgo(d) > NOVO_DIAS()) return '';
+  const n = newEpsCount(it);
+  if(it.upd && it.add && it.upd > it.add && it.cat !== 'filmes'){
+    return n > 1 ? `+${n} eps novos` : n === 1 ? '+1 ep novo' : 'Ep novo';
+  }
+  return n > 1 && it.cat !== 'filmes' && it.cat !== 'vods' ? `Novo · ${n} eps` : 'Novo';
 }
 
 /* ordenação dentro de cada categoria ("padrão" = a ordem do Trello).
