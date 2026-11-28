@@ -464,7 +464,23 @@ export async function triggerCatalogSync(env = {}) {
     },
     body: JSON.stringify({ ref: 'main' }),
   });
-  if (!res.ok) throw new Error(`GitHub dispatch HTTP ${res.status}`);
+  if (!res.ok) {
+    if ((res.status === 401 || res.status === 403) && env?.DISCORD_WEBHOOK_PEDIDOS) {
+      await fetch(env.DISCORD_WEBHOOK_PEDIDOS, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          embeds: [{
+            title: '🔑 GITHUB_TOKEN do Worker expirou ou perdeu permissão',
+            description: `O Cron Trigger recebeu HTTP ${res.status} ao tentar disparar \`${workflow}\`. Gere um token novo e rode \`npx wrangler secret put GITHUB_TOKEN\`.`,
+            color: 0xe63946,
+            timestamp: new Date().toISOString(),
+          }],
+        }),
+      }).catch(() => {});
+    }
+    throw new Error(`GitHub dispatch HTTP ${res.status}`);
+  }
   return { ok: true, status: res.status };
 }
 
